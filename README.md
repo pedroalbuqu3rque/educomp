@@ -8,7 +8,7 @@ O acesso poderá ocorrer por meio de links externos, arquivos hospedados diretam
 
 ## Sobre o projeto
 
-O EduComp é um projeto de planejamento de produto digital, com foco em Product Discovery, Product Ownership e UX/UI Design.
+O EduComp é um projeto de planejamento de produto digital, passando por Product Discovery, Product Ownership, UX/UI Design, Desenvolvimento e QA.
 
 A proposta parte da hipótese de que localizar materiais pedagógicos de Computação adequados pode exigir que professores consultem diferentes fontes e avaliem diversos recursos antes de escolher aqueles que pretendem utilizar em suas aulas.
 
