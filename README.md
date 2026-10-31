@@ -1,6 +1,6 @@
 # EduComp
 
-O EduComp é uma plataforma educacional em planejamento, especializada em reunir e facilitar a descoberta, a seleção e o acesso a materiais pedagógicos de Computação para a Educação Básica.
+O EduComp é uma plataforma educacional em planejamento, com objetivo de reunir e facilitar a descoberta, seleção e o acesso a materiais pedagógicos de Computação para a Educação Básica.
 
 A proposta é organizar recursos educacionais em um catálogo que permita explorar materiais, pesquisar por palavras-chave, aplicar filtros e consultar informações relevantes antes de acessar os recursos.
 
