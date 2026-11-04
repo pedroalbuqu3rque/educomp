@@ -68,7 +68,7 @@ As regras detalhadas, permissões, estados e critérios de aceite estão descrit
 |---|---|
 | Visão e planejamento do produto | Documentados; sujeitos a revisões conforme decisões futuras |
 | Escopo e requisitos | Documentados; em processo de alinhamento com o protótipo |
-| UX/UI e protótipo no Figma | Protótipo de alta fidelidade elaborado |
+| UX/UI e protótipo no Figma | Protótipo elaborado |
 | Desenvolvimento da aplicação | Ainda não iniciado |
 | Testes de software (QA) | Ainda não iniciados |
 | Validação com professores | Ainda não realizada |
