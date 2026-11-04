@@ -1,357 +1,298 @@
-# User Flow — EduComp
+# EduComp — User Flow
 
-**Versão:** 0.5  
-**Status:** Consolidado para orientar o design do MVP  
-**Escopo:** MVP do EduComp
+**Versão:** 0.6  
+**Data:** 04/11/2026  
+**Situação:** Fluxos de experiência planejados para o MVP; implementação e validação com usuários não iniciadas.
 
 ## 1. Objetivo
 
-Representar os percursos de um professor que deseja encontrar, avaliar inicialmente e acessar materiais educacionais por meio do EduComp.
+Mapear os percursos que permitem a professores conhecer o EduComp, acessar sua conta, encontrar materiais pedagógicos de Computação, consultar recursos, manter favoritos e enviar contribuições para revisão.
 
-O fluxo contempla:
+O documento descreve **ações, decisões, respostas da interface, desvios e pontos de retorno**. Não define telas adicionais como concluídas, contratos de API nem regras técnicas de armazenamento. O comportamento de detalhes funcionais permanece nas especificações e nos requisitos.
 
-- exploração do catálogo;
-- pesquisa textual;
-- aplicação e ajuste de filtros;
-- consulta aos detalhes de um material;
-- acesso por link externo, arquivo hospedado ou ambas as opções;
-- situações em que não há opção de acesso disponível;
-- recuperação após resultados vazios ou falhas.
+## 2. Pessoas e condições de acesso
 
-Este documento descreve o comportamento pretendido para o MVP. Não representa funcionalidades implementadas ou validadas com usuários reais.
+| Pessoa ou papel | Objetivo no fluxo | Condição de acesso |
+|---|---|---|
+| **Visitante** | Conhecer a plataforma e encontrar caminhos de entrada | Pode acessar Início e telas de autenticação; acesso à Biblioteca e aos detalhes ainda depende de definição. |
+| **Professor autenticado** | Descobrir, consultar, salvar e enviar materiais; administrar o perfil | Necessita de sessão válida para ações pessoais e de contribuição. |
+| **Responsável pela revisão** | Avaliar submissões e decidir sobre a publicação | Exige permissão específica; o acesso e a interface de moderação ainda serão definidos. |
 
-## 2. Usuário principal
+Quando uma pessoa tentar executar uma ação protegida, a experiência deverá informar a necessidade de autenticação ou a falta de permissão, sem executar a ação indevidamente. O retorno à tarefa original após entrar na conta permanece pendente de decisão.
 
-O usuário prioritário é o professor que procura materiais didáticos para utilizar em suas aulas.
-
-O fluxo deve permitir que ele encontre recursos potencialmente relevantes, compreenda as informações disponíveis, identifique as opções de acesso e consiga continuar a navegação quando a busca não produzir resultados ou quando ocorrer uma falha.
-
-## 3. Fluxo principal
-
-O fluxo começa no catálogo. O usuário pode explorar os materiais diretamente, pesquisar por palavras-chave ou aplicar filtros.
+## 3. Visão geral das jornadas
 
 ```mermaid
 flowchart TD
-    A["Acessar o EduComp"] --> B{"O catálogo foi carregado?"}
-
-    B -->|Não| C["Exibir falha ao carregar dados"]
-    C --> D["Tentar novamente, se disponível"]
-    D --> B
-
-    B -->|Sim| E{"Existem materiais cadastrados?"}
-
-    E -->|Não| F["Exibir catálogo vazio"]
-    F --> G["Encerrar exploração até haver materiais"]
-
-    E -->|Sim| H["Explorar catálogo"]
-    H --> I{"Como encontrar um material?"}
-
-    I -->|Pesquisa| J["Informar palavras-chave"]
-    I -->|Filtros| K["Selecionar filtros"]
-    I -->|Exploração| L["Percorrer materiais"]
-
-    J --> M["Apresentar resultados"]
-    K --> M
-
-    M --> N{"Existem resultados?"}
-    N -->|Não| O["Exibir estado sem resultados"]
-    O --> P["Ajustar pesquisa ou filtros"]
-    P --> M
-
-    N -->|Sim| Q["Selecionar material"]
-    L --> Q
-
-    Q --> R["Consultar detalhes"]
-    R --> S{"Quais opções de acesso existem?"}
-
-    S -->|Link externo| T["Selecionar link externo"]
-    S -->|Arquivo hospedado| U["Selecionar arquivo"]
-    S -->|Link e arquivo| V["Escolher uma opção"]
-    S -->|Nenhuma| W["Informar ausência de acesso"]
-
-    V --> T
-    V --> U
-
-    T --> X{"O acesso funcionou?"}
-    U --> Y{"O acesso ao arquivo funcionou?"}
-
-    X -->|Sim| Z["Acesso concluído"]
-    X -->|Não| AA["Informar falha de acesso"]
-    Y -->|Sim| Z
-    Y -->|Não| AB["Informar falha no arquivo"]
-
-    AA --> AC["Retornar aos detalhes ou ao catálogo"]
-    AB --> AC
-    W --> AC
-    Z --> AD["Fim do percurso de acesso"]
-    AC --> H
+    A[Início] --> B{O que deseja fazer?}
+    B -->|Conhecer o acervo| C[Biblioteca]
+    B -->|Acessar a conta| D[Entrar ou criar conta]
+    D --> E{Autenticação concluída?}
+    E -->|Sim| C
+    E -->|Não| D
+    C --> F[Pesquisar ou filtrar]
+    F --> G[Selecionar material]
+    G --> H[Detalhes do material]
+    H --> I[Acessar recurso disponível]
+    H --> J[Salvar material]
+    J --> K[Salvos]
+    C --> K
+    C --> L[Enviar material]
+    L --> M[Submissão para revisão]
+    M --> N[Acompanhar situação]
+    C --> O[Meu perfil]
 ```
 
-O diagrama representa os percursos previstos. A detecção automática de falhas, a possibilidade de tentar novamente e o comportamento técnico de abertura de arquivos ainda dependem de especificação.
+O mapa apresenta conexões lógicas entre as jornadas; não pressupõe que todas as áreas sejam páginas independentes. Menus, filtros e perfil podem ser apresentados em sobreposições. O alcance da navegação para visitantes ainda precisa ser confirmado.
 
-## 4. Descrição das etapas
+## 4. Jornada de entrada e autenticação
 
-| Etapa | Ação do usuário | Resposta esperada do sistema |
+### 4.1. Entrada e cadastro
+
+```mermaid
+flowchart TD
+    A[Início] --> B{Ação escolhida}
+    B -->|Explorar| C[Biblioteca conforme permissões]
+    B -->|Entrar| D[Formulário de entrada]
+    B -->|Criar conta| E[Formulário de cadastro]
+    D --> F{Dados e credenciais válidos?}
+    F -->|Não| G[Informar erro e permitir correção]
+    G --> D
+    F -->|Sim| H[Sessão iniciada]
+    H --> C
+    E --> I{Cadastro válido?}
+    I -->|Não| J[Exibir validações ou falha]
+    J --> E
+    I -->|Sim| K[Confirmar cadastro]
+    K --> L[Continuar conforme destino definido]
+    D --> M[Recuperar senha]
+    M --> N[Solicitar instruções por e-mail]
+    N --> O[Confirmar solicitação]
+    O --> P[Redefinir por link seguro]
+    P --> D
+```
+
+**Percurso esperado:**
+
+1. A pessoa chega ao **Início** e escolhe explorar, entrar ou criar uma conta.
+2. Em **Entrar**, informa e-mail e senha; dados inválidos ou falhas mantêm a possibilidade de corrigir e tentar novamente.
+3. Com credenciais válidas, a sessão é iniciada e a pessoa segue para a **Biblioteca**, que é o destino de referência para a entrada.
+4. Em **Criar conta**, informa nome, e-mail e senha; o sistema valida os campos, evita duplicidade e confirma o cadastro concluído.
+5. Em **Recuperar senha**, informa o e-mail, recebe feedback da solicitação e poderá redefinir a senha por link seguro.
+6. As telas de acesso oferecem retorno à entrada ou ao Início, conforme o contexto.
+
+**Alternativas e limites:** a autenticação real, o envio de e-mail e a redefinição por link serão implementados posteriormente. A exigência de e-mail institucional, os destinos após cadastro e recuperação e o redirecionamento de quem iniciou uma ação protegida precisam de definição. A opção de continuar com Google não integra o MVP.
+
+### 4.2. Saída da conta
+
+1. O professor abre o **Menu do perfil**.
+2. Seleciona **Sair da plataforma**.
+3. O sistema encerra a sessão.
+4. O usuário retorna ao **Início**; operações pessoais passam a exigir nova autenticação.
+
+Fechar o menu sem selecionar **Sair** não encerra a sessão.
+
+## 5. Jornada de descoberta na Biblioteca
+
+```mermaid
+flowchart TD
+    A[Biblioteca] --> B{Carregamento concluído?}
+    B -->|Não, houve falha| C[Informar erro e oferecer nova tentativa]
+    C --> A
+    B -->|Sim| D{Há materiais publicados?}
+    D -->|Não| E[Exibir estado de acervo vazio]
+    D -->|Sim| F[Explorar lista]
+    F --> G{Como refinar?}
+    G -->|Pesquisa| H[Pesquisar por título ou tema]
+    G -->|Filtros| I[Abrir filtro e editar seleções]
+    G -->|Sem refinamento| J[Selecionar material]
+    I --> K[Aplicar filtros]
+    H --> L[Atualizar resultados]
+    K --> L
+    L --> M{Há correspondências?}
+    M -->|Não| N[Exibir estado sem resultados]
+    N --> O[Revisar pesquisa ou filtros]
+    O --> G
+    M -->|Sim| P[Percorrer resultados]
+    P --> J
+    J --> Q[Detalhes do material]
+```
+
+### 5.1. Exploração e pesquisa
+
+O professor pode explorar os materiais publicados sem preencher a pesquisa. Também pode informar palavras-chave por **título e tema**. A pesquisa e os filtros devem funcionar em conjunto, preservando os critérios aplicados quando um deles for alterado.
+
+Uma consulta pode apresentar materiais, nenhuma correspondência, carregamento ou falha. **Acervo vazio** significa ausência de materiais publicados; **sem resultados** significa que os critérios atuais não encontraram correspondências. Os dois estados devem ser distintos.
+
+A listagem deve oferecer paginação ou carregamento progressivo, ainda a escolher. O retorno dos detalhes à Biblioteca deve manter o termo pesquisado e os filtros aplicados durante a navegação; a preservação exata da rolagem após retorno ou recarregamento ainda precisa ser definida.
+
+### 5.2. Seleção e aplicação dos filtros
+
+Há três grupos: **Tipo de material**, **Etapa de ensino** e **Eixo da Computação**. Cada grupo é aberto em uma sobreposição com seleção múltipla.
+
+1. O professor abre um dos grupos e visualiza as seleções já aplicadas.
+2. Marca ou desmarca opções, modificando temporariamente a seleção daquele grupo.
+3. Seleciona **Aplicar** para atualizar os resultados da Biblioteca.
+4. Pode reabrir qualquer grupo e conferir o que continua aplicado.
+5. A opção **Limpar** deve permitir retirar seleções, mas seu alcance e o momento da confirmação ainda serão definidos.
+
+As opções do mesmo grupo combinam-se por **OU**; grupos diferentes e a pesquisa textual combinam-se por **E**. Fechar a sobreposição sem aplicar não deve produzir uma alteração não intencional nos resultados; o destino das seleções temporárias ainda precisa ser formalizado.
+
+## 6. Jornada de detalhes e acesso ao recurso
+
+```mermaid
+flowchart TD
+    A[Selecionar material] --> B[Consultar detalhes e metadados]
+    B --> C{Há forma de acesso permitida?}
+    C -->|Arquivo| D[Acessar arquivo hospedado]
+    C -->|Link, se adotado| E[Abrir fonte externa]
+    C -->|Mais de uma opção| F[Escolher forma de acesso]
+    F --> D
+    F --> E
+    C -->|Nenhuma| G[Informar indisponibilidade]
+    D --> H{Acesso concluído?}
+    E --> H
+    H -->|Sim| I[Consultar recurso]
+    H -->|Falha identificável| J[Informar falha e orientar]
+    G --> K[Voltar aos detalhes ou à origem]
+    J --> K
+    I --> K
+```
+
+1. Ao selecionar um material na **Biblioteca** ou em **Salvos**, o professor abre os **Detalhes do material**.
+2. Consulta título, descrição, classificações e demais informações disponíveis.
+3. Identifica a ação para acessar o arquivo associado ao material. Caso links externos sejam admitidos, eles devem ser diferenciados dos arquivos hospedados.
+4. Quando não houver recurso acessível ou houver falta de permissão, a interface comunica a condição sem apresentar ações inexistentes.
+5. Após consultar ou tentar acessar o conteúdo, o professor pode retornar aos detalhes ou à área de origem.
+
+A plataforma deve comunicar apenas falhas que consiga identificar. Não deve afirmar que um site externo está indisponível sem conseguir verificar essa condição. A pré-visualização integrada de arquivos não faz parte do MVP.
+
+### 6.1. Favoritar nos detalhes ou na listagem
+
+Se a pessoa estiver autenticada, pode marcar ou desmarcar um material como favorito. A interface deve refletir a alteração e a lista pessoal deve permanecer atualizada entre sessões. Caso a ação esteja disponível visualmente para visitantes, ela deverá solicitar autenticação antes de modificar favoritos.
+
+### 6.2. Compartilhamento básico
+
+Ao abrir **Compartilhar** ou **Copiar link**, a pessoa seleciona a ação de cópia e recebe confirmação ou mensagem de falha. O destino do link — plataforma, material ou ambos — ainda será definido. Os canais sociais desenhados na interface não integram o fluxo funcional do MVP.
+
+## 7. Jornada de materiais salvos
+
+1. O professor autenticado favorita um material na **Biblioteca** ou nos **Detalhes**.
+2. O sistema registra o favorito vinculado à conta e atualiza o estado da ação.
+3. O professor abre **Salvos** e consulta a lista pessoal.
+4. Pode abrir os detalhes de um item ou removê-lo dos favoritos.
+5. A lista é atualizada após a remoção e apresenta um estado vazio quando não há materiais salvos.
+6. Ao voltar dos detalhes, o professor retorna ao contexto de **Salvos**, sem precisar refazer a descoberta.
+
+Falhas ao salvar, carregar ou remover materiais devem ser comunicadas sem apresentar uma alteração como concluída quando não foi persistida. A relação entre usuário e material não deve gerar duplicidade de favoritos.
+
+## 8. Jornada de envio, acompanhamento e revisão
+
+```mermaid
+flowchart TD
+    A[Professor autenticado] --> B[Enviar material]
+    B --> C[Preencher dados e escolher arquivo]
+    C --> D{Dados e arquivo válidos?}
+    D -->|Não| E[Apresentar erros para correção]
+    E --> C
+    D -->|Sim| F[Enviar contribuição]
+    F --> G{Envio concluído?}
+    G -->|Não| H[Informar falha ou permitir nova tentativa]
+    H --> C
+    G -->|Sim| I[Confirmar recebimento]
+    I --> J[Registrar submissão para revisão]
+    J --> K[Professor acompanha situação]
+    J --> L[Responsável autorizado analisa]
+    L --> M{Decisão de revisão}
+    M -->|Aprovar| N[Publicar material aprovado]
+    M -->|Recusar| O[Manter fora da Biblioteca publicada]
+    N --> K
+    O --> K
+```
+
+### 8.1. Envio pelo professor
+
+O professor abre **Enviar material**, preenche os metadados requeridos e seleciona um arquivo. O sistema valida os dados, apresenta mensagens para correção e informa o andamento do upload. Em caso de sucesso, confirma o recebimento e registra a submissão, **sem publicá-la automaticamente**.
+
+Os formatos aceitos, limites, campos obrigatórios e condições de uso dos materiais ainda precisam de definição.
+
+### 8.2. Acompanhamento
+
+O professor deve conseguir identificar seus envios e a situação de cada submissão. Os estados propostos são **Pendente**, **Em análise**, **Aprovado** e **Recusado**. A localização dessa consulta na navegação ainda não foi definida; o fluxo não presume que já exista uma tela específica.
+
+### 8.3. Revisão autorizada
+
+Um responsável com permissão adequada acessa as submissões, consulta os dados necessários e registra aprovação ou recusa. Somente materiais aprovados podem aparecer na Biblioteca publicada. Critérios de decisão, transições de status, justificativa de recusa, eventual reenvio e interface de moderação ainda dependem de especificação.
+
+## 9. Jornada de perfil
+
+1. O professor autenticado abre o **Menu do perfil**.
+2. Seleciona **Meu perfil**, que pode ser exibido como sobreposição.
+3. Consulta os dados registrados e escolhe editar informações pessoais, alterar foto ou senha.
+4. O sistema valida as alterações antes de salvá-las.
+5. Após uma operação concluída, informa sucesso e apresenta os dados atualizados; se houver falha, comunica o problema e permite corrigir ou tentar novamente.
+6. Ao fechar o perfil, o professor retorna ao contexto de onde o abriu, quando aplicável.
+
+A alteração não deve ser apresentada como concluída antes de ser persistida. O acesso ao perfil de outra pessoa não é permitido sem autorização.
+
+## 10. Menus, sobreposições e recursos complementares
+
+| Elemento | Entrada e saída esperadas | Observação |
 |---|---|---|
-| Acesso inicial | Entra no EduComp | Carrega e apresenta o catálogo, quando disponível |
-| Catálogo vazio | Acessa um catálogo sem materiais cadastrados | Informa que não existem materiais para exibição |
-| Exploração | Percorre a listagem | Apresenta os materiais sem exigir pesquisa prévia |
-| Pesquisa | Informa palavras-chave | Apresenta materiais correspondentes às regras de pesquisa |
-| Filtragem | Seleciona critérios | Restringe os materiais conforme os filtros aplicados |
-| Ajuste da consulta | Altera termos ou filtros | Atualiza os resultados de acordo com os critérios atuais |
-| Ausência de resultados | Não encontra correspondências | Informa a situação e orienta a revisão da consulta |
-| Seleção | Escolhe um material | Abre os detalhes do recurso selecionado |
-| Consulta aos detalhes | Analisa as informações | Apresenta os metadados disponíveis e as opções de acesso cadastradas |
-| Acesso externo | Seleciona um link | Tenta abrir o endereço externo cadastrado |
-| Acesso por arquivo | Seleciona um arquivo | Disponibiliza o comportamento de abertura ou download definido para o formato |
-| Duas opções de acesso | Escolhe entre link e arquivo | Apresenta as opções de forma distinta |
-| Nenhuma opção de acesso | Consulta um material sem link ou arquivo | Informa que não há opção de acesso cadastrada |
-| Falha de acesso | Não consegue acessar o recurso | Comunica a falha e orienta o próximo passo, quando possível |
-
-## 5. Percursos de pesquisa e filtragem
-
-### 5.1. Pesquisa textual
-
-A pesquisa deve considerar os seguintes campos, nesta ordem de prioridade para relevância: título, tipo de material, resumo e descrição.
-
-As regras confirmadas são:
-
-- ignorar diferenças entre letras maiúsculas e minúsculas;
-- ignorar diferenças de acentuação;
-- permitir correspondências parciais;
-- exigir que todas as palavras da consulta correspondam ao material (AND), mesmo que apareçam em campos diferentes;
-- priorizar campos de maior relevância; em consultas com várias palavras, priorizar materiais que concentram mais palavras em campos de maior prioridade;
-- dentro do mesmo campo e em condições equivalentes, priorizar correspondências exatas sobre parciais;
-- em empate de relevância, ordenar pelo título em ordem alfabética crescente, normalizando caixa e acentuação, e depois pelo identificador único em ordem crescente.
-
-A busca textual e todos os filtros ativos devem ser atendidos simultaneamente. Limpar o texto da busca mantém os filtros selecionados. Se não houver resultados, a interface informa a situação e permite revisar a consulta; a sugestão automática de correção está fora do escopo do MVP; o usuário pode alterar manualmente a consulta.
-
-O fluxo deve permitir que o professor altere a consulta e veja os resultados correspondentes aos novos termos.
-
-### 5.2. Filtragem
-
-Os filtros previstos são tipo de material e etapa de ensino. As opções de cada filtro são derivadas dos valores existentes no catálogo e atualizadas dinamicamente conforme os demais critérios ativos.
-
-O comportamento definido é:
-
-1. O usuário identifica os filtros disponíveis, apresentados em ordem alfabética e sem contagens individuais.
-2. Seleciona uma ou mais opções em cada filtro.
-3. As opções dentro do mesmo filtro combinam-se por OR; tipo de material, etapa de ensino e busca textual combinam-se entre si por AND.
-4. A listagem e a contagem total de resultados são atualizadas imediatamente.
-5. Os filtros ativos são apresentados como marcadores removíveis, permitindo retirar critérios individualmente.
-6. A ação “Limpar filtros” remove apenas os filtros de tipo e etapa de ensino e preserva o texto da busca.
-7. Se uma opção selecionada se tornar incompatível com os demais critérios, ela permanece selecionada e fica desabilitada no controle, podendo ser removida pelo marcador correspondente.
-
-Em telas maiores, os filtros são listas visíveis com caixas de seleção. Em telas pequenas, o botão “Filtros (N)” abre um painel lateral sobre o catálogo, onde N é o total de valores selecionados. O painel tem seções independentes para tipo de material e etapa de ensino, ambas expandidas inicialmente; o estado de expansão e as seleções são preservados ao fechar e reabrir. O painel pode ser fechado pelo botão de fechar, ao tocar fora ou pelo botão Voltar do dispositivo. Selecionar ou remover filtros mantém o painel aberto e atualiza os resultados sem botão “Aplicar”. Não há busca interna nas opções.
-
-Ao alterar busca ou filtros, a lista retorna ao topo. Os resultados são carregados inicialmente em lotes de até 12, com “Carregar mais” para acrescentar até 12 por vez. Durante o carregamento, o controle exibe “Carregando...”. Em caso de falha, a interface informa “Não foi possível carregar mais materiais” e oferece “Tentar novamente”, preservando os materiais já exibidos. Se os critérios mudarem durante o carregamento, respostas de solicitações antigas são invalidadas e não podem ser adicionadas à lista atual.
-
-## 6. Consulta aos detalhes
-
-Ao selecionar um material, o professor deve acessar uma página de detalhes que organize as informações cadastradas.
-
-Os campos previstos incluem, quando disponíveis:
-
-- título;
-- tipo de material;
-- etapa de ensino;
-- resumo;
-- descrição;
-- orientações de uso;
-- autoria ou fonte;
-- condições de utilização;
-- link externo;
-- arquivo hospedado.
-
-Os campos obrigatórios e opcionais estão definidos na especificação BK-006. Campos opcionais sem valor não devem ser inventados nem bloquear a consulta; a apresentação visual de campos ausentes será definida no Figma.
-
-A consulta aos detalhes não depende de pré-visualização integrada, pois essa funcionalidade está fora do escopo do MVP.
-
-## 7. Percursos de acesso
-
-A interface deve representar corretamente os quatro cenários de acesso.
-
-### 7.1. Somente link externo
-
-1. O usuário abre os detalhes do material.
-2. Identifica a opção de acesso externo.
-3. Seleciona o link.
-4. O navegador tenta abrir o endereço cadastrado.
-5. Se o recurso não puder ser acessado, a situação deve ser comunicada quando for possível identificá-la.
-
-A plataforma não deve presumir que todos os problemas ocorridos no destino externo podem ser detectados automaticamente.
-
-### 7.2. Somente arquivo hospedado
-
-1. O usuário abre os detalhes do material.
-2. Identifica a opção de acesso ao arquivo.
-3. Seleciona a opção.
-4. O sistema executa o comportamento definido para o arquivo, como abertura ou download.
-5. Se ocorrer uma falha identificável, a interface deve comunicar o problema.
-
-Os formatos aceitos para arquivos hospedados são PDF, DOCX, PPTX, PNG e JPG, com limite de 50 MB por arquivo. O comportamento técnico de abertura ou download será detalhado na implementação.
-
-### 7.3. Link externo e arquivo hospedado
-
-1. O usuário abre os detalhes do material.
-2. Identifica as duas opções disponíveis.
-3. Compara as opções conforme suas identificações.
-4. Seleciona a opção desejada.
-5. O fluxo continua pelo percurso correspondente ao tipo de acesso escolhido.
-
-A interface não deve sugerir que o link e o arquivo são necessariamente equivalentes.
-
-### 7.4. Nenhuma opção de acesso disponível
-
-1. O usuário abre os detalhes do material.
-2. Consulta as informações descritivas.
-3. A interface informa que não há opção de acesso cadastrada.
-4. O usuário pode retornar ao catálogo ou selecionar outro material.
-
-A ausência de uma opção de acesso não deve ser confundida com falha técnica, nem gerar um botão que prometa abrir um recurso inexistente.
-
-## 8. Estados alternativos e situações excepcionais
-
-### 8.1. Catálogo vazio
-
-Ocorre quando não existem materiais cadastrados para exibição.
-
-A interface deve informar que o catálogo está vazio. Esse estado é diferente de uma pesquisa sem resultados: no catálogo vazio não há materiais cadastrados; na pesquisa sem resultados, a consulta não encontra correspondências entre os materiais existentes.
-
-### 8.2. Pesquisa ou filtragem sem resultados
-
-Ocorre quando os termos pesquisados e os filtros atuais não retornam materiais correspondentes.
-
-A interface deve informar a situação e permitir revisar os termos ou remover critérios. Quando uma busca não retornar resultados, pode sugerir uma consulta corrigida sem alterar automaticamente o texto original, após avaliação técnica da solução.
-
-### 8.3. Falha ao carregar dados
-
-Ocorre quando o sistema não consegue obter ou apresentar os dados necessários para a interface.
-
-A mensagem deve distinguir a falha de um catálogo vazio. Uma ação para tentar novamente pode ser apresentada quando estiver disponível.
-
-### 8.4. Material sem opção de acesso cadastrada
-
-Ocorre quando o cadastro não contém link externo nem arquivo hospedado.
-
-A interface deve informar a condição, manter as informações descritivas disponíveis e permitir que o usuário continue a navegação.
-
-### 8.5. Link externo indisponível
-
-Pode ocorrer quando o endereço cadastrado está incorreto, o destino está indisponível ou o acesso é impedido por condições externas.
-
-A comunicação da falha deve considerar as limitações da plataforma. A detecção automática e os detalhes técnicos de recuperação serão tratados durante a implementação; a interface deve comunicar apenas falhas que puder identificar.
-
-### 8.6. Arquivo indisponível
-
-Pode ocorrer quando o arquivo não pode ser aberto ou baixado.
-
-A interface deverá comunicar a falha quando ela puder ser identificada. Os detalhes técnicos de detecção e recuperação serão definidos em uma etapa posterior.
-
-## 9. Retorno à navegação
-
-O usuário deve conseguir retornar aos detalhes ou ao catálogo depois de consultar um material, encontrar uma falha ou descobrir que não há opção de acesso cadastrada.
-
-Ao abrir um material e retornar ao catálogo durante a navegação atual, o sistema preserva o texto de busca, os filtros selecionados, a posição de rolagem e o estado de expansão das seções do painel de filtros. Se os critérios não forem alterados, a listagem retorna à posição anterior. Uma atualização da página pode reiniciar esse estado.
-
-## 10. Decisões de experiência
-
-- A pesquisa não deve ser o único caminho para encontrar materiais.
-- O professor deve poder explorar o catálogo sem informar palavras-chave.
-- A interface deve distinguir catálogo vazio, pesquisa sem resultados e falha ao carregar dados.
-- Os filtros ativos devem ser identificáveis.
-- O professor deve conseguir revisar a pesquisa e os filtros.
-- Os detalhes devem apresentar as informações disponíveis de forma organizada.
-- As opções de acesso devem ser identificadas conforme sua natureza.
-- Link externo e arquivo hospedado são formas distintas de acesso.
-- Quando ambas estiverem disponíveis, cada opção deve ser identificável.
-- Quando não houver opção de acesso, a interface deve informar essa condição.
-- A pré-visualização integrada não faz parte do MVP.
-- Falhas devem ser comunicadas sem prometer capacidades de detecção ou recuperação ainda não especificadas.
-
-## 11. Decisões, hipóteses e pendências
-
-### 11.1. Decisões confirmadas
-
-- O público prioritário são professores que procuram materiais para suas aulas.
-- O usuário poderá explorar o catálogo, pesquisar e utilizar filtros.
-- A pesquisa considera título, tipo de material, resumo e descrição.
-- A pesquisa ignora diferenças de caixa e acentuação e permite correspondências parciais.
-- A relevância prioriza título, tipo de material, resumo e descrição, nessa ordem.
-- Os filtros previstos incluem tipo de material e etapa de ensino.
-- O acesso pode ocorrer por link externo, arquivo hospedado ou ambos. Se um registro preexistente/incompleto não tiver acesso direto, o fluxo informa essa condição; novos cadastros exigem pelo menos uma forma de acesso.
-- A pré-visualização dos materiais não faz parte do MVP.
-- O documento descreve um fluxo pretendido, não uma implementação concluída.
-
-### 11.2. Hipóteses de experiência
-
-- A combinação de exploração, pesquisa e filtros pode facilitar a descoberta de materiais relevantes.
-- Informações resumidas no catálogo podem ajudar o professor a decidir quais materiais consultar.
-- Detalhes organizados e opções de acesso claras podem facilitar a compreensão dos recursos.
-- Mensagens de recuperação podem ajudar o professor a continuar após uma pesquisa sem resultados ou uma falha.
-
-Esses pontos representam expectativas de experiência, não resultados comprovados por pesquisa com usuários.
-
-### 11.3. Pendências
-
-- Avaliar tecnicamente a sugestão de correção de consulta e definir se será implementada no MVP ou adiada.
-- Definir os campos obrigatórios e opcionais dos materiais.
-- Definir os formatos de arquivo aceitos e os comportamentos de acesso.
-- Especificar o tratamento de links e arquivos indisponíveis.
-- Definir as mensagens e as estratégias de recuperação de falhas.
-- Definir os estados visuais finais dos componentes e os critérios de acessibilidade.
-
-## 12. Relação com os demais documentos
-
-Este fluxo deve ser interpretado em conjunto com:
-
-- `docs/product/product-brief.md` — visão, público prioritário e escopo;
-- `docs/product/requisitos.md` — requisitos funcionais e não funcionais;
-- `docs/product/historias-de-usuario.md` — necessidades dos usuários e critérios de aceitação;
-- `docs/product/backlog.md` — prioridades e pendências;
-- `docs/ux-ui/arquitetura-da-informacao.md` — organização do catálogo, resultados e detalhes;
-- `docs/ux-ui/objetivos-de-ux.md` — objetivos e princípios da experiência;
-- `docs/ux-ui/design-system.md` — direção visual e componentes previstos.
-
-As decisões confirmadas de escopo devem orientar a revisão dos documentos. Questões ainda não resolvidas devem permanecer identificadas como pendências.
-
-## 13. Status e validação futura
-
-O fluxo está documentado como uma proposta para o MVP. Não há, nesta etapa, evidência de implementação ou validação com usuários reais.
-
-Caso o projeto avance para uma etapa futura de avaliação, o fluxo poderá orientar tarefas que verifiquem se professores conseguem:
-
-1. Encontrar materiais por exploração, pesquisa ou filtros.
-2. Compreender as informações apresentadas nos resultados e nos detalhes.
-3. Identificar corretamente as opções de acesso disponíveis.
-4. Recuperar-se de uma pesquisa sem resultados.
-5. Distinguir um catálogo vazio de uma falha de carregamento.
-6. Reconhecer quando um material não possui uma opção de acesso cadastrada.
-7. Compreender mensagens de falha e identificar o próximo passo possível.
-
-A realização dessas atividades depende de uma etapa posterior do projeto. A atual fase permanece restrita à revisão documental.
-
-
-## Fluxo de envio de material
-
-1. O professor acessa “Enviar material”.
-2. Preenche os metadados e seleciona os arquivos.
-3. O sistema valida campos obrigatórios, formatos e limites.
-4. Se houver erros, apresenta mensagens e mantém os dados preenchidos para correção.
-5. Se válido, registra o material como “Pendente de revisão” e confirma o envio.
-6. Um responsável autorizado revisa a submissão e aprova ou rejeita.
-7. Apenas materiais aprovados ficam disponíveis no catálogo.
-
-## Fluxo de favoritos
-
-1. O usuário identificado aciona “Favoritar” em um cartão ou nos detalhes.
-2. O sistema salva a associação à conta.
-3. O usuário acessa “Favoritos” para consultar a lista.
-4. O usuário pode desfavoritar um item; a lista é atualizada.
-
-## Fluxo de compartilhamento
-
-1. O usuário abre os detalhes de um material.
-2. Aciona “Compartilhar” ou “Copiar link”.
-3. O sistema copia o link direto e confirma a ação.
-4. Quem recebe o link acessa os detalhes conforme as regras normais de acesso.
+| **Menu da Biblioteca** | Aberto pela navegação contextual; conduz a destinos disponíveis e deve permitir fechamento. | Não representa uma página de conteúdo. |
+| **Menu de Salvos** | Oferece navegação a partir da área de favoritos e permite voltar à lista. | Variações compacta e completa devem ter fechamento coerente. |
+| **Menu do perfil** | Aberto pela opção de perfil; permite acessar Meu perfil, sair ou fechar. | Fechar não equivale a sair da conta. |
+| **Filtros** | Abertos a partir da Biblioteca; permitem seleção, Aplicar, Limpar e fechamento. | Seleções temporárias e aplicadas precisam permanecer distinguíveis. |
+| **Compartilhar** | Aberto no contexto disponível; permite copiar o link ou fechar. | Integrações sociais ficam para evolução posterior. |
+| **Notificações** | Há uma sobreposição prevista na experiência visual. | Histórico, ações de leitura e contador não integram o MVP. |
+
+As sobreposições devem possuir controles de fechamento identificáveis, gerenciamento de foco e comportamento consistente por teclado. A forma de fechamento por clique fora ou tecla Esc e sua aplicação nos dispositivos menores precisam de revisão.
+
+## 11. Estados alternativos e recuperação
+
+| Situação | Resposta esperada | Continuidade possível |
+|---|---|---|
+| **Credenciais inválidas** | Informar que não foi possível entrar, sem iniciar sessão. | Corrigir os dados ou recuperar senha. |
+| **Cadastro inválido ou e-mail duplicado** | Identificar o problema sem declarar sucesso. | Corrigir campos ou usar a entrada. |
+| **Biblioteca vazia** | Informar ausência de materiais publicados. | Retornar ao Início ou consultar novamente depois. |
+| **Busca sem correspondência** | Informar que não há resultados para os critérios atuais. | Revisar pesquisa ou filtros. |
+| **Falha no carregamento** | Distinguir erro técnico de lista vazia. | Tentar novamente quando possível. |
+| **Material sem recurso acessível** | Informar ausência de acesso permitido. | Voltar aos detalhes ou à listagem. |
+| **Falha ao favoritar** | Informar que a ação não foi concluída. | Tentar novamente sem criar estado enganoso. |
+| **Erro de upload** | Informar falha e preservar dados recuperáveis do formulário. | Corrigir ou reenviar. |
+| **Falha ao atualizar perfil** | Informar que os dados não foram salvos. | Corrigir ou tentar novamente. |
+| **Ação sem permissão** | Impedir a operação e comunicar a restrição. | Entrar com conta autorizada ou voltar. |
+
+O fluxo deve evitar saídas sem orientação, mas não promete recuperação automática em situações que dependam de serviços externos ou de decisões técnicas futuras.
+
+## 12. Decisões de UX ainda necessárias
+
+| Tema | Decisão pendente |
+|---|---|
+| **Acesso como visitante** | Definir se Biblioteca e Detalhes podem ser consultados sem entrar. |
+| **Continuidade da autenticação** | Confirmar o destino após cadastro e recuperação e o retorno à tarefa que exigiu login. |
+| **Pesquisa** | Definir quando a consulta é executada e como a ordenação é apresentada. |
+| **Filtros** | Definir fechamento sem Aplicar, alcance de Limpar e comportamento de opções sem resultados. |
+| **Resultados** | Escolher paginação ou carregamento progressivo; definir preservação de rolagem e estado ao retornar. |
+| **Arquivos e links** | Confirmar formas de acesso, apresentação das opções e mensagens de indisponibilidade. |
+| **Compartilhamento** | Definir destino do link copiado e os contextos em que a ação aparece. |
+| **Envios** | Definir a localização do acompanhamento e o que é exibido para cada situação. |
+| **Moderação** | Definir entrada, organização da interface e passos da decisão autorizada. |
+| **Responsividade** | Revisar menus, formulários e sobreposições para telas menores. |
+
+## 13. Verificação futura dos fluxos
+
+Antes da implementação, os percursos deverão ser conferidos no protótipo navegável, especialmente os caminhos de retorno e fechamento das sobreposições. Durante o desenvolvimento e o QA, poderão ser verificados cenários de sucesso, erro, indisponibilidade e falta de permissão. Posteriormente, testes com professores poderão avaliar a compreensão e a facilidade de execução das jornadas.
+
+Não foram realizadas validações completas dos fluxos em modo de apresentação nem pesquisas com usuários reais. Os diagramas representam **comportamentos pretendidos**, não funcionalidades implementadas.
+
+## 14. Documentos relacionados
+
+- [`../product/escopo-mvp.md`](../product/escopo-mvp.md) — funcionalidades e limites da primeira versão.
+- [`../product/requisitos.md`](../product/requisitos.md) — requisitos e regras de negócio.
+- [`../product/historias-de-usuario.md`](../product/historias-de-usuario.md) — critérios de aceitação das tarefas.
+- [`../product/especificacao-busca-filtros.md`](../product/especificacao-busca-filtros.md) — comportamento de pesquisa e filtros.
+- [`../product/especificacao-metadados.md`](../product/especificacao-metadados.md) — dados dos materiais e submissões.
+- [`arquitetura-da-informacao.md`](arquitetura-da-informacao.md) — organização dos destinos e conteúdos.
+- [`objetivos-de-ux.md`](objetivos-de-ux.md) — objetivos de experiência.
+- [`design-system.md`](design-system.md) — padrões visuais e estados de componentes.
