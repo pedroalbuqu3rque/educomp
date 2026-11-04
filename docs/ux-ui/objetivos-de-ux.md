@@ -1,285 +1,304 @@
-# Objetivos de UX — EduComp
+# EduComp — Objetivos de UX
 
-**Versão:** 0.5  
-**Status:** Consolidado para orientar o design do MVP  
-**Escopo:** MVP do EduComp
+**Versão:** 0.6  
+**Data:** 04/11/2026  
+**Situação:** Objetivos de experiência definidos para orientar a primeira versão funcional; validação com usuários ainda não realizada.
 
 ## 1. Objetivo do documento
 
-Este documento define os objetivos de experiência do usuário (UX) para o MVP do EduComp, uma proposta de plataforma digital voltada a professores que procuram materiais didáticos para suas aulas.
+Estabelecer os resultados de experiência pretendidos para o EduComp, uma plataforma voltada a professores da Educação Básica que procuram, consultam, organizam e compartilham materiais pedagógicos de Computação.
 
-Os objetivos orientam as decisões de arquitetura da informação, navegação, conteúdo e interface. A intenção é facilitar a descoberta de materiais, a compreensão das informações disponíveis e a identificação das opções de acesso.
+Os objetivos orientam decisões de arquitetura da informação, navegação, conteúdo, interface e avaliação de usabilidade. Eles descrevem **o que a experiência deve facilitar para as pessoas**, não as soluções técnicas a implementar. Regras de negócio, campos obrigatórios e critérios funcionais são detalhados nos documentos de produto.
 
-Os objetivos representam resultados pretendidos. Não comprovam que a interface esteja implementada, que a experiência seja eficaz ou que as hipóteses tenham sido validadas com usuários reais.
+O protótipo visual foi elaborado, mas suas interações ainda não estão integralmente validadas. Não foram realizados testes de usabilidade ou pesquisas com professores reais; portanto, os resultados esperados neste documento são **metas de projeto, não resultados comprovados**.
 
-## 2. Público prioritário
+## 2. Público e contexto de uso
 
-O público prioritário do EduComp é formado por professores que procuram materiais didáticos para utilizar em suas aulas.
+O público prioritário é formado por **professores da Educação Básica que procuram materiais para o ensino de Computação**. A proposta considera situações como encontrar um recurso para determinado tema, verificar sua adequação à etapa de ensino, guardá-lo para uso posterior e contribuir com materiais para o acervo.
 
-A experiência deve considerar que esses usuários precisam:
+A experiência é guiada pela hipótese de que a dispersão dos recursos pode tornar a busca e a avaliação inicial mais trabalhosas. Essa hipótese ainda precisa ser investigada com professores, sem pressupor frequência, gravidade ou comportamento de uso.
 
-- explorar materiais disponíveis;
-- localizar recursos relacionados ao que procuram;
-- compreender as características de cada material;
-- identificar as opções de acesso;
-- recuperar-se de pesquisas sem resultados ou de falhas de acesso.
+Também existe uma necessidade operacional de **revisão de materiais submetidos**, a ser atendida por pessoas autorizadas. A experiência desse papel requer definição própria antes de ser considerada resolvida.
 
-Essas necessidades orientam o projeto, mas não devem ser apresentadas como conclusões de entrevistas, questionários ou testes com professores.
+## 3. Objetivo geral de experiência
 
-## 3. Contexto do problema
+**Permitir que o professor compreenda rapidamente o que o EduComp oferece, encontre e avalie materiais de interesse e conclua suas ações com orientação e feedback adequados.**
 
-O EduComp parte da hipótese de que localizar e avaliar materiais didáticos pode exigir que professores consultem diferentes fontes e analisem os recursos encontrados antes de utilizá-los.
+A experiência deve preservar a autonomia do professor na escolha dos materiais e comunicar com clareza os limites do conteúdo disponível, das permissões e das operações realizadas.
 
-A proposta consiste em organizar informações sobre materiais em um catálogo que permita exploração, pesquisa textual, filtragem e consulta de detalhes.
-
-O acesso deverá ser representado de acordo com as opções disponíveis para cada recurso:
-
-1. somente link externo;
-2. somente arquivo hospedado na plataforma;
-3. link externo e arquivo hospedado;
-4. nenhuma opção de acesso disponível.
-
-A coleta de respostas por meio do Google Forms foi abandonada. Portanto, não há resultados desse questionário que possam ser usados como evidência empírica para confirmar a existência, a frequência ou a intensidade das dificuldades descritas.
-
-## 4. Objetivos de experiência
+## 4. Objetivos específicos de UX
 
 ### OUX-001 — Facilitar a descoberta de materiais
 
-**Objetivo:** permitir que o professor explore o catálogo e identifique materiais potencialmente relevantes para suas aulas.
+**Objetivo:** tornar a Biblioteca compreensível e permitir que o professor identifique recursos de interesse para suas aulas.
 
-**Diretrizes de UX:**
+**Diretrizes de experiência:**
 
-- organizar os materiais de maneira consistente;
-- destacar o título e as informações essenciais de cada recurso;
-- manter uma hierarquia visual que facilite a exploração;
-- permitir que o usuário abra os detalhes de um material;
-- evitar que a apresentação dependa exclusivamente da existência de um link externo.
+- Apresentar os materiais de forma organizada, com títulos e informações de identificação em destaque.
+- Tornar evidente a diferença entre explorar a Biblioteca e abrir os detalhes de um material.
+- Permitir continuar a exploração sem perder o contexto da navegação.
+- Manter coerência visual entre os itens e as ações disponíveis.
 
-**Resultado esperado:** o professor compreende como o catálogo está organizado e como consultar os materiais.
+**Resultado esperado:** o professor entende como explorar a Biblioteca e consegue abrir um material que deseja conhecer melhor.
 
-**Avaliação futura:** propor tarefas nas quais participantes precisem localizar e abrir materiais específicos. Registrar a conclusão da tarefa, erros observados e dificuldades relatadas.
+**Avaliação futura:** observar a exploração inicial, a identificação de itens e a conclusão de tarefas de localização e abertura de detalhes.
 
-### OUX-002 — Tornar a pesquisa compreensível e útil
+### OUX-002 — Tornar a pesquisa clara e previsível
 
-**Objetivo:** permitir que o professor pesquise materiais por termos relacionados ao recurso que procura.
+**Objetivo:** permitir que o professor procure materiais por palavras-chave e compreenda a relação entre a pesquisa realizada e os resultados apresentados.
 
-**Diretrizes de UX:**
+**Diretrizes de experiência:**
 
-- apresentar um campo de pesquisa claramente identificado;
-- tornar compreensível a finalidade do campo;
-- apresentar os resultados de forma organizada;
-- permitir a alteração dos termos pesquisados;
-- informar quando não houver resultados;
-- manter consistência entre o comportamento da pesquisa e as regras funcionais documentadas.
+- Identificar claramente o campo de pesquisa e permitir revisar o termo informado.
+- Utilizar mensagens e estados que indiquem quando os resultados estão sendo atualizados.
+- Manter visíveis ou recuperáveis os critérios ativos, sem substituir resultados recentes por respostas antigas.
+- Comunicar consultas sem correspondência de modo distinto de erros técnicos.
 
-**Regras funcionais já definidas para a pesquisa:**
+A pesquisa prevista considera **título e tema**. O disparo da consulta, as regras de correspondência e a ordenação serão definidos na especificação funcional, sem transformar este objetivo de UX em uma regra de algoritmo.
 
-- ignorar diferenças entre letras maiúsculas e minúsculas e diferenças de acentuação;
-- permitir correspondências parciais;
-- exigir correspondência de todas as palavras da consulta (AND);
-- ordenar por hierarquia fixa de campos (título, tipo de material, resumo e descrição), comparando a quantidade de correspondências por campo nessa ordem;
-- priorizar correspondências exatas dentro do mesmo campo, sem superar a prioridade de um campo mais relevante;
-- desempatar pelo título em ordem alfabética crescente, normalizando caixa e acentuação, e depois pelo identificador único em ordem crescente.
+**Resultado esperado:** o professor sabe como pesquisar, percebe quando os resultados mudam e compreende o que pode fazer se não encontrar materiais.
 
-A sugestão automática de correção de consulta está fora do MVP; o usuário poderá alterar manualmente os termos ou filtros.
+**Avaliação futura:** propor buscas representativas e observar a compreensão do campo, dos resultados e das possibilidades de reformulação da pesquisa.
 
-**Resultado esperado:** o professor compreende como realizar uma pesquisa e interpretar os resultados apresentados.
+### OUX-003 — Tornar os filtros compreensíveis e controláveis
 
-**Avaliação futura:** utilizar consultas representativas e observar se participantes conseguem localizar materiais e compreender os resultados. A avaliação deverá distinguir problemas de interface de limitações na própria lógica de pesquisa.
+**Objetivo:** ajudar o professor a refinar resultados por **tipo de material, etapa de ensino e eixo da Computação**, mantendo clareza sobre as escolhas feitas.
 
-### OUX-003 — Facilitar o uso dos filtros
+**Diretrizes de experiência:**
 
-**Objetivo:** permitir que o professor refine a listagem por critérios relevantes para a seleção de materiais.
+- Apresentar nomes e opções de filtro com rótulos legíveis e consistentes.
+- Diferenciar opções selecionadas daquelas que estão efetivamente aplicadas à Biblioteca.
+- Tornar as ações **Aplicar** e **Limpar** fáceis de identificar e compreender.
+- Permitir reabrir um filtro e reconhecer as seleções já aplicadas.
+- Oferecer orientação quando a combinação de critérios não retornar materiais.
 
-**Diretrizes de UX:**
+O comportamento de fechar uma sobreposição sem aplicar e o alcance de **Limpar** ainda precisam ser definidos para evitar ambiguidades.
 
-- identificar claramente os filtros disponíveis;
-- apresentar as opções com rótulos compreensíveis;
-- indicar quais filtros estão ativos;
-- permitir revisar e remover os critérios aplicados;
-- comunicar quando a combinação de critérios não retornar materiais;
-- manter a apresentação dos filtros compreensível em diferentes tamanhos de tela.
+**Resultado esperado:** o professor consegue combinar, revisar e remover filtros e entende por que o conjunto de resultados foi alterado.
 
-Os filtros do MVP são tipo de material e etapa de ensino. As opções iniciais, a seleção múltipla, a combinação OR dentro do mesmo filtro, a combinação AND entre filtros e busca e os comportamentos responsivos estão definidos na especificação funcional BK-004/BK-005.
-
-**Resultado esperado:** o professor compreende como os filtros afetam os materiais apresentados e consegue ajustar os critérios utilizados.
-
-**Avaliação futura:** propor tarefas de aplicação, combinação e remoção de filtros. Registrar se os participantes compreendem a seleção ativa e conseguem recuperar resultados relevantes.
+**Avaliação futura:** observar tarefas de seleção múltipla, combinação de categorias, aplicação e limpeza de critérios, verificando possíveis confusões entre seleção e aplicação.
 
 ### OUX-004 — Apoiar a avaliação inicial dos materiais
 
-**Objetivo:** apresentar informações suficientes para que o professor compreenda as características conhecidas de um material antes de acessá-lo.
+**Objetivo:** oferecer informações claras para que o professor decida se vale a pena acessar determinado recurso.
 
-**Diretrizes de UX:**
+**Diretrizes de experiência:**
 
-- identificar claramente o material na página de detalhes;
-- organizar título, metadados, resumo e descrição em uma hierarquia compreensível;
-- apresentar orientações de uso quando disponíveis;
-- apresentar autoria, fonte e condições de utilização quando esses dados estiverem disponíveis e forem aplicáveis;
-- distinguir informações cadastradas de informações ausentes;
-- não depender de uma pré-visualização integrada, pois ela não faz parte do MVP.
+- Dar destaque ao título e à descrição do material.
+- Organizar as classificações e demais metadados disponíveis de maneira fácil de consultar.
+- Identificar autoria ou fonte quando esses dados estiverem cadastrados.
+- Não exibir campos ausentes como se fossem informações conhecidas.
+- Distinguir informações sobre o material das ações para acessar o conteúdo.
 
-**Resultado esperado:** o professor consegue compreender as informações disponíveis e decidir se deseja acessar o recurso.
+**Resultado esperado:** o professor consegue identificar as características conhecidas do material e tomar uma decisão inicial de acesso sem depender de pré-visualização integrada.
 
-**Avaliação futura:** solicitar aos participantes que identifiquem informações específicas nos detalhes e expliquem quais dados usariam para decidir se o material é pertinente à sua necessidade.
+**Avaliação futura:** solicitar que participantes encontrem informações específicas e expliquem quais dados usam para avaliar a pertinência de um recurso.
 
-### OUX-005 — Tornar as formas de acesso claras
+### OUX-005 — Tornar o acesso aos recursos transparente
 
-**Objetivo:** permitir que o professor identifique as opções disponíveis para acessar cada material e compreenda quando não existe uma opção cadastrada.
+**Objetivo:** permitir que o professor identifique o que pode acessar e compreenda eventuais restrições ou indisponibilidades.
 
-**Diretrizes de UX:**
+**Diretrizes de experiência:**
 
-- identificar links externos como opções de acesso;
-- identificar arquivos hospedados como opções distintas;
-- apresentar ambas as opções quando estiverem disponíveis;
-- informar quando não houver uma opção de acesso cadastrada;
-- não exibir ações que prometam abrir recursos inexistentes;
-- comunicar falhas de acesso de forma compreensível;
-- oferecer uma alternativa de recuperação quando ela existir e for aplicável.
+- Distinguir a página de detalhes da ação que abre o recurso pedagógico.
+- Exibir apenas opções de acesso existentes e autorizadas.
+- Diferenciar arquivo hospedado e link externo, caso ambos sejam aceitos na solução.
+- Comunicar a ausência de acesso sem sugerir que o material necessariamente deixou de existir.
+- Oferecer orientação ou nova tentativa quando houver uma ação possível após uma falha.
 
-**Cenários que a interface deve representar:**
+**Resultado esperado:** o professor compreende qual recurso será aberto e não confunde falta de permissão, indisponibilidade de conteúdo e erro de carregamento da plataforma.
 
-| Cenário | Resultado esperado |
+**Avaliação futura:** apresentar cenários com recurso disponível, sem permissão e indisponível; observar a interpretação dos controles e das mensagens. As formas definitivas de acesso ainda dependem de decisão funcional.
+
+### OUX-006 — Ajudar na recuperação de erros e estados vazios
+
+**Objetivo:** evitar que o professor fique sem orientação diante de consultas sem resultados, listas vazias ou falhas nas ações da plataforma.
+
+**Diretrizes de experiência:**
+
+- Distinguir acervo vazio de pesquisa sem correspondências.
+- Diferenciar erros de carregamento de ausência de conteúdo.
+- Oferecer meios de revisar a pesquisa, ajustar filtros ou tentar novamente quando pertinente.
+- Utilizar mensagens claras para falhas de autenticação, atualização de perfil e envio de arquivos.
+- Apresentar estados vazios informativos em Salvos e no acompanhamento de envios.
+
+**Resultado esperado:** o usuário entende a situação e reconhece uma próxima ação possível, quando houver.
+
+**Avaliação futura:** observar como participantes interpretam mensagens e se conseguem se recuperar de situações simuladas de erro ou ausência de dados.
+
+### OUX-007 — Preservar acessibilidade, legibilidade e consistência
+
+**Objetivo:** tornar os fluxos principais utilizáveis em diferentes tamanhos de tela e formas de interação.
+
+**Diretrizes de experiência:**
+
+- Preservar legibilidade, hierarquia visual e contraste adequado.
+- Manter navegação e controles disponíveis em telas menores, inclusive filtros e ações de conta.
+- Prever foco perceptível, navegação por teclado e rótulos acessíveis.
+- Tornar reconhecíveis os estados de hover, foco, pressionado, carregamento e desabilitado.
+- Não depender apenas de cor para transmitir seleção, erro ou sucesso.
+- Manter componentes semelhantes consistentes entre as áreas do produto.
+
+**Resultado esperado:** as tarefas principais continuam compreensíveis e operáveis nos contextos de uso definidos para o projeto.
+
+**Avaliação futura:** verificar fluxos em diferentes larguras de tela, realizar inspeções de acessibilidade e executar tarefas com teclado. Os critérios técnicos e resoluções de referência devem ser definidos antes da verificação final.
+
+### OUX-008 — Orientar o acesso e o gerenciamento da conta
+
+**Objetivo:** facilitar a entrada na plataforma e a utilização das funções pessoais, com compreensão dos requisitos de autenticação.
+
+**Diretrizes de experiência:**
+
+- Oferecer caminhos distinguíveis para **Entrar**, **Criar conta** e **Recuperar senha**.
+- Informar os dados necessários e apresentar erros de preenchimento em contexto.
+- Indicar processamento, sucesso e falha sem revelar dados sensíveis.
+- Permitir identificar as opções de perfil e saída da conta.
+- Explicar quando uma ação exige autenticação, preservando o contexto do usuário quando o fluxo permitir.
+
+**Resultado esperado:** o professor consegue reconhecer o caminho adequado para acessar sua conta, recuperar o acesso e entender a situação de uma tentativa malsucedida.
+
+**Avaliação futura:** observar tarefas de entrada, cadastro e recuperação com dados de teste, sem coletar senhas reais dos participantes. Os redirecionamentos e o acesso de visitantes ainda precisam ser confirmados.
+
+### OUX-009 — Facilitar o uso dos materiais salvos
+
+**Objetivo:** permitir que o professor guarde referências de interesse e as encontre novamente sem repetir a pesquisa.
+
+**Diretrizes de experiência:**
+
+- Tornar reconhecível a ação de favoritar ou desfavoritar.
+- Comunicar o estado salvo de um material e o resultado da alteração.
+- Apresentar a área de **Salvos** como uma lista pessoal, com acesso aos detalhes.
+- Informar claramente quando a lista estiver vazia.
+- Manter coerência entre o estado apresentado na Biblioteca, nos detalhes e em Salvos.
+
+**Resultado esperado:** o professor entende quais materiais estão salvos, consegue retomá-los e pode removê-los sem dúvidas sobre o resultado.
+
+**Avaliação futura:** propor tarefas de salvar, localizar e remover um material e observar se a mudança de estado é reconhecida.
+
+### OUX-010 — Tornar a contribuição e o acompanhamento de materiais compreensíveis
+
+**Objetivo:** permitir que o professor envie um recurso com segurança e compreenda que a submissão depende de revisão antes da publicação.
+
+**Diretrizes de experiência:**
+
+- Organizar o formulário de envio com rótulos e instruções compreensíveis.
+- Sinalizar erros de preenchimento e problemas com o arquivo antes de declarar o envio concluído.
+- Apresentar feedback de progresso, sucesso e falha no upload.
+- Diferenciar claramente **material enviado** de **material publicado**.
+- Permitir reconhecer a situação de submissões anteriores, conforme o fluxo de acompanhamento que será definido.
+- Para responsáveis pela revisão, prever uma experiência restrita que permita compreender os dados submetidos e registrar decisões sem ambiguidades.
+
+**Resultado esperado:** o professor conclui uma submissão válida e compreende o que acontecerá depois; um responsável autorizado entende quais materiais aguardam decisão.
+
+**Avaliação futura:** observar tarefas de envio e interpretação de status. A experiência de revisão deve ser avaliada somente depois de sua estrutura e seus papéis serem especificados.
+
+### OUX-011 — Facilitar a atualização do perfil
+
+**Objetivo:** permitir que o professor reconheça e atualize suas informações de conta com confiança.
+
+**Diretrizes de experiência:**
+
+- Apresentar os dados de perfil de forma organizada.
+- Diferenciar consulta, edição e confirmação de alterações.
+- Comunicar requisitos e erros ao alterar foto, dados pessoais ou senha.
+- Informar claramente se as alterações foram salvas.
+- Proteger ações e informações que pertençam exclusivamente à conta do usuário.
+
+**Resultado esperado:** o professor sabe quais dados pode editar e reconhece se uma alteração foi concluída.
+
+**Avaliação futura:** observar tarefas de atualização com contas de teste e verificar a compreensão de erros e confirmações.
+
+### OUX-012 — Tornar o compartilhamento básico previsível
+
+**Objetivo:** oferecer uma forma simples e compreensível de copiar um endereço compartilhável.
+
+**Diretrizes de experiência:**
+
+- Identificar claramente a ação de copiar o link.
+- Comunicar quando a cópia tiver sido concluída ou falhado.
+- Deixar compreensível qual conteúdo ou página será compartilhado.
+- Não sugerir acesso público irrestrito a um endereço que possua regras de permissão.
+
+**Resultado esperado:** o professor sabe o que está compartilhando e reconhece o resultado da ação.
+
+**Avaliação futura:** pedir que participantes copiem e identifiquem o destino de um link. O destino definitivo — página da plataforma, detalhes de material ou ambos — permanece pendente.
+
+## 5. Princípios transversais de experiência
+
+| Princípio | Aplicação esperada |
 |---|---|
-| Somente link externo | O usuário identifica e pode selecionar o link disponível. |
-| Somente arquivo hospedado | O usuário identifica e pode selecionar o arquivo disponível. |
-| Link externo e arquivo hospedado | O usuário reconhece as duas opções e consegue distingui-las. |
-| Nenhuma opção de acesso | O usuário compreende que não há uma opção disponível no cadastro. |
+| **Clareza** | Rótulos, informações e ações devem ter significados reconhecíveis. |
+| **Consistência** | Componentes e ações equivalentes devem se comportar de forma semelhante. |
+| **Orientação** | A navegação deve permitir compreender onde o usuário está e como continuar ou retornar. |
+| **Feedback** | Operações devem informar andamento, conclusão, erro ou indisponibilidade. |
+| **Autonomia** | O professor decide quais recursos consultar, salvar e utilizar. |
+| **Transparência** | A interface não deve prometer acesso ou publicação que não esteja disponível. |
+| **Acessibilidade** | As funções essenciais devem considerar diferentes dispositivos e formas de interação. |
+| **Fidelidade aos dados** | A interface deve refletir os dados cadastrados e não inventar informações ausentes. |
 
-A disponibilidade de uma opção não garante que o destino externo esteja funcionando. Os mecanismos de detecção de falhas e as estratégias de recuperação ainda precisam ser especificados.
+## 6. Relação entre objetivos e jornadas
 
-**Resultado esperado:** o professor reconhece corretamente as opções de acesso cadastradas e não confunde ausência de acesso com falha de carregamento da plataforma.
-
-**Avaliação futura:** apresentar os quatro cenários aos participantes e verificar se identificam as opções disponíveis e interpretam corretamente as mensagens apresentadas.
-
-### OUX-006 — Facilitar a recuperação após uma pesquisa sem resultados
-
-**Objetivo:** ajudar o professor a compreender quando os critérios utilizados não retornam materiais e a identificar como tentar novamente.
-
-**Diretrizes de UX:**
-
-- informar claramente que nenhum material corresponde aos critérios atuais;
-- permitir alterar os termos da pesquisa;
-- permitir revisar ou remover filtros;
-- evitar mensagens que atribuam a ausência de resultados a uma falha técnica sem evidências;
-- distinguir ausência de resultados de catálogo vazio, carregamento e falha ao carregar dados.
-
-**Resultado esperado:** o professor compreende o estado apresentado e consegue identificar uma ação para continuar a busca.
-
-**Avaliação futura:** propor uma pesquisa sem resultados e observar se os participantes conseguem modificar a consulta ou os filtros sem confundir esse estado com uma falha do sistema.
-
-### OUX-007 — Preservar a compreensão em diferentes telas
-
-**Objetivo:** planejar uma experiência legível e utilizável em diferentes tamanhos de tela.
-
-**Diretrizes de UX:**
-
-- preservar a legibilidade de títulos, descrições e metadados;
-- adaptar a apresentação do catálogo à largura disponível;
-- manter campos, filtros e ações identificáveis;
-- evitar que informações essenciais sejam ocultadas ou apresentadas de forma confusa;
-- considerar navegação por teclado e interação por toque;
-- manter os estados da interface compreensíveis independentemente do dispositivo.
-
-**Resultado esperado:** as tarefas centrais do MVP continuam compreensíveis nos tamanhos de tela contemplados pelo projeto.
-
-**Avaliação futura:** revisar os principais fluxos em diferentes resoluções e, caso exista uma implementação, verificar a funcionalidade dos controles e a legibilidade do conteúdo.
-
-## 5. Princípios gerais de experiência
-
-Os objetivos são orientados pelos seguintes princípios:
-
-- **Clareza:** o usuário deve compreender as informações e as ações disponíveis.
-- **Consistência:** componentes com funções equivalentes devem apresentar comportamentos semelhantes.
-- **Orientação:** o usuário deve entender onde está e como retornar à listagem.
-- **Transparência:** a interface deve comunicar as opções e limitações de acesso.
-- **Recuperação:** estados sem resultados e falhas devem orientar o próximo passo quando possível.
-- **Acessibilidade:** as informações e os controles devem considerar diferentes formas de interação.
-- **Integridade:** hipóteses e resultados pretendidos não devem ser apresentados como conclusões comprovadas.
-- **Fidelidade aos dados:** a interface não deve inventar informações ausentes sobre os materiais.
-
-## 6. Relação com o escopo do MVP
-
-| Funcionalidade | Objetivo relacionado |
+| Jornada | Objetivos de UX |
 |---|---|
-| Catálogo de materiais | OUX-001 |
-| Pesquisa textual | OUX-002 |
-| Filtros | OUX-003 |
-| Detalhes do material | OUX-004 |
-| Acesso por link ou arquivo | OUX-005 |
-| Estado sem resultados | OUX-006 |
-| Apresentação em diferentes telas | OUX-007 |
+| Conhecer a plataforma, entrar e recuperar acesso | OUX-008, OUX-006, OUX-007 |
+| Explorar a Biblioteca | OUX-001, OUX-006, OUX-007 |
+| Pesquisar e combinar filtros | OUX-002, OUX-003, OUX-006 |
+| Consultar detalhes e acessar recursos | OUX-004, OUX-005 |
+| Favoritar e consultar Salvos | OUX-009, OUX-006 |
+| Enviar material e acompanhar análise | OUX-010, OUX-006 |
+| Consultar e atualizar o perfil | OUX-011, OUX-008 |
+| Copiar link compartilhável | OUX-012 |
 
-A pré-visualização integrada, a edição ou adaptação de materiais e o envio de materiais pelos usuários não fazem parte do escopo atual do MVP.
+Os objetivos se aplicam à experiência planejada para a primeira versão. Notificações completas, autenticação com Google e integrações diretas com redes sociais são possibilidades de evolução e não devem ser tratadas como fluxos funcionais já entregues.
 
-## 7. Indicadores para avaliação futura
+## 7. Avaliação futura dos objetivos
 
-Os objetivos poderão orientar uma avaliação de usabilidade, desde que o projeto avance para uma etapa adequada de prototipação ou implementação.
+A avaliação deve verificar se a experiência projetada permite realizar tarefas relevantes, e não apenas se as telas são visualmente coerentes.
 
-Os seguintes indicadores são possibilidades de avaliação, não resultados já obtidos:
+**Abordagens possíveis:** inspeção heurística, revisão de acessibilidade, testes de navegação no protótipo e, posteriormente, testes de usabilidade na aplicação. A escolha do método depende de quais interações estarão realmente disponíveis em cada etapa.
 
-| Indicador | O que observar |
+| Aspecto | Evidência a observar |
 |---|---|
-| Conclusão de tarefas | Se o participante consegue concluir uma tarefa definida |
-| Erros de interação | Ações incorretas ou tentativas que não produzem o resultado esperado |
-| Tempo de execução | Tempo necessário para concluir uma tarefa, quando a medição for pertinente |
-| Compreensão dos estados | Se o participante distingue resultados vazios, carregamento e falhas |
-| Identificação do acesso | Se reconhece corretamente as opções de acesso disponíveis |
-| Percepção de clareza | Dificuldades e comentários relatados pelo participante |
-| Uso em diferentes telas | Se as tarefas permanecem realizáveis nas resoluções avaliadas |
+| **Conclusão de tarefas** | Se o participante consegue alcançar o objetivo proposto. |
+| **Dificuldades e erros** | Tentativas malsucedidas, desvios, dúvidas e necessidade de ajuda. |
+| **Compreensão das informações** | Se entende filtros, classificações, estados e possibilidades de acesso. |
+| **Clareza do feedback** | Se distingue progresso, sucesso, ausência de resultados e falha. |
+| **Continuidade da navegação** | Se consegue retornar e retomar tarefas sem perder o contexto esperado. |
+| **Acessibilidade e adaptação** | Se controles e informações permanecem operáveis nas condições avaliadas. |
+| **Percepção de utilidade** | Comentários dos participantes sobre a pertinência da solução para suas tarefas. |
 
-Antes da avaliação, devem ser definidos os participantes, as tarefas, o procedimento de coleta, os critérios de interpretação e a forma de registrar os resultados.
+Antes de uma avaliação com usuários, deverão ser definidos participantes, cenários, tarefas, condições de teste, critérios de observação e registro de evidências. Metas numéricas não devem ser inventadas sem método ou justificativa.
 
-Não devem ser estabelecidas metas numéricas arbitrárias sem justificativa para o contexto e o método de avaliação.
+## 8. Hipóteses e pontos a validar
 
-## 8. Decisões, hipóteses e pendências
+**Hipóteses de experiência:**
 
-### 8.1. Decisões confirmadas
+- Uma Biblioteca organizada pode tornar a descoberta de materiais mais clara.
+- Pesquisa e filtros podem ajudar professores a localizar recursos adequados aos seus contextos.
+- Detalhes e classificações podem apoiar a avaliação inicial de um recurso.
+- Favoritos podem facilitar a retomada de materiais de interesse.
+- Feedback claro pode reduzir dúvidas durante a autenticação, o envio e a consulta aos recursos.
 
-- O público prioritário do produto são professores.
-- O MVP contempla catálogo, pesquisa, filtros, detalhes e acesso aos materiais.
-- A pesquisa considera título, tipo de material, resumo e descrição.
-- A pesquisa deve ignorar diferenças de caixa e acentuação e aceitar correspondências parciais.
-- A ordenação deve priorizar título, tipo de material, resumo e descrição, nessa ordem.
-- O acesso pode ocorrer por link externo, arquivo hospedado ou ambos. Se um registro preexistente/incompleto não tiver acesso direto, essa condição deve ser comunicada claramente; novos cadastros exigem pelo menos uma forma de acesso.
-- A pré-visualização integrada não faz parte do MVP.
-- O projeto está em fase de revisão documental.
+**Pontos de definição de UX:**
 
-### 8.2. Hipóteses
+- Comportamento responsivo dos menus, filtros, formulários e sobreposições.
+- Fechamento de filtros sem **Aplicar** e alcance da ação **Limpar**.
+- Orientação e destino após autenticação, cadastro, recuperação de senha e ações protegidas.
+- Posição do acompanhamento dos envios na navegação do professor.
+- Organização da interface restrita de revisão e comunicação das decisões.
+- Destino e apresentação do link compartilhável.
+- Mensagens e tratamentos de erros e estados vazios nos fluxos principais.
 
-- Uma organização consistente pode facilitar a descoberta de materiais.
-- Pesquisa e filtros podem ajudar professores a localizar recursos relevantes.
-- Informações claras podem apoiar a avaliação inicial dos materiais.
-- A identificação das formas de acesso pode reduzir dúvidas durante a navegação.
-- Mensagens de recuperação podem ajudar os usuários a continuar após uma pesquisa sem resultados ou uma falha.
+Esses pontos devem ser definidos e avaliados conforme o desenvolvimento das interações. Não existem resultados de pesquisa com usuários que permitam considerá-los validados neste momento.
 
-Essas hipóteses ainda não foram validadas por pesquisa com usuários reais.
+## 9. Documentos relacionados
 
-### 8.3. Pendências
+- [`../product/product-brief.md`](../product/product-brief.md) — visão, problema e proposta de valor.
+- [`../product/escopo-mvp.md`](../product/escopo-mvp.md) — funcionalidades e limites da primeira versão.
+- [`../product/requisitos.md`](../product/requisitos.md) — requisitos funcionais e não funcionais.
+- [`../product/historias-de-usuario.md`](../product/historias-de-usuario.md) — necessidades e critérios de aceitação.
+- [`arquitetura-da-informacao.md`](arquitetura-da-informacao.md) — organização das áreas e informações.
+- [`user-flow.md`](user-flow.md) — percursos e decisões de navegação.
+- [`design-system.md`](design-system.md) — padrões visuais, componentes e estados.
 
-- Avaliar tecnicamente a sugestão de correção de consulta e definir se será implementada no MVP ou adiada.
-- Criar os wireframes e definir visualmente os controles de filtro e os campos dos materiais.
-- Aplicar no design os formatos de arquivo e os limites já definidos funcionalmente.
-- Especificar os estados e as estratégias de recuperação de falhas.
-- Definir os critérios verificáveis de acessibilidade.
-- Planejar uma avaliação futura compatível com o protótipo ou sistema que vier a existir.
-
-## 9. Relação com os demais documentos
-
-Este documento deve permanecer alinhado com:
-
-- `docs/product/product-brief.md` — visão e escopo do MVP;
-- `docs/product/requisitos.md` — requisitos funcionais e não funcionais;
-- `docs/product/historias-de-usuario.md` — necessidades e objetivos dos usuários;
-- `docs/product/backlog.md` — prioridades e pendências;
-- `docs/ux-ui/arquitetura-da-informacao.md` — organização das informações;
-- `docs/ux-ui/user-flow.md` — percursos e estados da navegação;
-- `docs/ux-ui/design-system.md` — princípios visuais e componentes.
-
-Eventuais divergências devem ser registradas e resolvidas durante a revisão documental.
-
-## 10. Status da documentação
-
-Este documento estabelece objetivos pretendidos para a experiência do EduComp. Não comprova que a interface esteja implementada, que os objetivos tenham sido alcançados ou que as hipóteses tenham sido validadas.
-
-A revisão atual é documental. Prototipação, implementação, testes de usabilidade e avaliação com professores são atividades futuras e devem ser registradas como realizadas somente quando houver evidências correspondentes.
+Este documento orienta o desenho e a avaliação da experiência. A efetividade dos objetivos dependerá de verificação futura com fluxos executáveis e, quando possível, com professores reais.
