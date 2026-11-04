@@ -77,7 +77,7 @@ As regras detalhadas, permissões, estados e critérios de aceite estão descrit
 
 O Figma é utilizado para estruturar a interface, os componentes, os padrões visuais e os fluxos de navegação do EduComp. A documentação de UX/UI neste repositório deve permanecer alinhada à versão vigente do protótipo.
 
-O documento [HANDOFF.md](docs/ux-ui/HANDOFF.md) reúne a estrutura das telas, as interações observadas, os requisitos de implementação e as pendências identificadas durante a auditoria do protótipo.
+O documento [handoff.md](docs/ux-ui/handoff.md) reúne a estrutura das telas, as interações observadas, os requisitos de implementação e as pendências identificadas durante a auditoria do protótipo.
 
 ## Tecnologias e ferramentas
 
