@@ -1,288 +1,254 @@
-# Arquitetura da Informação — EduComp
+# EduComp — Arquitetura da Informação
 
-**Status:** Consolidado para orientar o design do MVP  
-**Versão:** 0.5  
-**Escopo:** MVP do EduComp
+**Versão:** 0.6  
+**Data:** 04/11/2026  
+**Situação:** Arquitetura proposta para a primeira versão funcional; desenvolvimento não iniciado.
 
 ## 1. Objetivo
 
-Definir como os materiais educacionais são organizados, apresentados, encontrados e acessados no EduComp.
+Definir a organização das áreas, dos conteúdos e dos caminhos de navegação do EduComp, de modo que professores da Educação Básica consigam descobrir materiais pedagógicos de Computação, consultar seus detalhes, acessar recursos disponíveis, salvar referências e contribuir com o acervo.
 
-A arquitetura da informação deve ajudar professores a localizar materiais relevantes para suas aulas, compreender as características de cada recurso e identificar claramente as possibilidades de acesso disponíveis.
-
-Este documento descreve a estrutura proposta para o MVP. Não representa funcionalidades já implementadas ou validadas com usuários.
+Este documento descreve **onde as informações e ações devem estar disponíveis e como se relacionam**. As regras detalhadas de pesquisa, campos, validações e permissões são tratadas nas especificações funcionais. A arquitetura ainda não foi validada com professores reais.
 
 ## 2. Princípios de organização
 
-A arquitetura da informação segue os seguintes princípios:
+- **Encontrabilidade:** a Biblioteca é o principal ponto de descoberta de materiais; pesquisa, filtros e resultados devem permanecer próximos no contexto de uso.
+- **Clareza de destino:** cada opção de navegação deve identificar o conteúdo ou a ação que será aberta.
+- **Organização por tarefa:** explorar, salvar, enviar e gerenciar a conta devem ser atividades reconhecíveis, sem exigir que o usuário conheça a estrutura interna do sistema.
+- **Continuidade:** ao consultar detalhes e retornar à Biblioteca, os critérios de busca e filtros aplicados devem ser preservados durante a navegação.
+- **Separação entre consulta e contribuição:** materiais publicados fazem parte da Biblioteca; materiais enviados para revisão pertencem ao fluxo de submissão até serem aprovados.
+- **Acesso contextual:** ações dependentes de conta ou permissão devem ser identificadas e protegidas, sem apresentar conteúdo restrito como público.
+- **Representação fiel:** informações e possibilidades de acesso devem corresponder aos dados efetivamente cadastrados.
 
-- **Encontrabilidade:** facilitar a localização de materiais por pesquisa e filtros.
-- **Clareza:** apresentar informações que ajudem o professor a entender o conteúdo e a finalidade do recurso.
-- **Consistência:** utilizar uma estrutura coerente entre catálogo, resultados e detalhes.
-- **Transparência de acesso:** informar se o material possui link externo, arquivo hospedado na plataforma ou ambos; registros preexistentes/incompletos sem acesso direto devem ser identificados claramente.
-- **Representação fiel dos dados:** não apresentar informações, formatos ou ações que não correspondam ao material cadastrado.
-- **Simplicidade:** manter a navegação compatível com o escopo do MVP.
+## 3. Áreas da plataforma
 
-## 3. Estrutura geral
+### 3.1. Apresentação e acesso
 
-O MVP é organizado em três áreas principais:
+**Início** é a entrada institucional do EduComp. Apresenta a finalidade da plataforma e oferece caminhos para explorar a Biblioteca e acessar as funcionalidades de conta.
 
-1. **Catálogo:** apresenta os materiais disponíveis e permite explorar, pesquisar e filtrar os recursos.
-2. **Resultados da pesquisa:** apresenta os materiais que correspondem aos termos pesquisados e aos filtros ativos.
-3. **Detalhes do material:** reúne as informações de um recurso específico e apresenta as opções de acesso disponíveis.
+O conjunto de acesso compreende:
 
-Os resultados da pesquisa podem ser apresentados no próprio catálogo. A separação entre catálogo e resultados representa uma diferença de estado da interface, não necessariamente páginas distintas.
+- **Entrar:** autenticação com e-mail e senha.
+- **Criar conta:** cadastro de professor.
+- **Recuperar senha:** solicitação de redefinição do acesso.
 
-## 4. Hierarquia de navegação
+A página inicial e as telas de autenticação não são conteúdos do acervo. O que visitantes poderão consultar sem entrar na plataforma permanece pendente de definição.
+
+### 3.2. Descoberta e consulta
+
+**Biblioteca** é a área central para encontrar materiais publicados. Reúne pesquisa, filtros, resultados e acesso aos detalhes.
+
+**Detalhes do material** apresenta as informações de um recurso específico, suas classificações, autoria ou fonte quando cadastrada e opções de acesso permitidas. Também pode oferecer a ação de salvar o material.
+
+Resultados de pesquisa, filtros aplicados e ausência de correspondências são **estados da Biblioteca**, e não páginas independentes.
+
+### 3.3. Área do professor
+
+A área associada à conta contempla:
+
+- **Salvos:** materiais favoritados, com acesso aos respectivos detalhes e opção de removê-los da lista.
+- **Enviar material:** formulário de contribuição de recursos para revisão.
+- **Acompanhamento dos envios:** consulta à situação das submissões realizadas pelo professor; sua posição definitiva na navegação ainda deve ser definida.
+- **Meu perfil:** consulta e edição de informações da conta, foto e senha.
+
+Essas funcionalidades dependem de identificação do usuário e de permissões compatíveis com a ação realizada.
+
+### 3.4. Revisão do acervo
+
+A publicação de materiais enviados exige uma **área de revisão**, restrita a responsáveis autorizados, para consultar submissões e registrar aprovação ou recusa.
+
+Essa área é uma necessidade funcional da primeira versão, mas sua organização visual, os pontos de entrada e os papéis de acesso ainda não foram definidos. Ela não deve ser apresentada como uma tela já concluída.
+
+## 4. Mapa de navegação
+
+O mapa abaixo representa a **hierarquia lógica de conteúdos e tarefas**. Ele não determina URLs, componentes nem se cada destino será implementado como página, painel ou sobreposição.
 
 ```text
 EduComp
+├── Início
+│   ├── Acessar Biblioteca
+│   └── Acesso à conta
+│       ├── Entrar
+│       ├── Criar conta
+│       └── Recuperar senha
 │
-└── Catálogo
-    ├── Pesquisa
-    ├── Filtros
-    ├── Lista de materiais
-    │   └── Selecionar material
-    │       └── Detalhes do material
-    │           ├── Título
-    │           ├── Tipo de material
-    │           ├── Etapa de ensino
-    │           ├── Resumo
-    │           ├── Descrição
-    │           ├── Orientações de uso, quando disponíveis
-    │           └── Opções de acesso
-    │               ├── Um ou mais links externos
-    │               ├── Um ou mais arquivos hospedados
-    │               ├── Múltiplos links e arquivos combinados
-    │               └── Nenhuma opção de acesso disponível
-    │
-    └── Estados da interface
-        ├── Catálogo inicial
-        ├── Resultados encontrados
-        ├── Nenhum resultado
-        ├── Carregamento
-        ├── Falha ao carregar dados
-        └── Falha ao acessar um material
+├── Biblioteca
+│   ├── Pesquisa textual
+│   ├── Filtros
+│   │   ├── Tipo de material
+│   │   ├── Etapa de ensino
+│   │   └── Eixo da Computação
+│   ├── Lista de materiais publicados
+│   └── Detalhes do material
+│       ├── Informações e classificações
+│       ├── Acesso ao recurso disponível
+│       ├── Salvar ou remover dos favoritos
+│       └── Compartilhar link
+│
+└── Área do professor (acesso autenticado)
+    ├── Salvos
+    │   └── Detalhes do material
+    ├── Enviar material
+    ├── Acompanhar envios (posição a definir)
+    └── Meu perfil
+
+Operação do acervo (acesso autorizado; estrutura a definir)
+└── Revisar submissões
+    ├── Consultar material enviado
+    └── Aprovar ou recusar
 ```
 
-Os estados de carregamento e falha são estados da interface, não áreas permanentes da navegação.
+A navegação pode oferecer acessos diretos entre áreas, sem obrigar o usuário a percorrer toda a hierarquia a cada tarefa. Os menus da Biblioteca, de Salvos e do perfil são mecanismos de acesso a esses destinos, não novos níveis de conteúdo.
 
-## 5. Organização e apresentação dos materiais
+## 5. Inventário de conteúdos e destinos
 
-Cada material deve possuir um conjunto de metadados que permita identificá-lo, compreendê-lo e avaliar sua pertinência para uma aula.
-
-| Informação | Finalidade | Situação |
+| Área ou destino | Conteúdo principal | Ações ou saídas |
 |---|---|---|
-| Título | Identificar o material | Campo central para identificação e pesquisa |
-| Tipo de material | Indicar a categoria do recurso | Obrigatório |
-| Resumo | Apresentar brevemente a proposta do material | Obrigatório |
-| Descrição detalhada | Explicar o conteúdo, os objetivos e a finalidade do recurso | Opcional |
-| Etapa de ensino | Indicar a etapa educacional à qual o recurso se destina | Obrigatório |
-| Autor ou fonte | Identificar quem produziu o material ou sua origem | Opcional |
-| Orientações de uso | Apoiar a compreensão de como utilizar ou adaptar o recurso | Opcional |
-| Componente curricular | Indicar o componente curricular relacionado | Opcional |
-| Habilidades da BNCC | Relacionar o material às habilidades curriculares correspondentes | Opcional |
-| Licença e condições de uso | Informar permissões, restrições e atribuição de autoria | Opcional |
-| Links externos | Permitir acessar recursos em outros endereços | Um material pode ter vários links; deve existir pelo menos uma forma de acesso |
-| Arquivos hospedados | Permitir acessar arquivos disponibilizados pela plataforma | Um material pode ter vários arquivos e combiná-los com links externos |
+| **Início** | Apresentação da plataforma | Abrir Biblioteca, Entrar, Criar conta |
+| **Entrar** | E-mail, senha e orientação de acesso | Autenticar, Criar conta, Recuperar senha, fechar ou retornar |
+| **Criar conta** | Dados básicos de cadastro | Criar conta, Entrar, fechar ou retornar |
+| **Recuperar senha** | Solicitação de redefinição por e-mail | Enviar instruções, voltar a Entrar |
+| **Biblioteca** | Pesquisa, filtros e lista de materiais publicados | Consultar detalhes, favoritar quando permitido, acessar Salvos e outras áreas |
+| **Detalhes do material** | Descrição, classificações, informações complementares e recursos disponíveis | Acessar recurso, favoritar, compartilhar link, voltar |
+| **Salvos** | Lista pessoal de materiais favoritados | Consultar detalhes, desfavoritar, navegar para outras áreas |
+| **Enviar material** | Campos de submissão e seleção de arquivo | Validar, enviar e consultar confirmação |
+| **Acompanhar envios** | Submissões do usuário e suas situações | Consultar status; localização e ações adicionais a definir |
+| **Meu perfil** | Dados pessoais e opções de conta | Editar informações, foto e senha; salvar alterações |
+| **Revisão de materiais** | Envios que exigem análise | Consultar submissões, aprovar ou recusar; estrutura a definir |
 
-As etapas e subdivisões confirmadas para o catálogo inicial são: Educação Infantil — grupos da BNCC Bebês, Crianças bem pequenas e Crianças pequenas; Ensino Fundamental — Anos Iniciais — 1º ao 5º ano; Ensino Fundamental — Anos Finais — 6º ao 9º ano; Ensino Médio — 1ª à 3ª série; EJA — Ensino Fundamental — 1º e 2º segmentos; EJA — Ensino Médio — modalidade sem exigir série específica. Os campos obrigatórios confirmados são título, tipo de material, resumo e etapa de ensino. Além disso, cada material deve ter pelo menos uma forma de acesso: arquivo hospedado ou link externo; os dois podem coexistir. Os campos opcionais disponíveis no modelo são descrição detalhada, autor ou fonte, orientações de uso, componente curricular, habilidades da BNCC e licença e condições de uso. A ausência de um campo opcional não impede o cadastro. Um material pode estar associado a múltiplos componentes curriculares e a múltiplas habilidades da BNCC. Também pode estar associado a múltiplas etapas de ensino, com especificação dos anos escolares correspondentes a cada etapa. A interface deve manter clara a relação entre etapa e ano e permitir selecionar mais de uma combinação. As habilidades da BNCC são registradas por texto livre, digitado ou colado manualmente; o MVP não exige catálogo estruturado nem seletor de códigos oficiais. A representação e validação técnica dos metadados será detalhada durante a implementação. Permanecem pendentes a quantidade máxima de arquivos por material e o limite total combinado por cadastro. Os formatos aceitos para arquivos hospedados no MVP são PDF, DOCX, PPTX, PNG e JPG, com limite de 50 MB por arquivo.
+O formulário de redefinição efetiva de senha por link seguro também deverá ser contemplado na implementação, embora sua apresentação e seu destino de navegação ainda necessitem de especificação.
 
-### 5.1. Catálogo e resultados
+## 6. Navegação e elementos auxiliares
 
-Cada item apresentado no catálogo deve oferecer informações suficientes para que o professor reconheça o material e decida se deseja consultar seus detalhes.
+### 6.1. Navegação principal
 
-A composição visual definitiva dos cartões será definida no Figma. A seleção de informações precisa equilibrar identificação, legibilidade e espaço disponível, especialmente em dispositivos móveis.
+Os rótulos de referência para as áreas são **Início**, **Biblioteca**, **Salvos**, **Enviar material** e **Meu perfil**. As formas de acesso podem variar conforme o contexto e a largura de tela, mas não devem mudar o significado desses destinos.
 
-A lista não deve depender exclusivamente da presença de um link externo: a disponibilidade de acesso deve ser representada de acordo com os dados cadastrados para cada material.
+A Biblioteca funciona como ponto de retorno para a descoberta de novos materiais. Os links entre Salvos e Detalhes permitem retomar recursos sem refazer a pesquisa.
 
-#### Pesquisa, ordenação e filtros
+### 6.2. Menus contextuais
 
-A pesquisa consulta título, tipo de material, resumo e descrição, ignorando caixa e acentuação e aceitando correspondências parciais. Em consultas com várias palavras, todas devem corresponder ao material (AND), mesmo que apareçam em campos diferentes.
+- **Menu da Biblioteca:** disponibiliza caminhos para as áreas pertinentes do produto.
+- **Menu de Salvos:** reúne opções de navegação relacionadas à área; suas apresentações compacta e completa representam variações de interface, não conteúdos diferentes.
+- **Menu do perfil:** reúne acesso a Meu perfil e ação de sair da plataforma.
 
-Os resultados seguem uma hierarquia fixa: título, tipo de material, resumo e descrição. Para várias palavras, comparar a quantidade de palavras correspondentes em cada campo nessa ordem, como uma sequência lexicográfica. Dentro do mesmo campo e em condições equivalentes, correspondências exatas precedem parciais. Em empate de relevância, usa-se o título em ordem alfabética crescente, normalizando caixa e acentuação; se os títulos forem equivalentes, usa-se o identificador único em ordem crescente.
+Os destinos e a forma de fechamento de cada menu devem ser consistentes. Sair deve encerrar a sessão antes de redirecionar o usuário para a área pública definida.
 
-A busca textual e todos os filtros ativos devem ser atendidos simultaneamente (AND). Dentro de um mesmo filtro, as opções selecionadas combinam-se por OR. As opções disponíveis são derivadas dos valores existentes no catálogo e atualizadas conforme os demais critérios ativos. Limpar o texto da busca mantém os filtros selecionados. Os marcadores de filtros ativos permitem remover critérios individualmente. A ação “Limpar filtros” remove apenas tipo de material e etapa de ensino, preservando o texto da busca. O eixo da Computação pode ser exibido como metadado; sua adoção como filtro depende da consolidação do modelo de dados. Se a busca não retornar resultados, a interface informa a situação e permite revisar manualmente a consulta; a sugestão automática de correção está fora do escopo do MVP.
+### 6.3. Sobreposições
 
-### 5.2. Detalhes do material
+Os filtros por tipo, etapa e eixo, o menu do perfil e a interface de compartilhamento podem ser apresentados como sobreposições. Esses elementos devem manter relação clara com a página que os originou e oferecer fechamento compreensível.
 
-A área de detalhes deve reunir as informações disponíveis sobre o recurso em uma estrutura clara e consistente.
+As opções de filtros são controles da Biblioteca. A janela de **Compartilhar** é uma ação contextual: no MVP, a função prevista é copiar um link e apresentar o resultado da ação. O destino exato desse link ainda precisa ser definido.
 
-A interface deve distinguir:
+### 6.4. Contexto e retorno
 
-- informações descritivas do material;
-- metadados usados para organização e pesquisa;
-- orientações de uso, quando cadastradas;
-- opções de acesso efetivamente disponíveis.
+- Ao abrir os detalhes a partir da Biblioteca e retornar, devem continuar disponíveis o termo de pesquisa e os filtros aplicados.
+- Ao abrir os detalhes a partir de Salvos e retornar, o usuário deve conseguir voltar à sua lista pessoal.
+- Ações protegidas devem informar a necessidade de autenticação, sem executar operações em nome de visitantes.
+- O comportamento após cadastro, login, recuperação de senha e submissão deve indicar claramente o próximo destino, ainda que os redirecionamentos finais precisem ser confirmados.
 
-Informações ausentes não devem ser substituídas por conteúdo inventado. A regra de exibição para cada campo opcional deverá ser definida durante o refinamento do modelo de dados e da interface.
+A preservação da posição exata de rolagem e do estado após recarregar a página depende de definição específica.
 
-## 6. Pesquisa e filtros
+## 7. Organização dos materiais na Biblioteca
 
-### 6.1. Pesquisa textual
+### 7.1. Lista de materiais
 
-A pesquisa deve considerar os seguintes campos:
+Cada item da Biblioteca deve oferecer informações suficientes para reconhecer o recurso e decidir pela abertura dos detalhes. O conjunto visual de informações do cartão será definido no design system e nas telas de interface, utilizando apenas dados existentes.
 
-1. Título;
-2. Tipo de material;
-3. Resumo;
-4. Descrição.
+A listagem não deve incluir submissões pendentes, em análise ou recusadas como materiais publicados.
 
-As regras funcionais já estabelecidas são:
+### 7.2. Detalhes do material
 
-- ignorar diferenças entre letras maiúsculas e minúsculas;
-- ignorar diferenças de acentuação;
-- permitir correspondência parcial de termos;
-- exigir correspondência de todas as palavras da consulta (AND), ainda que apareçam em campos diferentes;
-- ordenar os resultados por hierarquia fixa: título, tipo de material, resumo e descrição;
-- para várias palavras, comparar a quantidade de correspondências por campo nessa ordem, como uma sequência lexicográfica;
-- dentro do mesmo campo e em condições equivalentes, priorizar correspondências exatas sobre parciais;
-- desempatar pela ordem alfabética crescente do título, normalizando caixa e acentuação, e depois pelo identificador único em ordem crescente.
+As informações são organizadas em grupos:
 
-Quando não houver resultados, a interface deve informar a situação e permitir revisar a consulta. Uma sugestão de correção pode ser apresentada sem substituir automaticamente o texto original, após avaliação técnica.
+1. **Identificação:** título e descrição.
+2. **Classificação:** tipo de material, etapa de ensino, eixo da Computação e tema, conforme os dados cadastrados.
+3. **Autoria e informações complementares:** autoria ou fonte e outros metadados disponíveis.
+4. **Acesso:** arquivo ou outra forma de acesso efetivamente permitida.
+5. **Ações contextuais:** favoritar/desfavoritar e compartilhar, conforme disponibilidade e permissões.
 
-### 6.2. Filtros
+A interface não deve inventar informações ausentes nem oferecer controles para recursos inexistentes. A lista definitiva de campos, sua obrigatoriedade e as formas de acesso serão estabelecidas na especificação de metadados.
 
-Os filtros devem restringir os materiais apresentados conforme os critérios disponibilizados pelo MVP. Tipo de material e etapa de ensino são os filtros previstos.
+### 7.3. Organização da pesquisa e dos filtros
 
-Os filtros são tipo de material e etapa de ensino. As opções de cada filtro são derivadas dos valores existentes no catálogo e atualizadas dinamicamente conforme os outros critérios ativos. É possível selecionar múltiplas opções em cada filtro; as opções do mesmo filtro combinam-se por OR, enquanto filtros diferentes e a busca textual combinam-se por AND.
+A pesquisa textual consulta **título e tema**. A Biblioteca oferece três grupos de filtros:
 
-Em telas maiores, os filtros aparecem como listas visíveis com caixas de seleção. Em telas pequenas, o botão “Filtros (N)” abre um painel lateral com seções independentes para tipo de material e etapa de ensino. N representa a quantidade total de valores selecionados. As seções começam expandidas e preservam seu estado ao fechar e reabrir o painel. O painel pode ser fechado pelo botão de fechar, ao tocar fora ou pelo botão Voltar do dispositivo; quando aberto, Voltar fecha o painel.
-
-As opções são ordenadas alfabeticamente, sem distinção de caixa ou acentuação, e não exibem contagens individuais. Não há busca interna nas opções. A seleção ou remoção de um filtro atualiza os resultados imediatamente, sem botão “Aplicar”, e mantém o painel móvel aberto. Os filtros ativos aparecem como marcadores removíveis acima dos resultados; no celular, os marcadores quebram em várias linhas e ficam fora do painel. A contagem total de resultados é exibida acima da lista.
-
-### 6.3. Estados dos resultados
-
-A interface deve distinguir claramente:
-
-- **Catálogo inicial:** não há pesquisa ativa nem filtros aplicados.
-- **Resultados encontrados:** há materiais correspondentes à pesquisa e aos filtros.
-- **Nenhum resultado:** a combinação atual de termos e filtros não retorna materiais.
-
-No estado sem resultados, a interface deve orientar o professor a revisar os termos pesquisados ou ajustar os filtros.
-
-A ausência de resultados não deve ser confundida com falha de carregamento ou indisponibilidade de acesso a um material.
-
-## 7. Organização das opções de acesso
-
-O acesso deve ser representado conforme a disponibilidade real de cada material. Existem quatro cenários previstos:
-
-| Cenário | Comportamento esperado |
+| Grupo | Opções disponíveis |
 |---|---|
-| Somente link externo | Apresentar a ação para abrir o endereço externo. |
-| Somente arquivo hospedado | Apresentar a ação para acessar o arquivo disponibilizado na plataforma. |
-| Link externo e arquivo hospedado | Apresentar as duas opções de acesso, identificando-as claramente. |
-| Nenhuma opção de acesso | Informar que não há uma opção de acesso disponível no momento, sem exibir uma ação que prometa abrir um recurso inexistente. |
+| **Tipo de material** | Plano de aula; Slides; Material de apoio; Atividade; Sequência didática |
+| **Etapa de ensino** | Educação Infantil; Ensino Fundamental — Anos iniciais; Ensino Fundamental — Anos finais; Ensino Médio |
+| **Eixo da Computação** | Pensamento Computacional; Mundo Digital; Cultura Digital |
 
-As ações de acesso devem ser identificadas de acordo com seu destino. Quando houver duas opções, a interface não deve induzir o usuário a acreditar que elas levam necessariamente ao mesmo conteúdo ou formato.
+As categorias oferecem seleção múltipla. O usuário pode editar as opções e confirmar a aplicação; ao reabrir um filtro, as seleções aplicadas devem permanecer reconhecíveis. O comportamento detalhado de **Aplicar**, **Limpar**, fechamento sem aplicar e combinação de critérios pertence à especificação de busca e filtros.
 
-Os formatos aceitos para arquivos hospedados no MVP são PDF, DOCX, PPTX, PNG e JPG, com limite de 50 MB por arquivo. Os detalhes técnicos de abertura/download, permissões e tratamento de erros serão tratados durante a implementação.
+As classificações disponíveis na interface de pesquisa não devem ser confundidas com a definição completa dos metadados permitidos no cadastro, cuja abrangência ainda será confirmada.
 
-## 8. Navegação e retorno
+## 8. Acesso e visibilidade das informações
 
-O usuário deve conseguir:
+| Conteúdo ou ação | Regra de acesso prevista |
+|---|---|
+| Apresentação inicial | Disponível sem autenticação |
+| Biblioteca e detalhes | Definir o alcance da consulta por visitantes |
+| Criação de conta, entrada e recuperação de senha | Disponíveis a pessoas que precisam acessar a conta |
+| Favoritar e consultar Salvos | Dependem da conta do professor |
+| Enviar material e acompanhar os próprios envios | Dependem de autenticação e permissão adequada |
+| Consultar e editar Meu perfil | Restrito ao titular da conta, conforme autorizações aplicáveis |
+| Revisar, aprovar ou recusar submissões | Restrito aos responsáveis autorizados |
 
-- explorar o catálogo;
-- realizar uma pesquisa;
-- aplicar e ajustar filtros;
-- abrir os detalhes de um material a partir da listagem;
-- identificar as opções de acesso disponíveis;
-- retornar à listagem;
-- corrigir a pesquisa ou os filtros quando não encontrar resultados.
+O sistema deve distinguir **material publicado**, **submissão privada** e **dados pessoais**. A definição dos papéis, das operações autorizadas e do acesso a recursos protegidos será detalhada nos requisitos e na preparação técnica.
 
-A navegação entre a listagem e os detalhes deve manter uma relação clara entre o material selecionado e suas informações.
+## 9. Estados de conteúdo e feedback
 
-Ao abrir um material e retornar ao catálogo durante a navegação atual, devem ser preservados o texto de busca, os filtros selecionados, a posição de rolagem e o estado de expansão das seções do painel móvel. Se os critérios forem alterados, a lista retorna ao topo. Uma atualização da página pode reiniciar o estado.
+Estados não constituem novos destinos da arquitetura, mas precisam estar previstos em cada contexto.
 
-## 9. Estados de carregamento e falha
+| Contexto | Estados a contemplar |
+|---|---|
+| **Biblioteca** | Carregando, materiais disponíveis, acervo vazio, consulta sem resultados, falha ao carregar |
+| **Detalhes e acesso** | Material disponível, recurso indisponível, acesso sem permissão, falha identificável |
+| **Salvos** | Lista com favoritos, lista vazia, falha ao carregar ou alterar |
+| **Autenticação e conta** | Validação, processamento, sucesso, erro de credenciais ou atualização |
+| **Envio de material** | Formulário incompleto, validação, progresso, envio concluído, falha |
+| **Acompanhamento e revisão** | Situação registrada, ausência de envios, atualização de estado ou falha |
+| **Compartilhamento** | Link copiado ou falha na cópia |
 
-A arquitetura deve prever estados distintos para problemas diferentes:
+As mensagens devem explicar o estado sem confundir ausência de resultados, falha de carregamento e indisponibilidade de um arquivo. Cada estado deve oferecer uma saída ou orientação quando aplicável.
 
-- **Carregamento:** os dados ainda estão sendo obtidos ou processados.
-- **Falha ao carregar dados:** não foi possível apresentar o catálogo ou as informações solicitadas.
-- **Falha de acesso:** o usuário selecionou uma opção de acesso, mas não conseguiu abrir ou obter o recurso.
-- **Nenhum resultado:** a consulta foi processada, mas não encontrou correspondências.
+## 10. Funcionalidades previstas para evolução
 
-Quando ocorrer uma falha, a mensagem deve explicar o problema em linguagem compreensível e, quando aplicável, indicar uma ação possível, como tentar novamente ou retornar à listagem.
+A interface projetada também contempla referências a **notificações**, **entrada com Google** e **compartilhamento por redes sociais**. Esses recursos não integram a primeira versão funcional definida para implementação.
 
-Os mecanismos de detecção de falhas, as mensagens definitivas e as estratégias de recuperação ainda precisam ser detalhados. Não se deve presumir que a plataforma consiga detectar automaticamente todos os problemas ocorridos em sites externos.
+- **Notificações:** sua futura posição na arquitetura, histórico e estados de leitura dependerão de especificação própria.
+- **Google:** eventual autenticação externa não altera as áreas fundamentais de conteúdo, mas exigirá revisão dos fluxos de entrada e cadastro.
+- **Canais sociais:** podem ampliar a ação de compartilhar após a definição do destino do link e das integrações previstas.
 
-## 10. Responsividade e acessibilidade
+Esses elementos não devem ser apresentados como serviços funcionais na primeira entrega apenas por existirem visualmente no protótipo.
 
-A organização das informações deve permanecer compreensível em diferentes tamanhos de tela.
+## 11. Decisões pendentes de arquitetura
 
-Como critérios a detalhar durante o projeto da interface, devem ser considerados:
+| Tema | Decisão necessária |
+|---|---|
+| **Acesso de visitantes** | Quais conteúdos da Biblioteca e dos detalhes podem ser consultados sem entrar. |
+| **Navegação após autenticação** | Destinos após login, cadastro e recuperação, inclusive retorno a ações protegidas. |
+| **Acompanhamento de envios** | Se será uma área própria, seção do perfil ou parte de Enviar material. |
+| **Moderação** | Ponto de entrada e organização da área restrita aos responsáveis pela revisão. |
+| **Compartilhamento** | Se o link copiado aponta para a plataforma, para um material ou para ambos os contextos. |
+| **Detalhes** | Quais metadados aparecem em cada bloco e como representar campos opcionais ausentes. |
+| **Acesso aos recursos** | Arquivos hospedados, links externos ou ambos, conforme definição de produto. |
+| **Navegação responsiva** | Distribuição dos menus, filtros e ações em telas menores, sem perda de destinos. |
+| **Continuidade de contexto** | Preservação de rolagem, filtros e pesquisa após retorno, recarregamento ou autenticação. |
 
-- hierarquia visual clara entre título, metadados, descrição e ações;
-- identificação textual das opções de acesso;
-- navegação por teclado;
-- foco visível nos elementos interativos;
-- rótulos claros para pesquisa e filtros;
-- mensagens de estado compreensíveis;
-- contraste adequado e uso de informações que não dependam exclusivamente de cores.
+Essas decisões devem ser resolvidas antes de encerrar a especificação dos fluxos correspondentes. A arquitetura proposta poderá ser refinada durante testes de navegação e usabilidade com professores.
 
-Os critérios verificáveis de acessibilidade e os requisitos de conformidade deverão ser definidos em documentação própria e conferidos durante a implementação e a validação.
+## 12. Documentos relacionados
 
-## 11. Limites do MVP
+- [`../product/product-brief.md`](../product/product-brief.md) — visão e proposta de valor do produto.
+- [`../product/escopo-mvp.md`](../product/escopo-mvp.md) — funcionalidades e limites da primeira versão.
+- [`../product/requisitos.md`](../product/requisitos.md) — requisitos e regras de negócio.
+- [`../product/historias-de-usuario.md`](../product/historias-de-usuario.md) — necessidades e critérios de aceitação.
+- [`../product/especificacao-busca-filtros.md`](../product/especificacao-busca-filtros.md) — comportamento da descoberta.
+- [`../product/especificacao-metadados.md`](../product/especificacao-metadados.md) — informações e classificações dos materiais.
+- [`objetivos-de-ux.md`](objetivos-de-ux.md) — objetivos de experiência.
+- [`user-flow.md`](user-flow.md) — percursos de navegação e estados de interação.
+- [`design-system.md`](design-system.md) — componentes e padrões visuais.
 
-A arquitetura descrita contempla catálogo, pesquisa, filtros, detalhes dos materiais, opções de acesso e estados necessários para orientar a navegação.
-
-Não fazem parte do escopo atual:
-
-- pré-visualização integrada dos materiais;
-- edição ou adaptação de materiais na plataforma;
-- criação ou envio de materiais pelos usuários.
-
-Essas funcionalidades não devem aparecer como recursos disponíveis no MVP. Uma eventual inclusão futura exige revisão de escopo, requisitos e arquitetura.
-
-## 12. Decisões pendentes
-
-Antes de considerar a arquitetura pronta para implementação, devem ser resolvidos ou documentados:
-
-- os detalhes técnicos de representação e validação dos metadados e eventuais condições de preenchimento;
-- as regras de exibição de metadados ausentes;
-- a composição definitiva dos itens do catálogo;
-- a implementação visual das regras de filtros e busca já especificadas;
-- os formatos de arquivo aceitos e o comportamento de acesso;
-- as mensagens e estratégias de recuperação para falhas;
-- os critérios verificáveis de acessibilidade.
-
-Esses pontos devem ser tratados como pendências, e não como decisões já aprovadas.
-
-## 13. Relação com os demais documentos
-
-Este documento deve permanecer alinhado com:
-
-- `docs/product/product-brief.md` — visão, escopo e limites do MVP;
-- `docs/product/requisitos.md` — requisitos funcionais e não funcionais;
-- `docs/product/historias-de-usuario.md` — necessidades e objetivos dos usuários;
-- `docs/product/backlog.md` — tarefas, prioridades e decisões pendentes;
-- `docs/ux-ui/objetivos-de-ux.md` — objetivos de experiência;
-- `docs/ux-ui/user-flow.md` — percursos e transições entre estados;
-- `docs/ux-ui/design-system.md` — padrões visuais e componentes.
-
-Se houver divergência entre documentos, ela deve ser registrada e resolvida durante a revisão documental, evitando que uma hipótese seja tratada como requisito confirmado.
-
-## 14. Validação e evolução
-
-A versão atual descreve uma proposta documental para a arquitetura da informação. Ela ainda precisa ser comparada com o conjunto de requisitos, o modelo de dados e os fluxos de navegação.
-
-A revisão documental não equivale à implementação, à avaliação de usabilidade ou à validação com professores. Essas atividades pertencem a etapas posteriores do projeto.
-
-**Próximo passo:** resolver as pendências registradas, manter os documentos consistentes e, quando o projeto avançar, validar a arquitetura com protótipos e testes apropriados.
-
-
-**Cardinalidade das formas de acesso:** cada material pode ter múltiplos arquivos hospedados e múltiplos links externos simultaneamente. O cadastro exige pelo menos uma forma de acesso.
-
-
-### Regra de upload definida no BK-006
-
-Os formatos aceitos no MVP são PDF, DOCX, PPTX, PNG e JPG. Cada arquivo hospedado poderá ter no máximo 50 MB. Um material pode reunir múltiplos arquivos e links externos; a quantidade máxima de arquivos por material e o limite total combinado por cadastro permanecem pendentes.
-
-
-## Áreas adicionais do MVP
-
-- **Enviar material:** formulário com metadados e anexos; ao concluir, o envio fica pendente de revisão e não entra imediatamente no catálogo.
-- **Favoritos:** lista pessoal persistente de materiais favoritados, associada a usuário identificado.
-- **Compartilhar:** ação contextual nos detalhes do material para copiar o link direto.
-- **Revisão:** área restrita a responsáveis autorizados para aprovar ou rejeitar submissões. O acesso administrativo deve ser definido na arquitetura técnica.
+A arquitetura descreve a organização da experiência planejada. Seu registro não equivale a implementação nem a validação de usabilidade já realizada.
