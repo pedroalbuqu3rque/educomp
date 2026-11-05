@@ -108,7 +108,7 @@ EduComp/
         ├── objetivos-de-ux.md
         ├── user-flow.md
         ├── design-system.md
-        └── HANDOFF.md
+        └── handoff.md
 ```
 
 ### Documentação de produto — `docs/product/`
