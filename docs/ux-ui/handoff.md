@@ -1,269 +1,684 @@
-# Handoff de UI/UX — EduComp
+# EduComp — Handoff de UI/UX
 
-**Referência para implementação da interface desktop**
+**Versão:** 1.1  
+**Data:** 06/11/2026  
+**Situação:** referência de interface desktop para desenvolvimento; implementação não iniciada.
 
-**Protótipo:** [EduComp — Protótipo · Desktop](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32520)  
-**Identidade visual:** [EduComp — ID Visual](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4418-15618)  
-**Base da revisão:** 5 de novembro de 2026  
-**Status:** especificação de interface a implementar.
+## 1. Objetivo
 
-## 1. Objetivo e escopo
+Este documento reúne as orientações necessárias para transformar o protótipo desktop do EduComp em uma interface funcional.
 
-Este documento orienta a construção da **versão desktop do EduComp**, descrevendo a composição das páginas, os componentes compartilhados, os fluxos de navegação e os estados necessários para reproduzir a experiência definida no Figma. Deve servir de apoio direto ao trabalho de front-end e à conferência da interface implementada.
+Seu foco está na composição das páginas, na navegação, nos componentes compartilhados, nos estados de interação e na correspondência entre o design e os comportamentos previstos para o MVP.
 
-A referência visual principal é a página **Protótipo · Desktop**. A página **ID Visual** complementa as definições de marca, cores e tipografia. A página **Backup** preserva versões anteriores e não deve ser utilizada como base para desenvolvimento.
+O handoff complementa o [Design System](design-system.md), a [Arquitetura da Informação](arquitetura-da-informacao.md) e o [User Flow](user-flow.md). As regras funcionais, os limites do produto e os critérios de negócio permanecem definidos na documentação de produto.
 
-### 1.1. Limites desta entrega
+### 1.1. Referências
 
-- **Incluído:** páginas e fluxos desktop, navegação, formulários, biblioteca, material e comunidade, salvos, envio, perfil, notificações, conteúdo institucional, sobreposições e estados de feedback.
-- **Referência principal de layout:** frames com **1536 px de largura**. A altura varia conforme o conteúdo; páginas longas devem rolar naturalmente.
-- **Também necessário:** funcionamento adequado em janelas desktop menores, sem conteúdo cortado nem rolagem horizontal indevida. Os limites e breakpoints serão definidos no front-end conforme o layout real.
-- **Fora do aceite desta etapa:** reprodução integral das telas mobile de 390 px e tablet de 768/1024 px. Essas versões continuam disponíveis no Figma para a etapa responsiva posterior; não são um segundo escopo de implementação neste handoff.
-- **Fora do documento:** definição de regras de negócio, contratos de API, arquitetura de serviços, permissões e critérios de produto. Consultar a documentação funcional do repositório para essas decisões.
+- [Protótipo desktop — Figma](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32520)
+- [Identidade visual — Figma](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4418-15618)
+- [Protótipo mobile e referências para tablet](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-26978)
+- [Escopo do MVP](../product/escopo-mvp.md)
+- [Requisitos do produto](../product/requisitos.md)
 
-Se houver diferença visual, o Figma ativo é a referência. Se houver conflito de comportamento, segurança ou escopo, o assunto deve ser resolvido com a documentação funcional, sem transformar um elemento ilustrativo do protótipo em regra de negócio.
+A página **Protótipo · Desktop** é a referência visual principal. A página **ID Visual** reúne os fundamentos da marca. A página **Backup** contém versões anteriores e não deve orientar a implementação.
 
-## 2. Organização das referências
+### 1.2. Recorte de desenvolvimento
 
-O Figma agrupa os frames desktop por assunto. Os identificadores **D01, D02, D05** etc. ajudam a localizar telas; não representam rotas obrigatórias, nomes de componentes ou ordem de implementação. Os sufixos (`.1`, `.2`, `S`, `A`, `F`, `R`) indicam, em geral, estados ou variações da mesma experiência.
+O desenvolvimento começará pelas interfaces desktop, utilizando os frames de **1536 px de largura** como referência de composição.
 
-| Área | Referência direta | O que documenta |
+Essa decisão estabelece uma ordem de trabalho, não uma limitação permanente da plataforma. A versão funcional completa deverá atender aos requisitos de responsividade e acessibilidade definidos para o MVP.
+
+As referências mobile e tablet serão utilizadas posteriormente, durante a adaptação dos fluxos implementados.
+
+## 2. Relação entre o protótipo e o MVP
+
+O protótipo apresenta uma visão mais ampla da experiência do EduComp do que o escopo definido para a primeira versão funcional.
+
+Por isso, as telas devem ser interpretadas de acordo com três situações:
+
+- **Incluído no MVP:** fluxo ou comportamento previsto nos documentos funcionais, cuja interface desktop deve ser implementada.
+- **Referência complementar:** elemento visual disponível no Figma que depende de definição funcional, conteúdo definitivo ou decisão de implementação.
+- **Evolução futura:** funcionalidade desenhada para demonstrar possibilidades do produto, mas que não integra os compromissos da primeira entrega.
+
+A existência de uma tela, botão ou estado no Figma não torna sua funcionalidade automaticamente obrigatória no MVP.
+
+### 2.1. Correspondência entre interfaces e escopo
+
+| Área | Referência | Situação para o MVP |
 | --- | --- | --- |
-| Início | [D01 — Início](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-34332) | Apresentação da plataforma, chamadas e acesso à biblioteca |
-| Autenticação | [DESKTOP / 02](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32521) | Entrar, cadastro, recuperação e erros |
-| Biblioteca e salvos | [DESKTOP / 03](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32683) | Listagem, pesquisa, coleção e estados vazios |
-| Filtros e compartilhamento | [DESKTOP / 04](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-33638) | Filtros, menus e ação de compartilhar |
-| Material e perfil público | [DESKTOP / 05](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-34034) | Detalhes do recurso, conteúdo pedagógico e autoria |
-| Comunidade | [DESKTOP / 06](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-33729) | Comentários, relatos, respostas e denúncias |
-| Envio e acompanhamento | [DESKTOP / 07](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-33078) | Formulário, revisão e histórico |
-| Perfil e notificações | [DESKTOP / 08](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-33378) | Conta, menu e notificações |
-| Institucional | [DESKTOP / 09](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-33488) | Contato, termos e privacidade |
-| Estados adicionais | [DESKTOP / 10](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4449-440) | Sucesso, falhas, estados de dados |
+| Página inicial | D01 | Incluída |
+| Cadastro e login por e-mail | D02 e D03 | Incluídos |
+| Recuperação de senha | D04 | Incluída |
+| Login com Google | D02 e D03 | Evolução futura |
+| Biblioteca, busca e filtros | D05 e D13 | Incluídos |
+| Detalhes e acesso ao material | D06 | Incluídos |
+| Perfil público do autor | D06.P01 | Referência complementar |
+| Comentários, relatos e denúncias | D06.S | Evolução possível, não prevista no MVP atual |
+| Materiais salvos | D07 | Incluídos |
+| Envio e acompanhamento | D08 | Incluídos |
+| Perfil e configurações da conta | D09 | Incluídos |
+| Central de notificações | D09.2 e variações | Evolução futura |
+| Páginas institucionais | D10 a D12 | Referência complementar |
+| Cópia de link | D14 | Incluída |
+| Compartilhamento por redes sociais | Variações de D14 | Evolução futura |
 
-## 3. Fundação visual
+A revisão e aprovação dos materiais por um responsável autorizado **integram o MVP**, mas a interface correspondente ainda precisa ser especificada. Essa ausência no protótipo não elimina a necessidade funcional.
 
-### 3.1. Cores
+A implementação deve preservar o escopo definido em [`escopo-mvp.md`](../product/escopo-mvp.md), sem antecipar funcionalidades adicionais apenas para reproduzir integralmente o Figma.
 
-As cores abaixo constam do guia **ID Visual**. Os nomes de variáveis são sugestões para o código, não uma afirmação de que já estejam presentes no repositório.
+## 3. Fundamentos visuais
 
-| Token sugerido | Valor | Aplicação de referência |
-| --- | --- | --- |
-| `--color-primary` | `#1761D8` | Ações principais e ícone da marca |
-| `--color-brand-name` | `#313E55` | Nome EduComp no logotipo |
-| `--color-heading` | `#102B5C` | Títulos e texto principal |
-| `--color-text-secondary` | `#526987` | Textos de apoio |
-| `--color-surface` | `#FFFFFF` | Cartões e superfícies |
-| `--color-page` | `#F8FAFF` | Fundo de página |
-| `--color-primary-soft` | `#D9E6FB` | Destaques suaves |
-| `--color-error` | `#C7333D` | Erro e validação |
+### 3.1. Identidade
 
-O fundo do ícone da marca deve ser **sólido em `#1761D8`**, sem gradiente. O nome **EduComp** deve usar **`#313E55`**; preservar a assinatura e o subtítulo conforme o ativo aprovado. Não reconstruir o logotipo apenas com texto e formas aproximadas quando o ativo exportável estiver disponível.
+A interface deve utilizar os fundamentos registrados no [Design System](design-system.md).
 
-### 3.2. Tipografia
+As referências principais são:
 
-Família principal: **Inter**.
+| Elemento | Definição |
+| --- | --- |
+| Fonte | Inter |
+| Azul principal | `#1761D8` |
+| Azul profundo | `#102B5C` |
+| Texto secundário | `#526987` |
+| Fundo geral | `#F8FAFF` |
+| Superfícies | `#FFFFFF` |
+| Azul suave | `#D9E6FB` |
+| Erro | `#C7333D` |
 
-| Estilo do guia | Fonte / entrelinha | Peso |
-| --- | --- | --- |
-| Display/Hero | 38 / 48 px | 700 |
-| Heading/H1 | 32 / 40 px | 700 |
-| Heading/H2 | 28 / 36 px | 600 |
-| Heading/H3 | 20 / 28 px | 600 |
-| Body/Regular | 16 / 24 px | 400 |
-| Body/Small | 14 / 20 px | 400 |
-| Label/Medium | 13 / 18 px | 600 |
-| Caption/Small | 11 / 16 px | 500 |
+O logotipo deve preservar a composição aprovada no Figma. O símbolo utiliza fundo sólido `#1761D8`, sem gradiente, e o nome EduComp utiliza `#313E55`.
 
-Esses valores formam a escala-base. Para diferenças pontuais, conferir o frame desktop correspondente antes de alterar tokens globais. Manter a hierarquia sem criar tamanhos ou pesos novos a cada tela.
+A assinatura visual deve ser aplicada por meio dos ativos originais, evitando reconstruções aproximadas.
 
-### 3.3. Layout e componentes
+A escala tipográfica, as variáveis semânticas e os efeitos reutilizáveis estão documentados no Design System e não devem ser redefinidos de forma independente neste arquivo.
 
-O protótipo contém duas estruturas recorrentes:
+### 3.2. Composição desktop
 
-- **Páginas públicas:** cabeçalho com identidade, chamadas de navegação, conteúdo institucional e rodapé; entrada com destaque para biblioteca, login e cadastro.
-- **Área interna:** navegação do EduComp, cabeçalho com identificação de conta/notificações, conteúdo principal e ações contextuais. As páginas de biblioteca, salvos, envio, detalhes e perfil devem compartilhar a estrutura, em vez de replicá-la independentemente.
+As páginas devem respeitar a hierarquia e os alinhamentos estabelecidos nos frames de 1536 px.
+
+A implementação deve considerar:
+
+- Largura de referência sem fixar o conteúdo à resolução do protótipo.
+- Margens e espaçamentos coerentes entre páginas.
+- Altura de página determinada pelo conteúdo.
+- Rolagem vertical natural.
+- Comportamento adequado em janelas desktop menores.
+- Ausência de cortes, sobreposições indevidas e rolagem horizontal desnecessária.
+- Adaptação de textos e dados dinâmicos sem comprometer a estrutura.
+
+Os frames do Figma representam composições de referência. Dimensões e posições não devem ser reproduzidas indiscriminadamente como valores absolutos no código.
+
+### 3.3. Estruturas compartilhadas
+
+O protótipo apresenta duas estruturas recorrentes.
+
+**Páginas públicas**
+
+Utilizam identidade visual, cabeçalho de navegação, conteúdo de apresentação ou acesso e rodapé quando aplicável.
+
+**Área interna**
+
+Compartilha cabeçalho, navegação principal, identificação de conta e região de conteúdo.
+
+Biblioteca, Salvos, Detalhes, Envio de material e Meu perfil devem utilizar estruturas compartilhadas, evitando implementações independentes para elementos equivalentes.
+
+A presença de notificações ou outras ações futuras no cabeçalho do protótipo não exige sua implementação funcional nesta primeira entrega.
 
 ## 4. Implementação dos fluxos desktop
 
-### 4.1. Início — D01
+Os identificadores utilizados no Figma facilitam a localização das referências visuais. Não representam nomes obrigatórios de rotas, componentes ou arquivos de código.
 
-**Frame:** [D01 — Início](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-34332).
+Os frames de estados e variações devem orientar o comportamento da interface, sem resultar necessariamente em páginas independentes.
 
-A tela apresenta cabeçalho, hero, exemplos de materiais, proposta do produto, chamada para a biblioteca e rodapé. As ações de destaque são **Entrar**, **Criar conta**, **Acessar a biblioteca** e **Saiba mais**. Preservar a ordem e a hierarquia das seções, incluindo a apresentação dos recursos didáticos e a citação editorial.
+### 4.1. Página inicial — D01
 
-**Conferir na implementação:** âncoras ou destinos de navegação, comportamento dos botões, dimensões e alinhamentos do hero, cartões ilustrativos e continuidade visual entre as seções. Os destinos efetivos devem ser definidos de acordo com a navegação do projeto.
+**Referência:** [D01 — Início](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-34332)
 
-### 4.2. Autenticação — D02 a D04
+A página inicial apresenta o EduComp, sua proposta e os principais caminhos de entrada na plataforma.
 
-**Frames principais:** [D02 — Entrar](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32522), [D03 — Criar conta](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32551) e [D04 — Recuperar senha](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32584).
+A composição contém:
 
-| Tela/estado | Identificador | Comportamento esperado na interface |
-| --- | --- | --- |
-| Entrar | D02, D02.3 | Formulário de e-mail e senha; opção **Continuar com Google**; acesso a cadastro e recuperação |
-| Credenciais inválidas | D02.1 | Erro legível, associado à tentativa de login, sem apagar dados desnecessariamente |
-| Falha no acesso Google | D02.2 | Mensagem de falha e alternativa para nova tentativa |
-| Criar conta | D03, D03.2 | Nome, e-mail, senha, alternativa Google e feedback de preenchimento |
-| Cadastro inválido | D03.1 | Validação de campos com mensagem específica |
-| Recuperação | D04, D04.1 | Solicitação por e-mail e confirmação das instruções enviadas |
-| Redefinir senha | D04.2–D04.4 | Nova senha, confirmação de sucesso e tratamento de link expirado |
+- Cabeçalho com identidade visual e navegação.
+- Seção principal de apresentação.
+- Exemplos de materiais pedagógicos.
+- Seções informativas sobre a proposta.
+- Chamada para a Biblioteca.
+- Rodapé.
 
-O protótipo orienta usar **pelo menos 12 caracteres** na senha. A regra definitiva, bem como o login Google e a recuperação por e-mail, precisa concordar com o serviço e a documentação de autenticação. Não implementar fluxo OAuth fictício apenas para corresponder ao botão do Figma.
+As principais ações são **Entrar**, **Criar conta**, **Acessar a biblioteca** e **Saiba mais**.
 
-### 4.3. Biblioteca, busca e filtros — D05 e D13
+**Orientações de implementação**
 
-**Frame principal:** [D05 — Biblioteca](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32684).
+A ordem e a hierarquia das seções devem acompanhar o protótipo. Os elementos visuais utilizados para apresentar materiais não devem ser confundidos com registros obrigatórios do acervo.
 
-A biblioteca reúne lista de materiais, miniaturas, tipo, título, descrição, etapa/ano escolar e acesso aos detalhes. Inclui **campo de busca**, ação **Buscar**, filtros de **tipo de material**, **etapa de ensino** e **eixo da BNCC**, além de indicação de quantidade e paginação.
+As ações precisam possuir destinos definidos e coerentes com a navegação. O acesso de visitantes à Biblioteca ainda depende de decisão funcional.
 
-| Referência | Estado a construir |
+A página deve manter sua composição em janelas desktop menores, sem depender de uma altura fixa.
+
+### 4.2. Cadastro, login e recuperação — D02 a D04
+
+**Referência:** [DESKTOP / 02 · Autenticação](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32521)
+
+A autenticação contempla a criação de conta, o acesso por e-mail e senha e a recuperação de credenciais.
+
+| Frame | Estado |
 | --- | --- |
-| D05 | Listagem inicial, controles de busca/filtro e paginação |
-| D05.1 | Busca sem resultados, com retorno claro para alterar ou limpar os critérios |
-| D05.F | Exemplos de listagem filtrada: plano de aula, Pensamento Computacional e anos iniciais |
-| D13, D13.1, D13.2 | Sobreposições de filtro por tipo, etapa e eixo |
-| Estado de carregamento em D05 | Mensagem de carregamento enquanto os materiais são obtidos |
+| D02 | Login |
+| D02.1 | Credenciais inválidas |
+| D02.3 | Formulário de login preenchido |
+| D03 | Criar conta |
+| D03.1 | Validação de cadastro |
+| D03.2 | Formulário de cadastro preenchido |
+| D04 | Recuperar senha |
+| D04.1 | Confirmação de solicitação |
+| D04.2 | Redefinir senha |
+| D04.3 | Senha redefinida |
+| D04.4 | Link expirado |
 
-A alteração de busca, filtros e página deve atualizar o estado visível da listagem. Não codificar uma página diferente para cada exemplo de filtro. Os valores dos cards, a contagem e a paginação devem vir do estado dos dados; o conteúdo ilustrativo do Figma serve para conferência visual.
+**Orientações de implementação**
 
-### 4.4. Salvos — D07
+Os formulários devem utilizar os componentes de campo e botão definidos no Design System.
 
-**Frame principal:** [D07 — Materiais salvos](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32921).
+A interface precisa distinguir estados iniciais, preenchidos, inválidos, de carregamento e de conclusão.
 
-A tela apresenta a coleção pessoal, contagem de itens, cartões de materiais e controles de busca/filtro. O protótipo inclui uma grade desktop de referência e estados após alterações na coleção.
+Erros de autenticação devem apresentar mensagens compreensíveis sem revelar informações sensíveis. A recuperação de senha deve contemplar o uso de link seguro, conforme os requisitos do produto.
 
-| Referência | Estado a construir |
+A exigência de e-mail institucional e a política de senha ainda precisam ser confirmadas. Os valores apresentados no protótipo não devem ser assumidos como regras definitivas.
+
+**Limite do MVP**
+
+O login com Google aparece visualmente nas telas, mas não integra a primeira versão funcional.
+
+O botão correspondente não deve oferecer uma ação simulada ou uma autenticação fictícia. Sua presença na implementação depende de uma decisão específica sobre a apresentação de funcionalidades futuras.
+
+### 4.3. Biblioteca, pesquisa e filtros — D05 e D13
+
+**Referências:**
+- [D05 — Biblioteca](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32684)
+- [DESKTOP / 04 · Filtros e sobreposições](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-33638)
+
+A Biblioteca é uma das áreas centrais do MVP.
+
+Apresenta a listagem dos materiais disponíveis, com informações pedagógicas, pesquisa textual e filtros.
+
+**Elementos principais**
+
+- Campo de pesquisa.
+- Botão Buscar.
+- Filtros por tipo de material, etapa de ensino e eixo da Computação.
+- Cartões de materiais.
+- Identificação do tipo e das classificações.
+- Acesso aos detalhes.
+- Contagem de resultados.
+- Navegação entre resultados.
+
+**Estados de referência**
+
+| Frame | Estado |
 | --- | --- |
-| D07 | Coleção com materiais salvos |
+| D05 | Biblioteca com materiais |
+| D05.1 | Pesquisa sem resultados |
+| D05.F | Resultados com filtros aplicados |
+| D13 | Filtro por tipo de material |
+| D13.1 | Filtro por etapa de ensino |
+| D13.2 | Filtro por eixo da Computação |
+
+O protótipo também apresenta um estado de carregamento da Biblioteca.
+
+**Orientações de implementação**
+
+Os filtros permitem selecionar múltiplas opções. Conforme os requisitos atuais, opções dentro da mesma categoria são combinadas por **OU**, enquanto categorias diferentes e pesquisa textual são combinadas por **E**.
+
+As seleções em edição devem ser diferenciadas dos filtros efetivamente aplicados. Ações como **Aplicar** e **Limpar** devem seguir as regras funcionais, inclusive nos casos de fechamento sem confirmação.
+
+A alteração da pesquisa ou dos filtros deve atualizar a listagem, a contagem e a navegação pelos resultados.
+
+Os dados e as quantidades apresentados no Figma são ilustrativos. A interface deve utilizar os registros disponibilizados pela aplicação.
+
+A paginação representada visualmente deverá ser ajustada à decisão funcional entre paginação e carregamento progressivo.
+
+**Referência funcional:** [Especificação de busca e filtros](../product/especificacao-busca-filtros.md).
+
+### 4.4. Detalhes e acesso ao material — D06
+
+**Referência:** [D06 — Material e discussão](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-34035)
+
+A página de detalhes apresenta as informações necessárias para que o professor conheça e avalie um recurso pedagógico.
+
+**Elementos do MVP**
+
+- Título e tipo de material.
+- Descrição.
+- Etapa de ensino e ano escolar, quando disponíveis.
+- Eixo da Computação.
+- Informações pedagógicas e objetivos cadastrados.
+- Identificação de autoria.
+- Ação de acesso ao recurso.
+- Ação de salvar ou remover dos favoritos.
+- Retorno à Biblioteca.
+
+**Estados complementares**
+
+| Referência | Comportamento |
+| --- | --- |
+| D06.A01 | Acesso ao arquivo |
+| D06.A02 | Falha no download |
+| D06.A03 | Material salvo |
+| D06.A04 | Material removido dos salvos |
+| D06.A05–A011 | Exemplos de acesso a diferentes materiais |
+
+Os exemplos de download não devem ser implementados como páginas específicas para cada título. O componente de acesso deve utilizar o arquivo ou endereço associado ao material consultado.
+
+Quando não houver recurso disponível ou autorizado, a interface deve apresentar uma orientação adequada, sem disponibilizar ações que não possam ser executadas.
+
+**Referências além do MVP**
+
+O protótipo contém uma seção de comunidade, com comentários, relatos de aplicação, respostas e denúncias.
+
+Essas funcionalidades não estão previstas nos requisitos da primeira entrega. Portanto, **a implementação inicial da página de detalhes deve priorizar as informações pedagógicas, o acesso ao recurso e os favoritos**.
+
+Os frames D06.S01–D06.S16 permanecem como referência para uma possível evolução da experiência.
+
+O perfil público do autor, representado em D06.P01, também depende de definição funcional própria. Para o MVP, a identificação de autoria deve ser apresentada conforme os metadados efetivamente disponíveis.
+
+### 4.5. Materiais salvos — D07
+
+**Referência:** [D07 — Materiais salvos](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32921)
+
+A área de Salvos reúne os recursos marcados como favoritos pelo professor autenticado.
+
+**Elementos principais**
+
+- Identificação da página.
+- Quantidade de materiais salvos.
+- Cartões de materiais.
+- Acesso aos detalhes.
+- Busca e filtros da coleção, conforme as regras aplicáveis.
+- Ação de remoção dos favoritos.
+
+**Estados de referência**
+
+| Frame | Estado |
+| --- | --- |
+| D07 | Coleção com materiais |
 | D07.1 | Coleção vazia |
-| D07.2 | Busca sem resultados dentro de salvos |
-| D07.R1–R6 | Coleção atualizada após ações de salvar/remover |
-| D07.F e D13.S | Filtros aplicados à coleção e seus menus |
+| D07.2 | Busca sem resultados |
+| D07.R1–R6 | Coleção atualizada |
+| D07.F | Resultados filtrados em Salvos |
+| D13.S | Menus de filtros em Salvos |
 
-Salvar ou remover um material deve refletir na biblioteca, no detalhe do material e na coleção, conforme a persistência disponível. Não confundir **nenhum material salvo** com **nenhum resultado para a busca atual**.
+**Orientações de implementação**
 
-### 4.5. Detalhes do material e perfil público — D06
+O estado de favorito deve permanecer consistente entre Biblioteca, Detalhes e Salvos.
 
-**Frames:** [D06 — Material e discussão](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-34035) e [D06.P01 — Perfil público](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-34291).
+A inclusão ou remoção deve atualizar a interface e persistir na conta do professor, conforme os requisitos funcionais.
 
-A página reúne informações pedagógicas (tipo, etapa, ano, eixo da Computação, descrição e objetivos), autoria, acesso ao arquivo e ações como **Adicionar aos salvos**. A seção de participação possui as visualizações **Todos**, **Relatos de aplicação** e **Discussões**, com comentários e respostas.
+É necessário distinguir uma coleção realmente vazia de uma coleção que possui itens, mas não apresenta correspondências para a busca atual.
 
-**Comportamentos que devem compartilhar a mesma página de detalhe:**
-
-- **D06.A01–A011:** acesso ao arquivo, falha no download, material salvo/removido e exemplos de download de diferentes materiais. O arquivo e seu nome variam conforme os dados; não criar telas exclusivas por título de recurso.
-- **D06.P01:** acesso ao perfil público do autor ou colaborador, respeitando o conjunto de dados públicos definido pelo produto.
-- **D06.S01–S12:** comentar, relatar aplicação, responder, editar comentário, denunciar, confirmar publicação/denúncia, filtrar contribuições e apresentar estado sem comentários.
-- **D06.S13–S16:** resposta publicada, comentário atualizado, relato publicado e falha ao contribuir.
-
-Exibir ações conforme o estado de autenticação e as permissões definidas funcionalmente. Uma ação de denúncia, edição ou remoção não deve depender apenas da exibição de um botão; sua autorização precisa ser confirmada pela aplicação.
+Não devem ser criadas páginas diferentes para representar cada atualização ilustrada no protótipo. As variações devem ser tratadas por estado e dados.
 
 ### 4.6. Envio e acompanhamento de materiais — D08
 
-**Frame principal:** [D08 — Enviar material](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-33079).
+**Referência:** [DESKTOP / 07 · Envio e acompanhamento](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-33078)
 
-A tela possui abas **Enviar material** e **Meus envios**, orientações de revisão, dados do recurso e seleção de arquivo. Campos visíveis: título, descrição, tipo de material, etapa de ensino, ano escolar opcional e eixo da Computação. As ações finais incluem **Cancelar** e **Enviar para revisão**.
+O envio permite que professores compartilhem materiais para avaliação e possível publicação no acervo.
 
-| Referência | Estado a construir |
+A tela apresenta as abas **Enviar material** e **Meus envios**.
+
+**Campos representados**
+
+- Título do material.
+- Descrição.
+- Tipo de material.
+- Etapa de ensino.
+- Ano escolar, quando aplicável.
+- Eixo da Computação.
+- Arquivo do material.
+
+O formulário também contém orientações e identificação dos campos obrigatórios.
+
+**Estados de referência**
+
+| Frame | Estado |
 | --- | --- |
-| D08 e D08.12 | Formulário inicial e preenchido |
-| D08.1 | Validação de campos |
+| D08 | Formulário inicial |
+| D08.1 | Validação |
+| D08.2 | Confirmação do envio |
+| D08.3 | Acompanhamento em modal |
+| D08.4 | Meus envios |
 | D08.5 | Arquivo selecionado |
 | D08.6 | Envio em andamento |
-| D08.7–D08.9 | Falha de envio, formato inválido e arquivo acima do limite |
-| D08.2 | Confirmação de envio |
-| D08.3 | Acompanhamento em modal |
-| D08.4 | Meus envios, com situação de cada contribuição |
-| D08.10–D08.11 | Ajustes solicitados e material não aprovado |
+| D08.7 | Falha no envio |
+| D08.8 | Formato inválido |
+| D08.9 | Arquivo acima do limite |
+| D08.10 | Ajustes solicitados |
+| D08.11 | Material não aprovado |
+| D08.12 | Formulário preenchido |
 
-O protótipo exibe **PDF, PPTX, DOCX ou imagens, até 20 MB**. Tratar esses valores como referência visual até serem confirmados pelos requisitos e pelo serviço de upload. Distinguir **erro de formulário**, **erro técnico no upload** e **situação editorial do envio**: cada caso tem significado e mensagem próprios. Impedir reenvio acidental durante a operação quando aplicável.
+**Orientações de implementação**
 
-### 4.7. Meu perfil e notificações — D09
+O envio deve contemplar validação dos dados e do arquivo, indicação de progresso, confirmação de conclusão e tratamento de falhas.
 
-**Frames:** [D09 — Meu perfil](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-33379), **D09.1 — Menu do perfil** e **D09.2 — Notificações**.
+O formulário precisa evitar o envio duplicado durante uma operação em andamento, quando aplicável.
 
-O perfil contempla identificação do professor, foto, nome, e-mail, instituição opcional, descrição pública (*Sobre mim*), salvamento de alterações e troca de senha. O texto de apoio do protótipo aponta limite de **300 caracteres** para a apresentação pessoal; conferir essa regra com a validação funcional.
+As informações já preenchidas devem ser preservadas sempre que possível após uma falha.
 
-**Estados adicionais:** D09.3 (perfil salvo), D09.4–D09.5 (alterar foto/foto selecionada), D09.6 (alterar senha), D09.7 (falha ao salvar), D09.8 (sem notificações), D09.9 (lidas) e D09.10 (lista completa).
+O protótipo apresenta formatos PDF, PPTX, DOCX e imagens, com limite visual de 20 MB. Essas restrições ainda dependem de confirmação funcional e técnica e não devem ser implementadas como regras definitivas apenas por constarem no Figma.
 
-O painel de notificações apresenta quantidade de novas mensagens, ações como **Marcar todas como lidas** e **Ver todas as notificações**, além de variações lidas/não lidas. Manter coerência entre indicador no cabeçalho, painel e listagem, com estado derivado dos dados.
+**Revisão e publicação**
 
-### 4.8. Institucional e compartilhamento — D10 a D14
+O envio de um material não equivale à sua publicação.
 
-| Referência | Interface e comportamento |
+A primeira versão deve permitir que o autor acompanhe a situação da submissão e que um responsável autorizado realize sua avaliação.
+
+Os estados previstos nos documentos de produto são **Pendente**, **Em análise**, **Aprovado** e **Recusado**.
+
+Variações como *Ajustes solicitados*, apresentadas no protótipo, dependem de definição adicional sobre o processo de revisão.
+
+**Lacuna de interface**
+
+A área de revisão utilizada pelo responsável autorizado ainda não possui uma especificação visual definitiva.
+
+Esse fluxo deverá ser detalhado antes de sua implementação, incluindo apresentação das submissões, acesso aos dados necessários para análise, ações permitidas e feedback das decisões.
+
+A ausência dessa tela no protótipo não retira a revisão e a aprovação do escopo funcional do MVP.
+
+### 4.7. Perfil do professor — D09
+
+**Referência:** [D09 — Meu perfil](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-33379)
+
+O perfil reúne informações da conta e ações de atualização de dados pessoais.
+
+**Elementos principais**
+
+- Identificação do professor.
+- Foto de perfil.
+- Nome completo.
+- E-mail.
+- Instituição de ensino, quando aplicável.
+- Informações complementares.
+- Ação de salvar alterações.
+- Ação de alterar senha.
+
+**Estados de referência**
+
+| Frame | Estado |
 | --- | --- |
-| D10 | Formulário **Fale conosco** |
-| D10.1–D10.3 | Mensagem enviada, erro de validação e falha de envio |
-| D11 | **Termos de uso**, com leitura confortável e rolagem natural |
-| D12 | **Política de privacidade**, com estrutura textual legível |
-| D14, D14.2 | Compartilhamento da plataforma |
-| D14.1 | Confirmação de link copiado |
+| D09 | Meu perfil |
+| D09.1 | Menu do perfil |
+| D09.3 | Perfil salvo |
+| D09.4 | Alterar foto |
+| D09.5 | Foto selecionada |
+| D09.6 | Alterar senha |
+| D09.7 | Falha ao salvar perfil |
 
-Usar o conteúdo jurídico aprovado para o produto, sem presumir que o texto ilustrativo seja versão legal definitiva. A cópia e o compartilhamento devem executar a ação real e retornar confirmação acessível.
+**Orientações de implementação**
 
-## 5. Interação, estados e acessibilidade
+Os dados devem ser carregados a partir da conta autenticada e refletir as alterações confirmadas.
 
-Os frames de estados complementares são uma **matriz de comportamento**, não uma lista de novas páginas. Implementar as transições com componentes e estados reaproveitáveis.
+O formulário deve apresentar validação, feedback de sucesso e tratamento de erros.
 
-| Situação | Exigência de interface |
+A foto precisa possuir apresentação adequada quando não houver imagem cadastrada.
+
+A descrição pessoal e seu limite de caracteres, ilustrados no Figma, devem ser confirmados antes de se tornarem regras definitivas.
+
+**Notificações**
+
+O protótipo também apresenta painel, lista, estados de leitura e contador de notificações.
+
+A central completa de notificações não integra o MVP. Esses elementos permanecem como referência visual para uma etapa posterior.
+
+Não devem ser exibidos indicadores fictícios de notificações não lidas em uma interface apresentada como funcional.
+
+### 4.8. Compartilhamento básico — D14
+
+**Referência:** [D14 — Compartilhar plataforma](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-33699)
+
+A primeira versão contempla o compartilhamento básico por cópia de link.
+
+**Comportamento esperado**
+
+- Disponibilizar a ação de copiar um endereço válido.
+- Confirmar quando a cópia for concluída.
+- Informar falhas quando identificáveis.
+- Respeitar as regras de acesso ao destino compartilhado.
+
+O endereço a ser copiado — página da plataforma, detalhe do material ou ambos — ainda precisa de definição funcional.
+
+O compartilhamento integrado com redes sociais não faz parte do MVP. As opções desse tipo presentes no Figma devem permanecer fora da implementação funcional inicial.
+
+### 4.9. Páginas institucionais — D10 a D12
+
+**Referência:** [DESKTOP / 09 · Institucional](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-33488)
+
+O protótipo contém:
+
+- D10 — Fale conosco.
+- D10.1 — Mensagem enviada.
+- D10.2 — Contato com erro.
+- D10.3 — Falha no contato.
+- D11 — Termos de uso.
+- D12 — Política de privacidade.
+
+Essas telas são referências de composição e conteúdo institucional, mas não correspondem, por si só, a requisitos funcionais detalhados no MVP atual.
+
+O formulário de contato dependerá de definição sobre recebimento, tratamento e destino das mensagens.
+
+Os documentos de termos de uso e privacidade devem utilizar textos aprovados para a aplicação. O conteúdo ilustrativo não deve ser tratado como versão jurídica definitiva.
+
+Sua implementação e os critérios específicos de aceite deverão ser definidos no planejamento funcional correspondente.
+
+## 5. Componentes compartilhados
+
+A implementação deve priorizar uma base de componentes reutilizáveis, separando estrutura visual, propriedades e comportamento.
+
+| Componente | Aplicações principais |
 | --- | --- |
-| Inicial e preenchido | Rótulos, valores, seleções e indicadores consistentes com a operação |
-| Validação | Mensagem específica vinculada ao campo, sem depender apenas da cor |
-| Carregamento ou envio | Feedback de progresso, preservação de contexto e prevenção de duplicidade quando necessária |
-| Sucesso | Confirmação visível e contextual, sem bloquear permanentemente a navegação |
-| Falha | Explicação compreensível, opção de recuperação e retenção de dados sempre que possível |
-| Vazio e sem resultados | Mensagens distintas para ausência de dados e critérios que não retornaram itens |
-| Modal, pop-up e menu | Fechamento previsível, controle de foco e sem sobreposição indevida |
-| Notificação lida/não lida | Diferenciação visual e semântica, com atualização consistente do indicador |
+| Cabeçalho público | Início e autenticação |
+| Cabeçalho interno | Biblioteca, Salvos, Detalhes, Envio e Perfil |
+| Navegação principal | Páginas internas |
+| Botão | Formulários, ações e confirmações |
+| Campo de entrada | Autenticação, busca e formulários |
+| Seletor e checkbox | Filtros e classificação |
+| Card de material | Biblioteca e Salvos |
+| Tag ou indicador | Tipo de material e metadados |
+| Modal | Confirmações e formulários auxiliares |
+| Menu | Perfil, filtros e ações contextuais |
+| Indicador de carregamento | Consultas e operações |
+| Mensagem de feedback | Sucesso, validação e falha |
+| Estado vazio | Biblioteca, busca e Salvos |
+| Navegação de resultados | Biblioteca e listagens aplicáveis |
 
-Na implementação desktop, validar especialmente **teclado**, foco visível, ordem de tabulação, nomes acessíveis de botões de ícone, associação entre campos e erros, contraste e comportamento de modais (foco de entrada, retorno e fechamento). As telas não substituem uma verificação de acessibilidade no navegador.
+Os componentes não devem incorporar dados fixos dos exemplos do Figma.
 
-## 6. Orientações para o front-end
+Propriedades, variantes e estados devem acompanhar as necessidades reais de uso, evitando estruturas duplicadas para cada tela ou condição.
 
-A organização concreta deve seguir o framework e as convenções existentes no repositório. Como divisão de responsabilidades, recomenda-se:
+O [Design System](design-system.md) estabelece os fundamentos visuais e as diretrizes para padronização desses elementos.
 
-1. **Fundação:** Inter, tokens, estilos globais e assets aprovados.
-2. **Layout compartilhado:** páginas públicas e área interna com navegação, cabeçalho, identificação de conta e notificações.
-3. **Componentes:** botão, campo, seletor, checkbox, busca, filtro, card de material, tag, abas, modal, menu, aviso, paginação e feedback.
-4. **Páginas e fluxos:** início, autenticação, biblioteca, salvos, material/comunidade, envio, perfil e institucional.
-5. **Estado e integrações:** dados de materiais, filtros, usuário, autenticação, uploads, downloads e notificações separados da apresentação visual.
+## 6. Estados e comportamento da interface
 
-Não duplicar componentes para cada frame de estado, nem construir páginas específicas para materiais de exemplo. Usar as variações do Figma como referência para **estados de componentes** e **cenários de teste**.
+Os estados apresentados no protótipo devem orientar a implementação das transições necessárias ao MVP.
 
-**Ordem de implementação sugerida:** primeiro a fundação visual e o layout; depois início/autenticação; biblioteca e salvos; detalhe/comunidade; envio; perfil/notificações; por fim institucional e revisão transversal dos estados. Essa sequência orienta o desenvolvimento da UI, mas não altera a priorização funcional definida no planejamento do projeto.
+| Estado | Comportamento esperado |
+| --- | --- |
+| Inicial | Interface disponível antes da interação |
+| Preenchido | Dados e seleções apresentados corretamente |
+| Foco | Destaque perceptível na navegação por teclado |
+| Carregamento | Indicação de operação em andamento |
+| Validação | Informação específica sobre dados incorretos |
+| Sucesso | Confirmação de ação concluída |
+| Falha | Mensagem compreensível e possibilidade de recuperação quando aplicável |
+| Vazio | Ausência de conteúdo no contexto consultado |
+| Sem resultados | Ausência de correspondência para os critérios utilizados |
+| Indisponível | Restrição de uso ou acesso claramente comunicada |
 
-## 7. Validação e critérios de aceite desktop
+### 6.1. Feedback
 
-A interface desktop estará pronta para revisão visual quando:
+As mensagens devem ser específicas para a situação.
 
-- [ ] O resultado for comparado com os frames pertinentes do Figma **na largura de referência de 1536 px**.
-- [ ] O layout também se mantiver utilizável em **janelas desktop menores**, sem depender de altura fixa, cortar conteúdo ou gerar rolagem horizontal desnecessária.
-- [ ] O logotipo, as cores, a Inter, a hierarquia, os espaçamentos, os ícones e os estados visuais estiverem coerentes com o design.
-- [ ] Cabeçalho, navegação, cartões, campos, botões, filtros, menus e modais apresentarem consistência entre páginas.
-- [ ] Busca, filtros, paginação, salvar/remover e estados da biblioteca exibirem respostas coerentes às ações.
-- [ ] Formulários distinguirem preenchimento, validação, carregamento, sucesso e falha.
-- [ ] Detalhe de material, downloads, contribuições e histórico de envios apresentarem os estados pertinentes, sem telas duplicadas por conteúdo fictício.
-- [ ] Notificações, perfil e ações de conta atualizarem suas representações na interface.
-- [ ] Navegação por teclado, foco, rótulos, textos de erro e fechamento de sobreposições forem verificados no navegador.
-- [ ] Conteúdo dinâmico, textos extensos e ausência de imagens forem tratados sem quebrar a composição.
-- [ ] Diferenças intencionais em relação ao Figma estiverem registradas e justificadas.
+Uma falha de conexão não deve apresentar a mesma orientação de um formulário inválido. Da mesma forma, um arquivo indisponível não deve ser representado como uma Biblioteca sem materiais.
 
-**Este aceite é de UI desktop.** Ele não substitui testes de integração, segurança, regras de negócio nem o aceite específico de mobile/tablet em etapa posterior.
+A interface não deve comunicar sucesso antes da confirmação da operação correspondente.
 
-## 8. Pontos de integração a confirmar
+### 6.2. Consistência dos dados
 
-O protótipo não define sozinho os itens abaixo. Conferir com os documentos de requisitos, decisões de produto e implementação:
+O resultado de uma ação deve ser refletido nos pontos pertinentes da interface.
 
-- Rotas e regras de acesso a páginas públicas/autenticadas.
-- Contrato de autenticação, login Google, recuperação de senha e política de credenciais.
-- Modelos de material, busca, paginação, filtros e persistência da coleção salva.
-- Autorização para comentários, respostas, edições, denúncias e ações sobre materiais.
-- Formatos aceitos, tamanho máximo, processamento do arquivo e situações de revisão editorial.
-- Endpoints, modelos e atualização das notificações.
-- Edição de foto/perfil, limites de texto e exposição de dados no perfil público.
-- Conteúdo definitivo de termos de uso, privacidade e contato.
-- Estratégia de exportação e versionamento dos assets do Figma.
+Exemplos:
 
-O objetivo é manter este handoff **centrado na implementação da interface desktop**, sem repetir especificações que pertencem a outros documentos do projeto.
+- Salvar um material atualiza sua representação em Detalhes e Salvos.
+- Remover um favorito atualiza a coleção pessoal.
+- Alterar o perfil modifica os dados exibidos após confirmação.
+- Enviar um material cria uma submissão consultável, sem publicação automática.
+- Aplicar filtros atualiza os resultados e preserva o estado de seleção.
+
+Esses comportamentos devem ser sustentados pelos dados e serviços da aplicação.
+
+### 6.3. Menus e modais
+
+Sobreposições devem possuir abertura e fechamento previsíveis.
+
+É necessário garantir:
+
+- Controle adequado do foco.
+- Fechamento acessível.
+- Identificação clara da janela ou painel.
+- Hierarquia entre ações principais e secundárias.
+- Retorno ao contexto anterior após o fechamento.
+- Ausência de sobreposições que impeçam o uso da interface.
+
+Os comportamentos devem ser verificados no navegador, e não apenas pela aparência dos frames.
+
+## 7. Acessibilidade e adaptação desktop
+
+A implementação inicial deve incorporar acessibilidade desde os componentes básicos.
+
+**Requisitos de interface**
+
+- Utilizar elementos HTML semanticamente adequados.
+- Preservar navegação por teclado.
+- Exibir foco visível.
+- Associar rótulos e mensagens de validação aos campos.
+- Garantir identificação acessível de botões com ícones.
+- Utilizar contraste adequado.
+- Evitar depender exclusivamente da cor para transmitir informações.
+- Permitir leitura e navegação com ampliação de texto.
+- Preservar acesso ao conteúdo em janelas desktop menores.
+- Manter menus e modais utilizáveis sem mouse.
+
+As verificações deverão considerar o comportamento real dos componentes.
+
+A implementação desktop não encerra os critérios de responsividade do MVP. A adaptação para tablet e celular deverá ser realizada antes da conclusão da versão funcional, conforme o planejamento e os requisitos do produto.
+
+## 8. Organização recomendada da implementação
+
+A estrutura definitiva dos arquivos e módulos deverá seguir a arquitetura técnica escolhida para o EduComp.
+
+Como orientação para o desenvolvimento da interface, recomenda-se trabalhar em camadas.
+
+### 8.1. Fundação
+
+Preparar:
+
+- Fonte Inter.
+- Variáveis de cor.
+- Estilos globais.
+- Ativos da identidade visual.
+- Padrões de espaçamento e composição.
+- Estruturas compartilhadas das páginas.
+
+### 8.2. Componentes
+
+Implementar os componentes de uso recorrente antes de reproduzir cada tela individualmente.
+
+Os estados devem ser representados por propriedades e dados, não por componentes inteiramente novos para cada variação do Figma.
+
+### 8.3. Páginas
+
+A sequência sugerida para a interface desktop é:
+
+1. Página inicial.
+2. Cadastro, login e recuperação de senha.
+3. Biblioteca, pesquisa e filtros.
+4. Detalhes e acesso ao material.
+5. Materiais salvos.
+6. Envio e acompanhamento.
+7. Perfil do professor.
+8. Compartilhamento básico.
+9. Interface mínima de revisão, após definição funcional e visual.
+
+Essa sequência organiza a construção da interface. A implementação real dependerá da arquitetura, das integrações e das prioridades do backlog.
+
+### 8.4. Integrações
+
+Os componentes devem ser preparados para receber dados e estados provenientes dos serviços da aplicação.
+
+A apresentação visual não deve ficar diretamente responsável por regras de autorização, persistência, validação de arquivos ou publicação de materiais.
+
+O frontend deve refletir o resultado dessas operações e respeitar as restrições estabelecidas pelos serviços.
+
+## 9. Critérios de aceite da implementação desktop
+
+A interface desktop estará pronta para revisão quando:
+
+- [ ] As páginas incluídas no MVP apresentarem correspondência visual com os frames aplicáveis do Figma.
+- [ ] A identidade visual, as cores e a tipografia seguirem o Design System.
+- [ ] Os componentes recorrentes estiverem padronizados e reutilizados.
+- [ ] O layout funcionar na largura de referência de 1536 px e em janelas desktop menores.
+- [ ] As páginas permitirem rolagem e adaptação de conteúdo sem cortes indevidos.
+- [ ] Navegação, campos, botões, menus e modais apresentarem comportamento coerente.
+- [ ] Cadastro, autenticação e recuperação exibirem os estados de interface necessários.
+- [ ] Biblioteca, busca, filtros e navegação pelos resultados refletirem os dados da aplicação.
+- [ ] Detalhes apresentarem os metadados cadastrados e somente ações de acesso válidas.
+- [ ] Favoritos e alterações de perfil apresentarem atualização e persistência.
+- [ ] Envio e acompanhamento distinguirem progresso, validação, falha e situação editorial.
+- [ ] A revisão de materiais por responsável autorizado possuir interface e fluxo definidos para implementação.
+- [ ] A cópia de link apresentar confirmação ou erro.
+- [ ] Os componentes previstos no MVP forem acessíveis por teclado e apresentarem feedback adequado.
+- [ ] Funcionalidades futuras não forem apresentadas como operacionais sem implementação real.
+- [ ] Diferenças intencionais em relação ao protótipo estiverem registradas e justificadas.
+
+Os itens acima orientam a **revisão da interface desktop**. Não substituem a verificação funcional completa do MVP, os testes de segurança, a avaliação de integração e a validação da responsividade em outras classes de dispositivo.
+
+## 10. Decisões pendentes
+
+Alguns comportamentos necessários à implementação ainda dependem de definições funcionais ou técnicas.
+
+| Tema | Definição necessária |
+| --- | --- |
+| Acesso | Permissões de visitantes e exigência de autenticação |
+| Cadastro | Política de e-mail institucional e senha |
+| Pesquisa | Correspondência de termos e critérios de ordenação |
+| Filtros | Fechamento sem aplicar, limpeza e opções sem resultados |
+| Resultados | Paginação ou carregamento progressivo |
+| Metadados | Campos obrigatórios, classificações e representação de temas |
+| Arquivos | Formatos, tamanhos, armazenamento e disponibilidade |
+| Revisão | Papéis, critérios, estados e interface do responsável autorizado |
+| Compartilhamento | Destino do endereço copiado |
+| Perfil | Limites de campos, foto e exposição de informações pessoais |
+| Institucional | Conteúdo definitivo e necessidade funcional do formulário de contato |
+| Responsividade | Pontos de quebra e adaptação dos componentes |
+| Acessibilidade | Critérios técnicos de verificação e testes |
+
+As decisões devem ser registradas nos documentos apropriados antes da implementação dos comportamentos diretamente afetados.
+
+Uma pendência específica não precisa impedir o desenvolvimento de componentes e áreas que já possuam definições suficientes.
+
+## 11. Documentação relacionada
+
+- [Product Brief](../product/product-brief.md)
+- [Escopo do MVP](../product/escopo-mvp.md)
+- [Requisitos](../product/requisitos.md)
+- [Histórias de usuário](../product/historias-de-usuario.md)
+- [Backlog](../product/backlog.md)
+- [Especificação de busca e filtros](../product/especificacao-busca-filtros.md)
+- [Especificação de metadados](../product/especificacao-metadados.md)
+- [Arquitetura da Informação](arquitetura-da-informacao.md)
+- [Objetivos de UX](objetivos-de-ux.md)
+- [User Flow](user-flow.md)
+- [Design System](design-system.md)
 
 ---
 
-**Manutenção:** atualizar este documento quando houver uma decisão de interface desktop que altere sua implementação ou seus critérios de aceite. Ajustes de regras de negócio, arquitetura e escopo devem ser registrados primeiro nos documentos correspondentes.
+O handoff deve ser mantido em alinhamento com a implementação e com as decisões funcionais do EduComp.
+
+Alterações de escopo devem ser registradas nos documentos de produto. Mudanças de padrões visuais devem ser refletidas no Design System. Este documento deve acompanhar as decisões que afetem diretamente a construção e a validação das interfaces desktop.
