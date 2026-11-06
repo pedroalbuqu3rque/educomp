@@ -1,289 +1,468 @@
 # EduComp — Design System
 
-**Versão:** 0.5  
-**Data:** 04/11/2026  
-**Situação:** Fundamentos visuais identificados; componentes e comportamentos em consolidação; desenvolvimento não iniciado.
+**Versão:** 0.6  
+**Data:** 06/11/2026  
+**Situação:** fundamentos visuais definidos no Figma; padrões de interface documentados para desenvolvimento desktop.
 
 ## 1. Objetivo
 
-Estabelecer os fundamentos visuais e os padrões de interface do EduComp, assegurando consistência entre as áreas de acesso, descoberta, consulta, organização e contribuição de materiais pedagógicos de Computação.
+O Design System do EduComp reúne os fundamentos de identidade visual e os padrões de interface que orientam a construção da plataforma.
 
-O Design System organiza **cores, tipografia, efeitos, componentes, estados e diretrizes de uso**. Diferencia os recursos já identificados no arquivo de design dos padrões que ainda precisam ser formalizados. As regras de negócio e os fluxos funcionais pertencem aos respectivos documentos de produto e UX/UI.
+Seu objetivo é manter a consistência entre páginas, componentes e estados de interação, além de facilitar a manutenção e a evolução da aplicação.
+
+Este documento estabelece cores, tipografia, diretrizes de composição, componentes e comportamentos visuais. O [handoff de UI/UX](handoff.md) complementa essas definições com as referências de telas e orientações para implementação.
+
+As regras de negócio, permissões e funcionalidades previstas para a primeira versão são tratadas na documentação de produto.
+
+### 1.1. Referências
+
+- [Identidade visual — Figma](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4418-15618)
+- [Protótipo desktop — Figma](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32520)
+- [Handoff de UI/UX](handoff.md)
+
+O desktop é a referência principal desta etapa de desenvolvimento. As versões mobile e tablet permanecem disponíveis no Figma para orientar a adaptação responsiva posterior.
 
 ## 2. Direção visual
 
-A identidade do EduComp segue uma abordagem **clean, institucional e contemporânea**, com predominância do azul, superfícies claras, hierarquia visual objetiva e componentes de baixa complexidade.
+A identidade do EduComp combina uma linguagem institucional com uma interface simples e acolhedora, adequada a uma plataforma de recursos educacionais.
 
-Princípios de aplicação:
+O azul é a principal cor de identificação. Fundos claros, áreas de respiro e uma hierarquia tipográfica definida ajudam a manter o conteúdo em evidência.
 
-- **Clareza:** destacar conteúdo e ações sem excesso de elementos decorativos.
-- **Consistência:** manter aparência e comportamento equivalentes para funções equivalentes.
-- **Hierarquia:** diferenciar títulos, descrições, metadados, ações e mensagens.
-- **Legibilidade:** favorecer a leitura de materiais e formulários em diferentes telas.
-- **Acessibilidade:** não depender apenas de cor, ícones ou posição para comunicar informações.
-- **Feedback:** indicar mudanças de estado e resultados de ações de maneira compreensível.
+As decisões visuais seguem cinco princípios:
 
-Os padrões visuais devem servir à atividade do professor: localizar, avaliar, salvar, acessar e enviar materiais.
+- **Clareza:** apresentar informações e ações sem elementos desnecessários.
+- **Consistência:** utilizar os mesmos padrões para funções equivalentes.
+- **Hierarquia:** diferenciar títulos, conteúdo, metadados e ações.
+- **Legibilidade:** favorecer a leitura de materiais, formulários e informações pedagógicas.
+- **Acessibilidade:** garantir que a interface possa ser compreendida e utilizada por diferentes pessoas e formas de interação.
 
-## 3. Cores
+A aparência deve apoiar as atividades centrais da plataforma: encontrar, consultar, salvar, acessar e compartilhar materiais pedagógicos.
 
-### 3.1. Variáveis identificadas
+## 3. Identidade visual
 
-O arquivo de design possui a coleção **`EduMaterial — Fundamentos`**, com as seguintes variáveis:
+### 3.1. Logotipo
 
-| Variável | Valor | Função semântica indicada pelo nome |
-|---|---|---|
-| `color/brand/primary` | `#1761D8` | Cor principal da marca e de ações de destaque. |
-| `color/brand/deep` | `#102D5C` | Tom profundo da identidade visual. |
-| `color/text/primary` | `#102D5C` | Texto principal em superfícies compatíveis. |
-| `color/text/secondary` | `#637DA3` | Texto secundário e informações de apoio. |
-| `color/surface/canvas` | `#F8FAFF` | Fundo geral de áreas claras. |
-| `color/surface/soft` | `#D9E6FB` | Superfícies suaves ou de apoio. |
-| `color/surface/default` | `#FFFFFF` | Superfície principal de conteúdo. |
-| `color/border/subtle` | `#D9E6FB` | Bordas e divisórias discretas. |
-| `color/status/danger` | `#C7333D` | Indicação de erro ou situação crítica. |
+O EduComp possui uma assinatura visual composta por símbolo, nome e subtítulo.
 
-Os valores acima são **variáveis existentes**. A coluna de função descreve a intenção semântica sugerida pelos nomes; a aplicação efetiva em todas as telas ainda precisa ser conferida.
+A aplicação principal deve preservar as proporções, o alinhamento e as cores definidos no guia de identidade visual.
 
-### 3.2. Regras de uso
+Regras de aplicação:
 
-- Preferir as variáveis semânticas em vez de inserir valores hexadecimais isolados nos componentes.
-- Usar a cor principal da marca para destacar ações prioritárias, respeitando a hierarquia de cada tela.
-- Utilizar `color/text/primary` e `color/text/secondary` apenas em combinações de fundo com legibilidade e contraste adequados.
-- Empregar `color/status/danger` em situações de erro, acompanhado de texto e, quando útil, de ícone; a cor isolada não deve transmitir a mensagem.
-- Não presumir que os tokens de texto definidos para superfícies claras funcionem sobre fundos azuis ou escuros.
-- Não criar cores definitivas para sucesso, aviso, foco, desabilitado ou superfícies escuras sem verificar a necessidade e o contraste da combinação.
+- O fundo do símbolo utiliza a cor sólida `#1761D8`, sem gradiente.
+- O nome **EduComp** utiliza `#313E55`.
+- O subtítulo mantém a composição e as cores definidas no arquivo original.
+- A assinatura deve preservar sua área de respiro e não sofrer distorções.
+- As versões monocromática e inversa devem seguir as aplicações previstas no guia.
 
-**Pendente:** verificar as combinações reais de primeiro plano e fundo, definir as cores de estados ainda não cobertos e atualizar o nome da coleção para a identidade EduComp após conferir suas dependências. A coleção não deve ser tratada como já renomeada.
+O Figma contém as referências de assinatura principal, monocromática, inversa, ícone e área de respiro.
 
-## 4. Tipografia
+Na implementação, devem ser utilizados os ativos exportados do design, preferencialmente em formato vetorial quando adequado.
 
-### 4.1. Estilos identificados
+### 3.2. Uso da marca
 
-Os seguintes estilos tipográficos estão cadastrados no design:
+A identidade aparece no cabeçalho das páginas públicas, nas áreas internas da plataforma e nos elementos institucionais.
 
-| Estilo | Uso recomendado na hierarquia |
-|---|---|
-| `Display/Hero` | Mensagem principal de apresentação ou destaque. |
-| `Heading/H1` | Título principal de página. |
-| `Heading/H2` | Título de seção de primeiro nível. |
-| `Heading/H3` | Subtítulo ou agrupamento de conteúdo. |
-| `Body/Regular` | Descrições e textos corridos. |
-| `Body/Small` | Textos de apoio de menor extensão. |
-| `Label/Medium` | Rótulos de campos, botões e controles. |
-| `Caption/Small` | Legendas e informações auxiliares. |
+A aplicação deve considerar o contraste entre a marca e a superfície em que está inserida. Variações de tamanho ou disposição não devem modificar a composição original de forma arbitrária.
 
-Os usos descritos orientam a padronização. **A existência dos estilos não comprova que estejam aplicados corretamente em todas as telas.**
+## 4. Sistema de cores
 
-### 4.2. Diretrizes tipográficas
+### 4.1. Variáveis existentes
 
-- Adotar uma ordem visual consistente para títulos, subtítulos, descrições e metadados.
-- Evitar criar estilos específicos para telas isoladas quando um estilo existente atender à mesma função.
-- Preservar a legibilidade de rótulos, mensagens de erro e informações complementares.
-- Garantir que mudanças de tamanho de tela ou ampliação de texto não ocultem conteúdos e ações essenciais.
-- Identificar títulos e rótulos semanticamente também na implementação, sem depender apenas da aparência visual.
+O Figma possui a coleção **`EduComp — Fundamentos`**, com o modo **`Padrão`**.
 
-**Pendente:** documentar família tipográfica, pesos, tamanhos, alturas de linha, espaçamentos entre letras e aplicação real de cada estilo no protótipo. Não há valores suficientes para fixar uma escala numérica neste documento.
+As seguintes variáveis de cor estão cadastradas:
 
-## 5. Layout, espaçamento e efeitos
+| Variável | Valor | Aplicação |
+| --- | --- | --- |
+| `color/brand/primary` | `#1761D8` | Cor principal e ações de destaque |
+| `color/brand/deep` | `#102B5C` | Azul profundo da identidade |
+| `color/brand/logo-background` | `#1761D8` | Fundo do símbolo da marca |
+| `color/brand/logo-name` | `#313E55` | Nome EduComp no logotipo |
+| `color/text/primary` | `#102B5C` | Texto principal |
+| `color/text/secondary` | `#526987` | Texto secundário e informações de apoio |
+| `color/surface/canvas` | `#F8FAFF` | Fundo geral das páginas |
+| `color/surface/default` | `#FFFFFF` | Superfícies de conteúdo |
+| `color/surface/soft` | `#D9E6FB` | Áreas de destaque suave |
+| `color/border/subtle` | `#D9E6FB` | Bordas e divisórias discretas |
+| `color/status/danger` | `#C7333D` | Erros e validações negativas |
 
-### 5.1. Composição
+A existência de uma variável no Figma não significa que ela esteja vinculada a todos os elementos correspondentes. Durante a implementação, deve-se priorizar seu uso semântico, evitando a repetição de valores isolados.
 
-- Manter alinhamentos previsíveis entre cabeçalho, áreas de conteúdo, filtros e cartões.
-- Utilizar espaçamentos consistentes entre elementos relacionados e separação perceptível entre seções.
-- Priorizar a leitura dos títulos dos materiais e das informações necessárias à escolha de um recurso.
-- Evitar sobreposição ou truncamento de ações em telas menores.
+### 4.2. Regras de aplicação
 
-Uma escala baseada em múltiplos de **4 px** pode ser avaliada como proposta de padronização, mas **não está confirmada como conjunto de tokens existente no Figma**. Margens, larguras máximas, grade, raios de borda e alturas dos componentes precisam de levantamento específico.
+**Cor principal**
 
-### 5.2. Elevação
+O azul `#1761D8` identifica ações prioritárias, elementos ativos e destaques relacionados à marca.
 
-Há um estilo de efeito identificado:
+Seu uso deve respeitar a hierarquia da página. Quando várias ações estiverem disponíveis, somente a ação prioritária deve receber o maior destaque visual.
 
-- **`Elevation/Modal`** — referência para a elevação de janelas ou sobreposições.
+**Cores de texto**
 
-O nome do estilo está documentado, mas seus valores de sombra e sua aplicação uniforme ainda precisam ser verificados. Não devem ser inventados valores definitivos de desfoque, deslocamento ou opacidade.
+O azul profundo `#102B5C` é utilizado como referência para títulos e textos principais. O tom `#526987` atende às informações secundárias, descrições e metadados.
 
-### 5.3. Ícones e imagens
+**Superfícies**
 
-Ícones devem ter significado reconhecível, consistência de traço e rótulos acessíveis quando acionáveis. Imagens e avatares não devem substituir o nome ou o contexto necessário para compreender uma ação.
+O branco e o fundo `#F8FAFF` estabelecem a separação entre áreas de conteúdo e fundo da página. O azul suave `#D9E6FB` pode ser utilizado para destacar informações sem competir com ações principais.
 
-**Pendente:** definir biblioteca de ícones, dimensões, tratamento de imagens ausentes e especificações de avatar, quando aplicáveis.
+**Erros**
 
-## 6. Componentes e padrões de interface
+A cor `#C7333D` identifica situações de erro. Deve ser acompanhada de uma mensagem compreensível e, quando necessário, de um indicador adicional.
 
-### 6.1. Componentes principais identificados
+### 4.3. Cores complementares
 
-A seção de componentes do arquivo de design inclui dois componentes principais catalogados:
+A coleção atual ainda não contempla todos os estados necessários à aplicação, como sucesso, aviso, foco e indisponibilidade.
 
-| Componente | Responsabilidade visual |
-|---|---|
-| `Ação flutuante / Botão de acesso` | Apresentar um ponto de acesso a ações ou navegação contextual. |
-| `Cabeçalho / Marca institucional` | Exibir a identificação visual institucional do EduComp. |
+Essas cores devem ser definidas durante a implementação dos respectivos componentes, considerando contraste, consistência e acessibilidade.
 
-Essa identificação **não significa que apenas dois elementos sejam reutilizados nas telas**, nem confirma que todos os demais controles já estejam organizados como componentes mestres. A conferência de instâncias, variantes e propriedades ainda precisa ser realizada.
+Não devem ser introduzidas novas cores apenas para reproduzir diferenças pontuais entre telas.
 
-### 6.2. Padrões a sistematizar
+## 5. Tipografia
 
-Além dos componentes catalogados, a interface demanda a padronização dos seguintes padrões:
+### 5.1. Família tipográfica
 
-| Padrão | Aplicações principais | Estados ou variações a prever |
-|---|---|---|
-| **Botões e links** | Entrar, criar conta, aplicar filtros, enviar, salvar, copiar link | Primário, secundário, foco, pressionado, desabilitado, carregamento |
-| **Campos de formulário** | E-mail, senha, nome, pesquisa, dados de perfil e material | Padrão, foco, preenchido, inválido, desabilitado |
-| **Cartão de material** | Biblioteca e Salvos | Conteúdo disponível, favorito marcado, carregamento quando aplicável |
-| **Controles de filtro** | Tipo, etapa de ensino e eixo da Computação | Não selecionado, selecionado em edição, selecionado aplicado |
-| **Menus contextuais** | Biblioteca, Salvos e perfil | Aberto, fechado, item em foco, item ativo quando aplicável |
-| **Sobreposição ou janela** | Filtros, perfil, compartilhar e outras ações contextuais | Aberta, fechamento, foco e retorno ao contexto de origem |
-| **Favorito** | Cartões, detalhes e Salvos | Salvo, não salvo, operação em andamento, falha |
-| **Upload** | Enviar material | Arquivo selecionado, validação, progresso, sucesso, erro |
-| **Identificação de status** | Acompanhamento e revisão de materiais | Pendente, Em análise, Aprovado, Recusado — a confirmar |
-| **Mensagens e estados vazios** | Biblioteca, Salvos, formulários e envios | Informação, sucesso, erro, ausência de dados |
+A família principal do EduComp é **Inter**.
 
-A tabela reúne **padrões necessários à experiência**, não uma declaração de que todos já existem como componentes reutilizáveis no Figma ou no código.
+Sua aplicação abrange títulos, descrições, formulários, navegação, cartões e informações complementares.
 
-## 7. Aplicação por área da interface
+A tipografia utiliza diferentes pesos para estabelecer hierarquia sem depender exclusivamente de tamanho ou cor.
 
-### 7.1. Acesso e autenticação
+### 5.2. Escala tipográfica
 
-As telas **Entrar**, **Criar conta** e **Recuperar senha** devem compartilhar padrões de campos, rótulos, mensagens, botões e fechamento. E-mail e senha devem ser identificados por rótulos claros; dados inválidos exigem mensagens associadas à ação ou ao campo correspondente.
+O guia de identidade visual estabelece os seguintes estilos de referência:
 
-A opção visual de autenticação com Google não integra a primeira versão funcional. Sua presença no protótipo não deve ser confundida com integração implementada.
+| Estilo | Tamanho | Altura de linha | Peso |
+| --- | --- | --- | --- |
+| `Display/Hero` | 38 px | 48 px | Bold — 700 |
+| `Heading/H1` | 32 px | 40 px | Bold — 700 |
+| `Heading/H2` | 28 px | 36 px | Semi Bold — 600 |
+| `Heading/H3` | 20 px | 28 px | Semi Bold — 600 |
+| `Body/Regular` | 16 px | 24 px | Regular — 400 |
+| `Body/Small` | 14 px | 20 px | Regular — 400 |
+| `Label/Medium` | 13 px | 18 px | Semi Bold — 600 |
+| `Caption/Small` | 11 px | 16 px | Medium — 500 |
 
-### 7.2. Biblioteca e filtros
+Esses oito estilos formam a escala semântica principal. O arquivo também contém estilos adicionais utilizados em composições específicas do protótipo, especialmente nas telas desktop.
 
-A Biblioteca deve manter uma hierarquia reconhecível entre **pesquisa**, **filtros**, **resultados** e **acesso aos detalhes**. Os três grupos de filtro são:
+Na implementação, a escala principal deve orientar a criação dos estilos reutilizáveis. Variações necessárias devem ser avaliadas conforme sua função, evitando a reprodução indiscriminada de todas as medidas presentes no Figma.
 
-| Categoria | Opções apresentadas |
-|---|---|
-| **Tipo de material** | Plano de aula; Slides; Material de apoio; Atividade; Sequência didática |
-| **Etapa de ensino** | Educação Infantil; Ensino Fundamental — Anos iniciais; Ensino Fundamental — Anos finais; Ensino Médio |
-| **Eixo da Computação** | Pensamento Computacional; Mundo Digital; Cultura Digital |
+### 5.3. Hierarquia e uso
 
-Os filtros devem indicar seleção múltipla e disponibilizar **Aplicar** e **Limpar**. A aparência precisa diferenciar seleções em edição das já aplicadas. O efeito de fechar sem aplicar e o alcance de Limpar ainda serão especificados.
+- **Display/Hero:** mensagens principais de apresentação.
+- **Heading/H1:** título principal da página.
+- **Heading/H2:** títulos de seções.
+- **Heading/H3:** subtítulos e agrupamentos de informações.
+- **Body/Regular:** conteúdo textual e descrições.
+- **Body/Small:** informações secundárias, apoio e metadados.
+- **Label/Medium:** rótulos, categorias e controles.
+- **Caption/Small:** legendas e informações auxiliares.
 
-O cartão de material deve priorizar identificação e leitura, sem apresentar metadados inexistentes ou acessos indisponíveis como ações funcionais.
+A hierarquia tipográfica deve corresponder à estrutura semântica da página. O tamanho visual de um texto não substitui a utilização correta dos elementos de título, parágrafo ou rótulo na aplicação.
 
-### 7.3. Detalhes, acesso e favoritos
+## 6. Layout e composição
 
-Os detalhes devem organizar título, descrição, classificações, autoria ou fonte quando disponível e ações de acesso. O usuário precisa distinguir a página de detalhes da abertura de arquivo ou link externo, caso esse tipo de acesso seja adotado.
+### 6.1. Referência desktop
 
-O controle de favorito deve expressar os estados **salvo** e **não salvo**, confirmar a operação e permanecer consistente entre Biblioteca, Detalhes e Salvos. A lista vazia de Salvos deve possuir mensagem própria.
+As telas desktop utilizam frames de **1536 px de largura** como referência principal.
 
-### 7.4. Envio, revisão e status
+Essa largura representa o ambiente de composição do protótipo, não um tamanho obrigatório para a janela do navegador.
 
-O formulário de envio deve agrupar campos relacionados, indicar erros de preenchimento e fornecer feedback do upload. Arquivos inválidos e falhas não devem ser apresentados como envio concluído.
+A implementação deve preservar os alinhamentos e a distribuição dos elementos, permitindo que o conteúdo se adapte a larguras desktop menores sem cortes ou sobreposições.
 
-Os estados propostos para a submissão são **Pendente**, **Em análise**, **Aprovado** e **Recusado**. As identificações visuais desses estados devem usar texto e não apenas cor. As regras finais e a interface de revisão ainda precisam de definição; portanto, não se presume a existência de um painel administrativo desenhado.
+As páginas com conteúdo extenso devem manter rolagem vertical natural, sem depender de alturas fixas que limitem a leitura.
 
-### 7.5. Perfil e compartilhamento
+### 6.2. Estruturas de página
 
-A área de perfil deve empregar padrões consistentes para exibição, edição, confirmação e erro nas alterações de dados, foto e senha.
+O protótipo apresenta dois padrões principais de organização.
 
-O compartilhamento básico deve identificar a ação **Copiar link** e apresentar feedback da cópia. As opções de redes sociais e a central de notificações fazem parte da experiência visual projetada, mas não integram o MVP funcional atualmente delimitado.
+**Páginas públicas**
 
-## 8. Estados de interação e feedback
+Utilizam cabeçalho institucional, áreas de apresentação ou formulários de acesso e navegação correspondente ao contexto. A página inicial também inclui seções informativas e rodapé.
 
-Cada componente interativo deve receber os estados pertinentes à sua função, sem que todos sejam obrigatórios em todos os contextos.
+**Área interna**
 
-| Estado | Expressão esperada |
-|---|---|
-| **Padrão** | Identificação e aparência habituais. |
-| **Hover** | Resposta visual ao ponteiro, quando aplicável. |
-| **Foco** | Indicador visível para navegação por teclado. |
-| **Pressionado** | Resposta à ativação do controle. |
-| **Selecionado** | Seleção perceptível por mais de um sinal visual. |
-| **Desabilitado** | Indicação clara de indisponibilidade, com contraste suficiente. |
-| **Carregamento** | Comunicação de operação em andamento, sem declarar sucesso antecipadamente. |
-| **Sucesso** | Confirmação objetiva de uma operação concluída. |
-| **Erro** | Mensagem compreensível e possibilidade de correção ou nova tentativa quando cabível. |
-| **Vazio** | Explicação para ausência de conteúdo ou correspondências. |
+Compartilha navegação principal, cabeçalho de identificação e uma região de conteúdo que varia conforme a funcionalidade.
 
-Situações que devem ser diferenciadas na interface:
+Biblioteca, Salvos, Detalhes, Enviar material e Meu perfil devem manter consistência entre essas estruturas.
 
-- Biblioteca sem materiais publicados **versus** pesquisa ou filtros sem resultados.
-- Falha ao carregar a listagem **versus** recurso indisponível nos detalhes.
-- Material enviado para revisão **versus** material publicado após aprovação.
-- Favorito salvo **versus** ação de favoritar ainda em processamento.
-- Erro de validação de campo **versus** falha de serviço.
+Elementos compartilhados devem ser implementados como componentes reutilizáveis, evitando diferenças de posicionamento e comportamento entre páginas equivalentes.
 
-As mensagens finais, os tokens de estado ainda ausentes e as respostas visuais devem ser consolidados antes da implementação.
+### 6.3. Espaçamento e alinhamento
 
-## 9. Menus e sobreposições
+Os espaçamentos devem estabelecer relações claras entre elementos:
 
-Menus e sobreposições devem preservar o contexto da tela que os originou. Para cada um, é necessário definir:
+- Itens de um mesmo grupo devem permanecer visualmente próximos.
+- Seções diferentes precisam de separação perceptível.
+- Formulários devem manter alinhamento consistente entre rótulos, campos, mensagens e botões.
+- Cartões devem seguir uma distribuição uniforme, preservando a leitura do conteúdo.
+- Margens e áreas de respiro devem acompanhar a hierarquia da página.
 
-- Ação ou controle que abre o elemento.
-- Título ou identificação do conteúdo, quando pertinente.
-- Controle explícito de fechamento.
-- Comportamento do foco ao abrir e ao fechar.
-- Possibilidade de fechar por teclado e por interação fora da área, quando apropriado.
-- Tratamento de alterações temporárias ainda não confirmadas.
+A escala definitiva de espaçamento, os raios de borda, as dimensões de componentes e as larguras máximas ainda precisam ser consolidados como tokens de implementação.
 
-Os filtros exigem cuidado especial: **editar uma seleção** não deve ser confundido visualmente com **aplicá-la aos resultados**. Menus de Salvos nas variações compacta e completa devem possuir fechamento consistente.
+Esses valores devem ser extraídos dos padrões recorrentes do desktop, sem transformar medidas excepcionais em regras globais.
 
-O uso de fundo desfocado, sombra ou escurecimento deve ser padronizado, evitando camadas redundantes de sobreposição.
+## 7. Elevação e efeitos
 
-## 10. Acessibilidade e responsividade
+O Figma possui o estilo de efeito **`Elevation/Modal`**, utilizado como referência de elevação para janelas e sobreposições.
 
-### 10.1. Acessibilidade
+Suas propriedades são:
 
-- Assegurar leitura e contraste adequados nas combinações de cores realmente utilizadas.
-- Fornecer rótulos para campos, botões, ícones acionáveis e controles de filtro.
-- Manter foco visível e ordem coerente de navegação por teclado.
-- Garantir que seleção, sucesso, erro e indisponibilidade não dependam exclusivamente de cor.
-- Relacionar mensagens de erro aos respectivos campos e informar o resultado das ações.
-- Utilizar títulos, botões, links e campos com semântica apropriada durante a implementação.
-- Considerar ampliação de texto e interação por toque sem perda de conteúdo essencial.
+| Propriedade | Valor |
+| --- | --- |
+| Tipo | Drop shadow |
+| Deslocamento horizontal | 0 px |
+| Deslocamento vertical | 18 px |
+| Desfoque | 48 px |
+| Expansão | 0 px |
+| Cor aproximada | `rgba(10, 20, 41, 0.22)` |
 
-A verificação de conformidade e os critérios mensuráveis de contraste, foco e áreas de toque devem ser formalizados no plano de QA.
+O efeito deve reforçar a separação entre a sobreposição e o conteúdo de fundo, sem prejudicar a leitura.
 
-### 10.2. Responsividade
+Quando houver escurecimento ou desfoque da página, esses recursos devem ser combinados com moderação e utilizados de maneira consistente.
 
-As telas principais foram desenhadas para uma largura de referência de **1536 px**, mas esse valor **não define o comportamento em tablets ou celulares**. O layout deve ser adaptado sem perder navegação, leitura, pesquisa, filtros, formulários ou ações essenciais.
+Outras sombras ou efeitos não devem ser introduzidos como padrões globais sem necessidade identificada.
 
-A documentação responsiva ainda deve especificar:
+## 8. Componentes de interface
 
-- Pontos de quebra e largura máxima das áreas de conteúdo.
-- Reorganização do cabeçalho e dos menus.
-- Quantidade de colunas ou disposição dos cartões da Biblioteca.
-- Apresentação das sobreposições e dos filtros em telas menores.
-- Dimensionamento de formulários, botões, campos e áreas de toque.
-- Comportamento de textos longos, títulos e mensagens.
+O protótipo apresenta padrões recorrentes em diferentes telas e estados. Esses padrões orientam a construção de uma biblioteca de componentes no código, mesmo quando suas representações no Figma ainda não estão formalizadas como componentes mestres.
 
-## 11. Organização e evolução do sistema
+### 8.1. Botões e links
 
-- Preservar nomes semânticos para variáveis e estilos, evitando referências específicas a uma tela ou posição.
-- Reutilizar componentes para comportamentos equivalentes e documentar suas variantes e estados.
-- Ao criar um novo padrão, registrar seu uso, propriedades, estados e restrições antes de replicá-lo em várias telas.
-- Manter coerência entre a biblioteca de design e a implementação, sem considerar os componentes como implementados apenas por estarem desenhados.
-- Registrar alterações relevantes de cor, tipografia, componentes e padrões responsivos conforme forem confirmadas.
+Os botões devem apresentar hierarquia visual compatível com a importância da ação.
 
-A biblioteca deverá evoluir com as necessidades do produto, preservando a distinção entre **recurso já identificado**, **regra de uso proposta** e **decisão pendente**.
+Padrões necessários:
 
-## 12. Pendências de definição
+- **Primário:** ação principal do contexto.
+- **Secundário:** ação complementar.
+- **Textual:** navegação ou ação de menor destaque.
+- **Com ícone:** ação identificada por símbolo, com rótulo acessível.
 
-| Tema | Definição necessária |
-|---|---|
-| **Biblioteca de variáveis** | Verificar dependências e renomear a coleção `EduMaterial — Fundamentos` para a identidade definitiva EduComp. |
-| **Aplicação das cores** | Conferir pares de contraste, superfícies escuras e estados sem token definido. |
-| **Tipografia** | Registrar métricas dos oito estilos e conferir seu uso nas telas. |
-| **Espaçamento e geometria** | Validar escala, grade, margens, dimensões, bordas e raios. |
-| **Efeitos** | Conferir valores e usos do estilo `Elevation/Modal`. |
-| **Componentes** | Auditar instâncias, propriedades e variantes; transformar padrões recorrentes em componentes reutilizáveis. |
-| **Filtros e sobreposições** | Definir fechamento, Aplicar, Limpar, foco e comportamento em telas menores. |
-| **Feedback** | Definir mensagens, tokens de sucesso, aviso, foco e desabilitado. |
-| **Responsividade** | Especificar layouts para outras larguras de tela. |
-| **Acessibilidade** | Estabelecer critérios verificáveis e procedimento de avaliação. |
+Estados a prever: padrão, hover, foco, pressionado, desabilitado e carregamento, conforme a função.
 
-## 13. Documentos relacionados
+Textos de botões devem indicar a ação realizada, como **Buscar**, **Salvar alterações**, **Enviar para revisão** ou **Acessar material**.
 
-- [`arquitetura-da-informacao.md`](arquitetura-da-informacao.md) — organização de áreas e conteúdos.
-- [`objetivos-de-ux.md`](objetivos-de-ux.md) — resultados de experiência pretendidos.
-- [`user-flow.md`](user-flow.md) — jornadas e interações.
-- [`../product/escopo-mvp.md`](../product/escopo-mvp.md) — delimitação da primeira versão.
-- [`../product/requisitos.md`](../product/requisitos.md) — requisitos e regras de negócio.
-- [`../product/especificacao-busca-filtros.md`](../product/especificacao-busca-filtros.md) — pesquisa e filtros.
-- [`../product/especificacao-metadados.md`](../product/especificacao-metadados.md) — dados e classificações dos materiais.
+### 8.2. Campos e formulários
 
-Este documento registra os fundamentos visuais existentes e as diretrizes necessárias à padronização da interface. A conferência final das propriedades, das interações e dos comportamentos responsivos precederá a implementação correspondente.
+Campos de texto, senha, pesquisa, seleção e entrada de arquivos devem compartilhar padrões de rótulo, preenchimento, borda, foco e validação.
+
+Os estados necessários incluem:
+
+- Padrão.
+- Foco.
+- Preenchido.
+- Inválido.
+- Desabilitado, quando aplicável.
+
+Mensagens de erro devem aparecer próximas ao campo correspondente e explicar o que precisa ser corrigido.
+
+Os formulários de autenticação, envio de materiais, contato e perfil devem utilizar os mesmos princípios, ainda que apresentem composições diferentes.
+
+### 8.3. Cartão de material
+
+O cartão reúne as informações necessárias para reconhecer um recurso antes de acessar seus detalhes.
+
+Sua composição deve considerar:
+
+- Identificação visual ou miniatura.
+- Tipo de material.
+- Título.
+- Descrição resumida.
+- Informações pedagógicas, como etapa ou ano escolar.
+- Ação para acessar os detalhes.
+- Ação de salvar, quando disponível no contexto.
+
+O conteúdo é variável e não deve ser incorporado permanentemente ao componente.
+
+Cartões utilizados na Biblioteca e em Salvos devem compartilhar uma estrutura visual coerente, incluindo tratamento de textos longos e ausência de imagens.
+
+### 8.4. Pesquisa e filtros
+
+A pesquisa e os filtros são elementos centrais da Biblioteca.
+
+As categorias previstas são:
+
+| Filtro | Opções |
+| --- | --- |
+| **Tipo de material** | Plano de aula, Slides, Material de apoio, Atividade, Sequência didática |
+| **Etapa de ensino** | Educação Infantil, Ensino Fundamental — Anos iniciais, Ensino Fundamental — Anos finais, Ensino Médio |
+| **Eixo da Computação** | Pensamento Computacional, Mundo Digital, Cultura Digital |
+
+Os controles devem distinguir seleção, aplicação e limpeza dos filtros.
+
+As opções em edição não devem ser confundidas com os filtros efetivamente aplicados aos resultados.
+
+Os detalhes de combinação dos filtros e pesquisa são definidos na [especificação de busca e filtros](../product/especificacao-busca-filtros.md).
+
+### 8.5. Menus e navegação
+
+Menus de navegação, perfil e ações contextuais devem manter consistência visual e comportamental.
+
+Devem apresentar:
+
+- Indicação da opção ativa, quando aplicável.
+- Estados de foco e hover.
+- Abertura e fechamento previsíveis.
+- Rótulos claros para cada ação.
+- Posicionamento que não oculte conteúdo essencial.
+
+A navegação principal deve apresentar uma estrutura reconhecível entre as páginas internas.
+
+### 8.6. Modais e sobreposições
+
+Modais e painéis de sobreposição são utilizados em situações como recuperação de senha, confirmação de envio, filtros, compartilhamento e ações de perfil.
+
+Devem preservar:
+
+- Identificação clara do conteúdo.
+- Ação de fechamento.
+- Hierarquia entre ações principais e secundárias.
+- Separação visual em relação à página de origem.
+- Controle adequado do foco durante a interação.
+- Retorno ao contexto anterior após o fechamento.
+
+O tamanho e a composição devem variar conforme o conteúdo, preservando um padrão visual comum.
+
+### 8.7. Favoritos
+
+O controle de favoritos deve comunicar claramente os estados **salvo** e **não salvo**.
+
+Sua representação precisa permanecer consistente nos cartões, nos detalhes e na página de materiais salvos.
+
+Quando houver atualização em andamento ou falha, o estado da interface deve refletir a operação sem apresentar uma confirmação antecipada.
+
+### 8.8. Upload de arquivos
+
+A interface de upload deve diferenciar:
+
+- Área disponível para seleção.
+- Arquivo selecionado.
+- Validação de formato ou tamanho.
+- Envio em andamento.
+- Envio concluído.
+- Falha de envio.
+
+O formulário deve preservar as informações já preenchidas sempre que possível.
+
+As restrições de formato e tamanho devem seguir a especificação funcional aprovada, ainda que o protótipo apresente valores ilustrativos.
+
+### 8.9. Mensagens e estados vazios
+
+Mensagens de feedback devem informar o resultado de ações sem interromper desnecessariamente a navegação.
+
+Os estados vazios precisam ser específicos para cada contexto.
+
+Uma coleção sem favoritos, uma pesquisa sem resultados e uma falha de carregamento representam situações diferentes e não devem compartilhar mensagens genéricas.
+
+## 9. Estados de interação
+
+Os componentes devem contemplar os estados pertinentes à sua função.
+
+| Estado | Comportamento esperado |
+| --- | --- |
+| Padrão | Apresentação habitual do componente |
+| Hover | Resposta visual à aproximação do ponteiro |
+| Foco | Indicação perceptível para navegação por teclado |
+| Pressionado | Retorno visual à ativação |
+| Selecionado | Indicação clara da opção escolhida |
+| Desabilitado | Comunicação de indisponibilidade |
+| Carregamento | Indicação de operação em andamento |
+| Sucesso | Confirmação de ação concluída |
+| Erro | Explicação da falha e orientação de recuperação |
+| Vazio | Informação contextual sobre a ausência de conteúdo |
+
+Estados de sucesso e erro devem ser expressos por texto e outros indicadores além da cor.
+
+O protótipo desktop contém exemplos desses comportamentos em autenticação, biblioteca, envio, perfil, comunidade e notificações.
+
+A implementação deve reutilizar os padrões de feedback, evitando criar soluções independentes para cada tela.
+
+## 10. Iconografia e imagens
+
+Os ícones devem apresentar consistência de proporção, espessura de traço e alinhamento.
+
+Quando representarem ações, precisam possuir identificação acessível. Ícones exclusivamente decorativos não devem introduzir informações redundantes para tecnologias assistivas.
+
+As imagens de materiais devem respeitar o espaço previsto nos cartões, sem distorcer ou comprometer a leitura dos demais elementos.
+
+Avatares devem possuir tratamento consistente para fotos disponíveis e situações sem imagem cadastrada.
+
+Os ativos aprovados no Figma devem orientar as escolhas de implementação. A biblioteca técnica de ícones e o tratamento definitivo das imagens serão estabelecidos durante a preparação do front-end.
+
+## 11. Acessibilidade
+
+A acessibilidade faz parte da construção dos componentes e não deve ser tratada apenas como uma verificação visual ao final.
+
+Diretrizes:
+
+- Manter contraste adequado entre textos, controles e superfícies.
+- Utilizar rótulos associados aos respectivos campos.
+- Preservar foco visível e navegação por teclado.
+- Utilizar elementos semânticos apropriados para títulos, botões, links e formulários.
+- Não comunicar estados exclusivamente por cor.
+- Associar erros aos campos correspondentes.
+- Garantir que menus e modais possam ser utilizados sem mouse.
+- Evitar perda de conteúdo com ampliação de texto.
+- Fornecer alternativas textuais para imagens informativas.
+
+A verificação deve ocorrer no navegador, considerando as interações reais e os critérios de acessibilidade estabelecidos para o projeto.
+
+## 12. Responsividade
+
+O desenvolvimento começa pelo desktop, tomando como referência os frames de 1536 px.
+
+Essa prioridade não elimina a necessidade de uma interface adaptável. As páginas desktop devem se ajustar a janelas menores, preservando os elementos essenciais e evitando rolagem horizontal desnecessária.
+
+As referências mobile e tablet serão utilizadas na etapa de adaptação responsiva da aplicação.
+
+Os pontos de quebra, a reorganização dos menus, a quantidade de colunas dos cartões e o comportamento das sobreposições deverão ser definidos a partir da implementação e das referências do Figma.
+
+A versão funcional completa deverá atender aos critérios responsivos estabelecidos no escopo do MVP.
+
+## 13. Organização para desenvolvimento
+
+O Design System deve orientar a criação de componentes reutilizáveis, evitando a duplicação de estruturas e estilos.
+
+Na implementação, recomenda-se separar:
+
+1. **Fundamentos:** cores, tipografia, espaçamento, bordas e efeitos.
+2. **Componentes básicos:** botões, campos, seletores, ícones e indicadores.
+3. **Componentes compostos:** cartões, filtros, menus, modais e formulários.
+4. **Estruturas compartilhadas:** cabeçalhos, navegação, áreas de conteúdo e rodapés.
+5. **Estados e feedback:** carregamento, erro, sucesso, vazio e indisponibilidade.
+
+A organização definitiva deve acompanhar a arquitetura e as tecnologias escolhidas para o projeto.
+
+Os nomes utilizados no código podem seguir convenções próprias, desde que preservem a correspondência com as funções e os fundamentos definidos no design.
+
+## 14. Pontos a consolidar na implementação
+
+Os fundamentos principais de identidade visual já estão definidos. Permanecem os seguintes trabalhos de consolidação:
+
+| Área | Trabalho necessário |
+| --- | --- |
+| Cores complementares | Definir estados de sucesso, aviso, foco e indisponibilidade, com verificação de contraste |
+| Espaçamentos | Consolidar escala, dimensões e raios a partir dos padrões recorrentes |
+| Componentes | Implementar estrutura reutilizável e documentar propriedades e variantes |
+| Iconografia | Definir conjunto técnico e padrões de tamanho e alinhamento |
+| Formulários | Padronizar validação, mensagens e estados de carregamento |
+| Sobreposições | Conferir foco, fechamento, dimensões e comportamento de interação |
+| Responsividade | Estabelecer breakpoints e adaptação de layout |
+| Acessibilidade | Executar verificações com teclado, ampliação de texto e ferramentas de avaliação |
+
+Esses trabalhos fazem parte da evolução natural do Design System durante o desenvolvimento. Não impedem a implementação inicial dos fundamentos visuais e dos componentes que já possuem referência definida.
+
+## 15. Documentos relacionados
+
+- [Arquitetura da informação](arquitetura-da-informacao.md)
+- [Objetivos de UX](objetivos-de-ux.md)
+- [User Flow](user-flow.md)
+- [Handoff de UI/UX](handoff.md)
+- [Escopo do MVP](../product/escopo-mvp.md)
+- [Requisitos](../product/requisitos.md)
+- [Especificação de busca e filtros](../product/especificacao-busca-filtros.md)
+- [Especificação de metadados](../product/especificacao-metadados.md)
+
+---
+
+O Design System deve evoluir junto à implementação, mantendo a identidade visual do EduComp e a consistência entre os componentes.
+
+Novos padrões devem ser incorporados quando houver necessidade real de reutilização, preservando as referências do Figma e registrando decisões que afetem a interface.
