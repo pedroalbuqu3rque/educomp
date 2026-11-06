@@ -2,10 +2,10 @@
 
 **Referência para implementação da interface desktop**
 
-> **Protótipo:** [EduComp — Protótipo · Desktop](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32520)  
-> **Identidade visual:** [EduComp — ID Visual](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4418-15618)  
-> **Base da revisão:** 5 de novembro de 2026  
-> **Status:** especificação de interface a implementar.
+**Protótipo:** [EduComp — Protótipo · Desktop](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32520)  
+**Identidade visual:** [EduComp — ID Visual](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4418-15618)  
+**Base da revisão:** 5 de novembro de 2026  
+**Status:** especificação de interface a implementar.
 
 ## 1. Objetivo e escopo
 
