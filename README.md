@@ -1,92 +1,57 @@
 # EduComp
 
-O **EduComp** é uma proposta de plataforma digital voltada a professores da Educação Básica, com foco na descoberta, organização e acesso a materiais pedagógicos de Computação.
+O **EduComp** é um projeto de plataforma digital para professores da Educação Básica encontrarem, consultarem e compartilharem materiais pedagógicos voltados ao ensino de Computação.
 
-A plataforma foi concebida para reunir recursos educacionais em uma biblioteca organizada, permitindo explorar os materiais disponíveis. A experiência também contempla recursos de apoio ao professor, como uma área para salvar materiais para acessar posteriormente. O professor pode também realizar o envio de materiais próprios para a plataforma.
+A proposta reúne esses recursos em uma biblioteca organizada por informações pedagógicas, com pesquisa, filtros e uma área pessoal de materiais salvos. Professores também poderão enviar seus próprios materiais, sujeitos à revisão antes de serem publicados no acervo.
 
-Este repositório reúne a documentação de produto e UX/UI do EduComp. O projeto possui um protótipo desenvolvido no Figma e documentação de handoff para orientar uma futura implementação.
+O projeto está na transição entre **design e desenvolvimento**. Este repositório contém, até o momento, a documentação de produto e UX/UI e as referências de prototipação. **A aplicação ainda não foi implementada.**
 
-## Sobre o projeto
+## Contexto e objetivo
 
-O EduComp é um projeto de produto digital que reúne atividades de Product Discovery, Product Ownership e UX/UI Design, com preparação para as etapas futuras de desenvolvimento e Quality Assurance (QA).
+O EduComp parte da hipótese de que encontrar materiais adequados ao ensino de Computação pode exigir a consulta a diferentes fontes e a análise individual de muitos recursos.
 
-A proposta parte da hipótese de que localizar materiais pedagógicos de Computação adequados pode exigir que professores consultem diferentes fontes e avaliem diversos recursos antes de escolher aqueles que pretendem utilizar em suas aulas. Um catálogo organizado, recursos de pesquisa, filtros e informações descritivas são propostos como formas de facilitar esse processo.
+A plataforma pretende facilitar essa busca, oferecendo informações claras sobre cada material e mecanismos para localizar conteúdos por tema, tipo, etapa de ensino e eixo da Computação.
 
-Essa hipótese ainda não foi validada por pesquisa com usuários reais. A documentação registra decisões de projeto, hipóteses, requisitos e pendências sem apresentar suposições ou exemplos simulados como evidências empíricas.
+O público prioritário são **professores da Educação Básica**. A hipótese que orienta o produto ainda não foi validada em pesquisa com usuários reais; as decisões atuais estão registradas na documentação e poderão ser revistas ao longo do desenvolvimento.
 
-## Objetivo
+## Escopo do MVP
 
-Projetar uma plataforma que facilite a descoberta, a avaliação inicial e o acesso a materiais pedagógicos de Computação para a Educação Básica, oferecendo uma experiência organizada e adequada à rotina de professores.
+A primeira versão funcional está planejada em torno dos seguintes fluxos:
 
-## Público-alvo
+- **Acesso e conta:** cadastro, login, recuperação de senha e gerenciamento de sessão.
+- **Biblioteca:** listagem de materiais, pesquisa textual, filtros combinados e navegação pelos resultados.
+- **Detalhes do material:** informações pedagógicas, identificação de autoria e acesso ao recurso disponível.
+- **Materiais salvos:** inclusão e remoção de favoritos, com persistência na conta do professor.
+- **Envio e revisão:** submissão de materiais, acompanhamento da situação e publicação somente após aprovação por responsável autorizado.
+- **Perfil:** consulta e atualização dos dados pessoais e de acesso.
+- **Compartilhamento básico:** cópia de link com confirmação da ação.
 
-O público prioritário são professores da Educação Básica que procuram materiais pedagógicos para ensinar Computação.
+O MVP deve funcionar com dados persistentes e serviços reais, não apenas reproduzir as telas do protótipo. As regras, permissões, critérios de aceite e decisões pendentes estão detalhados no [Escopo do MVP](docs/product/escopo-mvp.md) e nos [Requisitos](docs/product/requisitos.md).
 
-A experiência proposta busca apoiar esse público em atividades como:
+O Figma também apresenta experiências exploratórias, como login com Google, notificações e interações da comunidade. **A presença dessas telas não significa que todas integram o MVP.** Sua implementação dependerá do escopo aprovado e da evolução do produto.
 
-- Explorar uma biblioteca de materiais pedagógicos;
-- Pesquisar recursos por palavras-chave;
-- Refinar resultados por tipo de material, etapa de ensino e eixo da Computação;
-- Consultar detalhes e informações dos materiais;
-- Salvar materiais para consulta posterior;
-- Enviar materiais para avaliação e possível inclusão na biblioteca;
-- Gerenciar informações básicas de perfil;
-- Compartilhar materiais e acessar notificações.
+## Design e desenvolvimento
 
-## Escopo funcional projetado
+As interfaces foram organizadas no Figma em identidade visual, protótipo desktop, protótipo mobile e referências para tablet.
 
-O protótipo representa as seguintes áreas e funcionalidades:
+- [Identidade visual](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4418-15618)
+- [Protótipo desktop](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32520)
+- [Protótipo mobile e referências para tablet](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-26978)
 
-- **Início e acesso:** apresentação institucional, entrada, criação de conta e recuperação de senha;
-- **Biblioteca:** exploração dos materiais, pesquisa e filtros;
-- **Detalhes do material:** consulta às informações do recurso e acesso ao material;
-- **Materiais salvos:** visualização dos materiais marcados como favoritos;
-- **Envio de material:** fluxo de submissão de recursos para avaliação;
-- **Perfil do professor:** visualização e edição de informações básicas;
-- **Notificações:** área de consulta de avisos;
-- **Compartilhamento:** opções para compartilhar a plataforma;
-- **Navegação e sobreposições:** menus, filtros e janelas auxiliares.
+O **desktop será a primeira frente de implementação**, utilizando os frames de 1536 px como referência visual. O handoff descreve os componentes, fluxos e estados dessas telas. Mobile e tablet permanecem como referências para o trabalho responsivo posterior.
 
-A presença dessas áreas no protótipo representa o escopo visual e funcional projetado. Parte das interações é demonstrativa e ainda requer definição técnica.
+Essa ordem de desenvolvimento **não altera o escopo do MVP**: a experiência responsiva e a acessibilidade continuam fazendo parte dos critérios de conclusão da primeira versão funcional.
 
-### Regras e pontos que exigem implementação
-
-- A pesquisa e os filtros deverão operar sobre os dados cadastrados e permitir o refinamento dos resultados;
-- Os materiais salvos deverão ser associados ao usuário e persistir entre sessões;
-- O envio de materiais deverá incluir validação, upload e acompanhamento de status. O envio não deverá publicar automaticamente um material: ele deverá passar por um processo de revisão;
-- O perfil deverá permitir atualização dos dados previstos, com persistência;
-- As notificações deverão possuir estados de leitura e histórico, conforme os requisitos;
-- Os mecanismos de autenticação, recuperação de senha e compartilhamento deverão ser integrados a serviços reais.
-
-As regras detalhadas, permissões, estados e critérios de aceite estão descritos nos documentos de produto e no handoff.
-
-## Status do projeto
-
-**Fase atual:** design e prototipação concluídos; atualização documental e preparação para desenvolvimento.
+## Situação do projeto
 
 | Frente | Situação |
-|---|---|
-| Visão e planejamento do produto | Documentados; sujeitos a revisões conforme decisões futuras |
-| Escopo e requisitos | Documentados; em processo de alinhamento com o protótipo |
-| UX/UI e protótipo no Figma | Protótipo elaborado |
-| Desenvolvimento da aplicação | Ainda não iniciado |
-| Testes de software (QA) | Ainda não iniciados |
-| Validação com professores | Ainda não realizada |
-
-## Design e protótipo
-
-O Figma é utilizado para estruturar a interface, os componentes, os padrões visuais e os fluxos de navegação do EduComp. A documentação de UX/UI neste repositório deve permanecer alinhada à versão vigente do protótipo.
-
-O documento [handoff.md](docs/ux-ui/handoff.md) reúne a estrutura das telas, as interações observadas, os requisitos de implementação e as pendências identificadas durante a auditoria do protótipo.
-
-## Tecnologias e ferramentas
-
-As tecnologias para implementação ainda não foram definidas. Essa decisão deverá ocorrer durante a preparação técnica, considerando os requisitos do produto, a arquitetura e as necessidades de manutenção.
-
-Ferramentas utilizadas nesta fase:
-
-- **GitHub:** versionamento e organização da documentação do projeto;
-- **Figma:** design de interface, componentes e prototipação.
+| --- | --- |
+| Visão, escopo e requisitos | Documentados, com decisões pontuais ainda em aberto |
+| UX/UI | Protótipos e identidade visual elaborados; documentação em alinhamento final |
+| Handoff desktop | Documentado para orientar a implementação |
+| Arquitetura e tecnologias | A definir na preparação técnica |
+| Desenvolvimento | Não iniciado |
+| QA e validação com professores | Não realizados |
 
 ## Organização do repositório
 
@@ -96,13 +61,12 @@ EduComp/
 └── docs/
     ├── product/
     │   ├── product-brief.md
+    │   ├── escopo-mvp.md
     │   ├── requisitos.md
     │   ├── historias-de-usuario.md
     │   ├── backlog.md
-    │   ├── especificacao-funcional-bk-004-bk-005.md
-    │   ├── especificacao-funcional-bk-006-metadados.md
-    │   ├── alinhamento-documental-escopo-mvp.md
-    │   └── auditoria-documental-2026-10-28.md
+    │   ├── especificacao-busca-filtros.md
+    │   └── especificacao-metadados.md
     └── ux-ui/
         ├── arquitetura-da-informacao.md
         ├── objetivos-de-ux.md
@@ -111,23 +75,18 @@ EduComp/
         └── handoff.md
 ```
 
-### Documentação de produto — `docs/product/`
+A pasta [`docs/product`](docs/product/) reúne as definições do produto, requisitos, histórias, backlog e especificações funcionais. A pasta [`docs/ux-ui`](docs/ux-ui/) registra a estrutura de navegação, os objetivos de experiência, os fluxos, os padrões visuais e as orientações de interface.
 
-Reúne a visão do produto, o escopo, os requisitos, as histórias de usuário, o backlog, as especificações funcionais e os registros de decisões e auditorias documentais.
+## Próximas etapas
 
-### Documentação de UX/UI — `docs/ux-ui/`
+1. Concluir o alinhamento entre documentação funcional e Design System.
+2. Definir a arquitetura técnica, as tecnologias e as decisões necessárias para os primeiros fluxos.
+3. Preparar a estrutura da aplicação e implementar os componentes compartilhados.
+4. Desenvolver os fluxos desktop previstos no MVP e integrá-los aos dados e serviços.
+5. Completar a adaptação responsiva, executar testes e verificar os critérios de aceite.
 
-Reúne a arquitetura da informação, os objetivos de experiência, os fluxos de navegação, o Design System e o documento de handoff para desenvolvimento.
+As decisões serão registradas conforme o trabalho avançar, distinguindo **o que foi planejado, prototipado, implementado e validado**.
 
-## Integridade das informações e evolução do projeto
+## Sobre o portfólio
 
-Para manter a documentação confiável, o projeto diferencia:
-
-- **Decisões confirmadas:** definições adotadas para orientar o estado atual do produto;
-- **Hipóteses:** suposições sobre o problema, as necessidades do público e os benefícios esperados;
-- **Pendências:** questões que ainda precisam de definição;
-- **Etapas futuras:** atividades planejadas que ainda não foram executadas.
-
-## Portfólio
-
-O EduComp é um projeto de portfólio que demonstra atividades de concepção de produto, definição de escopo, documentação de requisitos, UX/UI Design, prototipação e preparação para desenvolvimento. À medida que novas etapas forem realizadas, seus resultados serão registrados de acordo com o trabalho efetivamente executado.
+O EduComp é um projeto de portfólio que reúne práticas de definição de produto, planejamento de escopo, documentação de requisitos, UX/UI Design e preparação para engenharia de software. As etapas de desenvolvimento e qualidade serão documentadas quando efetivamente realizadas.
