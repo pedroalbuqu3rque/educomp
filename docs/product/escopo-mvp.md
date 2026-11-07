@@ -1,135 +1,122 @@
+
 # EduComp — Escopo do MVP
 
-**Versão:** 1.5  
-**Data:** 07/11/2026  
-**Situação:** escopo definido para desenvolvimento; implementação não iniciada.
+**Versão:** 2.0 · **Data:** 07/11/2026 · **Situação:** escopo definido para implementação; desenvolvimento não iniciado.
 
-## 1. Proposta
+## 1. Objetivo
 
-O EduComp é uma plataforma para professores da Educação Básica encontrarem, consultarem, salvarem e compartilharem materiais pedagógicos relacionados à Computação.
+A primeira versão do EduComp reunirá **descoberta de materiais, participação docente e contribuição responsável ao acervo**. O professor poderá encontrar recursos, consultar informações pedagógicas, salvar materiais, trocar experiências e enviar novas contribuições. Revisores autorizados avaliarão tanto os materiais quanto as denúncias da comunidade.
 
-O MVP será uma biblioteca funcional, com pesquisa, filtros, informações dos materiais e acesso aos arquivos. Professores cadastrados também poderão manter favoritos e enviar contribuições para o acervo. Os envios passarão por revisão antes da publicação.
+A interface desktop está definida. O produto ainda precisa ser construído com autenticação, dados persistentes, armazenamento, serviços e testes. A existência de um estado no protótipo não significa que sua integração já esteja pronta.
 
-A proposta parte da hipótese de que reunir esses recursos em um só lugar facilita sua descoberta e avaliação. Essa hipótese ainda precisa ser investigada com professores reais.
-
-## 2. O que entra no MVP
+## 2. Funcionalidades incluídas
 
 ### 2.1. Acesso e conta
 
-- **Consulta pública:** visitantes poderão acessar Início, Biblioteca e detalhes dos materiais sem criar conta.
-- **Conta:** cadastro com nome, e-mail e senha, aceitando endereços pessoais ou institucionais; login, recuperação de senha e saída segura.
-- **Ações autenticadas:** acessar arquivos, salvar favoritos, enviar materiais e gerenciar o perfil exigirá login. Após entrar, o usuário poderá retomar a ação que iniciou o acesso.
-- **Perfil:** consulta dos dados e alteração de nome, foto e senha. O e-mail não poderá ser alterado nesta versão.
-
-A autenticação utilizará uma solução consolidada. A verificação de e-mail e as regras de sessão seguirão a configuração do serviço escolhido.
+- Início público, com caminhos para Biblioteca, cadastro e login.
+- Cadastro com nome, e-mail e senha; login, saída e recuperação de senha por e-mail, incluindo link inválido ou expirado.
+- Sessões e permissões verificadas também no servidor.
+- Perfil pessoal com nome, foto, cargo/função, apresentação *Sobre mim* e configuração de senha. O e-mail integra os dados da conta; sua eventual alteração depende das regras do serviço de autenticação escolhido.
+- Ações protegidas devem orientar o login e, quando possível, retomar a tarefa iniciada.
+- A logo do cabeçalho conduz à página inicial.
 
 ### 2.2. Biblioteca e descoberta
 
-- Listagem pública apenas de materiais aprovados e publicados.
-- Pesquisa por **título e palavras-chave**, executada pelo botão Buscar ou pela tecla Enter.
-- Filtros combináveis por **tipo de material**, **etapa de ensino** e **eixo da Computação**, com seleção múltipla.
-- Ordenação por **mais recentes** (padrão) ou **título em ordem alfabética**.
-- Paginação de **12 materiais por página**, com indicação do total de resultados.
-- Preservação da pesquisa, dos filtros, da ordenação e da página atual na URL.
-- Estados de carregamento, ausência de resultados e falha de consulta.
+- Consulta pública de materiais **aprovados e publicados**.
+- Pesquisa por título ou tema/palavras-chave, executada por **Buscar** ou Enter.
+- Quatro filtros independentes: **Tipo**, **Etapa**, **Eixo** e **Abordagem** (Plugada, Desplugada ou ambas).
+- Seis tipos: Plano de aula, Slides, Material de apoio, Atividade, Sequência didática e **Jogo**.
+- Etapas: Educação Infantil, Ensino Fundamental — Anos iniciais e finais, Ensino Médio; eixos: Pensamento Computacional, Mundo Digital e Cultura Digital.
+- Múltiplas seleções de filtro e estado sem resultados, com possibilidade de revisar os critérios.
+- Paginação de **12 materiais por página**, com total encontrado. A tela desktop apresenta a navegação entre páginas; não há seletor de ordenação no fluxo atual.
+- Cartões com título, resumo, tipo, etapa/ano ou série, controle de favorito e ícones de abordagem plugada/desplugada, sem etiquetas textuais redundantes para essa informação.
 
-As opções de classificação e o funcionamento dos filtros estão na [Especificação de busca e filtros](especificacao-busca-filtros.md).
+### 2.3. Detalhes, arquivos e autoria
 
-### 2.3. Detalhes e arquivos
+- Página pública do material com informações pedagógicas, objetivos de aprendizagem quando disponíveis, descrição, abordagem e identificação de autoria.
+- Materiais com um ou mais arquivos PDF, DOCX, PPTX, PNG ou JPG, até **20 MB por arquivo**.
+- Acesso aos arquivos mediante autenticação e autorização; mensagens de indisponibilidade ou falha quando necessário.
+- Link para **perfil público do autor**, com nome, foto ou avatar, apresentação autorizada e materiais publicados. E-mail e dados privados não são exibidos.
 
-- Página pública com título, descrição, palavras-chave, classificações, autoria ou fonte e demais informações cadastradas.
-- Um material poderá conter **vários arquivos**, nos formatos PDF, DOCX, PPTX, PNG ou JPG, com limite de **20 MB por arquivo**.
-- Os arquivos ficarão hospedados na plataforma e só poderão ser acessados por usuários autenticados.
-- A interface deverá informar quando um arquivo estiver indisponível ou não puder ser acessado.
+### 2.4. Salvos
 
-O acesso por links externos não fará parte da primeira versão.
+- Adicionar e remover favoritos associados à conta, sem duplicação e com persistência.
+- Consultar uma coleção pessoal, pesquisar por título ou tema e abrir os detalhes dos materiais.
+- Exibir o estado de coleção vazia com orientação para explorar a Biblioteca.
 
-### 2.4. Materiais salvos
+A página atual de Salvos mostra a busca textual. Existem variações de filtros de Salvos no arquivo de design, mas não estão integradas ao percurso visível da página; portanto, a ativação desses filtros não é exigência desta entrega.
 
-O professor autenticado poderá salvar e remover favoritos, consultar a lista pessoal em **Salvos** e abrir os detalhes dos materiais guardados. Os favoritos serão persistidos entre sessões, sem duplicar um mesmo material na coleção.
+### 2.5. Comunidade e perfis públicos
 
-A área Salvos não terá pesquisa nem filtros próprios no MVP.
+- Ler discussões vinculadas a cada material e alternar, **na própria página**, entre Todos, Relatos de aplicação e Discussões.
+- Professor autenticado pode publicar comentário, responder uma vez em nível de encadeamento, editar ou excluir sua própria contribuição, além de relatar a aplicação de uma atividade.
+- Comentários e respostas com até **1.000 caracteres**, apenas texto. Relatos informam ano/série da turma, descrição e adaptações opcionais.
+- Denúncia autenticada, com motivo, enviada à moderação; o envio da denúncia **não oculta** o conteúdo automaticamente.
+- Perfis públicos apresentam os materiais publicados do autor, sem divulgar dados privados da conta.
 
-### 2.5. Envio e acompanhamento
+### 2.6. Envio e acompanhamento de materiais
 
-O professor autenticado poderá enviar materiais para possível inclusão no acervo. O formulário terá:
+- Formulário com título, descrição, tema/palavras-chave, tipos, etapas, anos/séries, eixos, **abordagem da atividade**, autoria/fonte, objetivos opcionais, arquivos e declaração de direitos.
+- Possibilidade de selecionar múltiplos tipos, etapas, anos/séries compatíveis, eixos, abordagens e arquivos.
+- Validação de campos e arquivos antes da conclusão; estados de envio, falha, formato não aceito e arquivo acima do limite.
+- Confirmação de submissão e acompanhamento em **Meus envios**. O envio inicia como **Pendente**, sem publicação automática.
+- Situações de revisão e publicação apresentadas ao autor, incluindo recusa justificada e orientação de ajustes/reenvio quando aplicável.
 
-- Título, descrição, uma ou mais palavras-chave e identificação da autoria ou fonte.
-- Seleção de **um ou mais tipos, etapas de ensino e eixos da Computação**.
-- Ano/série obrigatório quando houver seleção de Ensino Fundamental ou Ensino Médio.
-- Objetivos de aprendizagem opcionais.
-- Upload de um ou mais arquivos nos formatos e limites definidos para o MVP.
-- Declaração de que possui direito de compartilhar o conteúdo.
+### 2.7. Revisão editorial e moderação
 
-O envio concluído será registrado como **Pendente** e não publicará o material automaticamente. Em **Meus envios**, o professor poderá consultar a situação atual e, em caso de recusa, a justificativa apresentada pelo revisor.
+- Área restrita para revisores autorizados, com fila de submissões, detalhes do material e ações **Iniciar análise**, **Aprovar** e **Recusar**.
+- Transição explícita de Pendente para Em análise. A recusa deve registrar justificativa acessível ao professor; decisões de revisão registram responsável e data.
+- Aprovação editorial separada da publicação: material aprovado somente aparece na Biblioteca quando estiver publicado; a despublicação não transforma o material em Recusado.
+- Fila de denúncias com contexto do comentário, motivo da denúncia e ações para **ocultar, restaurar ou excluir definitivamente**. Exclusão definitiva exige confirmação.
+- Registro de motivo, responsável e data das decisões de moderação.
 
-Nesta versão, uma submissão enviada não poderá ser editada pelo autor. Para tentar novamente após uma recusa, será necessário realizar outro envio.
+### 2.8. Notificações, contato e compartilhamento
 
-### 2.6. Revisão e publicação
-
-Uma área restrita permitirá ao responsável autorizado consultar submissões, iniciar a análise e registrar aprovação ou recusa. A atribuição do papel de revisor será feita manualmente.
-
-Os estados de revisão serão **Pendente**, **Em análise**, **Aprovado** e **Recusado**. O início da análise exigirá uma ação explícita. A recusa deverá conter uma justificativa visível ao autor.
-
-A revisão considerará o preenchimento dos dados, as classificações, a segurança dos arquivos, a autoria e as condições de uso. Apenas responsáveis autorizados poderão editar materiais publicados ou retirá-los da Biblioteca.
-
-**Aprovação e publicação são condições distintas:** um material aprovado poderá ser despublicado sem passar para Recusado. O MVP não exigirá histórico completo de alterações da revisão.
-
-### 2.7. Compartilhamento e páginas institucionais
-
-O compartilhamento básico permitirá **copiar o endereço da página inicial do EduComp**, com confirmação da operação. A interface deverá deixar claro que não está copiando o link de um material específico.
-
-Para a demonstração pública, estão previstas páginas de **Termos de uso** e **Política de privacidade**, além de um contato simples por e-mail, sem formulário próprio.
+- Notificações para o usuário sobre andamento de materiais, **novos materiais na Biblioteca** e **novidades da plataforma**, com indicador de não lidas, opção de marcar todas como lidas, lista completa e estado vazio.
+- Formulário **Fale conosco** com nome, e-mail, assunto e mensagem; validação, confirmação e tratamento de erro.
+- Termos de uso e Política de privacidade, com textos adequados ao serviço efetivamente oferecido antes da publicação.
+- Compartilhamento da plataforma com opções sociais previstas no protótipo e ação **Copiar link**, com confirmação. Endereços exibidos no Figma são ilustrativos até que haja domínio real.
 
 ## 3. Fora do MVP
 
-- Login com Google.
-- Acesso a materiais por links externos e visualizador de arquivos integrado.
-- Pesquisa e filtros na área Salvos; coleções personalizadas ou compartilhadas.
-- Comentários, relatos de aplicação, respostas e denúncias da comunidade.
-- Central de notificações ou avisos por e-mail sobre a revisão.
-- Compartilhamento integrado com redes sociais ou links individuais dos materiais.
-- Edição de submissões pelo autor, solicitação de ajustes e reenvio da mesma submissão.
-- Ferramentas administrativas avançadas, recomendações automáticas e criação de conteúdos pedagógicos na plataforma.
+- Login com Google ou outros provedores sociais.
+- Cadastro de recursos por URL externa, editor de materiais no navegador e visualização avançada de documentos.
+- Coleções compartilhadas, recomendações automáticas e personalização algorítmica do acervo.
+- Anexos, áudio, vídeo, curtidas, respostas em vários níveis ou mensagens privadas na comunidade.
+- Denúncias anônimas ou remoção automática de conteúdo denunciado.
+- Painel de análise avançada e histórico completo de versões de um mesmo material.
+- Controle de ordenação manual da Biblioteca, não representado no fluxo atual.
 
-As ações que pertencem a essas funcionalidades não deverão aparecer como operacionais na implementação do MVP, mesmo quando estiverem representadas no Figma.
+## 4. Ordem de implementação
 
-## 4. Ordem de desenvolvimento
+O desenvolvimento começará pela base técnica, autenticação e componentes compartilhados, seguirá pela Biblioteca e materiais e depois incorporará Salvos, perfil, envio, comunidade, revisão, notificações e recursos institucionais. A ordem detalhada e as dependências constam do [Backlog](backlog.md).
 
-A implementação começará pelo **desktop**, tomando o protótipo do Figma como referência. Essa etapa inclui os componentes, as páginas e as integrações necessárias aos fluxos previstos.
-
-Depois serão feitas as adaptações para **tablet e celular**, seguidas pela verificação dos critérios funcionais, de acessibilidade e de qualidade. A versão desktop, sozinha, não será considerada o MVP concluído.
-
-As entregas e suas dependências serão acompanhadas no [Backlog](backlog.md).
+A experiência desktop deve ser adaptada para tablet e celular. Essa adaptação, os testes de acessibilidade e a integração dos fluxos com dados reais fazem parte da conclusão do MVP.
 
 ## 5. Critérios de conclusão
 
-O MVP poderá ser considerado concluído quando for possível verificar que:
+- [ ] Cadastro, login, recuperação de senha, perfil e permissões funcionam com persistência.
+- [ ] Biblioteca e busca apresentam resultados coerentes com os quatro filtros, as classificações e a paginação.
+- [ ] Detalhes exibem dados verdadeiros, autoria e arquivos acessíveis apenas com autorização.
+- [ ] Favoritos e pesquisa em Salvos funcionam e refletem a coleção da conta.
+- [ ] Professores podem publicar, responder, editar/excluir suas contribuições e relatar aplicações conforme os limites definidos.
+- [ ] Perfis públicos preservam a privacidade; denúncias são encaminhadas à fila de moderação.
+- [ ] Submissões são validadas, persistidas e acompanhadas; aprovação não publica automaticamente sem a condição de disponibilidade pública.
+- [ ] Revisores conseguem registrar decisões editoriais e moderar denúncias, com justificativa e rastreabilidade.
+- [ ] Notificações, formulário de contato, compartilhamento e páginas institucionais funcionam nos limites definidos.
+- [ ] Erros e estados vazios foram tratados; os fluxos funcionam em desktop, tablet e celular.
+- [ ] Acessibilidade é avaliada tendo como referência a **WCAG 2.2 AA**, além dos testes funcionais, de segurança e de integração.
 
-- [ ] Visitantes consultam a Biblioteca e os detalhes; o acesso aos arquivos exige login.
-- [ ] O usuário cria uma conta, entra, recupera a senha, sai e atualiza os dados permitidos do perfil.
-- [ ] A Biblioteca pesquisa, filtra, ordena e pagina materiais publicados conforme as regras definidas.
-- [ ] Os detalhes apresentam dados reais e permitem acessar os arquivos disponíveis com a autorização necessária.
-- [ ] Favoritos podem ser adicionados, consultados e removidos, com persistência entre sessões.
-- [ ] O professor envia um material válido e acompanha a situação em Meus envios.
-- [ ] O revisor autorizado aprova, recusa com justificativa e pode retirar materiais publicados de circulação.
-- [ ] A cópia do link da página inicial funciona e informa o resultado.
-- [ ] Os fluxos tratam erros e estados vazios, funcionam em desktop, tablet e celular e são verificados quanto à acessibilidade.
-- [ ] As operações utilizam serviços e dados persistentes, com testes realizados e resultados registrados.
+O MVP só estará concluído após a implementação e a verificação desses critérios. O protótipo não substitui os testes.
 
-A acessibilidade terá como referência as **WCAG 2.2, nível AA**. A conclusão depende de implementação e testes, não apenas das telas do protótipo.
+## 6. Definições técnicas pendentes
 
-## 6. Detalhes que ainda serão fechados
-
-As decisões principais de escopo já foram tomadas. Restam definições para a implementação, como:
-
-- Quantidade máxima de arquivos por material, limite total do envio e validações de segurança.
-- Limites de campos e palavras-chave, além da relação entre anos/séries e etapas de ensino selecionadas.
-- Desempate da ordenação, detalhes da busca e formato dos parâmetros na URL.
-- Interface de moderação, regras de edição e despublicação e apresentação dos estados.
-- Framework específico baseado em React, serviço de autenticação, fornecedor de armazenamento de objetos, hospedagem gerenciada e políticas de tratamento de dados.
-
-Esses pontos serão detalhados nos documentos funcionais e técnicos correspondentes, sem ampliar o escopo automaticamente.
+- [ ] Escolher framework, serviços, autenticação, armazenamento, hospedagem e estratégia de envio de notificações.
+- [ ] Fechar limites de campos e tags, número máximo de arquivos e tratamento de upload parcial.
+- [ ] Especificar vínculo entre etapas e anos/séries, metadados das abordagens e normalização de busca.
+- [ ] Definir esquema de estados para ajustes/reenvios e regras de publicação/despublicação.
+- [ ] Detalhar proteção contra spam, retenção de denúncias e tratamento de dados pessoais.
+- [ ] Estabelecer URLs, recuperação da navegação, breakpoints e metas técnicas de qualidade.
 
 ## 7. Documentos relacionados
 
