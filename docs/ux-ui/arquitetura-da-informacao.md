@@ -1,169 +1,147 @@
+
 # EduComp — Arquitetura da Informação
 
-**Versão:** 0.8  
-**Data:** 07/11/2026  
-**Situação:** estrutura do MVP definida; interface de revisão ainda a desenhar.
+**Versão:** 1.0 · **Data:** 07/11/2026 · **Situação:** estrutura definida para o MVP; rotas técnicas a estabelecer.
 
 ## 1. Objetivo
 
-Este documento organiza as áreas e os conteúdos do EduComp, indicando como o usuário navega entre eles e quais partes exigem autenticação. Os comportamentos de cada funcionalidade estão descritos nos [Requisitos](../product/requisitos.md) e no [User Flow](user-flow.md).
+Este documento organiza os conteúdos e destinos do EduComp, seus vínculos e as áreas sujeitas a autenticação. Não determina URLs finais nem descreve cada clique: os comportamentos estão nos [Requisitos](../product/requisitos.md) e no [User Flow](user-flow.md).
 
-A Biblioteca é o principal ponto de consulta. O professor pode encontrar materiais, conhecer seus detalhes, salvar favoritos e enviar contribuições. Uma área separada permite que responsáveis autorizados revisem os materiais antes da publicação.
+A **Biblioteca** é o eixo central da experiência. Materiais têm detalhes, arquivos, autor e discussão; Salvos, envio, perfil e notificações estendem esse percurso para usuários autenticados. A revisão editorial e a moderação ficam em uma área restrita.
 
 ## 2. Mapa da plataforma
-
-O mapa representa a organização das informações, não as URLs definitivas da aplicação.
 
 ```text
 EduComp
 ├── Início
+│   ├── Apresentação da plataforma
+│   └── Atalhos para Biblioteca, Entrar e Criar conta
 ├── Biblioteca
-│   ├── Pesquisa, filtros, ordenação e paginação
-│   └── Detalhes do material
-│       ├── Informações pedagógicas e autoria
-│       └── Arquivos do material (login obrigatório)
-├── Acesso à conta
+│   ├── Buscar e filtros (Tipo, Etapa, Eixo, Abordagem)
+│   ├── Paginação e resultados
+│   └── Material
+│       ├── Informações pedagógicas e abordagem
+│       ├── Arquivos (acesso autenticado)
+│       ├── Autor → Perfil público
+│       │   └── Materiais publicados do autor
+│       └── Discussões
+│           ├── Todos / Relatos de aplicação / Discussões
+│           ├── Comentar, responder e relatar aplicação
+│           ├── Editar / excluir contribuição própria
+│           └── Denunciar conteúdo
+├── Acesso
 │   ├── Entrar
 │   ├── Criar conta
-│   └── Recuperar senha
-│       └── Redefinir senha
-├── Área do professor (login obrigatório)
-│   ├── Salvos
+│   └── Recuperar e redefinir senha
+├── Área pessoal (login)
+│   ├── Salvos (coleção, busca e estado vazio)
 │   ├── Enviar material
-│   │   ├── Formulário de envio
-│   │   └── Meus envios
-│   └── Meu perfil
-├── Revisão de materiais (acesso autorizado)
-│   ├── Lista de submissões
-│   └── Detalhes da submissão
-│       ├── Iniciar análise
-│       ├── Aprovar ou recusar
-│       └── Ações autorizadas sobre materiais publicados
-└── Informações institucionais
+│   │   ├── Formulário e arquivos
+│   │   └── Meus envios (situação e acompanhamento)
+│   ├── Meu perfil
+│   │   ├── Dados, foto, cargo e Sobre mim
+│   │   └── Segurança e senha
+│   └── Notificações
+│       ├── Recentes / marcar como lidas
+│       └── Todas as notificações
+├── Revisão (papel autorizado)
+│   ├── Envios
+│   │   ├── Lista e detalhes da submissão
+│   │   └── Iniciar análise / aprovar / recusar
+│   └── Denúncias
+│       ├── Fila e contexto do comentário
+│       └── Ocultar / restaurar / excluir
+└── Institucional
+    ├── Fale conosco (formulário)
     ├── Termos de uso
     ├── Política de privacidade
-    └── Contato por e-mail
+    └── Compartilhar plataforma
 ```
 
-**Enviar material** e **Meus envios** são duas abas da mesma área, conforme o protótipo desktop. Os detalhes de um material podem ser abertos tanto pela Biblioteca quanto por Salvos, sem precisar duplicar a página.
+Os estados de erro, sucesso, vazio, filtros abertos e confirmações são **variações de contexto**, e não páginas independentes do mapa de conteúdo.
 
-## 3. Áreas e conteúdos
+## 3. Áreas principais
 
-| Área | Conteúdo e ações principais |
+| Área | Conteúdo e ações |
 | --- | --- |
-| **Início** | Apresentação do EduComp e caminhos para Biblioteca, cadastro e login. |
-| **Biblioteca** | Pesquisa, filtros por tipo, etapa e eixo, ordenação, total de resultados e paginação. |
-| **Detalhes do material** | Descrição, palavras-chave, classificações, autoria ou fonte, informações complementares e arquivos associados. |
-| **Entrar / Criar conta / Recuperar senha** | Formulários e orientações para acesso à conta. |
-| **Salvos** | Lista pessoal de favoritos, acesso aos detalhes e remoção de materiais salvos. |
-| **Enviar material** | Cadastro de informações pedagógicas, seleção de classificações e envio de arquivos para revisão. |
-| **Meus envios** | Submissões do professor, situação atual e justificativa quando houver recusa. |
-| **Meu perfil** | Dados da conta, edição de nome, foto e senha e acesso à opção Sair. |
-| **Revisão** | Lista e detalhes dos envios, início da análise, aprovação, recusa justificada e operações autorizadas sobre materiais publicados. |
-| **Institucional** | Termos de uso, Política de privacidade e meio de contato por e-mail. |
-
-Mensagens de erro, confirmações, menus, filtros abertos e estados vazios pertencem às suas respectivas áreas. Não precisam ser tratados como páginas independentes.
+| Início | Apresentação, materiais em destaque e acesso aos percursos principais. |
+| Biblioteca | Pesquisa, filtros independentes, cartões, total e paginação. |
+| Material | Título, descrições, eixo, etapa, ano/série, abordagem, objetivos, autoria, arquivos e discussões. |
+| Perfil público | Nome, foto, apresentação autorizada e materiais publicados. |
+| Salvos | Coleção pessoal, busca textual, abertura e remoção de favoritos. |
+| Envio / Meus envios | Formulário, arquivos, validação, confirmação e acompanhamento das submissões. |
+| Meu perfil | Dados pessoais, cargo/função, Sobre mim, foto e senha. |
+| Notificações | Avisos recentes, estado de leitura e lista completa. |
+| Revisão | Lista de envios, decisões editoriais e fila de denúncias de discussões. |
+| Institucional | Termos, privacidade, contato e compartilhamento da plataforma. |
 
 ## 4. Navegação e permissões
 
-### 4.1. Visitantes
+### Visitantes
 
-Sem login, é possível acessar **Início, Biblioteca, detalhes dos materiais e páginas institucionais**, além das telas de autenticação.
+Sem conta, podem conhecer o EduComp, navegar pela Biblioteca, abrir detalhes, ler discussões públicas, visualizar perfis públicos e consultar as páginas institucionais. Para acessar arquivos, salvar favoritos, comentar, denunciar ou enviar recursos, precisam de uma sessão autenticada.
 
-A Biblioteca mostra apenas materiais aprovados e publicados. Um visitante pode consultar as informações de um material, mas precisa entrar na conta para abrir seus arquivos ou salvar um favorito.
+### Professores autenticados
 
-### 4.2. Professores autenticados
+O cabeçalho oferece **Biblioteca, Salvos, Enviar material, notificações e menu do perfil**. A logo funciona como retorno ao Início. O menu do perfil permite acessar os dados da conta e sair. A área Enviar material reúne o formulário e o acesso a **Meus envios**.
 
-A navegação principal mantém os destinos **Início, Biblioteca, Salvos, Enviar material e Meu perfil**. O menu de conta oferece acesso ao perfil e à opção **Sair**.
+As informações pessoais e notificações pertencem à própria conta. O perfil público compartilha somente dados autorizados, nunca o e-mail ou registros internos.
 
-As áreas pessoais exibem somente informações da própria conta. Em **Meu perfil**, o e-mail pode ser consultado, mas não alterado nesta versão.
+### Revisores autorizados
 
-### 4.3. Revisores
+O papel de revisor adiciona a navegação **Revisão**, com abas **Envios** e **Denúncias**. Somente esse papel pode aprovar/recusar materiais, controlar a publicação ou moderar conteúdo da comunidade. A ausência do item na navegação comum não substitui a validação de permissão no servidor.
 
-A área de revisão é acessível somente a contas que tenham recebido essa permissão. O papel será atribuído manualmente pelo responsável técnico ou administrador.
+## 5. Organização do acervo
 
-A revisão não faz parte da navegação comum de todos os professores. Seu ponto de entrada e a organização visual ainda serão definidos no Figma. Ocultar o acesso na interface não substitui as verificações de permissão no servidor.
+### Biblioteca
 
-## 5. Organização dos materiais
+Os cartões são organizados em páginas de até 12 materiais e indicam total, tipo, título, resumo, etapa/ano ou série e abordagem por ícones. A pesquisa textual utiliza título ou tema. Os filtros são **Tipo**, **Etapa**, **Eixo** e **Abordagem**. A categoria Tipo compreende seis opções, incluindo **Jogo**.
 
-### 5.1. Biblioteca
+A interface distingue resultado disponível de consulta sem correspondências, com ações de ajuste. A seleção de filtros acontece em sobreposição; confirmar a seleção na implementação deve atualizar a listagem.
 
-A Biblioteca reúne os materiais publicados em uma listagem de cartões. A pesquisa considera **título e palavras-chave**; os filtros permitem combinar tipo de material, etapa de ensino e eixo da Computação.
+### Material e discussão
 
-Os resultados podem ser ordenados por mais recentes ou por título e são apresentados em **páginas de 12 materiais**, com indicação do total encontrado.
+A página reúne informações pedagógicas, acesso aos arquivos e autor. A área de **Discussões** aparece no próprio detalhe, com três estados de filtragem — Todos, Relatos de aplicação e Discussões — sem abrir um pop-up para alterná-los.
 
-Os cartões devem refletir os dados cadastrados. Na ausência de miniatura, será usado um cartão padrão com ícone do tipo de material. Para materiais classificados em vários tipos, ainda será necessário definir qual ícone aparecerá.
+Contribuições textuais são vinculadas ao material e ao professor. O leitor pode consultar o conteúdo, mas publicação, edição, exclusão e denúncia exigem as permissões correspondentes.
 
-### 5.2. Detalhes
+### Salvos
 
-Os detalhes concentram as informações necessárias para avaliar um material antes de acessá-lo:
+A coleção pertence à conta e reaproveita os materiais da Biblioteca. A tela principal apresenta busca textual e estado vazio. O arquivo de design também reúne variações de filtros de Salvos não conectadas ao fluxo visual atual; elas não devem ser tratadas como controles já disponíveis na página.
 
-- Título, descrição e palavras-chave.
-- Tipos, etapas de ensino, anos/séries quando aplicáveis e eixos da Computação.
-- Autoria ou fonte e objetivos de aprendizagem, quando informados.
-- Lista dos arquivos associados, com indicação de disponibilidade e exigência de login.
+## 6. Envio, revisão e moderação
 
-Um material pode ter **várias classificações e vários arquivos**. Campos opcionais sem conteúdo não devem ser preenchidos artificialmente. Nesta versão, não haverá acesso por links externos.
+**Enviar material** compreende dados, múltiplas classificações, abordagem plugada/desplugada, arquivos e declaração de direitos. **Meus envios** apresenta as submissões do professor e seus respectivos estados de andamento.
 
-A ação **Copiar link**, quando apresentada, deve deixar claro que copia o endereço da **página inicial do EduComp**, não o do material consultado. Sua localização final na interface ainda precisa ser revisada.
+Na área **Revisão**, o responsável autorizado consulta a fila e os detalhes, inicia explicitamente a análise e registra aprovação ou recusa com justificativa. A publicação e a situação editorial são dimensões separadas.
 
-### 5.3. Salvos
-
-Salvos utiliza os mesmos materiais da Biblioteca, organizados como uma coleção pessoal. O professor pode abrir os detalhes e remover favoritos. Não haverá pesquisa, filtros ou coleções personalizadas nessa área no MVP.
-
-## 6. Envio, acompanhamento e revisão
-
-**Enviar material** e **Meus envios** ocupam a mesma área, em abas distintas. O formulário reúne as informações obrigatórias, as palavras-chave, as classificações múltiplas e os arquivos. Ao concluir um envio, a plataforma mostra uma confirmação com um atalho para **Meus envios**.
-
-Em **Meus envios**, o professor consulta apenas suas submissões, identificadas pelos estados **Pendente, Em análise, Aprovado ou Recusado**. A recusa apresenta a justificativa do revisor. O autor não poderá editar um envio já realizado no MVP.
-
-A área restrita de revisão terá, no mínimo:
-
-1. Uma lista de submissões para avaliação.
-2. Os detalhes e arquivos necessários para analisar cada envio.
-3. Uma ação explícita para iniciar a análise.
-4. Ações para aprovar ou recusar, com justificativa obrigatória na recusa.
-
-Responsáveis autorizados também poderão editar ou despublicar materiais já aprovados. A **situação da revisão** e a **disponibilidade pública** devem permanecer distintas: retirar um material da Biblioteca não o transforma em Recusado.
-
-Não está previsto um painel administrativo completo nem um histórico visual de todas as transições.
+Em **Denúncias**, o revisor consulta o comentário denunciado e seu contexto antes de ocultar, restaurar ou excluir. Uma denúncia não oculta conteúdo automaticamente. Decisões conservam motivo, data e responsável.
 
 ## 7. Continuidade da navegação
 
-- **Biblioteca → Detalhes → Biblioteca:** pesquisa, filtros, ordenação e página ficam preservados na URL. A posição de rolagem será restaurada quando tecnicamente viável.
-- **Salvos → Detalhes → Salvos:** o retorno mantém o contexto da coleção pessoal.
-- **Ação protegida → Login:** depois de entrar, o usuário retoma a ação que exigiu autenticação. Sem ação anterior, vai para a Biblioteca.
-- **Cadastro ou redefinição de senha:** após a conclusão, o usuário é encaminhado ao login.
-- **Enviar material → Meus envios:** o envio concluído apresenta confirmação e um atalho para a aba de acompanhamento.
-- **Revisão → Detalhes da submissão → Revisão:** o responsável retorna à lista com a situação atualizada após a operação.
+- A logo do cabeçalho leva ao Início, inclusive em Biblioteca, materiais, perfil e revisão.
+- Biblioteca → Material → Biblioteca deve recuperar pesquisa, filtros e página, quando viável.
+- Material → Perfil público → Material mantém o contexto de origem.
+- Salvos → Material → Salvos recupera a coleção da conta.
+- Ação protegida → Entrar retoma a tarefa após autenticação, quando tecnicamente possível.
+- Material → Discussões muda a filtragem dentro da página, preservando o contexto.
+- Envio → Confirmação → Meus envios permite acompanhar a submissão.
+- Revisão → Decisão → Fila mantém a operação no contexto administrativo.
 
-Mudanças não confirmadas nos filtros são descartadas ao fechar o controle sem selecionar **Aplicar**. O comportamento detalhado está na [Especificação de busca e filtros](../product/especificacao-busca-filtros.md).
+## 8. Páginas institucionais e compartilhamento
 
-## 8. Conteúdo institucional e funcionalidades futuras
+**Fale conosco** é um formulário de quatro campos, com confirmação e estados de erro. Termos e Política de privacidade são páginas públicas. Compartilhar abre opções sociais e cópia do endereço da plataforma; os links reais serão configurados antes da publicação.
 
-A demonstração pública incluirá **Termos de uso** e **Política de privacidade**, com um contato simples por e-mail. Não será necessário um formulário de contato funcional.
-
-O Figma também apresenta recursos que não fazem parte do MVP, como login com Google, notificações, comentários, relatos de aplicação e compartilhamento por redes sociais. Essas ações não devem aparecer como operacionais na aplicação inicial.
+Os textos legais do protótipo são preliminares e precisam ser revisados de acordo com a aplicação funcional e o tratamento efetivo de dados.
 
 ## 9. Responsividade
 
-A organização lógica das áreas será mantida no desktop, tablet e celular. O que poderá mudar é a disposição dos menus, cartões, filtros, formulários e abas.
+O mapa e as permissões não mudam entre dispositivos, mas menus, abas, cartões e filtros podem ser reorganizados. O desktop é a primeira frente de implementação; tablet e celular devem preservar descoberta, participação, envio e acesso seguro antes do encerramento do MVP.
 
-A implementação começará pelo desktop, tomando o protótipo como referência. A adaptação para telas menores será feita antes de considerar o MVP concluído. Os padrões de navegação responsiva serão ajustados no Figma e verificados na aplicação.
-
-## 10. Ajustes que faltam no Figma
-
-- [ ] Definir o ponto de entrada e desenhar a navegação da área restrita de revisão.
-- [ ] Representar palavras-chave, classificações múltiplas, anos/séries e upload de vários arquivos no formulário de envio.
-- [ ] Definir a apresentação dos cartões quando um material tiver mais de um tipo.
-- [ ] Revisar a posição e o rótulo da ação que copia o link da página inicial.
-- [ ] Conferir a navegação das abas e dos menus nas versões responsivas.
-
-## 11. Documentos relacionados
+## 10. Documentos relacionados
 
 - [Escopo do MVP](../product/escopo-mvp.md)
 - [Requisitos](../product/requisitos.md)
-- [Especificação de metadados](../product/especificacao-metadados.md)
 - [Especificação de busca e filtros](../product/especificacao-busca-filtros.md)
 - [User Flow](user-flow.md)
 - [Design System](design-system.md)
