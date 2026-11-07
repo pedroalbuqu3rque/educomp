@@ -1,189 +1,164 @@
 # EduComp — Especificação de metadados dos materiais
 
-**Versão:** 0.4  
-**Data:** 07/11/2026  
-**Situação:** regras de produto definidas; detalhes de implementação ainda pendentes.
+**Versão:** 1.0 · **Data:** 07/11/2026 · **Situação:** estrutura funcional definida; validações técnicas a completar.
 
 ## 1. Finalidade
 
-Este documento define os dados necessários para cadastrar, encontrar, consultar e revisar materiais pedagógicos no EduComp.
+Esta especificação define os dados necessários para cadastrar, classificar, descobrir e apresentar materiais pedagógicos no EduComp. As classificações do envio devem ser as mesmas usadas pela Biblioteca e pelos filtros. O sistema não deve criar informações de autoria ou ensino que o professor não tenha fornecido.
 
-O professor envia um material com suas informações e arquivos. O conteúdo só passa a integrar a Biblioteca após aprovação por um responsável autorizado. A estrutura do banco de dados e os serviços utilizados serão definidos na etapa técnica.
+## 2. Campos informados no envio
 
-## 2. Dados do material
-
-### 2.1. Campos preenchidos pelo professor
-
-| Campo | Regra para o MVP |
+| Campo | Regra |
 | --- | --- |
-| Título | Obrigatório. Identifica o material e participa da pesquisa. |
-| Descrição | Obrigatória. Apresenta o conteúdo e sua finalidade pedagógica. |
-| Tema / palavras-chave | Obrigatório. O professor informa uma ou mais palavras-chave livres, exibidas como etiquetas (*tags*). |
-| Tipo de material | Obrigatório. Aceita uma ou mais opções da lista definida na seção 3. |
-| Etapa de ensino | Obrigatória. Aceita uma ou mais etapas. |
-| Ano/série escolar | Obrigatório quando houver seleção de Ensino Fundamental ou Ensino Médio. A associação entre anos e etapas precisa ser detalhada. |
-| Eixo da Computação | Obrigatório. Aceita um ou mais eixos. |
-| Autor ou fonte | Obrigatório informar a autoria ou a origem do conteúdo. Não se confunde com a conta que realizou o envio. |
-| Objetivos de aprendizagem | Opcional. |
-| Arquivos | Obrigatório anexar pelo menos um arquivo; são permitidos vários por material. |
-| Declaração de direitos | Obrigatória. O professor deve declarar que possui autorização para compartilhar o conteúdo. |
+| **Título do material** | Obrigatório. Identifica o recurso na Biblioteca e nos detalhes. |
+| **Descrição** | Obrigatória. Explica o conteúdo e a utilização prevista. |
+| **Tema / palavras-chave** | Obrigatório informar ao menos uma tag; admite múltiplas entradas livres. |
+| **Tipos de material** | Obrigatório selecionar ao menos um; seleção múltipla. |
+| **Etapas de ensino** | Obrigatório selecionar ao menos uma; seleção múltipla. |
+| **Anos / séries** | Obrigatório quando a etapa exigir essa identificação; opções compatíveis com cada etapa selecionada. |
+| **Eixos da Computação** | Obrigatório selecionar ao menos um; seleção múltipla. |
+| **Abordagem da atividade** | Obrigatória: Plugada, Desplugada ou ambas. |
+| **Autor ou fonte** | Obrigatório; pode ser diferente do professor responsável pelo envio. |
+| **Objetivos de aprendizagem** | Opcionais, exibidos nos detalhes quando informados. |
+| **Arquivos** | Pelo menos um, podendo haver vários, respeitando os formatos e o limite por arquivo. |
+| **Direitos de compartilhamento** | Declaração obrigatória de autoria ou autorização e respeito à privacidade. |
 
-Os limites de caracteres dos campos e a quantidade máxima de palavras-chave ainda serão definidos. Resumo separado, habilidades da BNCC, componente curricular e orientações de uso ficam fora do formulário inicial.
-
-### 2.2. Dados registrados pelo sistema
-
-| Campo | Utilização |
-| --- | --- |
-| Identificador | Identificação única do material ou da submissão. |
-| Responsável pelo envio | Conta autenticada que realizou a submissão. |
-| Data do envio | Registro da submissão. |
-| Situação da revisão | Pendente, Em análise, Aprovado ou Recusado. |
-| Justificativa da recusa | Texto obrigatório quando houver recusa, acessível ao autor em Meus envios. |
-| Disponibilidade pública | Indica se um material aprovado está publicado ou foi retirado de circulação. |
-| Referências dos arquivos | Identificam os arquivos armazenados e vinculados ao material. |
-
-O responsável pelo envio e o autor do conteúdo podem ser pessoas diferentes. O sistema não deve atribuir automaticamente a autoria ao usuário que enviou o material.
+O formulário exibe seleções de tipo, etapa, ano/série, eixo e abordagem de maneira explícita, além da lista de arquivos selecionados, seus tamanhos e a opção de remoção. Os limites de tamanho dos textos e o número máximo de tags serão definidos antes da implementação dos campos.
 
 ## 3. Classificação pedagógica
 
-### Tipo de material
+### 3.1. Tipos de material
 
-- Plano de aula
-- Slides
-- Material de apoio
-- Atividade
-- Sequência didática
+1. Plano de aula
+2. Slides
+3. Material de apoio
+4. Atividade
+5. Sequência didática
+6. **Jogo**
 
-### Etapa de ensino
+A seleção múltipla permite representar materiais que combinem formatos. No cartão, apresenta-se um tipo principal de forma consistente, enquanto os detalhes podem exibir todas as classificações pertinentes. O critério de prioridade do tipo principal será definido no modelo de dados.
 
-- Educação Infantil
-- Ensino Fundamental — Anos iniciais
-- Ensino Fundamental — Anos finais
-- Ensino Médio
+### 3.2. Etapas e anos/séries
 
-### Eixo da Computação
+| Etapa | Exemplo de apresentação |
+| --- | --- |
+| Educação Infantil | `EI · 4 anos` ou `EI · 5 anos` |
+| Ensino Fundamental — Anos iniciais | `EF · 2º ano` ou `EF · 4º ano` |
+| Ensino Fundamental — Anos finais | `EF · 6º ano` ou `EF · 9º ano` |
+| Ensino Médio | `EM · 1ª série` ou `EM · 2ª série` |
+
+Um material pode atender a mais de uma etapa e a mais de um ano/série. O sistema deve vincular cada ano/série à etapa correta, evitando uma lista independente que gere combinações inválidas. O conjunto definitivo de opções para Educação Infantil, Ensino Fundamental e Médio será conferido durante a modelagem.
+
+### 3.3. Eixos da Computação
 
 - Pensamento Computacional
 - Mundo Digital
 - Cultura Digital
 
-Um material pode receber **vários tipos, várias etapas e vários eixos**. As opções cadastradas devem corresponder às utilizadas nos filtros da Biblioteca.
+Um material pode contemplar mais de um eixo. O formulário e os filtros devem utilizar o mesmo vocabulário.
 
-Quando o professor selecionar Ensino Fundamental ou Ensino Médio, o formulário deverá exigir ano ou série compatível. Como várias etapas podem ser selecionadas ao mesmo tempo, ainda é necessário definir como os anos serão vinculados a cada uma delas.
+### 3.4. Abordagem plugada e desplugada
 
-EJA e outras modalidades não serão acrescentadas às categorias nesta versão.
+A abordagem pode conter **Plugada**, **Desplugada** ou **as duas**. A classificação deve ficar registrada como dado, não inferida apenas a partir dos arquivos enviados.
 
-## 4. Tema e pesquisa
+- **Plugada:** utilização de dispositivos ou recursos digitais como parte da proposta.
+- **Desplugada:** possibilidade de desenvolver a atividade sem depender desses dispositivos.
 
-O campo **Tema / palavras-chave** deverá ser incluído no formulário de envio e no protótipo do Figma. As palavras-chave serão cadastradas livremente, com possibilidade de adicionar mais de uma etiqueta.
+Nos cartões, a abordagem é sinalizada pelos ícones de monitor e monitor riscado, sem texto de tag adicional. No detalhe do material, a abordagem pode ser descrita textualmente para evitar dúvidas. Materiais com as duas opções devem atender a qualquer um dos filtros de abordagem.
 
-A Biblioteca pesquisará pelo **título** e pelas **palavras-chave** dos materiais publicados. As regras de correspondência, combinação de termos e ordenação estão na [Especificação de busca e filtros](especificacao-busca-filtros.md).
+## 4. Dados registrados pelo sistema
 
-Não haverá geração automática de palavras-chave a partir da descrição ou das classificações. A quantidade permitida, os limites de tamanho e a normalização das etiquetas serão definidos antes da implementação do campo.
+| Campo | Finalidade |
+| --- | --- |
+| Identificador do material/submissão | Associar dados, recursos, contribuições e revisão. |
+| Conta responsável pelo envio | Identificar quem submeteu o recurso. |
+| Autor ou fonte do conteúdo | Identificar a autoria informada, distinta do responsável quando necessário. |
+| Data de envio | Registro da submissão. |
+| Situação editorial | Pendente, Em análise, Aprovado ou Recusado, além da orientação de ajustes quando usada no fluxo. |
+| Justificativa da decisão | Obrigatória em recusa e vinculada à submissão. |
+| Disponibilidade pública | Controla se um material aprovado aparece na Biblioteca. |
+| Arquivos armazenados | Identificadores, formatos, tamanhos e estado de acesso. |
+| Responsável e data de revisão | Rastreabilidade da decisão editorial. |
 
-## 5. Arquivos e acesso
+A exposição pública de dados deve seguir o contexto: a Biblioteca publica os metadados pedagógicos e a autoria; **Meus envios** apresenta dados da própria conta; a área de revisão disponibiliza informações operacionais somente a pessoas autorizadas.
 
-O MVP utilizará **arquivos hospedados na plataforma**, sem cadastro de links externos.
+## 5. Pesquisa, cartões e detalhes
+
+**Pesquisa:** título e tags livres participam da busca. Tipos, etapas, eixos e abordagens participam dos filtros, com regras descritas na [Especificação de busca e filtros](especificacao-busca-filtros.md).
+
+**Cartão:** exibe tipo principal, título, descrição breve, indicação de etapa/ano ou série, ícone(s) de abordagem e controle de favorito. Diferentes recursos devem apresentar seus metadados próprios; os exemplos do protótipo não são conteúdo fixo do produto.
+
+**Detalhes:** apresentam informações pedagógicas, abordagem, descrição, objetivos quando disponíveis, autoria e acesso aos arquivos. Campos opcionais vazios não são substituídos por textos genéricos. O link de autoria pode abrir um perfil público com a lista de materiais publicados desse professor.
+
+## 6. Arquivos e permissões
 
 | Regra | Definição |
 | --- | --- |
-| Formatos aceitos | PDF, DOCX, PPTX, PNG e JPG. |
-| Tamanho máximo | 20 MB por arquivo. |
-| Quantidade | Vários arquivos por material; número máximo ainda a definir. |
-| Armazenamento | Serviço de armazenamento de objetos com controle de acesso. |
-| Consulta à Biblioteca e aos detalhes | Permitida sem login. |
-| Acesso aos arquivos | Exige autenticação. |
+| Formatos | PDF, DOCX, PPTX, PNG e JPG |
+| Limite por arquivo | **20 MB** |
+| Arquivos por envio | Um ou mais; quantidade máxima ainda a definir |
+| Origem | Upload para armazenamento controlado pela plataforma |
+| Consulta de metadados | Pública para materiais publicados |
+| Obtenção de arquivos | Mediante autenticação e autorização |
 
-Ao tentar abrir um arquivo sem estar autenticado, o visitante deverá ser encaminhado ao login e, após entrar, retornar à ação que pretendia realizar.
+O servidor deve verificar extensão, tipo real, tamanho e regras de segurança antes de aceitar o envio. Arquivos inválidos ou acima do limite geram mensagens específicas; falhas recuperáveis não devem apagar os dados válidos do formulário. Materiais com arquivo temporariamente indisponível podem manter seus metadados, sem oferecer uma ação de acesso inexistente.
 
-O sistema deverá validar os arquivos antes de concluir a submissão. As verificações técnicas serão definidas de acordo com os riscos e com o serviço de armazenamento escolhido. A validação precisa ocorrer também no servidor; não basta conferir os arquivos no formulário.
+Links externos para materiais não integram o MVP.
 
-Se um arquivo publicado ficar indisponível, o material poderá continuar visível com seus metadados e uma mensagem adequada, até que seja revisado. A interface não deve oferecer um acesso que não possa ser realizado.
+## 7. Envio, revisão e publicação
 
-**Ainda falta definir:** quantidade máxima de arquivos por material, eventual limite total da submissão e comportamento para erros individuais em uploads múltiplos.
+1. O professor preenche o formulário, seleciona os arquivos e confirma os direitos de compartilhamento.
+2. A aplicação valida os dados, cria a submissão vinculada à conta e registra **Pendente**.
+3. Um revisor autorizado inicia explicitamente a avaliação: **Em análise**.
+4. A revisão pode resultar em **Aprovado** ou **Recusado**, exigindo justificativa em caso de recusa. O protótipo também apresenta orientação de ajustes e reenvio; a modelagem desse caso será fechada sem confundi-lo com publicação.
+5. Um material aprovado somente aparece na Biblioteca quando sua **disponibilidade pública** estiver ativa.
+6. Responsáveis autorizados podem retirar um recurso da circulação sem reclassificá-lo como Recusado.
 
-## 6. Envio, revisão e publicação
+As decisões devem conservar responsável e data. O acesso às ações de revisão e moderação exige permissão no servidor.
 
-### 6.1. Envio
+## 8. Vínculo com comunidade e perfis públicos
 
-O envio é realizado por um professor autenticado. Após a validação dos campos e arquivos, a submissão é registrada como **Pendente**, sem publicação automática.
+Cada discussão pertence a um material; cada comentário, resposta ou relato está associado a uma conta autenticada. Relatos de aplicação têm ano/série da turma, texto e adaptações opcionais. Conteúdos públicos podem ser denunciados por usuários autenticados e moderados.
 
-O professor poderá acompanhar seus materiais em **Meus envios**. Depois da submissão, os dados não poderão ser editados pelo autor nesta versão. Se um material for recusado, uma nova tentativa exigirá outra submissão.
+O perfil público mostra apenas dados autorizados — nome, foto/avatar, cargo/função, apresentação e materiais publicados. E-mail, credenciais, arquivos privados e informações de denúncia não devem compor a página pública.
 
-### 6.2. Revisão
-
-A função de revisor será atribuída manualmente pelo responsável técnico ou administrador. A interface restrita deverá oferecer uma lista de submissões, os detalhes de cada material e as ações necessárias à análise.
-
-| Situação | Regra |
-| --- | --- |
-| Pendente | Material recebido, ainda não iniciado para análise. |
-| Em análise | Um revisor autorizado acionou explicitamente o início da análise. |
-| Aprovado | O material passou pela revisão e pode ser publicado. |
-| Recusado | O material não foi aprovado; a justificativa é obrigatória e visível ao autor. |
-
-A avaliação deverá considerar a completude das informações, a coerência das classificações, a segurança dos arquivos, a autoria e as condições de uso declaradas.
-
-O professor verá a situação atual em **Meus envios**, sem notificações por e-mail ou central de notificações nesta versão. Não está previsto um histórico completo das transições de revisão; devem ser preservados, no mínimo, o estado atual e a justificativa de uma recusa.
-
-### 6.3. Publicação e retirada do acervo
-
-**Aprovação e publicação são condições diferentes.** Um material aprovado pode estar publicado ou ter sido retirado da Biblioteca por um responsável autorizado, sem que sua avaliação se transforme em Recusado.
-
-Somente usuários autorizados poderão aprovar, recusar, editar materiais publicados ou retirá-los de circulação. Os materiais pendentes, em análise, recusados ou despublicados não deverão aparecer na listagem pública.
-
-Os critérios editoriais deverão ser detalhados durante a construção da interface de moderação, mantendo as condições de avaliação acima.
-
-## 7. Apresentação dos dados
-
-**Biblioteca:** os cartões apresentam informações suficientes para reconhecer os materiais, utilizando os metadados cadastrados. Quando não houver miniatura, será utilizado um cartão padrão com ícone. Para materiais com mais de um tipo, ainda é preciso definir qual ícone aparecerá.
-
-**Detalhes:** apresentam descrição, classificações, autoria ou fonte, objetivos de aprendizagem quando cadastrados e arquivos disponíveis. Campos opcionais vazios não devem gerar textos ou valores fictícios.
-
-**Envio:** utiliza seleção múltipla para tipos, etapas e eixos, campo de palavras-chave e upload de vários arquivos. Essas mudanças precisam ser refletidas no Figma.
-
-**Meus envios:** apresenta as submissões do próprio professor, suas situações atuais e a justificativa quando um material for recusado.
-
-**Revisão:** permite consultar os dados necessários para avaliar a submissão e registrar a decisão, sem expor as ações administrativas aos demais usuários.
-
-## 8. Critérios de aceitação
-
-Os identificadores existentes foram mantidos para preservar a referência aos testes.
+## 9. Critérios de aceitação
 
 | ID | Verificação |
 | --- | --- |
-| CA-MD-01 | Uma submissão válida registra material, responsável pelo envio, data e situação inicial. |
-| CA-MD-02 | O cadastro aceita múltiplos tipos, etapas, eixos e palavras-chave. |
-| CA-MD-03 | Os materiais publicados aparecem nos filtros correspondentes às suas classificações. |
-| CA-MD-04 | O título do material participa da pesquisa da Biblioteca. |
-| CA-MD-05 | As palavras-chave cadastradas participam da pesquisa. |
-| CA-MD-06 | A ausência de objetivos de aprendizagem não impede a exibição do material. |
-| CA-MD-07 | Arquivos com formato inválido ou acima de 20 MB são rejeitados com mensagem adequada. |
-| CA-MD-08 | Enviar um material não o publica automaticamente. |
-| CA-MD-09 | Um revisor autorizado consegue aprovar o material, tornando possível sua publicação. |
-| CA-MD-10 | Um usuário sem permissão não consegue aprovar ou recusar submissões. |
-| CA-MD-11 | O professor consulta apenas os próprios envios. |
-| CA-MD-12 | A indisponibilidade do arquivo é informada sem inventar um recurso acessível. |
-| CA-MD-13 | A autoria ou fonte do conteúdo pode ser diferente da conta responsável pelo envio. |
-| CA-MD-14 | Uma recusa exige justificativa, exibida ao autor, e impede a publicação. |
-| CA-MD-15 | O visitante não consegue obter o arquivo diretamente sem autenticação. |
+| CA-MD-01 | Submissão válida registra dados, responsável, arquivos e situação inicial. |
+| CA-MD-02 | Campos de classificação aceitam múltiplos tipos, etapas, anos/séries, eixos e tags. |
+| CA-MD-03 | Classificações alimentam os filtros da Biblioteca corretamente. |
+| CA-MD-04 | Título participa da pesquisa. |
+| CA-MD-05 | Tags cadastradas participam da pesquisa. |
+| CA-MD-06 | Objetivos ausentes não geram valores fictícios. |
+| CA-MD-07 | Formato inválido ou arquivo acima de 20 MB gera erro adequado. |
+| CA-MD-08 | Envio não publica automaticamente. |
+| CA-MD-09 | Aprovação editorial permite publicação, mediante condição pública separada. |
+| CA-MD-10 | Contas sem permissão não revisam materiais. |
+| CA-MD-11 | Autor consulta apenas as próprias submissões em Meus envios. |
+| CA-MD-12 | Arquivo indisponível não aparece como acessível. |
+| CA-MD-13 | Autoria/fonte pode diferir de quem enviou. |
+| CA-MD-14 | Recusa exige justificativa exibida ao responsável. |
+| CA-MD-15 | Visitante sem autenticação não obtém arquivo protegido. |
+| CA-MD-16 | Jogo aparece entre os tipos aceitos. |
+| CA-MD-17 | Abordagem aceita Plugada, Desplugada ou ambas. |
+| CA-MD-18 | Cartões usam etapa/ano ou série coerente e os ícones corretos de abordagem. |
+| CA-MD-19 | Perfil público não expõe e-mail ou dados privados. |
 
-## 9. Definições que faltam
+## 10. Definições técnicas pendentes
 
-As escolhas centrais já foram feitas. Restam detalhes necessários antes de implementar os campos e serviços correspondentes:
+- [ ] Quantidade e tamanho máximo de tags; limites dos demais campos.
+- [ ] Vinculação normalizada entre etapas e anos/séries, inclusive Educação Infantil.
+- [ ] Prioridade do tipo principal quando houver classificações múltiplas.
+- [ ] Número máximo de arquivos por envio, limite total e política de upload parcial.
+- [ ] Regras de ajuste/reenvio, edição editorial e despublicação.
+- [ ] Mecanismos de armazenamento, proteção de arquivos e retenção de dados.
 
-- [ ] Definir os limites de caracteres e a quantidade máxima de palavras-chave.
-- [ ] Especificar quais anos ou séries podem ser associados a cada etapa de ensino, inclusive quando houver seleção múltipla.
-- [ ] Definir a quantidade máxima de arquivos por material e o limite total por submissão.
-- [ ] Estabelecer as verificações de segurança e o tratamento de falhas no upload múltiplo.
-- [ ] Definir o ícone de cartões classificados em mais de um tipo.
-- [ ] Detalhar os critérios editoriais, as permissões de edição e o comportamento da despublicação.
-- [ ] Redigir a declaração de direitos de compartilhamento que aparecerá no formulário.
-
-## 10. Documentos relacionados
+## 11. Documentos relacionados
 
 - [Escopo do MVP](escopo-mvp.md)
 - [Requisitos](requisitos.md)
-- [Histórias de usuário](historias-de-usuario.md)
 - [Especificação de busca e filtros](especificacao-busca-filtros.md)
 - [User Flow](../ux-ui/user-flow.md)
 - [Handoff de UI/UX](../ux-ui/handoff.md)
