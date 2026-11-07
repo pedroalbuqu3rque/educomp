@@ -1,207 +1,82 @@
 # EduComp — Product Brief
 
-**Versão:** 0.7  
-**Data:** 07/11/2026  
-**Status:** Visão do produto documentada; preparação para desenvolvimento  
+**Versão:** 0.8  
+**Atualizado em:** 07/11/2026  
+**Situação:** planejamento do MVP; desenvolvimento não iniciado.
 
-## 1. Visão do produto
+## 1. Visão geral
 
-O **EduComp** é uma proposta de plataforma digital voltada a professores da Educação Básica, com foco na descoberta, consulta, organização e compartilhamento de materiais pedagógicos relacionados à Computação.
+O EduComp é um projeto de plataforma para professores da Educação Básica que trabalham com conteúdos de Computação. A ideia é reunir materiais pedagógicos em uma Biblioteca na qual seja possível encontrar recursos, conhecer suas características e salvá-los para consultas futuras.
 
-A plataforma pretende reunir recursos educacionais em uma Biblioteca organizada, permitindo que os professores encontrem materiais, compreendam suas características, acessem os conteúdos disponíveis e salvem itens de interesse para consultas futuras. Também prevê a contribuição de materiais pelos próprios professores, mediante revisão antes da publicação.
+Professores também poderão contribuir com o acervo. Antes de ser publicado, cada material enviado passará por revisão.
 
-A proposta busca apoiar o planejamento e a realização de atividades de ensino, preservando a autonomia do professor na escolha e adaptação dos recursos ao seu contexto.
+A plataforma pretende apoiar o planejamento docente, sem substituir a avaliação do professor sobre a adequação de cada recurso à sua turma.
 
-## 2. Contexto e problema
+## 2. Problema e hipótese
 
-O ensino de Computação na Educação Básica envolve diferentes conteúdos, etapas de ensino e eixos de conhecimento. Nesse contexto, professores podem precisar consultar diversas fontes para localizar materiais adequados aos temas e às necessidades de suas aulas.
+Professores podem precisar buscar materiais em diferentes fontes, nem sempre organizadas por etapa de ensino ou pelos eixos da Computação. Isso pode dificultar a localização e a comparação de recursos para as aulas.
 
-O EduComp parte da **hipótese** de que a dispersão dos recursos e a dificuldade de comparar suas características podem tornar essa busca mais trabalhosa. Uma Biblioteca com pesquisa, filtros e informações descritivas é proposta como uma possível forma de facilitar esse processo.
+O projeto parte da hipótese de que uma Biblioteca organizada, com pesquisa, filtros e informações claras, pode facilitar essa tarefa.
 
-**Essa hipótese ainda não foi validada com professores reais.** Não há, nesta etapa, evidências de pesquisa que permitam afirmar a frequência ou a intensidade do problema, nem comprovar os benefícios da solução.
+**A hipótese ainda não foi validada com professores.** O problema e a utilidade da solução serão avaliados em testes com o público, sem tratar suposições como resultados já comprovados.
 
-## 3. Público-alvo
+## 3. Público
 
-### Público prioritário
+O público principal são **professores da Educação Básica** que procuram materiais para planejar e desenvolver atividades relacionadas à Computação.
 
-**Professores da Educação Básica que buscam materiais pedagógicos para o ensino de Computação.**
+A plataforma considera tanto quem deseja consultar e guardar recursos quanto quem pretende compartilhar materiais de sua autoria ou de fontes que tenha autorização para divulgar.
 
-O produto considera especialmente situações em que o professor precisa:
+O funcionamento do acervo também depende de **revisores autorizados**, responsáveis por avaliar as contribuições antes da publicação. Esse é um papel de operação da plataforma, não um público separado para o qual o produto está sendo desenvolvido.
 
-- Localizar recursos relacionados a temas, etapas de ensino e eixos da Computação.
-- Consultar informações para avaliar a pertinência de um material antes de utilizá-lo.
-- Retomar materiais selecionados anteriormente.
-- Compartilhar uma contribuição com a Biblioteca para possível disponibilização a outros professores.
+## 4. Proposta de valor
 
-### Público secundário potencial
+O EduComp busca oferecer um lugar organizado para descobrir e consultar materiais de Computação, com quatro possibilidades centrais:
 
-Outras pessoas envolvidas no planejamento de aulas, oficinas e atividades educacionais poderão se beneficiar da plataforma. Esse público não é prioritário na primeira versão e ainda requer avaliação específica.
+- **Encontrar materiais:** pesquisar por título e palavras-chave e filtrar por tipo, etapa de ensino e eixo da Computação.
+- **Avaliar antes de acessar:** consultar descrição, autoria, classificações e outras informações do recurso.
+- **Retomar o que interessa:** guardar materiais em uma lista pessoal de favoritos.
+- **Contribuir com o acervo:** enviar materiais e acompanhar o resultado da revisão.
 
-A operação do acervo também demandará **responsáveis autorizados pela revisão de materiais submetidos**. Esse papel integra o funcionamento do MVP, embora suas permissões e sua interface ainda precisem de definição.
+A proposta está na organização, na consulta e na circulação responsável dos recursos. Criar ou adaptar conteúdos pedagógicos dentro da plataforma não faz parte da primeira versão.
 
-## 4. Objetivos do produto
+## 5. Experiência prevista para o MVP
 
-### Objetivo principal
+O visitante poderá conhecer a plataforma, explorar a Biblioteca e abrir os detalhes de um material **sem criar uma conta**. Para acessar os arquivos, salvar favoritos ou enviar uma contribuição, será necessário entrar.
 
-**Facilitar a descoberta, a avaliação inicial e o acesso a materiais pedagógicos de Computação para professores da Educação Básica.**
+A Biblioteca terá pesquisa, filtros combináveis, ordenação e paginação. Os detalhes mostrarão as informações necessárias para que o professor decida se vale a pena consultar o recurso. Os arquivos ficarão hospedados na plataforma; links para materiais externos não serão aceitos nesta versão.
 
-### Objetivos específicos
+O professor autenticado poderá manter seus favoritos e enviar materiais para avaliação. Cada envio terá uma situação acompanhável em **Meus envios**. Um revisor autorizado poderá iniciar a análise, aprovar ou recusar o material, com justificativa obrigatória em caso de recusa.
 
-- Organizar o acervo de modo que os materiais possam ser encontrados por pesquisa e filtros.
-- Apresentar informações claras sobre cada recurso e suas possibilidades de acesso.
-- Permitir que professores organizem referências de interesse por meio de materiais salvos.
-- Viabilizar a contribuição de materiais para o acervo, com revisão antes da publicação.
-- Oferecer uma experiência compreensível, consistente, responsiva e acessível.
+A primeira implementação será feita para **desktop**, seguida pelas adaptações para tablet e celular. A responsividade faz parte da conclusão do MVP, não de uma etapa opcional.
 
-Esses objetivos descrevem resultados pretendidos, não resultados já alcançados.
+Funcionalidades como comentários, notificações, login com Google e interações de comunidade ficam para possíveis versões posteriores. O conteúdo exato da primeira entrega está definido no [Escopo do MVP](escopo-mvp.md).
 
-## 5. Proposta de valor
+## 6. Princípios da experiência
 
-O EduComp propõe **um ponto de acesso organizado a materiais pedagógicos de Computação**, combinando descoberta, consulta e organização pessoal de recursos.
+- **Foco no professor:** a plataforma deve ajudar a encontrar e avaliar recursos, respeitando a autonomia docente.
+- **Clareza:** pesquisa, filtros, informações e ações devem ser compreensíveis, inclusive quando não houver resultados ou um arquivo estiver indisponível.
+- **Confiança no acervo:** autoria, classificações e condições de acesso devem ser apresentadas corretamente, com revisão antes da publicação.
+- **Acesso e consistência:** os fluxos devem funcionar em diferentes tamanhos de tela e considerar navegação por teclado, contraste, rótulos e feedback adequado.
 
-A experiência busca oferecer ao professor:
+## 7. Como a proposta será avaliada
 
-- **Descoberta orientada:** pesquisa e filtros por tipo de material, etapa de ensino e eixo da Computação.
-- **Informações para escolha:** detalhes e metadados que ajudem a compreender a finalidade de cada recurso.
-- **Continuidade da consulta:** possibilidade de salvar materiais para encontrá-los novamente.
-- **Contribuição ao acervo:** envio de materiais para avaliação e eventual publicação.
+Estão previstos **testes moderados de tarefas com um pequeno grupo de professores**, inicialmente com o protótipo ou com uma versão funcional apropriada para avaliação.
 
-O valor proposto está na organização e no acesso à informação sobre os recursos. A plataforma não se propõe, na primeira versão, a criar ou adaptar conteúdos pedagógicos dentro do sistema.
+Os testes deverão observar se os participantes conseguem localizar materiais, compreender os filtros e os detalhes, identificar as condições de acesso e utilizar as funções de favoritos e envio. Também será importante ouvir se a organização do acervo faz sentido para suas necessidades reais.
 
-## 6. Experiência principal do usuário
+As dificuldades observadas orientarão ajustes na interface e, quando necessário, nas regras do produto. Ainda não existem resultados desses testes nem métricas de uso da plataforma.
 
-A jornada central começa na apresentação da plataforma e segue para a exploração da Biblioteca. O professor pesquisa ou filtra os materiais, consulta os detalhes de um recurso e utiliza a forma de acesso disponibilizada.
+## 8. Situação do projeto
 
-Com uma conta, poderá manter uma lista pessoal de favoritos, atualizar suas informações e submeter materiais para análise.
+O EduComp já possui documentação de produto e UX/UI, identidade visual e protótipos no Figma. As decisões centrais do MVP foram registradas, mas ainda há ajustes nas telas de envio e a interface restrita de revisão precisa ser desenhada.
 
-Materiais enviados não serão publicados automaticamente: sua inclusão no acervo dependerá da aprovação por um responsável autorizado. O professor deverá conseguir acompanhar a situação das próprias submissões.
+**A aplicação ainda não foi desenvolvida ou testada.** As próximas etapas são concluir o alinhamento entre documentação e protótipo, definir os serviços e ferramentas de implementação e começar a construção da versão desktop.
 
-A experiência também deverá comunicar claramente ações concluídas, erros, ausência de resultados e indisponibilidade de conteúdo.
+## 9. Documentos relacionados
 
-As regras de acesso para visitantes e usuários autenticados ainda precisam ser definidas.
-
-## 7. Direcionamento do produto e primeira versão
-
-A primeira versão funcional está orientada aos seguintes conjuntos de capacidades:
-
-- **Acesso e conta:** apresentação da plataforma, cadastro, autenticação, recuperação de senha e perfil do professor.
-- **Descoberta de recursos:** Biblioteca, pesquisa por título e tema, filtros combinados e detalhes dos materiais.
-- **Organização pessoal:** favoritos persistentes e área de materiais salvos.
-- **Contribuição:** envio de materiais, acompanhamento das submissões e revisão autorizada antes da publicação.
-- **Compartilhamento básico:** cópia de um link compartilhável, com destino ainda a definir.
-
-Funcionalidades mais amplas, como notificações completas, login com Google, interações da comunidade e integração direta com redes sociais, poderão ser consideradas em etapas posteriores.
-
-### 7.1. Estratégia de desenvolvimento
-
-O desenvolvimento será iniciado pela **interface desktop**, utilizando o protótipo do Figma como referência visual.
-
-Essa prioridade organiza a execução inicial dos componentes e fluxos, mas não altera os compromissos da primeira versão funcional. A experiência responsiva para tablet e dispositivos móveis será desenvolvida posteriormente e deverá ser verificada antes da conclusão do MVP.
-
-O detalhamento das funcionalidades incluídas, excluídas, critérios de conclusão e pendências está registrado no [Escopo do MVP](escopo-mvp.md).
-
-O Product Brief apresenta o direcionamento do produto, sem substituir a especificação funcional.
-
-## 8. Princípios do produto
-
-### 8.1. Foco na atividade docente
-
-O produto deve apoiar tarefas de busca e seleção de recursos, preservando a autonomia do professor para avaliar sua adequação ao contexto de ensino.
-
-### 8.2. Clareza e facilidade de descoberta
-
-A organização da Biblioteca, os filtros e a apresentação dos resultados devem permitir que o usuário compreenda o conteúdo disponível e refine sua busca.
-
-### 8.3. Transparência sobre os materiais
-
-As informações de autoria, descrição, classificação e acesso devem corresponder aos dados disponíveis. A interface não deve sugerir ações que não possam ser realizadas.
-
-### 8.4. Confiança na contribuição
-
-O envio de materiais deve estar associado a um processo de revisão, com responsabilidades e situações compreensíveis para quem contribui.
-
-A disponibilização dos recursos no acervo deve depender de autorização adequada, preservando a distinção entre submissão e publicação.
-
-### 8.5. Acessibilidade e consistência
-
-As interfaces devem considerar responsividade, contraste, navegação por teclado, identificação dos controles e mensagens claras de feedback.
-
-A consistência entre as áreas da plataforma deve facilitar o reconhecimento das ações e a continuidade das tarefas.
-
-## 9. Hipóteses a avaliar
-
-As hipóteses abaixo poderão orientar pesquisas e avaliações futuras:
-
-| Hipótese | O que deverá ser investigado |
-| --- | --- |
-| Uma Biblioteca organizada facilita a descoberta de recursos. | Se professores conseguem localizar materiais pertinentes às suas necessidades. |
-| Pesquisa e filtros tornam a exploração mais eficiente. | Se as opções de busca e classificação são compreensíveis e úteis. |
-| Detalhes claros apoiam a escolha de materiais. | Se as informações apresentadas são suficientes para uma avaliação inicial. |
-| Favoritos facilitam consultas posteriores. | Se os professores conseguem retomar recursos selecionados com facilidade. |
-| Um fluxo de contribuição revisada pode ampliar a utilidade do acervo. | Se o envio e o acompanhamento dos materiais fazem sentido para o público. |
-
-Nenhuma dessas hipóteses deve ser tratada como validada antes da coleta e análise de dados reais.
-
-## 10. Indicadores e avaliação futura
-
-O sucesso do produto deverá ser avaliado a partir de critérios e métodos definidos antes dos testes.
-
-Entre os aspectos a observar estão:
-
-- Capacidade de localizar materiais a partir de um tema ou necessidade de ensino.
-- Compreensão e uso dos filtros da Biblioteca.
-- Clareza das informações e das opções de acesso aos recursos.
-- Facilidade para salvar e reencontrar materiais.
-- Compreensão do envio de materiais e de sua situação de revisão.
-- Percepção de utilidade da plataforma entre professores participantes de avaliações futuras.
-
-A avaliação também poderá investigar dificuldades de navegação, compreensão das mensagens e continuidade das tarefas.
-
-Ainda não foram estabelecidas metas quantitativas nem coletados resultados de uso. Qualquer avaliação deverá diferenciar dados reais, observações de teste e cenários simulados.
-
-## 11. Situação atual do projeto
-
-O EduComp possui documentação de produto e UX/UI, identidade visual definida e protótipos elaborados no Figma, incluindo telas desktop, mobile e referências para tablet.
-
-As interfaces representam a experiência planejada, mas **não constituem uma aplicação funcional**.
-
-A documentação passou por uma revisão de alinhamento entre escopo, requisitos, histórias de usuário, backlog, arquitetura da informação, fluxos e padrões visuais.
-
-O projeto está na transição entre a conclusão dessa etapa documental e a preparação técnica do desenvolvimento.
-
-As próximas atividades envolvem a definição da arquitetura e das tecnologias, a resolução das decisões funcionais prioritárias e a construção da base da aplicação desktop.
-
-**Ainda não foram iniciados** o desenvolvimento de frontend e backend, os testes da aplicação e a validação da solução com professores reais.
-
-## 12. Principais decisões e riscos em aberto
-
-- **Acesso e identidade:** definir permissões de visitantes, requisitos de cadastro e política de autenticação.
-- **Organização do acervo:** confirmar metadados obrigatórios, representação do tema pesquisável e regras de classificação.
-- **Contribuição e moderação:** definir responsáveis, critérios de aprovação e recusa, situações de revisão e interface mínima do avaliador.
-- **Arquivos e conteúdo:** definir formatos, limites, armazenamento, disponibilidade e cuidados relacionados aos direitos de uso.
-- **Viabilidade técnica:** selecionar arquitetura, tecnologias, serviços e estratégia de implementação.
-- **Experiência responsiva:** adaptar os fluxos desktop e verificar sua utilização em diferentes tamanhos de tela.
-- **Validação:** investigar com professores se o problema identificado e a proposta correspondem às suas necessidades.
-
-Esses pontos não impedem a preparação da aplicação, mas precisam ser resolvidos ou delimitados antes da implementação das funcionalidades diretamente afetadas.
-
-## 13. Documentos relacionados
-
-- [README.md](../../README.md) — apresentação geral do projeto.
-- [Escopo do MVP](escopo-mvp.md) — delimitação da primeira versão funcional.
-- [Requisitos](requisitos.md) — comportamentos esperados e regras do sistema.
+- [Escopo do MVP](escopo-mvp.md) — funcionalidades incluídas e critérios de conclusão.
+- [Requisitos](requisitos.md) — comportamentos e regras do sistema.
 - [Histórias de usuário](historias-de-usuario.md) — necessidades e critérios de aceitação.
-- [Backlog](backlog.md) — organização e priorização do trabalho.
-- [Especificação de busca e filtros](especificacao-busca-filtros.md) — pesquisa e filtragem da Biblioteca.
-- [Especificação de metadados](especificacao-metadados.md) — informações e classificação dos recursos.
-- [Arquitetura da Informação](../ux-ui/arquitetura-da-informacao.md) — organização das áreas e conteúdos.
+- [Backlog](backlog.md) — entregas e acompanhamento do trabalho.
 - [Objetivos de UX](../ux-ui/objetivos-de-ux.md) — objetivos da experiência.
-- [User Flow](../ux-ui/user-flow.md) — jornadas e decisões de navegação.
-- [Design System](../ux-ui/design-system.md) — identidade visual e padrões de interface.
-- [Handoff de UI/UX](../ux-ui/handoff.md) — referência para implementação desktop.
-
----
-
-O Product Brief deverá ser atualizado quando houver mudanças relevantes na visão, no público ou na proposta de valor do EduComp.
-
-Decisões sobre funcionalidades, regras e implementação devem ser registradas nos documentos correspondentes, preservando a função deste arquivo como referência de direcionamento do produto.
+- [User Flow](../ux-ui/user-flow.md) — jornadas previstas para os usuários.
