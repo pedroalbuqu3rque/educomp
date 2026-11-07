@@ -1,110 +1,83 @@
 # EduComp — Objetivos de UX
 
-**Versão:** 0.8  
-**Atualizado em:** 07/11/2026  
-**Situação:** objetivos definidos para o MVP; validação com professores ainda não realizada.
+**Versão:** 1.0 · **Atualizado em:** 07/11/2026 · **Situação:** objetivos definidos; testes com professores ainda não realizados.
 
 ## 1. Propósito
 
-Este documento reúne os objetivos que orientam a experiência de uso do EduComp. O foco é ajudar professores da Educação Básica a encontrar, avaliar, guardar e enviar materiais pedagógicos de Computação com clareza e autonomia.
+Estes objetivos orientam a experiência de quem procura, utiliza e compartilha materiais de Computação no EduComp. Servem para avaliar as decisões de interface e a versão funcional, mas não são resultados de pesquisa já obtidos.
 
-Os objetivos orientam o desenho das interfaces e os testes de usabilidade. Não substituem as regras funcionais dos [Requisitos](../product/requisitos.md) nem descrevem resultados já alcançados. O projeto ainda não foi testado com professores.
+## 2. Descoberta e compreensão
 
-## 2. Objetivos de experiência
+**OUX-001 — Encontrar materiais com autonomia.** A Biblioteca deve permitir começar sem pesquisa, reconhecer rapidamente os cartões e abrir detalhes sem perder o contexto.
 
-### Descoberta e consulta
+**OUX-002 — Tornar a busca previsível.** O usuário deve identificar o campo de pesquisa, saber quando a consulta foi enviada e entender a ausência de resultados. O botão Buscar e a tecla Enter são acionadores reconhecíveis.
 
-**OUX-001 — Facilitar a descoberta de materiais**
+**OUX-003 — Facilitar o uso dos filtros.** Tipo, Etapa, Eixo e Abordagem aparecem como controles distintos. Seleção, Aplicar e Limpar devem comunicar efeitos previsíveis, inclusive quando há mais de um filtro ativo.
 
-A Biblioteca deve permitir reconhecer rapidamente o conteúdo dos cartões e abrir os detalhes de um material sem perder o contexto da navegação. A organização da página precisa funcionar tanto para quem chega sem uma busca definida quanto para quem procura algo específico.
+**OUX-004 — Apoiar a escolha pedagógica.** Título, resumo, ano/série, eixo e abordagem devem estar visíveis no nível adequado. Os ícones de atividades plugadas e desplugadas devem ser compreensíveis e ter texto acessível, sem poluir os cartões com tags redundantes.
 
-**OUX-002 — Tornar a pesquisa clara e previsível**
+**OUX-005 — Explicar o acesso aos arquivos.** É preciso distinguir consulta pública de detalhes, obtenção autenticada de arquivos e indisponibilidade de um recurso.
 
-O campo de busca deve ser fácil de identificar, e a pessoa precisa entender quando uma pesquisa foi executada e quais resultados ela produziu. A busca será feita por título e palavras-chave, mediante Enter ou o botão Buscar. Também deve ser simples ajustar a consulta quando não houver correspondências.
+**OUX-006 — Recuperar falhas e estados vazios.** Não confundir busca sem correspondências com acervo vazio, coleção sem favoritos ou falha técnica. As mensagens devem indicar uma ação possível quando existir.
 
-**OUX-003 — Tornar os filtros compreensíveis e controláveis**
+## 3. Conta e organização pessoal
 
-Os filtros por tipo de material, etapa de ensino e eixo da Computação devem deixar claro o que está selecionado e o que foi aplicado. As ações Aplicar e Limpar precisam ter resultados previsíveis: Limpar afeta apenas a categoria aberta, e fechar sem aplicar descarta alterações temporárias.
+**OUX-008 — Orientar autenticação e recuperação.** Cadastro, login, recuperação de senha e links expirados precisam ter caminhos claros, feedback específico e proteção de informações sensíveis.
 
-**OUX-004 — Apoiar a avaliação inicial dos materiais**
+**OUX-009 — Tornar os favoritos úteis.** O usuário deve reconhecer quando salvou um material e reencontrá-lo na coleção, inclusive pela busca de Salvos. Uma coleção vazia deve convidar à descoberta, não parecer erro.
 
-Os detalhes devem apresentar título, descrição, classificações, palavras-chave e autoria ou fonte de maneira legível. O professor precisa conseguir avaliar a pertinência de um recurso antes de abrir seus arquivos, sem depender de informações inventadas ou de uma pré-visualização integrada.
+**OUX-011 — Facilitar o perfil.** Nome, foto, cargo/função, apresentação e configurações de acesso devem ser organizados por finalidade. A prévia de foto precisa mostrar o resultado esperado antes de salvar, sem sugerir um editor de recorte inexistente.
 
-**OUX-005 — Tornar o acesso aos recursos transparente**
+**OUX-012 — Dar clareza ao compartilhamento.** A interface deve indicar que copia ou compartilha o endereço do EduComp e informar o resultado real da operação.
 
-A consulta à Biblioteca e aos detalhes é pública, mas abrir arquivos exige login. Essa diferença deve aparecer de forma clara na interface. Quando um material tiver vários arquivos, a pessoa precisa identificar o que está disponível e entender eventuais restrições ou falhas de acesso.
+## 4. Participação, confiança e segurança
 
-**OUX-006 — Ajudar na recuperação de erros e estados vazios**
+**OUX-014 — Aproximar professores.** Comentários, dúvidas, respostas e relatos de aplicação devem ser apresentados no contexto do material. Alternar entre Todos, Relatos e Discussões deve ocorrer **na própria página**, sem interromper a leitura com modal.
 
-A interface deve diferenciar acervo vazio, pesquisa sem resultados e erro de carregamento. Falhas em login, favoritos, perfil ou envio precisam trazer mensagens específicas e, sempre que possível, indicar como continuar. Nenhuma operação deve ser apresentada como concluída antes da confirmação do sistema.
+**OUX-015 — Valorizar autoria sem expor dados privados.** Perfis públicos ajudam a reconhecer a trajetória do autor e seus materiais. E-mail e informações pessoais restritas não participam da apresentação pública.
 
-### Conta e organização pessoal
+**OUX-016 — Tornar a denúncia responsável.** O professor precisa entender os motivos disponíveis, que a denúncia será analisada e que o conteúdo não será ocultado automaticamente.
 
-**OUX-008 — Orientar o acesso e o gerenciamento da conta**
+**OUX-017 — Dar segurança à moderação.** O revisor deve compreender contexto, consequências e confirmação de ações como ocultar, restaurar ou excluir. Ações definitivas merecem confirmação explícita.
 
-Entrar, Criar conta e Recuperar senha devem ser caminhos fáceis de distinguir. Quando o professor precisar entrar para executar uma ação, a interface deve explicar essa exigência e permitir a retomada da tarefa após o login. Os formulários precisam identificar erros sem expor informações sensíveis.
+## 5. Contribuição e acompanhamento
 
-**OUX-009 — Facilitar a organização dos materiais salvos**
+**OUX-010 — Tornar o envio compreensível.** Campos obrigatórios, classificações múltiplas, anos/séries, abordagem plugada/desplugada e arquivos devem ser preenchidos sem ambiguidades. O sistema deve permitir corrigir erros e acompanhar o envio.
 
-Salvar e remover um favorito deve produzir uma mudança visível e coerente entre Biblioteca, Detalhes e Salvos. O professor precisa reconhecer quais materiais guardou e conseguir retomá-los depois. A coleção pessoal terá lista e ações de favoritos, sem pesquisa ou filtros próprios no MVP.
+**OUX-013 — Dar clareza à avaliação editorial.** A interface de revisão distingue Pendente, Em análise, Aprovado e Recusado. A recusa requer justificativa; aprovação e publicação não são sinônimos.
 
-**OUX-011 — Facilitar a atualização do perfil**
+**OUX-018 — Tornar notificações úteis.** Avisos sobre os próprios materiais, novos conteúdos e notícias da plataforma precisam ter linguagem específica, estado de leitura e acesso ao contexto quando disponível.
 
-O professor deve identificar quais informações pode alterar — nome, foto e senha — e quais são apenas de consulta, como o e-mail. Mensagens de confirmação e erro precisam informar o resultado real das alterações.
+**OUX-019 — Facilitar o contato.** O formulário institucional deve deixar claros os campos obrigatórios e comunicar tanto o envio concluído quanto a falha.
 
-**OUX-012 — Tornar o compartilhamento básico previsível**
+## 6. Acessibilidade e consistência
 
-A ação de copiar link deve indicar explicitamente que compartilha o endereço da página inicial do EduComp, e não o de um material. O resultado da cópia precisa ser informado. Seu rótulo e sua posição no Figma ainda devem ser revistos para evitar interpretações equivocadas.
+**OUX-007 — Preservar legibilidade e controle.** A experiência deve ter rótulos claros, foco visível, navegação por teclado, semântica adequada e contrastes suficientes. Ícones não podem transmitir informação exclusivamente visual. Diálogos e filtros devem respeitar a ordem do foco; o fundo desfocado não deve competir com o conteúdo ativo.
 
-### Contribuição e revisão
+A implementação inicia pelo desktop, mas os fluxos devem adaptar-se a tablet e celular. A referência de avaliação de acessibilidade será a **WCAG 2.2 AA**.
 
-**OUX-010 — Tornar o envio e o acompanhamento compreensíveis**
+## 7. Avaliação prevista
 
-O formulário deve orientar o preenchimento de palavras-chave, classificações pedagógicas e arquivos, permitindo corrigir problemas antes do envio. Depois da submissão, o professor precisa entender que o material está pendente de revisão e encontrar facilmente sua situação na aba Meus envios. Em caso de recusa, a justificativa deve ser compreensível.
-
-**OUX-013 — Facilitar a revisão de materiais**
-
-O responsável autorizado deve conseguir localizar submissões, examinar suas informações e decidir com segurança. A interface precisa distinguir iniciar análise, aprovar e recusar, informar as consequências da decisão e exigir justificativa para a recusa. Também deve deixar clara a diferença entre aprovação e disponibilidade pública do material.
-
-### Acessibilidade e consistência
-
-**OUX-007 — Preservar acessibilidade, legibilidade e consistência**
-
-Os fluxos devem manter rótulos compreensíveis, foco visível, navegação por teclado, contraste adequado e estados identificáveis sem depender apenas de cores. Componentes semelhantes devem ter comportamentos semelhantes. O desenvolvimento começa pelo desktop, mas a experiência em tablet e celular também integra o MVP. A WCAG 2.2 AA será a referência de acessibilidade para a avaliação.
-
-## 3. Como avaliar a experiência
-
-Estão previstos **testes moderados de tarefas com um pequeno grupo de professores**. Eles poderão ser feitos no protótipo ou em uma versão funcional, desde que os caminhos necessários estejam disponíveis para avaliação.
+Os testes moderados serão realizados com um grupo de professores quando houver um ambiente adequado. Não existem medidas atuais de sucesso, satisfação ou ganho de tempo.
 
 | Tarefa | O que observar |
 | --- | --- |
-| Explorar e pesquisar materiais | Se a pessoa encontra a Biblioteca, entende a busca e localiza um recurso. |
-| Aplicar e remover filtros | Se compreende as seleções, o botão Aplicar e a ação Limpar. |
-| Consultar detalhes e tentar abrir um arquivo | Se identifica informações do material e entende a exigência de login. |
-| Salvar e recuperar um favorito | Se reconhece a mudança de estado e encontra o material em Salvos. |
-| Enviar um material | Se entende os campos, corrige erros e reconhece que o envio ainda depende de revisão. |
-| Acompanhar ou revisar uma submissão | Se interpreta as situações e, no caso do revisor, compreende as ações disponíveis. |
-| Atualizar o perfil ou copiar o link | Se identifica o que pode alterar e qual endereço será compartilhado. |
+| Encontrar um material | Compreensão da busca, dos cartões e da classificação pedagógica. |
+| Combinar filtros | Interpretação de Tipo, Etapa, Eixo e Abordagem; resultado de Aplicar e Limpar. |
+| Consultar detalhes e arquivos | Identificação de autoria, objetivo, acesso e restrições. |
+| Salvar e recuperar um recurso | Mudança de estado e localização do material em Salvos. |
+| Participar da discussão | Distinção entre comentário e relato; resposta, edição e denúncia. |
+| Enviar um material | Compreensão dos campos, arquivos, validação e acompanhamento. |
+| Revisar um envio ou denúncia | Entendimento de permissões, decisões e consequências. |
+| Gerenciar perfil ou notificações | Clareza de dados públicos/privados, prévia de foto e leitura de avisos. |
+| Enviar mensagem de contato | Reconhecimento dos campos e do resultado. |
 
-Durante os testes, serão registrados a conclusão das tarefas, as dúvidas, as tentativas malsucedidas, a necessidade de ajuda e os comentários dos participantes. Também serão feitas verificações de acessibilidade, navegação por teclado e adaptação para diferentes tamanhos de tela.
+Durante os testes deverão ser registrados conclusão de tarefas, erros, dúvidas, necessidade de ajuda e comentários. As verificações de teclado, leitores de tela e responsividade complementam os testes com participantes.
 
-Os cenários, os participantes e a forma de registro serão definidos antes da avaliação. Ainda não há dados que permitam afirmar taxas de sucesso, níveis de satisfação ou ganhos de tempo.
-
-## 4. Ajustes de interface ainda necessários
-
-- [ ] Adicionar ao envio as palavras-chave, as classificações múltiplas, a seleção de anos/séries e o upload de vários arquivos.
-- [ ] Desenhar a área restrita de revisão e seus estados de decisão.
-- [ ] Revisar o rótulo e a localização da ação que copia o link da página inicial.
-- [ ] Conferir os estados de erro, o comportamento por teclado e a adaptação dos fluxos para tablet e celular.
-
-Os detalhes de funcionamento que ainda faltam serão definidos nas especificações correspondentes, sem criar novos objetivos de UX desnecessariamente.
-
-## 5. Documentos relacionados
+## 8. Documentos relacionados
 
 - [Product Brief](../product/product-brief.md)
-- [Escopo do MVP](../product/escopo-mvp.md)
 - [Requisitos](../product/requisitos.md)
 - [Arquitetura da Informação](arquitetura-da-informacao.md)
 - [User Flow](user-flow.md)
 - [Design System](design-system.md)
-- [Handoff de UI/UX](handoff.md)
