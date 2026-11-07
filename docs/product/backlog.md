@@ -1,132 +1,126 @@
 # EduComp — Backlog
 
-**Atualizado em:** 07/11/2026  
-**Situação:** planejamento e revisão dos protótipos; desenvolvimento não iniciado.
+**Versão:** 1.0 · **Atualizado em:** 07/11/2026 · **Situação:** protótipo consolidado; implementação não iniciada.
 
-## 1. Como usar este backlog
+## 1. Como usar
 
-Este arquivo organiza o trabalho necessário para desenvolver o EduComp. Cada item tem um código fixo (`BK`), uma prioridade e uma situação. Os requisitos e critérios de aceitação estão nos documentos específicos; aqui ficam as entregas a acompanhar.
+Este backlog organiza entregas, dependências e o estado do trabalho. Os códigos `BK` existentes foram preservados. Uma tarefa de **design ou documentação concluída** não significa que a funcionalidade correspondente tenha sido implementada. O desenvolvimento só poderá ser concluído após integração e verificação.
 
-| Prioridade | Significado |
+| Prioridade | Critério |
 | --- | --- |
-| **P0** | Resolver antes de começar a implementação afetada. |
-| **P1** | Necessário para concluir o MVP. |
-| **P2** | Complementar à entrega, sem bloquear o desenvolvimento dos fluxos principais. |
-| **P3** | Evolução futura, fora do MVP. |
+| **P0** | Decisão ou preparação que bloqueia uma frente de implementação. |
+| **P1** | Funcionalidade ou qualidade necessária ao MVP. |
+| **P2** | Complemento previsto que pode ser desenvolvido após os fluxos-base, mas antes da entrega. |
+| **P3** | Evolução fora do MVP. |
 
-As situações usadas são **A fazer**, **Em andamento**, **Em revisão**, **A verificar**, **Concluído** e **Planejado para etapa futura**. Uma entrega só passa a Concluído depois de ser conferida; a existência de uma tela no Figma ou de uma descrição no repositório não basta.
+Estados: **Concluído (design/documentação)**, **A fazer**, **Em andamento**, **A verificar** e **Futuro**. Os estados abaixo não representam conclusão técnica da plataforma.
 
-## 2. Situação atual
-
-As 88 decisões do checklist de produto foram respondidas. A documentação está sendo atualizada para refletir essas escolhas, e o Figma ainda precisa de alguns ajustes, principalmente no envio de materiais e na moderação.
-
-A aplicação ainda não foi implementada ou testada. O desenvolvimento começará pelo desktop; tablet e celular fazem parte da entrega do MVP, não de uma versão posterior.
-
-## 3. Produto e UX/UI
+## 2. Produto, documentação e design
 
 | ID | Entrega | Prioridade | Situação |
 | --- | --- | --- | --- |
-| **BK-001** | Consolidar os documentos de produto de acordo com o MVP definido. | P0 | Em revisão |
-| **BK-002** | Conferir links, códigos e consistência entre os documentos. | P0 | Em andamento |
-| **BK-003** | Incorporar as decisões de acesso, permissões e revisão às especificações. | P0 | Em andamento |
-| **BK-004** | Finalizar os detalhes da pesquisa, ordenação e paginação. | P0 | Em revisão |
-| **BK-005** | Consolidar os filtros e os comportamentos de Aplicar, Limpar e fechar. | P0 | Em revisão |
-| **BK-006** | Ajustar os metadados: tags livres, classificações múltiplas, anos/séries e arquivos. | P0 | Em revisão |
-| **BK-007** | Especificar acesso autenticado aos arquivos e tratamento de indisponibilidade. | P0 | Em revisão |
-| **BK-008** | Atualizar a arquitetura da informação conforme o acesso público e as áreas restritas. | P1 | Em revisão |
-| **BK-009** | Atualizar os fluxos de navegação, envio, acompanhamento e revisão. | P1 | Em revisão |
-| **BK-010** | Consolidar componentes, estados e tokens visuais do Design System. | P1 | Em revisão |
-| **BK-011** | Verificar lacunas nos wireframes e estados de interface; criar apenas o que faltar. | P1 | A verificar |
-| **BK-012** | Revisar o protótipo desktop e adequar os formulários ao MVP. | P1 | Em revisão |
-| **BK-031** | Desenhar a área restrita de moderação, com lista, detalhes e decisões. | P0 | A fazer |
+| BK-001 | Atualizar documentos de produto conforme o escopo atual. | P0 | Concluído (documentação) |
+| BK-002 | Revisar terminologia, códigos e ligações entre documentos. | P0 | Concluído (documentação) |
+| BK-003 | Registrar papéis, permissões e regras editoriais. | P0 | Concluído (documentação) |
+| BK-004 | Especificar pesquisa, paginação, combinação e persistência dos filtros. | P0 | Concluído (documentação) |
+| BK-005 | Consolidar os quatro filtros e ações Aplicar, Limpar e Fechar. | P0 | Concluído (design/documentação) |
+| BK-006 | Consolidar metadados, seis tipos, abordagens, anos/séries e múltiplos arquivos. | P0 | Concluído (design/documentação) |
+| BK-007 | Documentar acesso autenticado e falhas dos arquivos. | P0 | Concluído (documentação) |
+| BK-008 | Revisar arquitetura da informação e permissões por área. | P1 | Concluído (documentação) |
+| BK-009 | Atualizar fluxos de acesso, comunidade, envio e revisão. | P1 | Concluído (documentação) |
+| BK-010 | Alinhar identidade, componentes e estados de interface. | P1 | Concluído (design/documentação) |
+| BK-011 | Auditar as telas e os estados do protótipo. | P1 | Concluído (design) |
+| BK-012 | Consolidar o protótipo desktop nos fluxos definidos. | P1 | Concluído (design) |
+| BK-031 | Desenhar área restrita de revisão e moderação de discussões. | P1 | Concluído (design) |
 
-**Ajustes prioritários no Figma:** acrescentar Tema / palavras-chave, permitir vários tipos, etapas e eixos, relacionar anos/séries às etapas selecionadas, aceitar vários arquivos e desenhar a interface mínima do revisor. As ações fora do MVP não devem aparecer como funcionais.
+A página do Figma **Protótipo** contém dez seções numeradas de 01 a 10. As situações condicionais de erro e estados vazios servem de referência para testes de implementação; a fidelidade visual não comprova comportamento real.
 
-## 4. Preparação técnica
+## 3. Preparação técnica
 
 | ID | Entrega | Prioridade | Situação |
 | --- | --- | --- | --- |
-| **BK-014** | Definir o framework React, a organização do backend e os serviços de hospedagem. | P0 | A fazer |
-| **BK-015** | Preparar o plano de testes e as verificações automáticas do projeto. | P0 | A fazer |
-| **BK-019** | Escolher a autenticação e implementar o modelo de papéis e permissões. | P0 | A fazer |
-| **BK-020** | Preparar a aplicação, o PostgreSQL, o armazenamento, as migrations e os dados de demonstração. | P1 | A fazer |
-| **BK-030** | Implementar a base visual desktop e os componentes compartilhados. | P1 | A fazer |
+| BK-014 | Escolher framework, organização do backend e serviços de hospedagem. | P0 | A fazer |
+| BK-015 | Preparar CI, testes, lint, checagem de tipos e critérios de qualidade. | P0 | A fazer |
+| BK-019 | Escolher autenticação e implementar papéis, sessões e permissões. | P0 | A fazer |
+| BK-020 | Preparar banco de dados, armazenamento de arquivos, migrações e dados de demonstração. | P1 | A fazer |
+| BK-030 | Implementar a base visual desktop e componentes reutilizáveis. | P1 | A fazer |
 
-As escolhas de base já estão encaminhadas: **React com TypeScript**, backend integrado ao framework, **PostgreSQL**, APIs HTTP/REST, armazenamento de objetos, repositório único e hospedagem gerenciada. Ainda faltam os fornecedores e bibliotecas específicos.
+As tecnologias anteriores — por exemplo, TypeScript, React, PostgreSQL e armazenamento de objetos — são alternativas de planejamento, **não uma arquitetura implementada**. As escolhas serão confirmadas antes de iniciar as dependências técnicas.
 
-O ambiente deverá usar variáveis de configuração, migrations e dados de demonstração reproduzíveis. A qualidade mínima inclui lint, formatação, checagem de tipos e testes no CI. As permissões devem ser validadas no servidor; a interface, sozinha, não protege dados ou arquivos.
+## 4. Entregas funcionais do MVP
 
-## 5. Funcionalidades do MVP
-
-| ID | Entrega | Prioridade | Situação | Dependências principais |
+| ID | Entrega | Prioridade | Estado | Dependências |
 | --- | --- | --- | --- | --- |
-| **BK-021** | Implementar Início, cadastro, login, recuperação de senha e saída. | P1 | A fazer | BK-019, BK-020, BK-030 |
-| **BK-022** | Implementar Biblioteca, pesquisa, filtros, ordenação e paginação. | P1 | A fazer | BK-004, BK-005, BK-006, BK-020, BK-030 |
-| **BK-023** | Implementar detalhes dos materiais e acesso autorizado aos arquivos. | P1 | A fazer | BK-006, BK-007, BK-019, BK-020 |
-| **BK-017** | Implementar favoritos persistentes e a área Salvos. | P1 | A fazer | BK-021, BK-022, BK-023 |
-| **BK-016** | Implementar o envio de materiais e a revisão antes da publicação. | P1 | A fazer | BK-006, BK-019, BK-020, BK-031 |
-| **BK-025** | Implementar Meus envios, com situação atual e justificativa de recusa. | P1 | A fazer | BK-016, BK-021 |
-| **BK-024** | Implementar consulta e edição de nome, foto e senha no perfil. | P1 | A fazer | BK-021 |
-| **BK-018** | Implementar a cópia do link da página inicial, com feedback e rótulo claro. | P2 | A fazer | BK-030 |
-| **BK-026** | Tratar carregamento, erros, estados vazios, teclado e acessibilidade nas telas. | P1 | A fazer | BK-010 e fluxos correspondentes |
+| BK-021 | Implementar Início, cadastro, login, recuperação de senha e logout. | P1 | A fazer | BK-019, BK-020, BK-030 |
+| BK-022 | Implementar Biblioteca com busca, quatro filtros e paginação. | P1 | A fazer | BK-004, BK-006, BK-020, BK-030 |
+| BK-023 | Implementar detalhes, autoria e acesso autorizado aos arquivos. | P1 | A fazer | BK-006, BK-007, BK-019, BK-020 |
+| BK-017 | Implementar favoritos, Salvos e busca na coleção. | P1 | A fazer | BK-021, BK-022, BK-023 |
+| BK-024 | Implementar perfil pessoal, foto, senha, cargo/função e apresentação. | P1 | A fazer | BK-021 |
+| BK-034 | Implementar perfis públicos dos autores e materiais publicados. | P1 | A fazer | BK-023, BK-024 |
+| BK-016 | Implementar formulário de envio, validação e revisão editorial. | P1 | A fazer | BK-019, BK-020, BK-031 |
+| BK-025 | Implementar Meus envios, situação editorial e orientações de recusa/ajuste. | P1 | A fazer | BK-016 |
+| BK-033 | Implementar comentários, respostas, relatos e filtragem inline das contribuições. | P1 | A fazer | BK-021, BK-023 |
+| BK-035 | Implementar denúncias e moderação restrita da comunidade. | P1 | A fazer | BK-019, BK-031, BK-033 |
+| BK-036 | Implementar notificações de materiais, revisão e novidades, com leitura/não leitura. | P1 | A fazer | BK-019, BK-020, BK-016 |
+| BK-018 | Implementar cópia do link e opções de compartilhamento da plataforma. | P2 | A fazer | BK-030 |
+| BK-037 | Implementar formulário Fale conosco, estados de sucesso/erro e páginas institucionais. | P1 | A fazer | BK-020, BK-030 |
+| BK-026 | Tratar erros, estados vazios, carregamento, foco e acessibilidade nos fluxos. | P1 | A fazer | Todas as entregas funcionais |
 
-As entregas acima devem seguir as regras já documentadas. Alguns pontos que afetam diretamente a implementação merecem atenção:
+### Regras relevantes à implementação
 
-- **Biblioteca (BK-022):** pesquisar título e tags; aplicar os três filtros; oferecer ordenação por mais recentes ou título; paginar de 12 em 12; manter os critérios na URL.
-- **Detalhes (BK-023):** permitir consulta pública, mas exigir login para abrir arquivos. Não haverá links externos no MVP.
-- **Envio e revisão (BK-016):** aceitar classificações e arquivos múltiplos, com até **20 MB por arquivo**. A submissão começa como Pendente e pode passar a Em análise, Aprovado ou Recusado. A recusa exige justificativa.
-- **Moderação (BK-016/BK-031):** somente pessoas autorizadas revisam, editam materiais publicados ou os retiram de circulação. Despublicar não significa recusar.
-- **Salvos (BK-017):** não terá pesquisa nem filtros próprios nesta versão.
+**Biblioteca (BK-022).** Seis tipos de material, inclusive **Jogo**; quatro filtros separados, incluindo **Abordagem**; uso de ícones de monitor/monitor riscado nos cartões; indicação coerente de EI, EF, EM e anos/séries; 12 materiais por página.
 
-## 6. Responsividade, validação e entrega
+**Arquivos e envios (BK-023/BK-016).** Arquivos PDF, DOCX, PPTX, PNG ou JPG, até 20 MB por arquivo; classificação múltipla; confirmação de direitos; revisão antes da publicação.
 
-| ID | Entrega | Prioridade | Situação | Dependências principais |
+**Comunidade (BK-033/BK-035).** Comentários textuais de até 1.000 caracteres, respostas em um nível, relatos de aplicação, denúncias autenticadas e moderação com registro de decisão. Denunciar não oculta automaticamente um comentário.
+
+**Notificações (BK-036).** Eventos dos próprios materiais, novos recursos da Biblioteca e novidades da plataforma. Marcar como lida não deve apagar notificações.
+
+**Salvos (BK-017).** Busca visível na página. As telas isoladas de filtros de Salvos não implicam implementação de controles atualmente ausentes do fluxo principal.
+
+## 5. Verificação, responsividade e entrega
+
+| ID | Entrega | Prioridade | Situação | Dependências |
 | --- | --- | --- | --- | --- |
-| **BK-032** | Adaptar todos os fluxos do MVP para tablet e celular. | P1 | A fazer | Fluxos desktop e BK-026 |
-| **BK-027** | Executar testes, corrigir falhas e verificar os critérios do MVP. | P1 | A fazer | BK-015 e fluxos implementados |
-| **BK-013** | Realizar testes moderados de tarefas com um pequeno grupo de professores e registrar os resultados. | P2 | A fazer | Protótipo ou versão funcional adequada aos testes |
-| **BK-028** | Publicar a demonstração, preparar dados autorizados e documentar o que foi entregue. | P1 | A fazer | BK-027, BK-032 |
+| BK-032 | Adaptar os fluxos para tablet e celular. | P1 | A fazer | BK-030 e telas funcionais |
+| BK-027 | Executar testes funcionais, segurança, integração e acessibilidade. | P1 | A fazer | BK-015 e entregas implementadas |
+| BK-013 | Realizar testes moderados de tarefas com professores e registrar achados. | P2 | A fazer | Protótipo ou versão funcional adequada |
+| BK-028 | Preparar demonstração, dados permitidos e registro das entregas de portfólio. | P1 | A fazer | BK-027, BK-032 |
 
-A verificação deverá abranger testes unitários, integração dos fluxos críticos e um teste ponta a ponta das jornadas principais. A acessibilidade terá a **WCAG 2.2 AA** como referência, com testes manuais. Também serão verificados navegadores atuais (Chrome, Firefox, Edge e Safari), tamanhos de tela e métricas de desempenho definidas antes dos testes.
+A avaliação de acessibilidade terá a **WCAG 2.2 AA** como referência. O plano de qualidade deve incluir fluxos protegidos, estados da comunidade, revisão editorial, moderação, falhas de upload e compatibilidade com navegadores atuais.
 
-Os testes com professores ainda não aconteceram. Seus resultados só deverão ser apresentados no portfólio depois de realizados. Para a demonstração pública, serão necessários Termos de uso, Política de privacidade, um meio de contato e regras de tratamento de dados compatíveis com o funcionamento escolhido.
+## 6. Evoluções fora do MVP
 
-## 7. Depois do MVP
-
-| ID | Entrega | Prioridade | Situação |
+| ID | Tema | Prioridade | Situação |
 | --- | --- | --- | --- |
-| **BK-029** | Avaliar funcionalidades para versões posteriores, a partir do uso e dos aprendizados do projeto. | P3 | Planejado para etapa futura |
+| BK-029 | Avaliar melhorias com base no uso e nos testes. | P3 | Futuro |
 
-Entre as possibilidades estão login com Google, links externos para materiais, comentários, notificações, relatos de aplicação, coleções e outras funcionalidades de comunidade. Nenhuma delas será implementada apenas porque aparece no protótipo.
+Possibilidades: login social, importação por URL, editor de recursos, recomendações, coleções colaborativas ou recursos avançados de comunidade. Não há compromisso de desenvolvimento dessas ideias.
 
-## 8. Ordem sugerida de trabalho
+## 7. Ordem sugerida
 
-1. **Concluir a revisão documental e do Figma:** BK-001 a BK-012 e BK-031, conforme a necessidade de cada fluxo.
-2. **Preparar a base técnica:** BK-014, BK-015, BK-019, BK-020 e BK-030.
-3. **Desenvolver as funcionalidades desktop:** BK-021, BK-022, BK-023, BK-017, BK-016, BK-025, BK-024 e BK-018. O BK-026 acompanha a implementação.
-4. **Adaptar e verificar:** BK-032 e BK-027, com testes durante o desenvolvimento, não apenas no final.
-5. **Avaliar e publicar:** executar o BK-013 quando houver uma versão adequada para os testes e preparar o BK-028.
+1. **Fundação:** BK-014, BK-015, BK-019, BK-020 e BK-030.
+2. **Acervo e conta:** BK-021, BK-022, BK-023, BK-017 e BK-024.
+3. **Contribuição e participação:** BK-016, BK-025, BK-034 e BK-033.
+4. **Governança e comunicação:** BK-035, BK-036, BK-037 e BK-018.
+5. **Qualidade e entrega:** BK-026, BK-032, BK-027, BK-013 e BK-028.
 
-Não há datas ou estimativas de esforço definidas. A ordem poderá mudar quando surgirem dependências técnicas reais.
+A ordem é indicativa. O desenvolvimento das camadas de segurança e dos estados de erro deve ocorrer junto aos fluxos, não apenas no encerramento do projeto.
 
-## 9. Pendências para as próximas etapas
+## 8. Pendências técnicas para destravar tarefas
 
-- [ ] Fechar os detalhes de busca: data de ordenação, desempate, termos entre título e tags e parâmetros da URL (**BK-004**).
-- [ ] Definir limites de campos e tags, associação de anos/séries e quantidade total de arquivos por material (**BK-006**).
-- [ ] Definir as verificações de segurança do upload múltiplo (**BK-007**, **BK-016**, **BK-020**).
-- [ ] Desenhar o fluxo de revisão e esclarecer a edição/despublicação por responsáveis autorizados (**BK-031**).
-- [ ] Escolher framework, autenticação, armazenamento e hospedagem concretos (**BK-014**, **BK-019**, **BK-020**).
-- [ ] Definir metas de desempenho e preparar os cenários de teste (**BK-015**).
+- [ ] Definir autenticação, backend, papéis, armazenamento e regras de sessão.
+- [ ] Fechar limites adicionais de campos, tags e upload múltiplo.
+- [ ] Especificar ordenação padrão, busca e parâmetros da URL.
+- [ ] Modelar estados de ajustes/reenvio, publicação/despublicação e justificativas.
+- [ ] Definir defesa contra spam, retenção de denúncias e política de notificações.
+- [ ] Estabelecer plano de testes, breakpoints e metas de desempenho.
 
-Essas pendências não impedem iniciar tarefas independentes. Devem ser resolvidas antes da funcionalidade correspondente.
-
-## 10. Documentos relacionados
+## 9. Documentos relacionados
 
 - [Escopo do MVP](escopo-mvp.md)
 - [Requisitos](requisitos.md)
 - [Histórias de usuário](historias-de-usuario.md)
 - [Especificação de busca e filtros](especificacao-busca-filtros.md)
 - [Especificação de metadados](especificacao-metadados.md)
-- [User Flow](../ux-ui/user-flow.md)
-- [Design System](../ux-ui/design-system.md)
 - [Handoff de UI/UX](../ux-ui/handoff.md)
