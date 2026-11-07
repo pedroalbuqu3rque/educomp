@@ -1,273 +1,289 @@
 # EduComp — Histórias de usuário
 
-**Versão:** 0.7  
-**Data:** 07/11/2026  
-**Situação:** critérios definidos para o MVP; desenvolvimento não iniciado.
+**Versão:** 1.0 · **Data:** 07/11/2026 · **Situação:** histórias planejadas; critérios ainda não testados na aplicação.
 
 ## 1. Finalidade
 
-As histórias descrevem o que as pessoas precisam fazer no EduComp e como verificar se cada entrega funciona. Os detalhes de comportamento ficam nos [Requisitos](requisitos.md) e nas especificações de [busca e filtros](especificacao-busca-filtros.md) e [metadados](especificacao-metadados.md).
+As histórias descrevem necessidades de visitantes, professores e revisores. Os códigos existentes foram preservados para manter a rastreabilidade. A **US-005** permanece reservada a links externos de materiais, fora do MVP. Novos códigos cobrem comunidade, perfis públicos, moderação, notificações e contato.
 
-Os códigos `US-001` a `US-018` foram preservados. São **17 histórias previstas para o MVP** e uma reservada para evolução futura (`US-005`). Os critérios abaixo ainda não foram testados.
+Uma tela no Figma não comprova que o critério esteja implementado. O aceite depende de dados, persistência, validação e permissões reais.
 
-O desenvolvimento começará pelo desktop, mas as histórias do MVP também deverão funcionar nas versões responsivas.
-
-## 2. Acesso e conta
+## 2. Entrada, autenticação e perfil
 
 ### US-018 — Conhecer a plataforma
 
-**Como** visitante, **quero** conhecer o EduComp e acessar a Biblioteca, **para** explorar os materiais disponíveis.
+**Como** visitante, **quero** entender o EduComp e abrir a Biblioteca, **para** conhecer os materiais disponíveis.
 
-**Critérios de aceitação**
-
-- [ ] O Início apresenta a proposta da plataforma e caminhos para Biblioteca, Entrar e Criar conta.
-- [ ] É possível consultar a Biblioteca e os detalhes dos materiais sem conta.
-- [ ] Ações que exigem login informam essa condição antes de prosseguir.
+- [ ] Início apresenta a proposta e caminhos para Biblioteca, Entrar e Criar conta.
+- [ ] Visitantes consultam Biblioteca e detalhes sem criar conta.
+- [ ] A logo do cabeçalho permite retornar ao Início.
 
 **Requisito:** RF-020.
 
 ### US-014 — Criar conta
 
-**Como** professor, **quero** me cadastrar, **para** utilizar as funcionalidades pessoais do EduComp.
+**Como** professor, **quero** criar uma conta, **para** utilizar as áreas pessoais.
 
-**Critérios de aceitação**
-
-- [ ] O cadastro solicita nome, e-mail e senha; aceita e-mails pessoais e institucionais.
-- [ ] Dados inválidos e e-mails já cadastrados são tratados sem criar uma segunda conta.
-- [ ] Após o cadastro, o usuário é orientado a entrar, respeitando eventual verificação de e-mail exigida pelo serviço de autenticação.
-- [ ] O cadastro comum não concede acesso à revisão de materiais.
+- [ ] Nome, e-mail e senha são validados; contas duplicadas são tratadas.
+- [ ] A interface orienta a conclusão e o caminho para login.
+- [ ] O cadastro não concede papel de revisor.
 
 **Requisito:** RF-015.
 
-### US-015 — Entrar e sair da plataforma
+### US-015 — Entrar e sair
 
-**Como** professor cadastrado, **quero** entrar e sair da minha conta, **para** acessar meus dados com segurança.
+**Como** professor cadastrado, **quero** entrar e sair com segurança, **para** acessar meus dados.
 
-**Critérios de aceitação**
-
-- [ ] Credenciais válidas iniciam a sessão; credenciais inválidas apresentam erro.
-- [ ] Após entrar, o professor retoma a ação que exigiu login ou, se não houver uma, vai para a Biblioteca.
-- [ ] Sair encerra a sessão e impede novas operações protegidas sem autenticação.
-- [ ] Estar autenticado não permite executar ações reservadas ao revisor.
+- [ ] Credenciais corretas iniciam sessão; inválidas apresentam erro.
+- [ ] Ação protegida pode ser retomada após o login, quando aplicável.
+- [ ] Sair encerra a sessão; ações restritas são verificadas no servidor.
 
 **Requisito:** RF-016.
 
 ### US-016 — Recuperar senha
 
-**Como** professor que esqueceu sua senha, **quero** redefini-la por e-mail, **para** recuperar o acesso.
+**Como** professor, **quero** redefinir uma senha esquecida, **para** recuperar meu acesso.
 
-**Critérios de aceitação**
-
-- [ ] O usuário pode solicitar instruções pelo e-mail informado, sem exposição indevida da existência da conta.
-- [ ] Apenas links válidos e não expirados permitem redefinir a senha.
-- [ ] Após a alteração, a interface confirma o resultado e oferece retorno ao login.
+- [ ] É possível solicitar instruções por e-mail sem revelar indevidamente se a conta existe.
+- [ ] Links expirados ou inválidos são rejeitados e orientam nova solicitação.
+- [ ] A redefinição confirmada oferece retorno ao login.
 
 **Requisito:** RF-017.
 
 ### US-017 — Atualizar o perfil
 
-**Como** professor autenticado, **quero** atualizar meu perfil, **para** manter meus dados corretos.
+**Como** professor autenticado, **quero** manter minhas informações corretas, **para** identificar minhas contribuições.
 
-**Critérios de aceitação**
+- [ ] Perfil apresenta nome, foto, cargo/função, e-mail e campo *Sobre mim*.
+- [ ] É possível alterar os dados autorizados e a senha, com validação e persistência.
+- [ ] A foto selecionada tem prévia e opção de escolher outra imagem antes de salvar.
+- [ ] Dados privados não são expostos no perfil público.
 
-- [ ] O professor pode consultar seus dados e alterar nome, foto e senha.
-- [ ] O e-mail é exibido, mas não pode ser editado no MVP.
-- [ ] As alterações são validadas, persistidas e acompanhadas de confirmação ou erro.
-- [ ] Uma conta não pode alterar os dados de outra.
-
-**Requisito:** RF-018.
+**Requisitos:** RF-018, RF-024.
 
 ## 3. Biblioteca e descoberta
 
 ### US-001 — Explorar a Biblioteca
 
-**Como** professor, **quero** visualizar os materiais da Biblioteca, **para** encontrar recursos para minhas aulas.
+**Como** professor, **quero** consultar os materiais publicados, **para** escolher recursos para minhas aulas.
 
-**Critérios de aceitação**
+- [ ] A listagem pública exibe cartões com dados reais, 12 por página e total correto.
+- [ ] Cards apresentam tipo, título, resumo, etapa/ano ou série, ícones de abordagem e favorito.
+- [ ] É possível abrir detalhes e navegar entre páginas sem duplicação.
 
-- [ ] A listagem pública mostra apenas materiais aprovados e publicados.
-- [ ] Os resultados são apresentados em páginas de até 12 materiais, com total real e navegação entre páginas.
-- [ ] A ordenação inicial é por mais recentes, com opção de ordem alfabética por título.
-- [ ] É possível abrir os detalhes; estados de carregamento, acervo vazio e falha são identificáveis.
-
-**Requisitos:** RF-001, RF-003 e RF-005.
+**Requisitos:** RF-001, RF-003, RF-005.
 
 ### US-002 — Pesquisar materiais
 
-**Como** professor, **quero** pesquisar por título ou palavras-chave, **para** localizar materiais sobre um assunto.
+**Como** professor, **quero** buscar por título ou tema, **para** localizar um conteúdo específico.
 
-**Critérios de aceitação**
+- [ ] Enter e Buscar executam pesquisa em título e palavras-chave.
+- [ ] Diferenças de caixa e acento não impedem a correspondência.
+- [ ] A busca convive com os filtros e informa a ausência de resultados.
 
-- [ ] A pesquisa é executada por Enter ou pelo botão Buscar, sem consulta automática a cada tecla.
-- [ ] A busca ignora diferenças entre maiúsculas e minúsculas e entre letras com ou sem acento, aceitando trechos de palavras.
-- [ ] Consultas com várias palavras exigem correspondência de todos os termos, sem exigir a mesma ordem.
-- [ ] A pesquisa funciona junto aos filtros aplicados; uma resposta antiga não substitui resultados mais recentes.
-- [ ] O texto pesquisado é preservado na URL e pode ser alterado ou removido.
-
-**Requisitos:** RF-002 e RF-005.
+**Requisitos:** RF-002, RF-005.
 
 ### US-003 — Filtrar materiais
 
-**Como** professor, **quero** combinar filtros pedagógicos, **para** restringir a Biblioteca aos recursos de interesse.
+**Como** professor, **quero** combinar filtros, **para** encontrar atividades adequadas ao contexto da turma.
 
-**Critérios de aceitação**
+- [ ] Tipo inclui **Jogo**; há filtros separados para Tipo, Etapa, Eixo e Abordagem.
+- [ ] A abordagem identifica Plugada e Desplugada, inclusive em materiais com ambas.
+- [ ] Aplicar confirma a seleção; Limpar afeta apenas a categoria aberta; fechar sem aplicar não muda os resultados.
+- [ ] Filtros distintos combinam-se com a pesquisa; uma consulta sem correspondências mantém os critérios para revisão.
 
-- [ ] Há filtros por tipo de material, etapa de ensino e eixo da Computação, com seleção múltipla.
-- [ ] Opções da mesma categoria usam **OU**; categorias diferentes e pesquisa textual usam **E**.
-- [ ] **Aplicar** confirma as seleções; **Limpar** desmarca apenas a categoria aberta e também exige Aplicar.
-- [ ] Fechar sem aplicar descarta alterações temporárias; reabrir mostra as seleções confirmadas.
-- [ ] Opções sem resultados continuam selecionáveis, com estado vazio quando necessário.
-- [ ] Alterar critérios volta à primeira página e preserva os filtros aplicados na URL.
+**Requisitos:** RF-004, RF-005.
 
-**Requisitos:** RF-004 e RF-005.
+## 4. Detalhes, arquivos e autoria
 
-## 4. Detalhes e arquivos
+### US-004 — Consultar detalhes
 
-### US-004 — Consultar detalhes do material
+**Como** professor, **quero** ler as informações de um material, **para** decidir como utilizá-lo.
 
-**Como** professor, **quero** consultar as informações de um material, **para** avaliar se ele é adequado à minha aula.
-
-**Critérios de aceitação**
-
-- [ ] Os detalhes são públicos e exibem título, descrição, palavras-chave, classificações e autoria ou fonte.
-- [ ] Ano/série e objetivos de aprendizagem aparecem quando cadastrados, sem preenchimento fictício de campos opcionais.
-- [ ] Os arquivos associados são identificados, com indicação de que o acesso exige login.
-- [ ] É possível retornar à Biblioteca com a pesquisa e os filtros preservados.
+- [ ] A página pública mostra classificação, ano/série, abordagem, descrição, objetivos e autoria quando presentes.
+- [ ] Campos opcionais ausentes não aparecem preenchidos artificialmente.
+- [ ] O autor pode ser acessado pelo link para o perfil público.
 
 **Requisito:** RF-006.
 
-### US-006 — Acessar arquivos hospedados
+### US-006 — Acessar arquivos
 
-**Como** professor, **quero** abrir os arquivos de um material, **para** consultar ou utilizar seu conteúdo.
+**Como** professor, **quero** obter os arquivos associados, **para** preparar minhas aulas.
 
-**Critérios de aceitação**
-
-- [ ] Cada arquivo disponível possui uma ação de acesso identificável.
-- [ ] Ao tentar abrir um arquivo sem login, o visitante é encaminhado à autenticação e pode retomar a ação depois de entrar.
-- [ ] A obtenção do arquivo exige autorização também no serviço que o disponibiliza.
-- [ ] Arquivos ausentes ou indisponíveis não são apresentados como acessíveis.
+- [ ] Recursos disponíveis têm ação identificável.
+- [ ] Autenticação e permissão são verificadas antes de liberar o arquivo.
+- [ ] Um visitante encaminhado ao login pode retomar a tentativa de acesso quando viável.
 
 **Requisito:** RF-008.
 
 ### US-007 — Identificar arquivos disponíveis
 
-**Como** professor, **quero** saber quais arquivos acompanham um material, **para** escolher o que preciso acessar.
+**Como** professor, **quero** conhecer os arquivos disponíveis, **para** selecionar o recurso correto.
 
-**Critérios de aceitação**
-
-- [ ] Os detalhes identificam os arquivos associados ao material, quando disponíveis.
-- [ ] A interface diferencia arquivo disponível de arquivo indisponível.
-- [ ] Quando não houver arquivo acessível, a situação é informada sem oferecer um link inexistente.
+- [ ] A interface mostra os arquivos vinculados e não inventa acessos inexistentes.
+- [ ] Falha de um arquivo não elimina os demais dados do material.
 
 **Requisito:** RF-009.
 
 ### US-008 — Entender falhas de acesso
 
-**Como** professor, **quero** entender por que não consegui acessar um arquivo, **para** saber como continuar.
+**Como** professor, **quero** receber uma explicação quando não consigo abrir um arquivo, **para** saber como continuar.
 
-**Critérios de aceitação**
-
-- [ ] A interface diferencia falta de login, ausência de permissão e indisponibilidade quando essas situações puderem ser identificadas.
-- [ ] Um erro ao abrir o arquivo não remove automaticamente os dados do material.
-- [ ] A mensagem apresenta orientação ou nova tentativa quando aplicável, sem revelar informações protegidas.
+- [ ] Falta de login, ausência de permissão e indisponibilidade são tratadas adequadamente.
+- [ ] A interface não confirma download que não ocorreu e oferece continuidade quando possível.
 
 **Requisito:** RF-010.
+
+### US-024 — Conhecer o perfil do autor
+
+**Como** visitante ou professor, **quero** abrir o perfil público do autor, **para** conhecer seus materiais publicados.
+
+- [ ] O perfil apresenta nome, avatar, apresentação autorizada e materiais publicados.
+- [ ] E-mail e dados pessoais restritos não são exibidos.
+- [ ] É possível voltar ao material consultado.
+
+**Requisito:** RF-024.
 
 ## 5. Materiais salvos
 
 ### US-010 — Salvar e reencontrar materiais
 
-**Como** professor autenticado, **quero** manter uma lista de favoritos, **para** retomar materiais de interesse.
+**Como** professor autenticado, **quero** guardar materiais, **para** consultá-los depois.
 
-**Critérios de aceitação**
-
-- [ ] O professor pode salvar e remover materiais na Biblioteca ou nos detalhes, conforme os controles disponíveis.
-- [ ] Salvos apresenta somente os favoritos da conta, sem duplicar um mesmo material.
-- [ ] As alterações persistem entre sessões e são refletidas nas interfaces relacionadas.
-- [ ] Uma coleção vazia apresenta mensagem apropriada; cada item permite abrir seus detalhes.
+- [ ] Salvar/remover altera a coleção da conta e o estado visual do favorito.
+- [ ] Salvos mostra a coleção sem duplicações, permite buscar por título/tema e abrir detalhes.
+- [ ] A coleção vazia apresenta orientação para explorar a Biblioteca.
 
 **Requisito:** RF-012.
 
-A área Salvos não terá pesquisa nem filtros próprios no MVP.
+## 6. Comunidade e moderação
 
-## 6. Envio e revisão de materiais
+### US-019 — Participar das discussões
 
-### US-009 — Enviar material
+**Como** professor autenticado, **quero** comentar e responder sobre um material, **para** trocar dúvidas e sugestões.
 
-**Como** professor autenticado, **quero** enviar um material, **para** submetê-lo à avaliação e possível publicação.
+- [ ] Todos, Relatos de aplicação e Discussões filtram o conteúdo na mesma página.
+- [ ] Comentários são textuais e têm até 1.000 caracteres; respostas têm um único nível.
+- [ ] Publicar requer login e confirmação do sistema; campos inválidos geram feedback.
 
-**Critérios de aceitação**
+**Requisitos:** RF-021, RF-022.
 
-- [ ] O formulário exige título, descrição, ao menos uma palavra-chave, tipo, etapa, eixo, autoria ou fonte e declaração de direito de compartilhamento.
-- [ ] É possível selecionar vários tipos, etapas e eixos. Ano/série é exigido quando houver Ensino Fundamental ou Médio; objetivos de aprendizagem são opcionais.
-- [ ] O envio aceita vários arquivos PDF, DOCX, PPTX, PNG ou JPG, com até 20 MB por arquivo, respeitando os limites adicionais definidos na implementação.
-- [ ] Dados e arquivos inválidos apresentam erro; um envio válido é registrado como **Pendente**, sem publicação automática.
-- [ ] A confirmação oferece um caminho para **Meus envios**.
+### US-020 — Registrar aplicação em aula
+
+**Como** professor, **quero** compartilhar como usei uma atividade, **para** ajudar outros docentes.
+
+- [ ] O relato informa ano/série da turma, experiência e adaptações opcionais.
+- [ ] A interface orienta a não incluir nomes, fotos ou dados pessoais de estudantes.
+- [ ] O relato publicado aparece na seção correspondente do material.
+
+**Requisito:** RF-022.
+
+### US-021 — Gerenciar a própria contribuição
+
+**Como** autor de um comentário, **quero** editá-lo ou excluí-lo, **para** corrigir ou retirar meu conteúdo.
+
+- [ ] Apenas o autor autenticado dispõe das ações comuns de edição/exclusão.
+- [ ] Excluir pede confirmação; sucesso e falha correspondem ao estado real.
+
+**Requisito:** RF-023.
+
+### US-022 — Denunciar conteúdo
+
+**Como** professor autenticado, **quero** comunicar conteúdo inadequado, **para** preservar a utilidade e a segurança da comunidade.
+
+- [ ] A denúncia solicita um motivo e é associada à conta autenticada.
+- [ ] A denúncia é registrada para avaliação, sem ocultar automaticamente o conteúdo.
+- [ ] A identidade de quem denunciou não aparece publicamente.
+
+**Requisito:** RF-025.
+
+### US-023 — Moderar uma denúncia
+
+**Como** revisor autorizado, **quero** avaliar o contexto e decidir sobre um comentário denunciado, **para** aplicar regras de convivência.
+
+- [ ] A fila mostra denúncia, motivo, comentário e material relacionado.
+- [ ] O revisor pode ocultar, restaurar ou excluir definitivamente, com confirmação para exclusão.
+- [ ] A decisão registra responsável, data e motivo e altera a visibilidade pública adequadamente.
+
+**Requisito:** RF-026.
+
+## 7. Envio e revisão de materiais
+
+### US-009 — Enviar um material
+
+**Como** professor autenticado, **quero** enviar meu recurso, **para** submetê-lo à avaliação.
+
+- [ ] O formulário valida título, descrição, tags, tipos, etapas/anos, eixos, abordagem, autoria, arquivos e direitos.
+- [ ] É possível informar classificações e arquivos múltiplos; cada arquivo respeita o limite de 20 MB.
+- [ ] Erros são apresentados de forma recuperável; envio válido começa como Pendente.
+- [ ] Após a confirmação, há acesso a Meus envios.
 
 **Requisito:** RF-011.
 
 ### US-013 — Acompanhar meus envios
 
-**Como** professor que enviou um material, **quero** acompanhar sua situação, **para** saber o resultado da avaliação.
+**Como** professor que contribuiu, **quero** consultar a situação dos materiais, **para** conhecer o resultado da revisão.
 
-**Critérios de aceitação**
-
-- [ ] **Meus envios** é acessível por uma aba da área de envio e mostra apenas as submissões da conta.
-- [ ] Cada material apresenta a situação atual: Pendente, Em análise, Aprovado ou Recusado.
-- [ ] Uma recusa apresenta a justificativa registrada pelo revisor.
-- [ ] Os dados são persistidos e atualizados após uma decisão; não é necessária uma central de notificações.
-- [ ] O professor não pode editar uma submissão enviada. Para tentar novamente após uma recusa, deverá criar outra submissão.
+- [ ] Meus envios mostra apenas as contribuições da própria conta.
+- [ ] Estados de revisão/publicação e justificativa de recusa são apresentados corretamente.
+- [ ] Se houver solicitação de ajustes, o próximo passo é explicado sem confundir o material com um recurso publicado.
 
 **Requisito:** RF-019.
 
 ### US-012 — Revisar submissões
 
-**Como** responsável autorizado, **quero** avaliar os materiais enviados, **para** controlar sua publicação na Biblioteca.
+**Como** revisor autorizado, **quero** decidir sobre os envios, **para** manter a qualidade e a segurança do acervo.
 
-**Critérios de aceitação**
-
-- [ ] A área restrita apresenta lista de submissões, detalhes e controles para iniciar análise, aprovar ou recusar.
-- [ ] A situação muda de Pendente para **Em análise** por uma ação explícita do revisor.
-- [ ] A decisão considera informações do material, classificações, segurança dos arquivos, autoria e condições de uso.
-- [ ] Recusar exige justificativa visível ao autor; aprovar permite publicar o material.
-- [ ] Apenas usuários autorizados podem revisar, editar materiais publicados ou retirá-los da Biblioteca.
-- [ ] Despublicar retira o material da listagem sem alterar sua aprovação para Recusado; as operações confirmadas são persistidas.
+- [ ] Somente revisores acessam lista e detalhes restritos.
+- [ ] Iniciar análise altera explicitamente Pendente para Em análise.
+- [ ] Aprovação e recusa são registradas; recusa exige justificativa.
+- [ ] Disponibilidade pública pode ser controlada sem reclassificar a aprovação.
 
 **Requisito:** RF-014.
 
-O papel de revisor é atribuído manualmente. A interface dessa área ainda será desenhada no Figma.
+## 8. Comunicação e informações institucionais
 
-## 7. Compartilhamento
+### US-025 — Acompanhar notificações
 
-### US-011 — Copiar o link da plataforma
+**Como** professor autenticado, **quero** receber atualizações, **para** acompanhar meus materiais e as novidades do EduComp.
 
-**Como** pessoa que deseja divulgar o EduComp, **quero** copiar o endereço da página inicial, **para** compartilhá-lo pelo canal que preferir.
+- [ ] Notificações cobrem situação de materiais, novos conteúdos e notícias da plataforma.
+- [ ] A central apresenta lidas/não lidas, marcação de todas como lidas, lista completa e estado vazio.
+- [ ] Mensagens acionáveis levam ao contexto adequado, quando houver.
 
-**Critérios de aceitação**
+**Requisito:** RF-027.
 
-- [ ] A ação copia o endereço da página inicial, e não o de um material específico.
-- [ ] A interface confirma a cópia ou informa uma falha identificável.
-- [ ] O texto do controle deixa claro o destino compartilhado.
+### US-026 — Entrar em contato
+
+**Como** pessoa que usa a plataforma, **quero** enviar uma mensagem, **para** esclarecer dúvidas ou comunicar problemas.
+
+- [ ] Nome, e-mail, assunto e mensagem são validados.
+- [ ] Sucesso ou falha é exibido somente após a operação correspondente.
+
+**Requisito:** RF-028.
+
+### US-011 — Compartilhar o EduComp
+
+**Como** visitante, **quero** copiar ou compartilhar o endereço da plataforma, **para** apresentá-la a outros professores.
+
+- [ ] Copiar link confirma o resultado e utiliza o endereço real da plataforma.
+- [ ] Atalhos sociais não prometem integração que o serviço de destino não oferece.
 
 **Requisito:** RF-013.
 
-## 8. História reservada para versão futura
+## 9. História reservada
 
-### US-005 — Acessar material por link externo
+### US-005 — Acessar material por URL externa
 
-**Como** professor, **quero** abrir um recurso hospedado fora do EduComp, **para** consultar seu conteúdo na fonte original.
-
-**Situação:** fora do MVP. A primeira versão utilizará apenas arquivos hospedados na plataforma. Os critérios de aceitação desta história serão definidos caso o acesso por links externos entre no escopo.
+**Situação:** fora do MVP. O EduComp utilizará arquivos hospedados na plataforma. Os critérios serão definidos somente se essa modalidade for priorizada futuramente.
 
 **Requisito reservado:** RF-007.
 
-## 9. Aceite e documentos relacionados
+## 10. Aceite e documentos relacionados
 
-Os critérios serão verificados durante o desenvolvimento, incluindo estados de erro, persistência e permissões. A conclusão do MVP também exige responsividade e acessibilidade, conforme os requisitos não funcionais. Nenhuma história deve ser marcada como concluída apenas por existir no Figma.
+Os critérios serão testados na aplicação funcional, com permissões de servidor, dados persistentes, tratamento de falhas e acessibilidade. A versão desktop é a primeira etapa, não a única forma de uso prevista.
 
 - [Escopo do MVP](escopo-mvp.md)
 - [Requisitos](requisitos.md)
 - [Backlog](backlog.md)
-- [Especificação de busca e filtros](especificacao-busca-filtros.md)
-- [Especificação de metadados](especificacao-metadados.md)
 - [User Flow](../ux-ui/user-flow.md)
