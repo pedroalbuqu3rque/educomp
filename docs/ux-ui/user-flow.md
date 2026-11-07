@@ -1,207 +1,507 @@
-# EduComp — User Flow
+# EduComp — User flow
 
-**Versão:** 0.8  
-**Atualizado em:** 07/11/2026  
-**Situação:** fluxos planejados; ainda não implementados ou validados com usuários.
+**Versão:** 1.0 · **Data:** 07/11/2026 · **Situação:** fluxos definidos no protótipo; implementação não iniciada.
 
-## 1. Visão geral
+## 1. Objetivo
 
-Este documento descreve os caminhos principais de quem utiliza o EduComp: descobrir materiais, acessar arquivos, guardar favoritos, enviar contribuições e acompanhar sua revisão.
+Este documento descreve os principais percursos de visitantes, professores autenticados e revisores no EduComp. Registra os pontos de entrada, as decisões, os estados alternativos e as condições de conclusão de cada tarefa.
 
-**Início, Biblioteca e detalhes são públicos.** Abrir arquivos, salvar materiais, enviar contribuições e acessar o perfil exige login. A revisão é reservada às contas autorizadas.
+Os fluxos refletem a experiência prevista no protótipo do Figma. As transições funcionais, a persistência e as permissões deverão ser implementadas e verificadas durante o desenvolvimento.
 
-Os fluxos tomam como referência o [protótipo desktop no Figma](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32520). A disposição das telas poderá mudar no tablet e no celular, mas as ações e os caminhos de recuperação deverão continuar disponíveis.
+## 2. Organização do protótipo
 
-## 2. Entrada e autenticação
+A página **EduComp · Protótipo** está organizada em dez seções:
 
-```mermaid
-flowchart TD
-    A[Início] --> B[Biblioteca]
-    B --> C[Detalhes do material]
-    C --> D{Ação exige login?}
-    D -->|Não| E[Continuar consulta]
-    D -->|Sim| F{Sessão ativa?}
-    F -->|Sim| G[Executar ação]
-    F -->|Não| H[Entrar]
-    H --> I{Login concluído?}
-    I -->|Sim| G
-    I -->|Não| J[Corrigir dados ou recuperar senha]
-    J --> H
-    A --> K[Criar conta]
-    K --> L[Confirmar cadastro]
-    L --> H
-```
+| Seção | Conteúdo |
+| --- | --- |
+| 01 · Início | Apresentação da plataforma e acesso aos principais percursos. |
+| 02 · Acesso | Cadastro, login, recuperação e redefinição de senha. |
+| 03 · Biblioteca e salvos | Listagem de materiais, pesquisa, favoritos e coleção pessoal. |
+| 04 · Filtros | Seleção de tipo, etapa, eixo e abordagem. |
+| 05 · Material e autor | Detalhes, arquivos, autoria e perfis públicos. |
+| 06 · Comunidade | Discussões, relatos de aplicação, respostas, edição, exclusão e denúncia. |
+| 07 · Envio de materiais | Cadastro, validação, confirmação e acompanhamento de materiais. |
+| 08 · Perfil e notificações | Dados pessoais, fotografia, segurança e avisos. |
+| 09 · Contato e informações | Fale conosco, compartilhamento e páginas institucionais. |
+| 10 · Revisão e moderação | Avaliação editorial de materiais e tratamento de denúncias. |
 
-O visitante pode explorar a Biblioteca e ler os detalhes sem se cadastrar. Se tentar abrir um arquivo ou salvar um material, será encaminhado ao login. Depois de entrar, deverá retomar a ação interrompida; se tiver iniciado o login diretamente, irá para a Biblioteca.
+As telas representam etapas, estados e alternativas de interação. Nem toda tela corresponde a uma rota independente da aplicação.
 
-- **Cadastro:** aceita e-mails pessoais e institucionais. Após a conclusão, o próximo passo é o login, respeitando a eventual verificação de e-mail exigida pelo serviço de autenticação.
-- **Login:** credenciais incorretas apresentam erro sem iniciar a sessão.
-- **Recuperação de senha:** o usuário solicita um link por e-mail, redefine a senha e volta ao login. Links inválidos ou expirados devem permitir uma nova solicitação.
-- **Saída:** a opção Sair encerra a sessão. Operações pessoais voltam a exigir login.
+## 3. Fluxo 01 — Conhecer a plataforma
 
-Contas comuns não recebem permissão de revisão automaticamente. O papel de revisor será concedido manualmente e verificado também no servidor.
+**Ator:** visitante ou professor autenticado.
 
-## 3. Descoberta na Biblioteca
+**Objetivo:** compreender a proposta do EduComp e encontrar o caminho para a Biblioteca.
 
-O visitante ou professor acessa a Biblioteca, visualiza os materiais publicados e pode abrir seus detalhes. A listagem começa pelos **mais recentes**, com opção de ordenação alfabética por título e **12 materiais por página**.
+**Percurso principal:**
 
-### Pesquisa
+1. O usuário acessa a página inicial.
+2. Visualiza a apresentação da plataforma e seus principais recursos.
+3. Seleciona a ação de explorar a Biblioteca.
+4. É direcionado à listagem pública de materiais.
 
-1. A pessoa digita um título ou palavras-chave e pressiona **Enter** ou seleciona **Buscar**.
-2. O sistema consulta apenas materiais publicados, considerando título e tags. A busca ignora diferenças de caixa e acentos, aceita trechos de palavras e exige correspondência de todos os termos digitados.
-3. A Biblioteca apresenta os resultados e a quantidade total encontrada, ou informa que não houve correspondências.
-4. Uma nova pesquisa mantém os filtros aplicados e volta à primeira página.
+**Alternativas:**
 
-A consulta não é executada automaticamente a cada tecla. Se uma pesquisa anterior terminar depois de uma mais recente, seus resultados não devem substituir a listagem atual.
+- Selecionar Entrar ou Criar conta para acessar recursos pessoais.
+- Utilizar a navegação para consultar outras áreas públicas.
+- Selecionar a logo do EduComp, em outra página, para retornar ao Início.
 
-### Filtros
+**Resultado esperado:** o visitante consegue conhecer a plataforma e iniciar a exploração sem precisar criar uma conta.
 
-Os filtros são **Tipo de material**, **Etapa de ensino** e **Eixo da Computação**. É possível selecionar várias opções em cada categoria: vale **OU** dentro dela e **E** entre categorias diferentes e a pesquisa textual.
+## 4. Fluxo 02 — Pesquisar e filtrar materiais
+
+**Ator:** visitante ou professor autenticado.
+
+**Objetivo:** localizar materiais adequados a uma necessidade pedagógica.
+
+**Percurso principal:**
+
+1. O usuário acessa a Biblioteca.
+2. O sistema apresenta os materiais aprovados e publicados.
+3. O usuário digita um título ou tema no campo de pesquisa.
+4. Executa a consulta por **Buscar** ou Enter.
+5. O sistema apresenta os materiais correspondentes.
+6. O usuário pode abrir um cartão ou navegar para outra página de resultados.
+
+**Aplicação de filtros:**
+
+1. O usuário abre um dos quatro botões independentes: **Tipo**, **Etapa**, **Eixo** ou **Abordagem**.
+2. Seleciona uma ou mais opções da categoria.
+3. Seleciona **Aplicar**.
+4. O filtro é incorporado à consulta e os resultados são atualizados.
+5. O usuário pode repetir o processo com outras categorias.
+
+As opções de uma mesma categoria são combinadas por **OU**. Categorias diferentes e o texto da pesquisa são combinados por **E**.
+
+O filtro Tipo inclui seis opções, entre elas **Jogo**. O filtro Abordagem oferece **Plugada** e **Desplugada**, aceitando materiais classificados com ambas.
+
+**Alternativas e exceções:**
+
+- **Limpar:** remove as seleções temporárias da categoria aberta; Aplicar confirma a alteração.
+- **Fechar sem aplicar:** descarta alterações ainda não confirmadas.
+- **Nenhum resultado:** mantém os critérios e oferece caminhos para revisar a consulta.
+- **Acervo vazio:** informa que ainda não existem materiais publicados.
+- **Falha de carregamento:** apresenta feedback e permite uma nova tentativa.
+- **Mudança de critérios:** reinicia a paginação.
+
+**Resultado esperado:** a Biblioteca apresenta resultados coerentes com a pesquisa e os filtros, com até 12 materiais por página.
+
+O retorno de um detalhe à Biblioteca deve preservar, quando possível, a consulta, a página e a posição anterior.
+
+## 5. Fluxo 03 — Consultar um material
+
+**Ator:** visitante ou professor autenticado.
+
+**Objetivo:** avaliar a adequação de um recurso e acessar seus arquivos.
+
+**Percurso principal:**
+
+1. O usuário seleciona um cartão da Biblioteca.
+2. A página de detalhes apresenta título, descrição, classificações, abordagem, objetivos disponíveis e autoria.
+3. O usuário consulta as informações pedagógicas.
+4. Se houver arquivos, identifica os recursos disponíveis.
+5. Seleciona a ação de acesso ao arquivo.
+
+**Decisão: usuário autenticado?**
+
+- **Sim:** o sistema verifica a permissão e disponibiliza o arquivo.
+- **Não:** o usuário é encaminhado ao login, com possibilidade de retomar a ação após autenticação.
+
+**Alternativas:**
+
+- Abrir o perfil público do autor para conhecer seus materiais publicados.
+- Consultar as discussões associadas ao material.
+- Salvar o material na coleção pessoal, mediante autenticação.
+- Retornar à Biblioteca ou a Salvos, preservando o contexto quando possível.
+
+**Exceções:**
+
+- Arquivo indisponível.
+- Falha na transferência.
+- Acesso não autorizado.
+- Material retirado da circulação.
+
+**Resultado esperado:** o professor compreende o recurso e recebe uma resposta clara sobre a disponibilidade de seus arquivos.
+
+## 6. Fluxo 04 — Cadastro, login e recuperação de senha
+
+**Ator:** visitante ou professor cadastrado.
+
+### 6.1. Cadastro
+
+1. O visitante seleciona **Criar conta**.
+2. Preenche nome, e-mail e senha.
+3. O sistema valida os campos.
+4. Se os dados forem válidos, registra a conta conforme as regras de autenticação.
+5. Apresenta a confirmação e orienta a continuidade do acesso.
+
+**Exceções:** dados incompletos, e-mail inválido, conta existente ou falha no cadastro.
+
+### 6.2. Login
+
+1. O professor seleciona **Entrar**.
+2. Informa e-mail e senha.
+3. O sistema valida as credenciais.
+4. Se forem corretas, inicia a sessão e libera os recursos da conta.
+
+**Exceções:** credenciais inválidas, sessão não autorizada ou falha de serviço.
+
+Se o login foi solicitado durante uma ação protegida, o sistema deve recuperar a intenção original quando viável.
+
+### 6.3. Recuperação de senha
+
+1. O usuário seleciona **Esqueci minha senha**.
+2. Informa seu e-mail.
+3. O sistema apresenta o resultado da solicitação sem expor indevidamente a existência de uma conta.
+4. O usuário acessa o link recebido.
+5. Informa a nova senha.
+6. Após validação, conclui a redefinição e retorna ao login.
+
+**Exceções:** link inválido, expirado, já utilizado ou senha fora dos critérios.
+
+**Resultado esperado:** os processos de acesso são compreensíveis, seguros e oferecem continuidade em situações de erro.
+
+## 7. Fluxo 05 — Salvar e recuperar materiais
+
+**Ator:** professor autenticado.
+
+**Objetivo:** manter uma coleção pessoal de recursos para consulta posterior.
+
+**Percurso principal:**
+
+1. O professor encontra um material na Biblioteca ou nos detalhes.
+2. Seleciona o controle de favorito.
+3. O sistema vincula o material à sua conta.
+4. O controle passa a indicar o estado salvo.
+5. O professor acessa **Salvos** pelo cabeçalho.
+6. Visualiza sua coleção e pode pesquisar por título ou tema.
+7. Seleciona um material para consultar seus detalhes.
+
+**Alternativas:**
+
+- Selecionar novamente o favorito para remover o material.
+- Encontrar uma coleção vazia e utilizar **Explorar biblioteca**.
+- Pesquisar por um termo sem correspondências na coleção.
+
+A busca de Salvos atua somente sobre a coleção pessoal. Não deve ser confundida com a pesquisa global da Biblioteca.
+
+As variações de filtros de Salvos existentes no arquivo de design não estão conectadas ao fluxo principal da página e não representam controles ativos nesta versão.
+
+**Resultado esperado:** os favoritos permanecem associados à conta, sem duplicação e com estados sincronizados.
+
+## 8. Fluxo 06 — Participar da comunidade
+
+**Ator:** visitante ou professor autenticado.
+
+**Objetivo:** consultar e compartilhar experiências sobre materiais.
+
+### 8.1. Consultar discussões
+
+1. O usuário abre os detalhes de um material.
+2. Acessa a área de Discussões.
+3. Visualiza as contribuições publicadas.
+4. Alterna entre **Todos**, **Relatos de aplicação** e **Discussões**.
+
+A filtragem acontece diretamente na página, sem abrir um modal.
+
+### 8.2. Publicar comentário ou resposta
+
+1. O professor autenticado seleciona a ação de comentar ou responder.
+2. Escreve uma contribuição de até **1.000 caracteres**.
+3. Confirma a publicação.
+4. O sistema valida e registra o conteúdo.
+5. A contribuição aparece no contexto do material.
+
+As respostas possuem apenas um nível de encadeamento. Não há anexos, curtidas ou mensagens privadas no MVP.
+
+**Exceções:** usuário não autenticado, texto vazio, limite excedido, conteúdo inválido ou falha na publicação.
+
+### 8.3. Publicar relato de aplicação
+
+1. O professor seleciona a opção de compartilhar uma experiência.
+2. Informa o ano/série da turma.
+3. Descreve como utilizou o material.
+4. Pode registrar adaptações realizadas.
+5. Confirma o envio.
+6. O relato aparece na categoria correspondente.
+
+O formulário deve orientar o professor a não divulgar informações pessoais de estudantes.
+
+### 8.4. Editar ou excluir uma contribuição
+
+1. O autor identifica uma contribuição própria.
+2. Seleciona **Editar** ou **Excluir**.
+3. Na edição, altera o texto e confirma.
+4. Na exclusão, visualiza uma confirmação antes da operação.
+5. O sistema atualiza ou remove a contribuição conforme a ação autorizada.
+
+Uma contribuição de outra pessoa não apresenta as ações comuns de edição e exclusão para o usuário.
+
+### 8.5. Denunciar uma contribuição
+
+1. O professor autenticado seleciona a opção de denúncia.
+2. Escolhe o motivo.
+3. Confirma o envio.
+4. O sistema registra a denúncia e apresenta confirmação.
+
+**Importante:** a denúncia não oculta o comentário automaticamente. A decisão cabe à moderação.
+
+**Resultado esperado:** professores conseguem participar das discussões com ações claras e regras de convivência aplicáveis.
+
+## 9. Fluxo 07 — Enviar um material
+
+**Ator:** professor autenticado.
+
+**Objetivo:** contribuir com um recurso para a Biblioteca.
+
+**Percurso principal:**
+
+1. O professor seleciona **Enviar material**.
+2. Preenche título e descrição.
+3. Informa tema ou palavras-chave.
+4. Seleciona um ou mais tipos, etapas, anos/séries compatíveis e eixos da Computação.
+5. Informa se o recurso é plugado, desplugado ou contempla ambas as abordagens.
+6. Preenche autoria ou fonte e objetivos de aprendizagem, quando houver.
+7. Adiciona um ou mais arquivos.
+8. Confirma a declaração de direitos de compartilhamento.
+9. Seleciona a ação de enviar.
+10. O sistema valida os dados e os arquivos.
+11. A submissão válida é registrada com situação **Pendente**.
+12. O sistema apresenta a confirmação e oferece acesso a **Meus envios**.
+
+**Regras dos arquivos:**
+
+- Formatos: PDF, DOCX, PPTX, PNG e JPG.
+- Limite: 20 MB por arquivo.
+- É possível selecionar e remover arquivos antes da confirmação.
+- Tipo, tamanho e permissões devem ser verificados no servidor.
+
+**Exceções:**
+
+- Campos obrigatórios ausentes.
+- Ano/série incompatível com a etapa.
+- Arquivo com formato não permitido.
+- Arquivo acima do limite.
+- Falha de transferência.
+- Ausência da declaração de direitos.
+
+O usuário deve receber mensagens específicas e conseguir corrigir erros sem perder desnecessariamente os dados válidos.
+
+**Resultado esperado:** o envio é registrado para revisão, sem publicação automática.
+
+## 10. Fluxo 08 — Acompanhar materiais enviados
+
+**Ator:** professor autenticado.
+
+**Objetivo:** conhecer o andamento das próprias contribuições.
+
+**Percurso principal:**
+
+1. O professor acessa **Meus envios**.
+2. Visualiza os materiais associados à sua conta.
+3. Seleciona uma submissão.
+4. Consulta informações e situação editorial.
+5. Acompanha atualizações de avaliação e disponibilidade.
+
+**Situações previstas:**
+
+| Situação | Significado |
+| --- | --- |
+| Pendente | Material recebido e aguardando análise. |
+| Em análise | Um revisor iniciou a avaliação. |
+| Aprovado | Material aceito editorialmente. |
+| Recusado | Material não aceito, com justificativa. |
+| Publicado | Material aprovado e disponível na Biblioteca. |
+
+A condição **Publicado** representa disponibilidade pública, não uma substituição obrigatória da situação editorial. Um material pode estar aprovado e ainda não estar disponível na Biblioteca.
+
+Quando houver orientação de ajustes ou reenvio, ela deve ser apresentada ao professor com clareza, conforme o fluxo implementado.
+
+**Resultado esperado:** o responsável conhece o andamento e o resultado de cada submissão sem precisar entrar na área de revisão.
+
+## 11. Fluxo 09 — Revisar materiais
+
+**Ator:** revisor autorizado.
+
+**Objetivo:** avaliar contribuições antes de disponibilizá-las publicamente.
+
+**Percurso principal:**
+
+1. O revisor autenticado acessa **Revisão**.
+2. Seleciona a área **Envios**.
+3. Visualiza a fila de submissões.
+4. Abre um material pendente.
+5. Consulta seus metadados, arquivos, autoria e declaração de direitos.
+6. Seleciona **Iniciar análise**.
+7. O sistema registra a situação **Em análise**.
+8. O revisor avalia o material.
+9. Seleciona **Aprovar** ou **Recusar**.
+10. O sistema confirma e registra a decisão, vinculando data e responsável.
+
+**Aprovação:**
+
+- Registra a aceitação editorial.
+- Não deve ser confundida com publicação automática.
+- A visibilidade pública depende da condição de publicação.
+
+**Recusa:**
+
+- Exige justificativa antes da conclusão.
+- Registra a decisão e seu responsável.
+- Disponibiliza o motivo ao professor em Meus envios.
+
+**Alternativas e exceções:**
+
+- Material indisponível ou arquivo inválido.
+- Falha ao registrar a decisão.
+- Mudança de situação por outro revisor.
+- Conta sem autorização.
+
+O sistema não deve apresentar sucesso antes de confirmar a persistência da decisão.
+
+**Resultado esperado:** somente materiais aprovados e publicados entram no acervo público, com decisões editoriais rastreáveis.
+
+## 12. Fluxo 10 — Moderar denúncias
+
+**Ator:** revisor autorizado.
+
+**Objetivo:** avaliar conteúdos denunciados e aplicar medidas de moderação.
+
+**Percurso principal:**
+
+1. O revisor acessa **Revisão**.
+2. Abre a área **Denúncias**.
+3. Visualiza os registros recebidos.
+4. Seleciona uma denúncia.
+5. Consulta o motivo, o comentário denunciado e o contexto do material.
+6. Decide a medida adequada.
+7. Confirma a decisão quando necessário.
+8. O sistema registra responsável, data, motivo e resultado.
+
+**Ações previstas:**
 
 | Ação | Resultado |
 | --- | --- |
-| Abrir uma categoria | Exibe as opções já aplicadas. |
-| Marcar ou desmarcar | Altera apenas a seleção temporária. |
-| Aplicar | Confirma a categoria, atualiza os resultados e retorna à primeira página. |
-| Limpar | Desmarca apenas a categoria aberta; os resultados não mudam até Aplicar. |
-| Fechar sem Aplicar | Descarta as mudanças temporárias e mantém a consulta anterior. |
+| Ocultar | Retira o comentário da visualização pública sem excluí-lo definitivamente. |
+| Restaurar | Torna novamente visível um comentário ocultado. |
+| Excluir definitivamente | Remove o conteúdo conforme a política de retenção e exige confirmação. |
 
-Opções sem materiais correspondentes continuam visíveis e selecionáveis. Se a combinação não encontrar nenhum material, a interface mostra o estado vazio da pesquisa.
+**Exceções:**
 
-### Paginação e retorno
+- Comentário já removido ou indisponível.
+- Denúncia já tratada.
+- Falha ao executar a medida.
+- Usuário sem permissão de moderação.
 
-Pesquisa, filtros, ordenação e página atual serão preservados na **URL**. Ao abrir os detalhes e voltar, a pessoa encontra a consulta anterior; a posição da rolagem também deverá ser restaurada quando tecnicamente viável.
+**Resultado esperado:** denúncias recebem tratamento controlado, sem remoção automática e com rastreabilidade das decisões.
 
-A Biblioteca distingue carregamento, acervo sem materiais, pesquisa sem resultados e falha de consulta. Em caso de falha, oferece nova tentativa quando possível.
+## 13. Fluxo 11 — Gerenciar perfil e notificações
 
-## 4. Detalhes e acesso aos arquivos
+**Ator:** professor autenticado.
 
-Os detalhes podem ser abertos pela Biblioteca ou pela área Salvos. Apresentam as informações cadastradas, incluindo palavras-chave, classificações, autoria ou fonte e os arquivos associados. Campos opcionais vazios não recebem conteúdo fictício.
+### 13.1. Perfil
 
-Para abrir um arquivo:
+1. O professor abre o menu da conta.
+2. Acessa **Meu perfil**.
+3. Consulta seus dados pessoais.
+4. Altera nome, foto, cargo/função ou apresentação, quando desejar.
+5. Visualiza a prévia da fotografia selecionada.
+6. Confirma a atualização.
+7. O sistema valida e salva os dados.
 
-1. A pessoa seleciona um dos arquivos listados no material.
-2. Se não estiver autenticada, entra na conta e retoma a tentativa de acesso.
-3. O sistema verifica a autorização e disponibiliza o arquivo, quando possível.
-4. Se houver indisponibilidade ou falta de permissão, a interface informa o problema sem apresentar um acesso inexistente.
+A alteração de senha segue um percurso protegido, com validação e confirmação. O perfil público utiliza apenas as informações autorizadas para divulgação.
 
-Um material pode conter **vários arquivos**. Links externos e visualização integrada não fazem parte do MVP. O acesso público aos detalhes não permite contornar a autenticação exigida para obter os arquivos.
+### 13.2. Notificações
 
-Ao voltar, a pessoa retorna à Biblioteca com seus critérios preservados ou à coleção Salvos, conforme a origem.
+1. O professor identifica o indicador de notificações no cabeçalho.
+2. Abre a central.
+3. Consulta avisos sobre envios, novos materiais ou novidades da plataforma.
+4. Seleciona uma notificação para abrir seu contexto, quando houver.
+5. Pode acessar a lista completa ou marcar todas como lidas.
 
-## 5. Materiais salvos
+**Alternativas:**
 
-O professor autenticado pode adicionar ou remover um favorito pela Biblioteca ou pelos detalhes. Depois de cada operação, o estado visual deve refletir o que foi efetivamente salvo.
+- Nenhuma notificação disponível.
+- Todas as notificações já lidas.
+- Falha de carregamento.
+- Conteúdo associado à notificação não mais disponível.
 
-Na área **Salvos**, o professor encontra sua coleção pessoal, pode abrir os detalhes e remover itens. Os favoritos permanecem associados à conta entre sessões, sem duplicar o mesmo material.
+**Resultado esperado:** o professor consegue manter o perfil atualizado e acompanhar acontecimentos relevantes da plataforma.
 
-Se a coleção estiver vazia, a interface informa isso. Falhas ao carregar, salvar ou remover não devem aparecer como operações concluídas. **Salvos não terá pesquisa nem filtros próprios** nesta versão.
+## 14. Fluxo 12 — Contato, informações e compartilhamento
 
-## 6. Envio e acompanhamento
+**Ator:** visitante ou professor autenticado.
 
-O professor autenticado acessa **Enviar material**, preenche o formulário e anexa os arquivos. **Enviar material** e **Meus envios** são duas abas da mesma área.
+### 14.1. Fale conosco
 
-O formulário deve permitir palavras-chave livres e seleção múltipla de tipos, etapas e eixos. Quando houver Ensino Fundamental ou Médio, será obrigatório informar os anos ou séries correspondentes. São aceitos arquivos PDF, DOCX, PPTX, PNG e JPG, com até **20 MB por arquivo** e possibilidade de anexar vários arquivos.
+1. O usuário acessa a página de contato.
+2. Informa nome, e-mail, assunto e mensagem.
+3. Seleciona a ação de envio.
+4. O sistema valida os dados.
+5. Após registrar a mensagem, apresenta confirmação.
 
-O percurso é:
+**Exceções:** dados inválidos, campos incompletos ou falha no envio.
 
-1. Preencher os campos, informar autoria ou fonte e confirmar o direito de compartilhar o conteúdo.
-2. Selecionar os arquivos e enviar.
-3. Corrigir campos ou arquivos inválidos, caso a validação indique algum problema.
-4. Após a confirmação do sistema, receber a mensagem de envio concluído e um atalho para **Meus envios**.
-5. Consultar a situação da submissão na aba de acompanhamento.
+### 14.2. Informações institucionais
 
-O envio concluído fica **Pendente** e não é publicado automaticamente. O autor não pode alterar uma submissão enviada no MVP. Se ela for recusada, uma nova tentativa exigirá outra submissão.
+Termos de uso e Política de privacidade ficam disponíveis sem autenticação. Seus textos deverão corresponder às práticas efetivas da plataforma antes da publicação.
 
-Em **Meus envios**, o professor visualiza somente os próprios materiais e sua situação atual: **Pendente, Em análise, Aprovado ou Recusado**. Uma recusa exibe a justificativa. Não haverá notificações por e-mail nem central de notificações.
+### 14.3. Compartilhar o EduComp
 
-## 7. Revisão e publicação
+1. O usuário acessa a opção de compartilhamento.
+2. Seleciona uma alternativa social ou **Copiar link**.
+3. O sistema executa a ação compatível.
+4. A cópia do endereço é confirmada quando concluída.
 
-```mermaid
-flowchart TD
-    A[Submissão pendente] --> B[Lista restrita de revisão]
-    B --> C[Revisor consulta os detalhes]
-    C --> D[Iniciar análise]
-    D --> E[Em análise]
-    E --> F{Decisão}
-    F -->|Aprovar| G[Aprovado]
-    F -->|Recusar| H[Informar justificativa]
-    H --> I[Recusado]
-    G --> J[Publicação conforme autorização]
-    I --> K[Autor consulta justificativa]
-    G --> L[Autor consulta situação]
-    J --> M[Material aparece na Biblioteca se publicado]
-```
+O endereço utilizado deve ser o domínio real do EduComp, não um endereço ilustrativo do protótipo.
 
-A área de revisão será acessível somente a pessoas autorizadas. Ela terá uma lista de submissões, os detalhes do material e os controles necessários para iniciar a análise, aprovar ou recusar.
+## 15. Regras transversais
 
-O revisor verifica o preenchimento, a classificação, os arquivos, a autoria e as condições de uso declaradas. **Abrir os detalhes não inicia a análise:** essa mudança exige uma ação explícita.
+### Autenticação e permissões
 
-A recusa exige uma justificativa breve, que ficará disponível ao autor. O MVP manterá a situação atual da submissão e a justificativa de recusa, sem histórico completo das transições.
+- Consultar Biblioteca, detalhes públicos, discussões e perfis públicos não exige conta.
+- Salvar materiais, acessar arquivos, comentar, denunciar e enviar recursos exige autenticação.
+- Ações pessoais só podem operar sobre dados autorizados da própria conta.
+- Revisão editorial e moderação exigem papel específico.
+- Todas as permissões devem ser verificadas no servidor, não apenas pela visibilidade dos controles.
 
-**Aprovação e publicação são condições distintas.** Um responsável autorizado pode retirar um material da Biblioteca sem transformar sua situação editorial em Recusado. Edição de materiais já publicados e despublicação também dependem de autorização.
+### Diálogos e confirmações
 
-A interface de revisão ainda precisa ser desenhada no Figma. Não é necessário criar um painel administrativo completo para esse fluxo.
+Ações destrutivas devem informar claramente suas consequências antes da confirmação. Janelas de filtros e diálogos precisam ter foco adequado, fechamento previsível e retorno ao contexto de origem.
 
-## 8. Perfil e compartilhamento
+O estilo visual de sobreposições, fundo escurecido e desfoque segue o Design System e o protótipo. Esses efeitos não substituem tratamento de foco e acessibilidade.
 
-### Meu perfil
+### Estados de retorno
 
-Após entrar, o professor pode abrir **Meu perfil**, consultar seus dados e alterar **nome, foto e senha**. O e-mail será exibido, mas não poderá ser editado. Uma atualização só deve ser confirmada depois de salva; erros permitem corrigir os dados ou tentar novamente.
+Os fluxos devem considerar:
 
-### Copiar link
+- Carregamento e processamento.
+- Confirmação de sucesso somente após operação concluída.
+- Erros de validação próximos aos campos correspondentes.
+- Falhas técnicas com orientação de continuidade.
+- Estados vazios específicos de cada contexto.
+- Recuperação da navegação após login ou retorno de detalhes, quando possível.
 
-A ação de compartilhamento do MVP copia **o endereço da página inicial do EduComp**, mesmo quando estiver disponível em outro contexto. O texto da ação precisa informar claramente esse destino, sem sugerir que será copiado o link de um material específico.
+## 16. Critérios para validação
 
-Após a tentativa de cópia, a interface informa sucesso ou falha. O compartilhamento direto por redes sociais fica fora do MVP.
+Os fluxos deverão ser verificados na aplicação funcional, contemplando:
 
-## 9. Navegação, erros e acessibilidade
+- Conclusão das tarefas principais sem caminhos bloqueados.
+- Coerência entre informações do material, filtros e cartões.
+- Persistência de dados e atualização dos estados visuais.
+- Proteção de ações por autenticação e permissão.
+- Tratamento de falhas, confirmações e estados vazios.
+- Navegação por teclado, foco, semântica e feedback acessível.
+- Adaptação dos percursos para desktop, tablet e celular.
 
-Menus, filtros e diálogos devem permitir fechamento por **Escape**, com controle do foco e retorno ao elemento que abriu a sobreposição, conforme o componente. Fechar um filtro sem Aplicar não altera os resultados.
+A referência de acessibilidade será a **WCAG 2.2 AA**. A documentação dos resultados dependerá da realização efetiva dos testes.
 
-| Situação | Caminho de continuidade |
-| --- | --- |
-| Ação protegida sem login | Entrar e retomar a tarefa. |
-| Login inválido ou link de recuperação expirado | Corrigir os dados ou solicitar outro link. |
-| Pesquisa sem resultados | Revisar texto ou filtros, sem perder o contexto. |
-| Falha ao carregar materiais | Informar o erro e permitir nova tentativa. |
-| Arquivo indisponível ou não autorizado | Informar a restrição e manter o acesso aos detalhes. |
-| Erro no envio | Apontar o problema e preservar os dados recuperáveis. |
-| Falha ao aprovar ou recusar | Não apresentar decisão como concluída; permitir nova tentativa quando cabível. |
+## 17. Referências
 
-As jornadas precisam funcionar com teclado, foco visível e mensagens compreensíveis. A mesma lógica de navegação será mantida nas versões para tablet e celular, mesmo que os menus e formulários sejam reorganizados.
-
-## 10. Ajustes necessários no Figma
-
-- [ ] Adicionar palavras-chave, classificações múltiplas e seleção de anos/séries no formulário de envio.
-- [ ] Representar o upload de vários arquivos e seus estados de validação.
-- [ ] Desenhar a lista e os detalhes da revisão, com início de análise, aprovação e recusa justificada.
-- [ ] Revisar o rótulo e a posição da ação que copia o endereço da página inicial.
-- [ ] Conferir os caminhos de retorno, os estados de erro e a navegação nas versões responsivas.
-
-As decisões sobre quantidade máxima de arquivos, regras específicas de ano/série e detalhes técnicos de autenticação serão fechadas antes de implementar os respectivos fluxos.
-
-## 11. Rastreabilidade
-
-| Jornada | Histórias de usuário | Requisitos |
-| --- | --- | --- |
-| Entrada e autenticação | US-018, US-014 a US-016 | RF-020, RF-015 a RF-017 |
-| Biblioteca e filtros | US-001 a US-003 | RF-001 a RF-005 |
-| Detalhes e arquivos | US-004, US-006 a US-008 | RF-006, RF-008 a RF-010 |
-| Salvos | US-010 | RF-012 |
-| Envio e acompanhamento | US-009, US-013 | RF-011, RF-019 |
-| Revisão e publicação | US-012 | RF-014 |
-| Perfil | US-017 | RF-018 |
-| Compartilhamento | US-011 | RF-013 |
-
-A **US-005 / RF-007**, referente a links externos, está reservada para uma versão futura.
-
-## 12. Documentos relacionados
-
-- [Escopo do MVP](../product/escopo-mvp.md)
+- [Protótipo do EduComp no Figma](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32520)
+- [Arquitetura da Informação](arquitetura-da-informacao.md)
+- [Objetivos de UX](objetivos-de-ux.md)
+- [Design System](design-system.md)
+- [Handoff de UI/UX](handoff.md)
 - [Requisitos](../product/requisitos.md)
 - [Histórias de usuário](../product/historias-de-usuario.md)
-- [Especificação de busca e filtros](../product/especificacao-busca-filtros.md)
-- [Especificação de metadados](../product/especificacao-metadados.md)
-- [Arquitetura da Informação](arquitetura-da-informacao.md)
-- [Handoff de UI/UX](handoff.md)
