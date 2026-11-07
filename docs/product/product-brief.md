@@ -1,82 +1,71 @@
+
 # EduComp — Product Brief
 
-**Versão:** 0.8  
-**Atualizado em:** 07/11/2026  
-**Situação:** planejamento do MVP; desenvolvimento não iniciado.
+**Versão:** 1.0 · **Atualizado em:** 07/11/2026 · **Situação:** proposta e escopo do MVP definidos; desenvolvimento não iniciado.
 
 ## 1. Visão geral
 
-O EduComp é um projeto de plataforma para professores da Educação Básica que trabalham com conteúdos de Computação. A ideia é reunir materiais pedagógicos em uma Biblioteca na qual seja possível encontrar recursos, conhecer suas características e salvá-los para consultas futuras.
+O EduComp é uma plataforma para professores da Educação Básica encontrarem materiais de Computação, avaliarem sua adequação às aulas e compartilharem práticas. O acervo reúne recursos classificados pedagogicamente, enquanto as discussões permitem registrar dúvidas, sugestões e experiências de aplicação.
 
-Professores também poderão contribuir com o acervo. Antes de ser publicado, cada material enviado passará por revisão.
-
-A plataforma pretende apoiar o planejamento docente, sem substituir a avaliação do professor sobre a adequação de cada recurso à sua turma.
+Professores podem contribuir com novos materiais. Essas submissões passam por revisão antes de entrar na Biblioteca; as discussões também estão sujeitas à moderação. O EduComp não substitui o julgamento pedagógico do professor nem garante, por si só, a qualidade de uma aula.
 
 ## 2. Problema e hipótese
 
-Professores podem precisar buscar materiais em diferentes fontes, nem sempre organizadas por etapa de ensino ou pelos eixos da Computação. Isso pode dificultar a localização e a comparação de recursos para as aulas.
+Encontrar recursos adequados ao ensino de Computação pode exigir consultar fontes dispersas, comparar classificações e descobrir, por tentativa, como uma atividade funciona em sala. A proposta é aproximar **descoberta, contexto pedagógico e experiência de outros docentes** em um mesmo ambiente.
 
-O projeto parte da hipótese de que uma Biblioteca organizada, com pesquisa, filtros e informações claras, pode facilitar essa tarefa.
+A hipótese é que pesquisa orientada por metadados, distinção entre atividades plugadas e desplugadas e relatos de aplicação reduzam o esforço de seleção dos recursos. **A hipótese ainda não foi validada com professores**; não há dados de uso ou resultados de pesquisa que sustentem ganhos mensuráveis neste momento.
 
-**A hipótese ainda não foi validada com professores.** O problema e a utilidade da solução serão avaliados em testes com o público, sem tratar suposições como resultados já comprovados.
+## 3. Pessoas envolvidas
 
-## 3. Público
+- **Visitante:** conhece a plataforma e consulta a Biblioteca, os detalhes dos materiais e as informações públicas dos autores.
+- **Professor autenticado:** acessa arquivos, salva materiais, atualiza o perfil, participa das discussões e envia contribuições para revisão.
+- **Revisor autorizado:** avalia submissões e denúncias, aprova ou recusa materiais e modera conteúdos da comunidade.
 
-O público principal são **professores da Educação Básica** que procuram materiais para planejar e desenvolver atividades relacionadas à Computação.
-
-A plataforma considera tanto quem deseja consultar e guardar recursos quanto quem pretende compartilhar materiais de sua autoria ou de fontes que tenha autorização para divulgar.
-
-O funcionamento do acervo também depende de **revisores autorizados**, responsáveis por avaliar as contribuições antes da publicação. Esse é um papel de operação da plataforma, não um público separado para o qual o produto está sendo desenvolvido.
+O público central é o professor da Educação Básica. O papel de revisor atende à operação segura do acervo e não é atribuído automaticamente a quem se cadastra.
 
 ## 4. Proposta de valor
 
-O EduComp busca oferecer um lugar organizado para descobrir e consultar materiais de Computação, com quatro possibilidades centrais:
+O produto se apoia em quatro frentes:
 
-- **Encontrar materiais:** pesquisar por título e palavras-chave e filtrar por tipo, etapa de ensino e eixo da Computação.
-- **Avaliar antes de acessar:** consultar descrição, autoria, classificações e outras informações do recurso.
-- **Retomar o que interessa:** guardar materiais em uma lista pessoal de favoritos.
-- **Contribuir com o acervo:** enviar materiais e acompanhar o resultado da revisão.
+1. **Encontrar:** Biblioteca pública com busca, filtros pedagógicos e cartões que informam tipo, etapa, ano/série e abordagem plugada/desplugada.
+2. **Compreender:** páginas de detalhes com descrição, eixo da Computação, objetivos, autoria e arquivos vinculados.
+3. **Trocar:** perfis públicos, comentários, respostas e relatos de aplicação ligados aos materiais, com denúncia e moderação.
+4. **Compartilhar com responsabilidade:** envio de materiais, declaração de direitos, revisão editorial e acompanhamento do resultado.
 
-A proposta está na organização, na consulta e na circulação responsável dos recursos. Criar ou adaptar conteúdos pedagógicos dentro da plataforma não faz parte da primeira versão.
+A experiência é complementada por favoritos, notificações sobre materiais e novidades, perfil do professor, canal de contato e compartilhamento da plataforma.
 
-## 5. Experiência prevista para o MVP
+## 5. Experiência do MVP
 
-O visitante poderá conhecer a plataforma, explorar a Biblioteca e abrir os detalhes de um material **sem criar uma conta**. Para acessar os arquivos, salvar favoritos ou enviar uma contribuição, será necessário entrar.
+A primeira versão contempla cadastro, login e recuperação de senha; Biblioteca com **seis tipos de material** e filtros por tipo, etapa, eixo e abordagem; detalhes e acesso autorizado a arquivos; Salvos; envio, acompanhamento e revisão; comunidade básica; perfis públicos; moderação de denúncias; notificações; formulário de contato; páginas institucionais e compartilhamento do EduComp.
 
-A Biblioteca terá pesquisa, filtros combináveis, ordenação e paginação. Os detalhes mostrarão as informações necessárias para que o professor decida se vale a pena consultar o recurso. Os arquivos ficarão hospedados na plataforma; links para materiais externos não serão aceitos nesta versão.
+A comunidade ficará limitada a publicações textuais, respostas em um nível e relatos de aplicação, sem anexos nas conversas ou mensagens privadas. As denúncias exigem identificação da conta e análise de um responsável; não removem conteúdo automaticamente.
 
-O professor autenticado poderá manter seus favoritos e enviar materiais para avaliação. Cada envio terá uma situação acompanhável em **Meus envios**. Um revisor autorizado poderá iniciar a análise, aprovar ou recusar o material, com justificativa obrigatória em caso de recusa.
+A implementação começará pelo desktop e deverá ser adaptada para tablet e celular. **O MVP só estará concluído com fluxos funcionais, dados persistentes, permissões verificadas e testes**, não com a reprodução visual das telas.
 
-A primeira implementação será feita para **desktop**, seguida pelas adaptações para tablet e celular. A responsividade faz parte da conclusão do MVP, não de uma etapa opcional.
+## 6. Limites
 
-Funcionalidades como comentários, notificações, login com Google e interações de comunidade ficam para possíveis versões posteriores. O conteúdo exato da primeira entrega está definido no [Escopo do MVP](escopo-mvp.md).
+Não fazem parte da primeira entrega login por provedores externos, importação de materiais por URL, editor de materiais dentro da plataforma, curtidas, conversas privadas, respostas em múltiplos níveis, denúncias anônimas ou recomendações automatizadas. Evoluções devem ser justificadas por necessidades observadas, não pela quantidade de recursos possíveis.
 
-## 6. Princípios da experiência
+As regras de armazenamento, validade da autenticação, limites de campos e detalhes operacionais ainda serão fechados durante a preparação técnica. O [Escopo do MVP](escopo-mvp.md) diferencia essas definições de novas funcionalidades.
 
-- **Foco no professor:** a plataforma deve ajudar a encontrar e avaliar recursos, respeitando a autonomia docente.
-- **Clareza:** pesquisa, filtros, informações e ações devem ser compreensíveis, inclusive quando não houver resultados ou um arquivo estiver indisponível.
-- **Confiança no acervo:** autoria, classificações e condições de acesso devem ser apresentadas corretamente, com revisão antes da publicação.
-- **Acesso e consistência:** os fluxos devem funcionar em diferentes tamanhos de tela e considerar navegação por teclado, contraste, rótulos e feedback adequado.
+## 7. Princípios da experiência
 
-## 7. Como a proposta será avaliada
+- **Utilidade pedagógica:** tornar visíveis as informações que ajudam o professor a decidir.
+- **Clareza e previsibilidade:** explicar filtros, acesso, status e resultados das ações.
+- **Confiança:** preservar autoria, direitos, privacidade e rastreabilidade das decisões de revisão e moderação.
+- **Participação respeitosa:** incentivar trocas úteis sem expor estudantes ou permitir conteúdo abusivo.
+- **Acessibilidade:** manter navegação por teclado, foco, contraste e leitura apropriados em diferentes telas.
 
-Estão previstos **testes moderados de tarefas com um pequeno grupo de professores**, inicialmente com o protótipo ou com uma versão funcional apropriada para avaliação.
+## 8. Validação e situação
 
-Os testes deverão observar se os participantes conseguem localizar materiais, compreender os filtros e os detalhes, identificar as condições de acesso e utilizar as funções de favoritos e envio. Também será importante ouvir se a organização do acervo faz sentido para suas necessidades reais.
+Estão previstos testes moderados de tarefas com professores, observando busca e filtros, compreensão dos detalhes, uso de Salvos, participação na comunidade e envio de materiais. A segurança e as permissões exigem testes técnicos específicos.
 
-As dificuldades observadas orientarão ajustes na interface e, quando necessário, nas regras do produto. Ainda não existem resultados desses testes nem métricas de uso da plataforma.
-
-## 8. Situação do projeto
-
-O EduComp já possui documentação de produto e UX/UI, identidade visual e protótipos no Figma. As decisões centrais do MVP foram registradas, mas ainda há ajustes nas telas de envio e a interface restrita de revisão precisa ser desenhada.
-
-**A aplicação ainda não foi desenvolvida ou testada.** As próximas etapas são concluir o alinhamento entre documentação e protótipo, definir os serviços e ferramentas de implementação e começar a construção da versão desktop.
+A identidade visual e o protótipo desktop estão consolidados. **A aplicação não foi desenvolvida e não ocorreram testes com usuários reais.** Os resultados serão documentados somente após a execução dos testes.
 
 ## 9. Documentos relacionados
 
-- [Escopo do MVP](escopo-mvp.md) — funcionalidades incluídas e critérios de conclusão.
-- [Requisitos](requisitos.md) — comportamentos e regras do sistema.
-- [Histórias de usuário](historias-de-usuario.md) — necessidades e critérios de aceitação.
-- [Backlog](backlog.md) — entregas e acompanhamento do trabalho.
-- [Objetivos de UX](../ux-ui/objetivos-de-ux.md) — objetivos da experiência.
-- [User Flow](../ux-ui/user-flow.md) — jornadas previstas para os usuários.
+- [Escopo do MVP](escopo-mvp.md)
+- [Requisitos](requisitos.md)
+- [Histórias de usuário](historias-de-usuario.md)
+- [Backlog](backlog.md)
+- [Objetivos de UX](../ux-ui/objetivos-de-ux.md)
