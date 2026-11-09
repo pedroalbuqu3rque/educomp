@@ -1,6 +1,6 @@
 # EduComp — Handoff de UI/UX
 
-**Versão:** 2.0 · **Atualizado em:** 07/11/2026  
+**Versão:** 2.0 · **Atualizado em:** 08/11/2026  
 **Situação:** protótipo desktop consolidado; desenvolvimento não iniciado.
 
 ## 1. Objetivo
@@ -31,15 +31,15 @@ O protótipo está organizado em **dez seções**, totalizando **90 telas princi
 
 | Seção | Telas | Conteúdo |
 | --- | ---: | --- |
-| 01 · Início | 1 | Apresentação do EduComp. |
-| 02 · Acesso | 9 | Cadastro, login e recuperação de senha. |
-| 03 · Biblioteca e salvos | 4 | Listagem, pesquisa e coleção pessoal. |
-| 04 · Filtros | 7 | Estados dos filtros da Biblioteca. |
-| 05 · Material e autor | 7 | Detalhes, arquivos e perfis públicos. |
-| 06 · Comunidade | 16 | Comentários, relatos, respostas e denúncias. |
-| 07 · Envio de materiais | 11 | Formulário, validações e acompanhamento. |
-| 08 · Perfil e notificações | 11 | Conta, fotografia, senha e avisos. |
-| 09 · Contato e informações | 9 | Contato, compartilhamento e páginas institucionais. |
+| 1 · Início | 1 | Apresentação do EduComp. |
+| 2 · Acesso | 9 | Cadastro, login e recuperação de senha. |
+| 3 · Biblioteca e salvos | 4 | Listagem, pesquisa e coleção pessoal. |
+| 4 · Filtros | 7 | Estados dos filtros da Biblioteca. |
+| 5 · Material e autor | 7 | Detalhes, arquivos e perfis públicos. |
+| 6 · Comunidade | 16 | Comentários, relatos, respostas e denúncias. |
+| 7 · Envio de materiais | 11 | Formulário, validações e acompanhamento. |
+| 8 · Perfil e notificações | 11 | Conta, fotografia, senha e avisos. |
+| 9 · Contato e informações | 9 | Contato, compartilhamento e páginas institucionais. |
 | 10 · Revisão e moderação | 15 | Avaliação de materiais e denúncias. |
 
 As seções agrupam telas por finalidade e não determinam, necessariamente, a estrutura de rotas da aplicação.
