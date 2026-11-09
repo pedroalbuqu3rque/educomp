@@ -1,0 +1,10 @@
+import { beforeEach, expect, test, vi } from "vitest";
+import { NextRequest } from "next/server";
+const {auth} = vi.hoisted(()=>({auth:{verifyOtp:vi.fn(),exchangeCodeForSession:vi.fn()}}));
+vi.mock("@/lib/supabase/server",()=>({createClient:async()=>({auth})}));
+import { GET as confirm } from "../src/app/auth/confirm/route";
+import { GET as callback } from "../src/app/auth/callback/route";
+beforeEach(()=>{vi.resetAllMocks();process.env.APP_URL="http://localhost:3000";});
+test("recovery tokens lead only to password reset and are not forwarded",async()=>{auth.verifyOtp.mockResolvedValue({error:null});const result=await confirm(new NextRequest("http://untrusted.test/auth/confirm?token_hash=one-time-token&type=recovery&next=https://evil.test"));expect(result.headers.get("location")).toBe("http://localhost:3000/redefinir-senha");expect(result.headers.get("cache-control")).toBe("no-store");expect(auth.verifyOtp).toHaveBeenCalledWith({token_hash:"one-time-token",type:"recovery"});});
+test("expired or unsupported tokens cannot enter account",async()=>{auth.verifyOtp.mockResolvedValue({error:{message:"expired"}});for(const type of ["recovery","invite"]) {const result=await confirm(new NextRequest(`http://localhost:3000/auth/confirm?token_hash=expired&type=${type}`));expect(result.headers.get("location")).toContain("error=link");}expect(auth.verifyOtp).toHaveBeenCalledTimes(1);});
+test("PKCE callback rejects external destination",async()=>{auth.exchangeCodeForSession.mockResolvedValue({error:null});const result=await callback(new NextRequest("http://localhost:3000/auth/callback?code=abc&next=https://evil.test"));expect(result.headers.get("location")).toBe("http://localhost:3000/biblioteca");});

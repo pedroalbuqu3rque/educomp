@@ -1,0 +1,16 @@
+import { expect, test, vi, beforeEach } from "vitest";
+import { safeNext,passwordSchema } from "../src/lib/auth/validation";
+const {auth} = vi.hoisted(()=>({auth:{signInWithPassword:vi.fn(),signUp:vi.fn(),resetPasswordForEmail:vi.fn(),getUser:vi.fn(),updateUser:vi.fn(),signOut:vi.fn()}}));
+vi.mock("@/lib/supabase/server",()=>({createClient:async()=>({auth})}));
+vi.mock("next/navigation",()=>({redirect:(path:string)=>{throw new Error(`REDIRECT:${path}`);}}));
+vi.mock("next/cache",()=>({revalidatePath:vi.fn()}));
+import { authenticate } from "../src/lib/auth/actions";
+beforeEach(()=>{vi.resetAllMocks();process.env.NEXT_PUBLIC_SUPABASE_URL="https://example.supabase.co";process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY="test";});
+function form(values:Record<string,string>) {const data=new FormData();Object.entries(values).forEach(([k,v])=>data.set(k,v));return data;}
+test("redirects reject external URLs and unimplemented destinations",()=>{for(const url of ["//evil.test","https://evil.test","/\\evil.test","/%2f%2fevil.test","/enviar",null]) expect(safeNext(url)).toBe("/biblioteca");expect(safeNext("/conta")).toBe("/conta");});
+test("password policy accepts phrases and rejects short passwords",()=>{expect(passwordSchema.safeParse("uma frase longa e fácil").success).toBe(true);expect(passwordSchema.safeParse("abc123").success).toBe(false);});
+test("login failure does not redirect or expose backend error",async()=>{auth.signInWithPassword.mockResolvedValue({error:{message:"private details"}});const result=await authenticate("login",{},form({email:"a@example.com",password:"incorrect"}));expect(result.error).toContain("Não foi possível entrar");expect(JSON.stringify(result)).not.toContain("private details");});
+test("successful login redirects only to allowed destination",async()=>{auth.signInWithPassword.mockResolvedValue({error:null});await expect(authenticate("login",{},form({email:"a@example.com",password:"valid",next:"https://evil.test"}))).rejects.toThrow("REDIRECT:/biblioteca");});
+test("signup passes display name and waits for email confirmation",async()=>{auth.signUp.mockResolvedValue({data:{session:null},error:null});const result=await authenticate("signup",{},form({name:"Ana",email:"a@example.com",password:"uma frase longa"}));expect(result.success).toContain("confirmar");expect(auth.signUp.mock.calls[0][0].options.data).toEqual({display_name:"Ana"});});
+test("recovery does not reveal existence of account",async()=>{auth.resetPasswordForEmail.mockResolvedValue({error:null});expect((await authenticate("recover",{},form({email:"a@example.com"}))).success).toContain("Se houver uma conta");});
+test("reset requires a verified session and matching passwords",async()=>{const input={password:"uma frase longa",confirmation:"uma frase longa"};auth.getUser.mockResolvedValue({data:{user:null},error:null});expect((await authenticate("reset",{},form(input))).error).toContain("sessão expirou");expect(auth.updateUser).not.toHaveBeenCalled();expect((await authenticate("reset",{},form({...input,confirmation:"outra frase longa"}))).error).toContain("não coincidem");});
