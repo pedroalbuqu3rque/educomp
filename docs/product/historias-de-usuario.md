@@ -1,12 +1,10 @@
 # EduComp — Histórias de usuário
 
-**Versão:** 1.0 · **Data:** 07/11/2026 · **Situação:** histórias planejadas; critérios ainda não testados na aplicação.
+**Versão:** 1.0 · **Data:** 10/11/2026 · **Situação:** histórias planejadas; critérios ainda não testados na aplicação.
 
 ## 1. Finalidade
 
 As histórias descrevem necessidades de visitantes, professores e revisores. Os códigos existentes foram preservados para manter a rastreabilidade. A **US-005** permanece reservada a links externos de materiais, fora do MVP. Novos códigos cobrem comunidade, perfis públicos, moderação, notificações e contato.
-
-Uma tela no Figma não comprova que o critério esteja implementado. O aceite depende de dados, persistência, validação e permissões reais.
 
 ## 2. Entrada, autenticação e perfil
 
