@@ -1,6 +1,6 @@
 {
   "name": "educomp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "O **EduComp** é um projeto de plataforma para professores da Educação Básica encontrarem, utilizarem e compartilharem materiais pedagógicos de Computação. A proposta combina uma Biblioteca organizada por critérios de ensino, um espaço para troca de experiências entre docentes e um processo de revisão das contribuições publicadas.",
   "directories": {
     "doc": "docs"
@@ -11,7 +11,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:checks": "node --test tests/*.check.mjs"
   },
   "keywords": [],
   "author": "",

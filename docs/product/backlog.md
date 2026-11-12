@@ -61,9 +61,9 @@ As tecnologias anteriores — por exemplo, TypeScript, React, PostgreSQL e armaz
 | BK-025 | Implementar Meus envios, situação editorial e orientações de recusa/ajuste. | P1 | A fazer | BK-016 |
 | BK-033 | Implementar comentários, respostas, relatos e filtragem inline das contribuições. | P1 | A fazer | BK-021, BK-023 |
 | BK-035 | Implementar denúncias e moderação restrita da comunidade. | P1 | A fazer | BK-019, BK-031, BK-033 |
-| BK-036 | Implementar notificações de materiais, revisão e novidades, com leitura/não leitura. | P1 | A fazer | BK-019, BK-020, BK-016 |
+| BK-036 | Implementar notificações de materiais, revisão e novidades, com leitura/não leitura. | P1 | Implementado no código; validação pendente | BK-019, BK-020, BK-016 |
 | BK-018 | Implementar cópia do link e opções de compartilhamento da plataforma. | P2 | A fazer | BK-030 |
-| BK-037 | Implementar formulário Fale conosco, estados de sucesso/erro e páginas institucionais. | P1 | A fazer | BK-020, BK-030 |
+| BK-037 | Implementar formulário Fale conosco, estados de sucesso/erro e páginas institucionais. | P1 | Implementado no código; validação Supabase e revisão jurídica pendentes | BK-020, BK-030 |
 | BK-026 | Tratar erros, estados vazios, carregamento, foco e acessibilidade nos fluxos. | P1 | A fazer | Todas as entregas funcionais |
 
 ### Regras relevantes à implementação

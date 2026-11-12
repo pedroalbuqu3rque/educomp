@@ -245,9 +245,9 @@ As histórias descrevem necessidades de visitantes, professores e revisores. Os 
 
 **Como** professor autenticado, **quero** receber atualizações, **para** acompanhar meus materiais e as novidades do EduComp.
 
-- [ ] Notificações cobrem situação de materiais, novos conteúdos e notícias da plataforma.
-- [ ] A central apresenta lidas/não lidas, marcação de todas como lidas, lista completa e estado vazio.
-- [ ] Mensagens acionáveis levam ao contexto adequado, quando houver.
+- [x] Notificações cobrem situação de materiais, novos conteúdos e notícias da plataforma.
+- [x] A central apresenta lidas/não lidas, marcação de todas como lidas, lista completa e estado vazio.
+- [x] Mensagens acionáveis levam ao contexto adequado, quando houver.
 
 **Requisito:** RF-027.
 

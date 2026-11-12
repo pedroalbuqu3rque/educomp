@@ -36,3 +36,18 @@ test("biblioteca carrega estado salvo do usuário verificado",async()=>{
  favorites.in.mockResolvedValue({data:null,error:{message:"unavailable"}});
  const failed=await loadLibrary(query);expect(failed.savedError).toBe(true);expect(failed.result.items[0].saved).toBeUndefined();
 });
+
+test("exemplos aparecem com IDs próprios e favoritos, sem consultar arquivos reais",async()=>{
+ const id="d3000000-0000-4000-8000-000000000001";
+ client.auth.getUser.mockResolvedValue({data:{user:{id:"verified-user"}}});
+ client.rpc.mockResolvedValue({data:{total:1,page:1,pages:1,items:[{id,title:"Algoritmos no dia a dia",description:"Instruções, execução, identificação de erros e repetições.",keywords:["algoritmos"],year:"EF · 4º e 5º ano",type:["Sequência de atividades"],stage:["Ensino Fundamental — Anos iniciais"],axis:["Pensamento Computacional"],approach:["Desplugada"],authorship:"EduComp · exemplo de interface",objectives:"Identificar sequências.",is_demo:true}]},error:null});
+ const favorites={select:vi.fn(),eq:vi.fn(),in:vi.fn()};
+ favorites.select.mockReturnValue(favorites);favorites.eq.mockReturnValue(favorites);
+ favorites.in.mockResolvedValue({data:[{example_id:id}],error:null});
+ client.from.mockImplementation((table:string)=>table==="saved_catalog_examples"?favorites:undefined);
+ const result=await loadLibrary({q:"",selections:emptySelections(),page:1});
+ expect(result.result.items[0]).toMatchObject({id,is_demo:true,saved:true});
+ expect(client.from).toHaveBeenCalledWith("saved_catalog_examples");
+ expect(client.from).not.toHaveBeenCalledWith("material_files");
+ expect(client.from).not.toHaveBeenCalledWith("saved_materials");
+});

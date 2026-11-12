@@ -1,6 +1,6 @@
 # Biblioteca conectada ao Supabase
 
-A página /biblioteca consulta a RPC search_library com o cliente SSR e a sessão do visitante. Não usa service_role, não carrega todo o acervo e não retorna exemplos locais em falhas. Os fixtures demo-materials.ts permanecem apenas para testes.
+A página /biblioteca consulta a RPC search_library com o cliente SSR e a sessão do visitante. Não usa service_role, não carrega todo o acervo e não retorna exemplos locais em falhas. A migration 012 inclui **24 exemplos de interface em tabela própria do Supabase**, com paginação e RLS, sem fingir publicações ou anexos reais. O arquivo demo-materials.ts continua como referência de testes, não como fallback para falhas de rede. Consulte [exemplos-biblioteca.md](exemplos-biblioteca.md).
 
 A migration 004 cadastra as opções de classificação e uma função SECURITY INVOKER, com search_path vazio. Ela respeita RLS e exige explicitamente is_published=true e review_status=approved, mesmo para autores/revisores. Termos da busca são combinados com E, opções dentro da categoria com OU, e categorias com E. A busca é por título e palavras-chave, ignorando caixa e acentos. Ordenação por created_at e id decrescentes; páginas de 12, com ajuste de páginas fora do intervalo. A contagem e os itens pertencem à mesma consulta/snapshot.
 

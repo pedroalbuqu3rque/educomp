@@ -42,16 +42,16 @@ h1 { font-size: clamp(42px,4.167vw,64px); line-height: 1.15625; font-weight: 700
 .educator-quote figcaption { margin-top: 9px; font-size: 11px; line-height: 16px; letter-spacing: 1px; font-weight: 600; }
 .hero-visual { position: absolute; right: 44px; top: 43px; width: 44.27%; max-width: 680px; aspect-ratio: 680 / 660; container-type: inline-size; }
 .visual-stage { width: 680px; height: 660px; position: relative; transform: scale(calc(100cqw / 680px)); transform-origin: top left; }
-.hero-geometry { position: absolute; left: 114px; top: -84px; max-width: none; }
-.example-card { position: absolute; border: 1.3px solid var(--line); border-radius: 12px; background: white; padding: 17.7px 20.7px; box-shadow: 0 3px 6px #1c366694, 0 14px 23px #1c2b4a26; }
+.hero-geometry { position: absolute; left: -104px; top: -121px; width: 828px; height: 737px; max-width: none; pointer-events: none; }
+.example-card { position: absolute; border: 1.3px solid var(--line); border-radius: 12px; background: white; padding: 19px 22px; box-shadow: 0 3px 6px #1c366694, 0 14px 23px #1c2b4a26; }
 .material-kind { display: inline-flex; align-items: center; justify-content: center; padding: 4px 11px; height: 26px; background: #d9e6fb99; border-radius: 4px; font-weight: 700; font-size: 12px; line-height: 17px; color: var(--brand); }
 .material-title { margin-top: 12px; font-weight: 700; font-size: 20px; line-height: 23px; }
-.material-year { position: absolute; bottom: 20px; left: 20.7px; right: 20.7px; border-top: 1px solid var(--line); padding-top: 10px; color: var(--muted); font-size: 14px; line-height: 19px; }
+.material-year { position: absolute; bottom: 20px; left: 22px; right: 22px; border-top: 1px solid var(--line); padding-top: 10px; color: var(--muted); font-size: 14px; line-height: 19px; }
 .game { top: 131px; left: 34px; width: 257px; height: 162px; }
 .slides { top: 1px; left: 256px; width: 278px; height: 175px; }
-.activity { top: 209px; left: 305px; width: 319px; height: 190px; }
-.lesson { top: 332px; left: 0; width: 327px; height: 195px; }
-.sequence { top: 447px; left: 292px; width: 308px; height: 181px; box-shadow: 0 3px 6px #1c366694; }
+.activity { top: 194px; left: 305px; width: 319px; height: 190px; }
+.lesson { top: 317px; left: 0; width: 327px; height: 195px; }
+.sequence { top: 444px; left: 278px; width: 308px; height: 181px; box-shadow: 0 3px 6px #1c366694; }
 .benefits { padding-top: 70px; padding-bottom: 54px; border-bottom: 1px solid var(--line); }
 .eyebrow { color: var(--brand); font-size: 17px; line-height: 25px; font-weight: 700; }
 .with-line { display: flex; align-items: center; gap: 24px; }
@@ -72,7 +72,7 @@ h1 { font-size: clamp(42px,4.167vw,64px); line-height: 1.15625; font-weight: 700
 .proposal h2 span { color: var(--brand); }
 .proposal-copy { border-left: 1px solid var(--line); padding: 8px 0 0 55px; margin-top: 12px; color: var(--muted); font-size: 19px; line-height: 29px; }
 .proposal-copy p+p { margin-top: 22px; }
-.library-callout { background: #f8faff; border-radius: 19px; padding: 45px 40px 45px 44px; display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 87px; min-height: 172px; }
+.library-callout { background: #f8faff; border-radius: 19px; padding: 45px 40px 45px 44px; display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 87px; min-height: 172px; box-shadow: -9px 9px 0 var(--brand); }
 .library-callout h2 { font-size: 31px; line-height: 42px; font-weight: 600; }
 .library-callout p { font-size: 19px; line-height: 29px; color: var(--muted); }
 .library-callout .button { min-width: 301px; min-height: 68px; font-size: 17px; }
@@ -111,7 +111,7 @@ h1 { font-size: clamp(42px,4.167vw,64px); line-height: 1.15625; font-weight: 700
  .hero-copy { width: 100%; max-width: 699px; }
  h1 { font-size: 56px; line-height: 1.16; }
  .hero-visual { position: relative; top: auto; right: auto; width: 100%; max-width: 680px; align-self: center; margin-top: 68px; }
- .hero-geometry { top: -20px; }
+ .hero-geometry { top: -61px; }
  .benefits { padding-top: 54px; }
  .benefits h2 { font-size: 38px; line-height: 48px; }
  .benefit-grid { margin-top: 42px; }
@@ -163,3 +163,5 @@ h1 { font-size: clamp(42px,4.167vw,64px); line-height: 1.15625; font-weight: 700
  .coming-soon { padding-block: 60px; }
 }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
+
+@media(max-width:600px){.account-nav .notification-bell{width:42px;height:44px}}

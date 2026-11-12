@@ -15,7 +15,7 @@ describe("Biblioteca: regras de busca",()=>{
   let q=applyCategory(query(),"type",["Atividade","Jogo"]);
   q=applyCategory(q,"stage",["Ensino Fundamental — Anos iniciais"]);
   q=applyCategory(q,"approach",["Desplugada"]);
-  expect(searchCatalog(demoMaterials,q).items.map(m=>m.id)).toEqual(["demo-02","demo-03","demo-09","demo-17"]);
+  expect(searchCatalog(demoMaterials,q).items.map(m=>m.id)).toEqual(["demo-03","demo-09","demo-17"]);
   expect(searchCatalog(demoMaterials,{...q,q:"blocos"}).items.map(m=>m.id)).toEqual(["demo-09"]);
  });
  test("materiais com ambas as abordagens correspondem a cada filtro",()=>{

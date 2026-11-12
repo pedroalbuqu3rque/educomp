@@ -1,5 +1,5 @@
 export const filters = {
- type: { label: "Tipo", title: "Tipo de material", icon: "type.png", options: ["Plano de aula", "Slides", "Material de apoio", "Atividade", "Sequência didática", "Jogo"] },
+ type: { label: "Tipo", title: "Tipo de material", icon: "type.png", options: ["Plano de aula", "Slides", "Material de apoio", "Atividade", "Sequência didática", "Sequência de atividades", "Aula completa", "Jogo"] },
  stage: { label: "Etapa", title: "Etapa de ensino", icon: "stage.png", options: ["Educação Infantil", "Ensino Fundamental — Anos iniciais", "Ensino Fundamental — Anos finais", "Ensino Médio"] },
  axis: { label: "Eixo", title: "Eixo da Computação", icon: "axis.png", options: ["Pensamento Computacional", "Mundo Digital", "Cultura Digital"] },
  approach: { label: "Abordagem", title: "Abordagem da atividade", icon: "approach.svg", options: ["Plugada", "Desplugada"] },
@@ -8,6 +8,7 @@ export type FilterKey = keyof typeof filters;
 export const filterKeys = Object.keys(filters) as FilterKey[];
 export type Selections = Record<FilterKey, string[]>;
 export interface Material {
+ is_demo?: boolean;
  saved?: boolean; authorship?: string; objectives?: string; files?: {id:string;name:string;size:number}[];
  id: string; title: string; description: string; keywords: string[]; year: string;
  type: string[]; stage: string[]; axis: string[]; approach: string[];
@@ -40,4 +41,11 @@ export function searchCatalog(materials: Material[], query: Query) {
  const pages=Math.max(1,Math.ceil(matches.length/12));
  const page=Math.min(query.page,pages);
  return { total:matches.length,pages,page,items:matches.slice((page-1)*12,page*12) };
+}
+
+/** IDs reservados para os 24 exemplos de interface (não publicados como materiais reais). */
+export function isCatalogExampleId(id: string): boolean {
+ if(!/^d3000000-0000-4000-8000-[0-9]{12}$/i.test(id)) return false;
+ const number=Number(id.slice(-12));
+ return number>=1 && number<=24;
 }

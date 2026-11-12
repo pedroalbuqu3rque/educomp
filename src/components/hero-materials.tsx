@@ -8,7 +8,7 @@ const examples = [
 ];
 export function HeroMaterials() {
  return <div className="hero-visual" aria-label="Exemplos ilustrativos de materiais pedagógicos" role="img"><div className="visual-stage" aria-hidden="true">
-  <img className="hero-geometry" src="/brand/geometry.svg" alt="" />
+  <img className="hero-geometry" src="/brand/hero-glow.svg" alt="" />
   {examples.map(item=><div key={item.className} className={`example-card ${item.className}`}>
    <span className="material-kind">{item.kind}</span><p className="material-title">{item.title}</p><p className="material-year">{item.year}</p>
   </div>)}
