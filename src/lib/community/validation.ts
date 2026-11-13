@@ -6,10 +6,13 @@ const optionalAdaptations = z.string().trim().max(1000).optional();
 
 export const communityActionSchema = z.discriminatedUnion("action", [
  z.object({
-  action: z.literal("create"), materialId: z.uuid(), body: text,
+  action: z.literal("create"), materialId: z.uuid().optional(), catalogExampleId: z.uuid().optional(), body: text,
   kind: z.enum(["discussion", "application_report"]), parentId: z.uuid().nullable().optional(),
   grade: grade.optional(), adaptations: optionalAdaptations,
  }).superRefine((value, context) => {
+  if (Boolean(value.materialId) === Boolean(value.catalogExampleId)) {
+   context.addIssue({ code: "custom", message: "Informe apenas um material válido.", path: ["materialId"] });
+  }
   if (value.kind === "application_report" && (value.parentId || !value.grade)) {
    context.addIssue({ code: "custom", message: "O relato deve informar a turma e não pode ser uma resposta.", path: ["grade"] });
   }

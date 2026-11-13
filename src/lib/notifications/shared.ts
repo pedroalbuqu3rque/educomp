@@ -4,7 +4,7 @@ export type NotificationKind =
  | "material_submitted" | "review_pending" | "material_in_review"
  | "material_approved" | "material_rejected" | "material_changes_requested" | "material_published"
  | "material_unpublished" | "new_material" | "comment_reply"
- | "material_comment" | "moderation" | "report_resolved" | "announcement";
+ | "material_comment" | "moderation" | "report_resolved" | "announcement" | "welcome";
 
 export type NotificationItem = {
  id: string;
@@ -46,6 +46,7 @@ export function notificationCategory(kind: NotificationKind): string {
   case "comment_reply": case "material_comment": return "Comunidade";
   case "moderation": case "report_resolved": return "Moderação";
   case "announcement": return "Atualização";
+  case "welcome": return "Boas-vindas";
  }
 }
 

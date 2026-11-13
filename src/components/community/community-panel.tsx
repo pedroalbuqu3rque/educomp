@@ -22,7 +22,7 @@ const reasons=[
 ] as const;
 const dateText=(value:string)=>new Intl.DateTimeFormat("pt-BR",{day:"2-digit",month:"short",year:"numeric",timeZone:"America/Sao_Paulo"}).format(new Date(value));
 
-export function CommunityPanel({materialId,data,filter}:{materialId:string;data:CommunityPageData;filter:CommunityFilter}){
+export function CommunityPanel({materialId,data,filter,source="material"}:{materialId:string;data:CommunityPageData;filter:CommunityFilter;source?:"material"|"catalog"}){
  const router=useRouter();
  const [dialog,setDialog]=useState<DialogState|null>(null);
  const [body,setBody]=useState("");
@@ -52,7 +52,7 @@ export function CommunityPanel({materialId,data,filter}:{materialId:string;data:
   const {mode,target}=dialog;
   let payload:Record<string,unknown>;
   if(mode==="comment"||mode==="reply"||mode==="application"){
-   payload={action:"create",materialId,body:body.trim(),kind:mode==="application"?"application_report":"discussion"};
+   payload={action:"create",...(source==="catalog"?{catalogExampleId:materialId}:{materialId}),body:body.trim(),kind:mode==="application"?"application_report":"discussion"};
    if(mode==="reply")payload.parentId=target?.id;
    if(mode==="application"){payload.grade=grade.trim();payload.adaptations=adaptations.trim();}
   }else if(mode==="edit"){
@@ -122,8 +122,8 @@ export function CommunityPanel({materialId,data,filter}:{materialId:string;data:
   body.trim().length>=1&&body.trim().length<=1000&&(!applicationForm||(grade.trim().length>=1&&grade.trim().length<=80))
  );
  return <section className="community-section" id="comunidade" aria-labelledby="community-heading">
-  <div className="community-heading"><div><h2 id="community-heading">Discussões</h2><p>Dúvidas, adaptações e sugestões de professores sobre este material.</p></div>
-   <div className="community-primary-actions"><button type="button" className="button button-outline" onClick={()=>open("comment")}>Comentar</button><button type="button" className="button button-primary" onClick={()=>open("application")}>Relatar aplicação</button></div>
+  <div className="community-heading"><div><h2 id="community-heading">Comunidade</h2><p>Dúvidas, adaptações e sugestões de professores sobre este material.</p></div>
+   <div className="community-primary-actions"><button type="button" className="button button-outline" onClick={()=>open("comment")} disabled={Boolean(data.error)}>Comentar</button><button type="button" className="button button-primary" onClick={()=>open("application")} disabled={Boolean(data.error)}>Relatar aplicação</button></div>
   </div>
   <p className="community-guidelines">Comentários de até 1.000 caracteres, apenas texto. Respostas em um único nível. Não compartilhe dados pessoais de estudantes.</p>
   {!data.viewerId&&<div className="community-auth-message"><Link href={login}>Entre na sua conta</Link> para compartilhar experiências, responder ou denunciar.</div>}

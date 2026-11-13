@@ -260,14 +260,9 @@ As histórias descrevem necessidades de visitantes, professores e revisores. Os 
 
 **Requisito:** RF-028.
 
-### US-011 — Compartilhar o EduComp
+### US-011 — Compartilhar o EduComp (fora do MVP)
 
-**Como** visitante, **quero** copiar ou compartilhar o endereço da plataforma, **para** apresentá-la a outros professores.
-
-- [ ] Copiar link confirma o resultado e utiliza o endereço real da plataforma.
-- [ ] Atalhos sociais não prometem integração que o serviço de destino não oferece.
-
-**Requisito:** RF-013.
+História retirada do escopo da versão 0.2. O botão de compartilhamento externo não é exibido no rodapé. O histórico é preservado pelo identificador **RF-013**.
 
 ## 9. História reservada
 

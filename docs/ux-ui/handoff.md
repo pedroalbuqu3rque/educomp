@@ -1,7 +1,7 @@
 # EduComp — Handoff de UI/UX
 
-**Versão:** 2.0 · **Atualizado em:** 08/11/2026  
-**Situação:** protótipo desktop consolidado; desenvolvimento não iniciado.
+**Versão:** 2.1 · **Atualizado em:** 13/11/2026
+**Situação:** referência de interface implementada; homologação responsiva e funcional pendente.
 
 ## 1. Objetivo
 
@@ -143,7 +143,7 @@ Visitantes podem acessar:
 - Cadastro e login.
 - Fale conosco.
 - Termos de uso e Política de privacidade.
-- Compartilhamento da plataforma.
+- Links institucionais no rodapé.
 
 Não é necessário cadastro para explorar o acervo público.
 
@@ -542,11 +542,9 @@ Termos de uso e Política de privacidade devem ser públicos e acessíveis.
 
 Os conteúdos definitivos precisam refletir a aplicação funcional, suas práticas de tratamento de dados e as responsabilidades das pessoas envolvidas.
 
-### 15.3. Compartilhamento
+### 15.3. Rodapé
 
-A interface prevê opções sociais e a ação **Copiar link**.
-
-A cópia deve utilizar o endereço público real da plataforma e comunicar o resultado da operação. Endereços demonstrativos dos frames não devem ser incorporados como URLs definitivas.
+O rodapé apresenta Termos de uso, Privacidade e Fale conosco. O botão de compartilhamento foi retirado da interface da versão 0.2.
 
 ## 16. Estados de interface
 

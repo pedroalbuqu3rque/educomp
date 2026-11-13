@@ -2,6 +2,7 @@ import {describe,expect,it} from "vitest";
 import {communityActionSchema} from "../src/lib/community/validation";
 const materialId="8c410a6c-4ec0-4d97-8d7b-71b96bfd8b09";
 const commentId="7202ec30-d7aa-4a55-8022-5b3655670f4a";
+const catalogExampleId="d3000000-0000-4000-8000-000000000001";
 
 describe("validação da Comunidade",()=>{
  it("valida comentário e limite de texto",()=>{
@@ -10,6 +11,12 @@ describe("validação da Comunidade",()=>{
   expect(communityActionSchema.safeParse({...base,body:"  "}).success).toBe(false);
   expect(communityActionSchema.safeParse({...base,body:"a".repeat(1001)}).success).toBe(false);
   expect(communityActionSchema.safeParse({...base,body:"Ok",grade:"5º ano"}).success).toBe(false);
+ });
+ it("aceita discussão sobre recurso do acervo sem confundir os dois tipos de materiais",()=>{
+  const valid={action:"create",catalogExampleId,kind:"discussion",body:"Gostaria de adaptar o jogo"};
+  expect(communityActionSchema.safeParse(valid).success).toBe(true);
+  expect(communityActionSchema.safeParse({...valid,materialId}).success).toBe(false);
+  expect(communityActionSchema.safeParse({action:"create",kind:"discussion",body:"Sem material"}).success).toBe(false);
  });
  it("requer ano escolar nos relatos e impede relatos como resposta",()=>{
   const base={action:"create",materialId,kind:"application_report",body:"Turma fez a atividade"};

@@ -23,11 +23,14 @@ export async function POST(request:NextRequest){
   let error: {code?:string;message:string}|null=null;
   let id:string|null=null;
   if(data.action==="create"){
-   const result=await client.rpc("create_community_comment",{
-    p_material_id:data.materialId,p_body:data.body,p_kind:data.kind,p_parent_id:data.parentId??null,
+   const params={
+    p_body:data.body,p_kind:data.kind,p_parent_id:data.parentId??null,
     p_grade:data.kind==="application_report"?(data.grade??null):null,
     p_adaptations:data.kind==="application_report"?(data.adaptations??""):null,
-   });
+   };
+   const result=data.catalogExampleId
+    ? await client.rpc("create_catalog_comment",{p_catalog_example_id:data.catalogExampleId,...params})
+    : await client.rpc("create_community_comment",{p_material_id:data.materialId!,...params});
    error=result.error;id=result.data;
   }else if(data.action==="edit"){
    const result=await client.rpc("edit_community_comment",{
@@ -46,7 +49,7 @@ export async function POST(request:NextRequest){
    if(error.code==="42501")return fail(403,"Esta ação não está disponível para sua conta ou para este conteúdo.");
    if(error.message.includes("Hourly comment limit"))return fail(429,"Limite de 12 contribuições por hora. Tente novamente mais tarde.");
    if(error.message.includes("Too many reports"))return fail(429,"Limite de denúncias por hora atingido.");
-   if(error.code==="42883"||error.code==="42P01")return fail(503,"A Comunidade ainda precisa da migration 008 no Supabase.");
+   if(error.code==="42883"||error.code==="42P01"||error.code==="PGRST202")return fail(503,"A Comunidade ainda precisa das migrations 008 e 014 no Supabase.");
    if(error.message.includes("Comment cannot be edited")||error.message.includes("Comment cannot be deleted"))return fail(403,"Você não pode alterar este comentário.");
    return fail(400,"Não foi possível concluir a ação. Confira os dados e tente novamente.");
   }

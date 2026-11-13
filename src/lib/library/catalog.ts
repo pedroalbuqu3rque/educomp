@@ -43,7 +43,7 @@ export function searchCatalog(materials: Material[], query: Query) {
  return { total:matches.length,pages,page,items:matches.slice((page-1)*12,page*12) };
 }
 
-/** IDs reservados para os 24 exemplos de interface (não publicados como materiais reais). */
+/** IDs dos 24 registros institucionais do acervo inicial, separados de envios docentes. */
 export function isCatalogExampleId(id: string): boolean {
  if(!/^d3000000-0000-4000-8000-[0-9]{12}$/i.test(id)) return false;
  const number=Number(id.slice(-12));

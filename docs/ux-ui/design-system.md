@@ -1,6 +1,6 @@
 # EduComp — Design System
 
-**Versão:** 1.0 · **Atualizado em:** 07/11/2026 · **Situação:** fundamentos e padrões desktop consolidados; implementação e validação responsiva pendentes.
+**Versão:** 1.1 · **Atualizado em:** 13/11/2026 · **Situação:** padrões implementados; validação responsiva em andamento.
 
 ## 1. Referências
 
@@ -103,11 +103,11 @@ A camada de desfoque não deve capturar indevidamente o foco nem impedir o funci
 
 Os cartões não são repetidos com conteúdo fictício único. Devem receber dados reais do recurso e manter consistência entre Biblioteca e Salvos.
 
-- **Tipo:** selo textual na parte superior, incluindo o sexto tipo **Jogo**.
+- **Tipo:** selo textual na parte superior, incluindo **Jogo**, **Aula completa** e **Sequência de atividades**.
 - **Etapa/ano:** mostrar `EI · idade`, `EF · ano` ou `EM · série`, conforme cadastro.
 - **Abordagem:** indicar **Plugada** por ícone de monitor e **Desplugada** por monitor riscado; exibir os dois quando ambas se aplicarem. Não acrescentar tag textual de abordagem em cada cartão.
-- **Favorito:** estado ativo/inativo e confirmação da operação sem antecipar resposta do servidor.
-- **Leitura:** título, resumo e ações precisam manter altura e espaçamento consistentes mesmo com textos diferentes.
+- **Favorito:** contorno azul quando inativo e ícone preenchido em azul quando salvo; confirmação apenas após retorno do servidor.
+- **Leitura:** descrição limitada a duas linhas; título, resumo e ações mantêm altura e espaçamento consistentes mesmo com textos diferentes. O card não exibe uma faixa adicional de eixo nem um selo de PDF.
 
 Os ícones de abordagem devem possuir texto acessível, porque a legenda visual localizada na Biblioteca não atende, sozinha, a todos os leitores.
 
@@ -134,7 +134,7 @@ O perfil público mostra apenas dados autorizados e materiais publicados. A cent
 
 ### 6.5. Institucional
 
-O formulário **Fale conosco** usa nome, e-mail, assunto e mensagem, com estados de confirmação e erro. O compartilhamento apresenta destinos sociais e cópia do endereço do EduComp. Termos e Política de privacidade são páginas públicas.
+O formulário **Fale conosco** usa nome, e-mail, assunto e mensagem, com estados de confirmação e erro. O rodapé reúne Termos de uso, Privacidade e Fale conosco, sem botão de compartilhamento externo.
 
 ## 7. Estados e acessibilidade
 

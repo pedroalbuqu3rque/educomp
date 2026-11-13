@@ -1,34 +1,40 @@
 # Controle de implementação
 
-Este controle acompanha as entregas incrementais iniciadas a partir de `educomp-github.rar`. Não substitui o backlog geral.
+**Referência:** EduComp 0.2 · 13/11/2026
+**Uso:** acompanhamento das entregas no repositório. A validação de QA acontece em etapa separada.
 
-| Entrega | Situação | Validação |
+## Estado das áreas
+
+| Área | Código | O que precisa ser validado |
 | --- | --- | --- |
-| Detalhes do material e perfil público | Código entregue e aplicação confirmada pelo usuário | TypeScript e 9 testes de consultas/retorno após login; revisão visual com dados de teste |
-| Meu perfil: nome, cargo e apresentação | Código entregue; aplicação local a confirmar | TypeScript e 8 testes de validação/autorização; revisão visual com dados de teste |
-| Revisão e moderação | Código entregue; migration 007 e integração com Supabase a validar | Fila, transições editoriais, denúncia, exclusão e RLS; ver `revisao-moderacao.md` |
-| Foto de perfil | Pendente | Seleção, prévia, upload e políticas de armazenamento |
-| Discussões e relatos | Implementados no código; migration 008 e testes reais pendentes | Formulários, respostas, edição/exclusão, denúncia, RLS; ver `comunidade.md` |
-| Notificações | Implementadas no código; migration 009 e testes reais pendentes | Eventos, destinatários, leitura e interface; ver `notificacoes.md` |
-| Contato e páginas institucionais | Implementados no código; migration 010, revisão jurídica e testes reais pendentes | Formulário, gravação privada e páginas de Termos/Privacidade; ver `contato-institucional.md` |
+| Início e páginas institucionais | Implementado | Responsividade, acessibilidade e revisão jurídica de Termos/Privacidade |
+| Biblioteca e acervo inicial | Implementado | Pesquisa, filtros, paginação, PDFs definitivos e fichas com anexos provisórios |
+| Salvos | Implementado | Salvar, remover e consultar com usuário autenticado |
+| Autenticação e perfis | Implementado | Cadastro/confirmação, recuperação de senha, foto e dados públicos |
+| Envio e reenvio | Implementado | Storage privado, validação de arquivos, estados e retornos após login |
+| Revisão e moderação | Implementado | Papel de revisor, aprovar, solicitar ajustes, recusar e resolver denúncias |
+| Comunidade | Implementado | Comentários, relatos, respostas, edição, exclusão e denúncias por material |
+| Notificações | Implementado | Eventos do banco, boas-vindas, leitura individual e em lote |
+| Fale conosco | Implementado | Recebimento e limites de envio com o banco real |
 
-## Organização do trabalho
+## Banco e arquivos
 
-- Uma funcionalidade delimitada por entrega, com ZIP incremental.
-- Reutilizar os componentes existentes e consultar apenas as telas necessárias no Figma.
-- Executar TypeScript e testes direcionados ao comportamento alterado.
-- Repetir verificações amplas somente quando houver mudança ou falha que justifique.
-- Conferir integração real no ambiente do projeto; não confundir dados simulados de teste com dados do Supabase.
-- Registrar pendências concretas ao terminar cada entrega.
+Migrations disponíveis: `001`–`016` em `supabase/migrations`. Não as reexecute sem verificar se já foram aplicadas. O banco do projeto já foi consultado e apresentou 16 tabelas com RLS habilitado, os buckets `materials` (privado) e `avatars` (público), além das funções principais de envio, revisão, Comunidade e notificações.
 
-A cota restante de Codex não está disponível para consulta pelo assistente. Este controle reduz retrabalho e mantém o escopo de cada rodada explícito.
+O acervo editorial contém 24 registros. Quatro PDFs são materiais completos; os outros têm arquivos provisórios, identificados na ficha. A migration `013` mantém metadados da Biblioteca coerentes com os PDFs; a `014` permite participação da Comunidade nos registros do acervo; a `015` cria a notificação de boas-vindas. A aplicação efetiva dessas três migrations deve ser confirmada na homologação.
 
+## Pendências para fechamento
 
-## Notificações — etapa 009
+1. Criar ou conferir uma conta com papel de revisor, sem ampliar permissões de usuários comuns.
+2. Validar as migrations `013`–`016` e os fluxos ponta a ponta no Supabase hospedado.
+3. Executar revisão visual em desktop, tablet e celular, incluindo foco por teclado e estados de erro.
+4. Realizar homologação funcional e registrar evidências no plano de QA.
+5. Revisar Termos, Privacidade e configuração de produção antes de colocar a plataforma no ar.
 
-A central de notificações, o sininho com contador, a lista completa, as ações de leitura e os gatilhos de eventos estão implementados no código. A integração com o Supabase depende da aplicação da migration `202611110009_notifications.sql`; os testes de integração real e o build precisam ser executados em ambiente com dependências completas. Detalhes em [Notificações](notificacoes.md).
+## Regras de manutenção
 
-
-## Contato e páginas institucionais — etapa 010
-
-As rotas `/contato`, `/termos` e `/privacidade` substituem as páginas provisórias. O formulário permite registrar mensagens de visitantes numa tabela privada; a leitura é reservada ao SQL Editor administrativo. As páginas jurídicas estão marcadas como rascunhos para revisão antes da publicação pública. A aplicação real da migration `202611110010_contact.sql` e os testes completos permanecem pendentes. Veja [Contato e páginas institucionais](contato-institucional.md).
+- O protótipo no Figma orienta a identidade visual; o código do repositório é a referência de comportamento implementado.
+- Alterações visuais não devem ampliar permissões, alterar políticas RLS ou substituir arquivos publicados.
+- Migrations são históricas e sequenciais. Corrija esquemas com uma nova migration, nunca editando uma já executada.
+- Testes automatizados ajudam a identificar regressões, mas não comprovam integração real ou ausência de bugs.
+- Documentação desatualizada deve ser revisada na mesma entrega que muda o comportamento descrito.

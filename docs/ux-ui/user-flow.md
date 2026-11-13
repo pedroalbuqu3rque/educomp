@@ -446,14 +446,9 @@ A alteração de senha segue um percurso protegido, com validação e confirmaç
 
 Termos de uso e Política de privacidade ficam disponíveis sem autenticação. Seus textos deverão corresponder às práticas efetivas da plataforma antes da publicação.
 
-### 14.3. Compartilhar o EduComp
+### 14.3. Compartilhamento externo
 
-1. O usuário acessa a opção de compartilhamento.
-2. Seleciona uma alternativa social ou **Copiar link**.
-3. O sistema executa a ação compatível.
-4. A cópia do endereço é confirmada quando concluída.
-
-O endereço utilizado deve ser o domínio real do EduComp, não um endereço ilustrativo do protótipo.
+O botão de compartilhamento foi retirado do escopo da versão 0.2 e não aparece no rodapé.
 
 ## 15. Regras transversais
 

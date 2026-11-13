@@ -1,7 +1,9 @@
 # Revisão técnica — EduComp 0.2
 
-**Data:** 12 de novembro de 2026  
-**Base:** código recebido como `EduComp 0.2.rar`  
+> Registro histórico de 12/11/2026. Consulte o `README.md` e `docs/technical/controle-implementacao.md` para o estado atualizado do projeto.
+
+**Data:** 12 de novembro de 2026
+**Base:** código recebido como `EduComp 0.2.rar`
 **Escopo:** estabilidade, consistência, segurança básica das rotas, testes e manutenção. A interface existente não foi redesenhada.
 
 ## Visão geral

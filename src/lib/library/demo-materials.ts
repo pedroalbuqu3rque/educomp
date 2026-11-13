@@ -1,6 +1,5 @@
 import type { Material } from "./catalog";
-// Dados de demonstração do Figma. NÃO representam publicações com arquivo.
-// A migration 012 registra estes exemplos em uma tabela própria, sem burlar a revisão editorial.
+// Dados de referência para os testes. O catálogo público é consultado no Supabase.
 export const demoMaterials: Material[] = [
   {
     "id": "demo-01",
@@ -25,12 +24,12 @@ export const demoMaterials: Material[] = [
       "repetições",
       "depuração"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Organizar instruções sequenciais, identificar erros e reconhecer repetições em algoritmos do cotidiano."
   },
   {
     "id": "demo-02",
-    "title": "Privacidade e segurança na internet",
+    "title": "Privacidade e segurança",
     "description": "O que compartilhar e o que manter em segurança na internet?",
     "type": [
       "Aula completa"
@@ -51,7 +50,7 @@ export const demoMaterials: Material[] = [
       "dados pessoais",
       "internet"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Distinguir informações pessoais e públicas e estabelecer cuidados para compartilhar dados na internet."
   },
   {
@@ -75,7 +74,7 @@ export const demoMaterials: Material[] = [
       "lógica",
       "raciocínio"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Resolver desafios por dedução e argumentar sobre estratégias de raciocínio lógico."
   },
   {
@@ -100,7 +99,7 @@ export const demoMaterials: Material[] = [
       "programação",
       "histórias"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Planejar personagens, cenas e comandos para uma narrativa interativa no Scratch."
   },
   {
@@ -124,7 +123,7 @@ export const demoMaterials: Material[] = [
       "redes",
       "internet"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Reconhecer redes e dispositivos conectados e explicar trocas de informações na internet."
   },
   {
@@ -150,7 +149,7 @@ export const demoMaterials: Material[] = [
       "segurança",
       "internet"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Identificar riscos digitais e formular medidas de proteção contra golpes e exposição de dados."
   },
   {
@@ -174,7 +173,7 @@ export const demoMaterials: Material[] = [
       "padrões",
       "formas"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Observar, comparar e continuar padrões de cores, formas e sequências."
   },
   {
@@ -199,7 +198,7 @@ export const demoMaterials: Material[] = [
       "privacidade",
       "dados"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Debater consentimento, coleta de dados e atitudes responsáveis em situações digitais."
   },
   {
@@ -223,7 +222,7 @@ export const demoMaterials: Material[] = [
       "comandos",
       "algoritmos"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Organizar blocos de comandos e prever o resultado de uma sequência de instruções."
   },
   {
@@ -247,7 +246,7 @@ export const demoMaterials: Material[] = [
       "criptografia",
       "códigos"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Representar e decodificar mensagens com regras simples de substituição e símbolos."
   },
   {
@@ -271,7 +270,7 @@ export const demoMaterials: Material[] = [
       "cidadania",
       "convivência"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Reconhecer práticas de respeito, participação e segurança nos espaços digitais."
   },
   {
@@ -295,7 +294,7 @@ export const demoMaterials: Material[] = [
       "algoritmos",
       "movimentos"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Representar deslocamentos com comandos, setas e percursos."
   },
   {
@@ -319,7 +318,7 @@ export const demoMaterials: Material[] = [
       "programação",
       "repetição"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Criar uma animação com comandos e repetições simples."
   },
   {
@@ -344,7 +343,7 @@ export const demoMaterials: Material[] = [
       "hardware",
       "computador"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Identificar componentes básicos do computador e explicar suas funções."
   },
   {
@@ -369,7 +368,7 @@ export const demoMaterials: Material[] = [
       "informação",
       "fontes"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Avaliar evidências e comparar fontes de informação na internet."
   },
   {
@@ -393,7 +392,7 @@ export const demoMaterials: Material[] = [
       "binário",
       "números"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Compreender a ideia de representação binária de números."
   },
   {
@@ -417,7 +416,7 @@ export const demoMaterials: Material[] = [
       "robôs",
       "mapas"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Planejar trajetos por meio de instruções precisas e testar suas soluções."
   },
   {
@@ -441,7 +440,7 @@ export const demoMaterials: Material[] = [
       "padrões",
       "histórias"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Identificar regularidades e construir narrativas baseadas em padrões."
   },
   {
@@ -466,7 +465,7 @@ export const demoMaterials: Material[] = [
       "pixels",
       "imagens"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Descrever como pixels formam imagens e experimentar resoluções distintas."
   },
   {
@@ -490,7 +489,7 @@ export const demoMaterials: Material[] = [
       "condições",
       "programação"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Empregar condições para representar decisões em programas simples."
   },
   {
@@ -514,7 +513,7 @@ export const demoMaterials: Material[] = [
       "privacidade",
       "rastros"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Reconhecer rastros digitais e avaliar escolhas de compartilhamento online."
   },
   {
@@ -538,7 +537,7 @@ export const demoMaterials: Material[] = [
       "classificação",
       "coleções"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Classificar objetos em conjuntos conforme critérios construídos coletivamente."
   },
   {
@@ -563,7 +562,7 @@ export const demoMaterials: Material[] = [
       "sociedade",
       "tecnologia"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Analisar impactos da tecnologia no cotidiano e discutir alternativas de uso responsável."
   },
   {
@@ -588,7 +587,7 @@ export const demoMaterials: Material[] = [
       "jogos",
       "programação"
     ],
-    "authorship": "EduComp · exemplo de interface",
+    "authorship": "EduComp",
     "objectives": "Planejar jogos digitais com objetivos, regras, desafios e personagens no Scratch."
   }
 ];

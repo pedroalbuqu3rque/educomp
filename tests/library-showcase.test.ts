@@ -4,11 +4,11 @@ import { applyCategory, emptySelections, isCatalogExampleId, searchCatalog } fro
 
 const q={q:"",selections:emptySelections(),page:1};
 const titles=[
- "Algoritmos no dia a dia","Privacidade e segurança na internet","Jogos de lógica","Histórias no Scratch",
+ "Algoritmos no dia a dia","Privacidade e segurança","Jogos de lógica","Histórias no Scratch",
  "Redes e conexões","Segurança na internet","Padrões e formas","Dados e privacidade",
  "Comandos com blocos","Mensagens codificadas","Cidadania digital","Caminhos e movimentos",
 ];
-describe("Catálogo ilustrativo alinhado ao Figma",()=>{
+describe("Catálogo de referência da Biblioteca",()=>{
  test("primeira página possui exatamente os 12 cards e a ordem do protótipo",()=>{
   expect(searchCatalog(demoMaterials,q).items.map(x=>x.title)).toEqual(titles);
   expect(searchCatalog(demoMaterials,{...q,page:2}).items).toHaveLength(12);
@@ -26,11 +26,11 @@ describe("Catálogo ilustrativo alinhado ao Figma",()=>{
  });
  test("novos tipos funcionam com busca e abordagem",()=>{
   const classes=searchCatalog(demoMaterials,applyCategory(q,"type",["Aula completa"]));
-  expect(classes.items.map(m=>m.title)).toContain("Privacidade e segurança na internet");
+  expect(classes.items.map(m=>m.title)).toContain("Privacidade e segurança");
   expect(searchCatalog(demoMaterials,applyCategory(q,"type",["Sequência de atividades"])).items[0].title).toBe("Algoritmos no dia a dia");
   expect(searchCatalog(demoMaterials,{...q,q:"criptografia"}).items[0].title).toBe("Mensagens codificadas");
  });
- test("IDs determinísticos distinguem demos de publicações reais",()=>{
+ test("IDs determinísticos distinguem acervo institucional de publicações de professores",()=>{
   expect(isCatalogExampleId("d3000000-0000-4000-8000-000000000001")).toBe(true);
   expect(isCatalogExampleId("d3000000-0000-4000-8000-000000000024")).toBe(true);
   expect(isCatalogExampleId("d3000000-0000-4000-8000-000000000025")).toBe(false);

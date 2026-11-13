@@ -1,7 +1,7 @@
 
 # EduComp — Product Brief
 
-**Versão:** 1.0 · **Atualizado em:** 07/11/2026 · **Situação:** proposta e escopo do MVP definidos; desenvolvimento não iniciado.
+**Versão:** 0.2 · **Atualizado em:** 13/11/2026 · **Situação:** aplicação implementada; homologação final pendente.
 
 ## 1. Visão geral
 
@@ -32,21 +32,21 @@ O produto se apoia em quatro frentes:
 3. **Trocar:** perfis públicos, comentários, respostas e relatos de aplicação ligados aos materiais, com denúncia e moderação.
 4. **Compartilhar com responsabilidade:** envio de materiais, declaração de direitos, revisão editorial e acompanhamento do resultado.
 
-A experiência é complementada por favoritos, notificações sobre materiais e novidades, perfil do professor, canal de contato e compartilhamento da plataforma.
+A experiência é complementada por favoritos, notificações sobre materiais e novidades, perfil do professor, canal de contato e páginas institucionais.
 
 ## 5. Experiência do MVP
 
-A primeira versão contempla cadastro, login e recuperação de senha; Biblioteca com **seis tipos de material** e filtros por tipo, etapa, eixo e abordagem; detalhes e acesso autorizado a arquivos; Salvos; envio, acompanhamento e revisão; comunidade básica; perfis públicos; moderação de denúncias; notificações; formulário de contato; páginas institucionais e compartilhamento do EduComp.
+A primeira versão contempla cadastro, login e recuperação de senha; Biblioteca com **oito tipos de material** e filtros por tipo, etapa, eixo e abordagem; detalhes e acesso autorizado a arquivos; Salvos; envio, acompanhamento e revisão; comunidade básica; perfis públicos; moderação de denúncias; notificações; formulário de contato; páginas institucionais e informações institucionais.
 
 A comunidade ficará limitada a publicações textuais, respostas em um nível e relatos de aplicação, sem anexos nas conversas ou mensagens privadas. As denúncias exigem identificação da conta e análise de um responsável; não removem conteúdo automaticamente.
 
-A implementação começará pelo desktop e deverá ser adaptada para tablet e celular. **O MVP só estará concluído com fluxos funcionais, dados persistentes, permissões verificadas e testes**, não com a reprodução visual das telas.
+A implementação parte do desktop e possui ajustes responsivos para tablet e celular, ainda sujeitos a homologação. **O MVP só estará concluído com fluxos funcionais, dados persistentes, permissões verificadas e testes**, não com a reprodução visual das telas.
 
 ## 6. Limites
 
 Não fazem parte da primeira entrega login por provedores externos, importação de materiais por URL, editor de materiais dentro da plataforma, curtidas, conversas privadas, respostas em múltiplos níveis, denúncias anônimas ou recomendações automatizadas. Evoluções devem ser justificadas por necessidades observadas, não pela quantidade de recursos possíveis.
 
-As regras de armazenamento, validade da autenticação, limites de campos e detalhes operacionais ainda serão fechados durante a preparação técnica. O [Escopo do MVP](escopo-mvp.md) diferencia essas definições de novas funcionalidades.
+As regras de autenticação, armazenamento e validação estão descritas na documentação técnica e devem ser verificadas durante a homologação. O [Escopo do MVP](escopo-mvp.md) diferencia essas definições de novas funcionalidades.
 
 ## 7. Princípios da experiência
 
@@ -60,7 +60,7 @@ As regras de armazenamento, validade da autenticação, limites de campos e deta
 
 Estão previstos testes moderados de tarefas com professores, observando busca e filtros, compreensão dos detalhes, uso de Salvos, participação na comunidade e envio de materiais. A segurança e as permissões exigem testes técnicos específicos.
 
-A identidade visual e o protótipo desktop estão consolidados. **A aplicação não foi desenvolvida e não ocorreram testes com usuários reais.** Os resultados serão documentados somente após a execução dos testes.
+A identidade visual e os principais fluxos estão implementados. Os testes de unidade, banco embarcado e build já foram executados nas revisões anteriores; ainda faltam testes funcionais com contas reais e homologação de acessibilidade. Os resultados dessa etapa serão registrados em `docs/qa`.
 
 ## 9. Documentos relacionados
 

@@ -14,11 +14,11 @@ import "@/components/material/material.css";
 export const metadata = { title: "Material | EduComp" };
 export default async function MaterialPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ contribuicoes?: string; pagina?: string }> }) {
  const { id } = await params;
- if(isCatalogExampleId(id)) return <ExampleMaterialPage id={id} />;
  const query = await searchParams;
  const filter: CommunityFilter = query.contribuicoes === "application_report" || query.contribuicoes === "discussion" ? query.contribuicoes : "all";
  const number = Number(query.pagina ?? "1");
  const page = Number.isSafeInteger(number) && number > 0 ? Math.min(number, 1000) : 1;
+ if(isCatalogExampleId(id)) return <ExampleMaterialPage id={id} filter={filter} page={page} />;
  const data = await loadMaterial(id);
  const community = data.material ? await loadCommunity(id, filter, page) : null;
  if (!data.material && !data.error) notFound();

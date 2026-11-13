@@ -44,11 +44,11 @@ Este documento estabelece os comportamentos e as regras do MVP do EduComp. Os id
 
 **RF-010 — Tratar falhas de arquivo.** Ausência de autorização, falha de transferência ou indisponibilidade devem gerar retorno específico sem retirar automaticamente os demais metadados do material.
 
-### 2.4. Salvos e compartilhamento
+### 2.4. Salvos
 
 **RF-012 — Gerenciar Salvos.** O usuário autenticado pode adicionar e remover materiais da coleção, sem duplicidade. O estado deve persistir e refletir-se nos cartões e nos detalhes. Salvos deve permitir consulta da coleção, busca textual por título/tema e estado vazio.
 
-**RF-013 — Compartilhar o EduComp.** A plataforma deve oferecer **Copiar link** com confirmação da operação e atalhos de compartilhamento social mostrados no protótipo, conforme os recursos permitidos por cada serviço. O link compartilhado é o da plataforma; o endereço exibido no protótipo não pressupõe domínio registrado.
+**RF-013 — Compartilhamento externo (retirado do MVP).** O botão de compartilhamento da plataforma não integra a interface atual. O identificador permanece reservado para preservar o histórico de requisitos.
 
 ### 2.5. Envio e acompanhamento
 

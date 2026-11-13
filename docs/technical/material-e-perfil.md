@@ -6,7 +6,7 @@ As consultas usam as tabelas e políticas existentes. Não há nova migração n
 
 Visitantes podem ler as páginas. O download e os salvos exigem autenticação. O retorno do login aceita o endereço local de um material com UUID válido; endereços externos continuam bloqueados. O download utiliza a rota protegida já existente e suas URLs temporárias.
 
-A página distingue ausência de registro de falha de consulta. Falhas de arquivos ou favoritos preservam as informações do material e apresentam aviso. Não existem materiais ou professores de demonstração no código entregue.
+A página distingue ausência de registro de falha de consulta. Falhas de arquivos ou favoritos preservam as informações do material e apresentam aviso. Os materiais enviados por professores têm ficha própria; os registros do acervo editorial ficam separados, com autoria indicada e arquivos vinculados.
 
 ## Escopo desta etapa
 

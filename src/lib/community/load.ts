@@ -10,7 +10,7 @@ type Raw = {
  created_at:string; updated_at:string;
 };
 
-export async function loadCommunity(materialId:string,filter:CommunityFilter,page:number):Promise<CommunityPageData> {
+export async function loadCommunity(materialId:string,filter:CommunityFilter,page:number,source:"material"|"catalog"="material"):Promise<CommunityPageData> {
  const empty:CommunityPageData={items:[],total:0,page,pages:1,viewerId:null};
  try {
   const client=await createClient();
@@ -18,13 +18,18 @@ export async function loadCommunity(materialId:string,filter:CommunityFilter,pag
   const viewerId=auth.user?.id??null;
   let query=client.from("discussion_comments")
    .select("id,author_id,parent_id,kind,body,report_grade,report_adaptations,created_at,updated_at",{count:"exact"})
-   .eq("material_id",materialId).is("parent_id",null).eq("visibility","visible")
+   .eq(source==="catalog"?"catalog_example_id":"material_id",materialId).is("parent_id",null).eq("visibility","visible")
    .order("created_at",{ascending:false}).order("id",{ascending:false});
   if(filter!=="all") query=query.eq("kind",filter);
   const {data:roots,error,count}=await query.range((page-1)*size,page*size-1);
-  if(error)throw error;
+  if(error) {
+   if(source==="catalog" && (error.code==="42703" || error.message.includes("catalog_example_id"))) {
+    return {...empty,viewerId,error:"A Comunidade do acervo precisa da migration 014 no Supabase."};
+   }
+   throw error;
+  }
   const actualPages=Math.max(1,Math.ceil((count??0)/size));
-  if(page>actualPages)return loadCommunity(materialId,filter,actualPages);
+  if(page>actualPages)return loadCommunity(materialId,filter,actualPages,source);
   const rootRows=(roots??[]) as Raw[];
   const rootIds=rootRows.map(post=>post.id);
   const replyResponse=rootIds.length ? await client.from("discussion_comments")
@@ -49,6 +54,6 @@ export async function loadCommunity(materialId:string,filter:CommunityFilter,pag
   return {items:[...byId.values()],total:count??0,page,pages:actualPages,viewerId,
    ...(replies.length===500 ? {error:"Há muitas respostas nesta página. Parte das respostas mais recentes não está sendo exibida."} : {})};
  } catch {
-  return {...empty,error:"Não foi possível carregar as contribuições. Confira se a migration 008 foi aplicada."};
+  return {...empty,error:"Não foi possível carregar as contribuições. Verifique a configuração da Comunidade no Supabase."};
  }
 }

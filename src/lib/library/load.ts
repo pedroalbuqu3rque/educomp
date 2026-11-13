@@ -2,6 +2,7 @@ import "server-only";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import type { Query, Material } from "./catalog";
+import { presentCatalogRecord } from "./catalog-resources";
 const materialSchema = z.object({id:z.uuid(),title:z.string(),description:z.string(),keywords:z.array(z.string()),year:z.string(),type:z.array(z.string()),stage:z.array(z.string()),axis:z.array(z.string()),approach:z.array(z.string()),authorship:z.string(),objectives:z.string(),is_demo:z.boolean().default(false)});
 const resultSchema = z.object({total:z.number().int().nonnegative(),pages:z.number().int().positive(),page:z.number().int().positive(),items:z.array(materialSchema).max(12)});
 export type CatalogResult = {total:number;pages:number;page:number;items:Material[]};
@@ -14,6 +15,7 @@ export async function loadLibrary(query:Query,savedOnly=false):Promise<LibraryDa
   const {data,error}=await client.rpc(savedOnly ? "search_saved_library" : "search_library",{p_q:query.q,p_types:query.selections.type,p_stages:query.selections.stage,p_axes:query.selections.axis,p_approaches:query.selections.approach,p_page:query.page});
   if(error) return {...empty,error:error.code === "PGRST202" ? `Falta atualizar o banco. Execute a migração ${savedOnly ? "202611090005_saved_materials.sql" : "202611090004_library.sql"} no Supabase.` : "Não foi possível carregar a biblioteca. Tente novamente em alguns instantes."};
   const result:CatalogResult=resultSchema.parse(data);
+  result.items=result.items.map(item => item.is_demo ? presentCatalogRecord(item) : item);
   const {data:session}=await client.auth.getUser();
   const signedIn=Boolean(session.user);
   let savedError=false;

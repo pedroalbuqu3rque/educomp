@@ -7,7 +7,7 @@ const teacher="10000000-0000-4000-8000-000000000001";
 const another="10000000-0000-4000-8000-000000000002";
 const first="d3000000-0000-4000-8000-000000000001";
 const second="d3000000-0000-4000-8000-000000000002";
-const migrations=["202611080001_core.sql","202611080002_storage.sql","202611090003_auth_profiles.sql","202611090004_library.sql","202611090005_saved_materials.sql","202611110006_material_submissions.sql","202611110007_review_moderation.sql","202611110008_community.sql","202611110009_notifications.sql","202611110010_contact.sql","202611110011_profile_photo_resubmissions.sql","202611110012_library_showcase.sql"];
+const migrations=["202611080001_core.sql","202611080002_storage.sql","202611090003_auth_profiles.sql","202611090004_library.sql","202611090005_saved_materials.sql","202611110006_material_submissions.sql","202611110007_review_moderation.sql","202611110008_community.sql","202611110009_notifications.sql","202611110010_contact.sql","202611110011_profile_photo_resubmissions.sql","202611110012_library_showcase.sql","202611130013_catalog_editorial.sql","202611130016_catalog_title_cards.sql"];
 
 beforeAll(async()=>{
  await db.exec(`create role anon;create role authenticated;create schema auth;
@@ -45,7 +45,7 @@ test("os 24 exemplos estão no banco, sem se passarem por material publicado",as
   expect(page1.total).toBe(24);expect(page1.pages).toBe(2);
   expect(page1.items).toHaveLength(12);expect(page2.items).toHaveLength(12);
   expect(page1.items[0]).toMatchObject({id:first,title:"Algoritmos no dia a dia",is_demo:true,type:["Sequência de atividades"]});
-  expect(page1.items[1]).toMatchObject({id:second,title:"Privacidade e segurança na internet",is_demo:true,type:["Aula completa"]});
+  expect(page1.items[1]).toMatchObject({id:second,title:"Privacidade e segurança",is_demo:true,type:["Aula completa"]});
   expect(new Set([...page1.items,...page2.items].map(x=>x.id)).size).toBe(24);
   expect((await search(1,"privacidade",["Aula completa"])).items.map(x=>x.id)).toEqual([second]);
   await expect(db.exec(`insert into public.catalog_examples(id,position,title,description,keywords,objectives,year,type,stage,axis,approach) values(gen_random_uuid(),40,'X','Y',array['x'],'X','EF',array['Jogo'],array['Ensino Médio'],array['Cultura Digital'],array['Plugada'])`)).rejects.toThrow();
@@ -76,4 +76,17 @@ test("um material real aprovado substitui seu exemplo com mesmo título",async()
   expect(result.items[0]).toMatchObject({title:"Algoritmos no dia a dia",is_demo:false});
   expect(result.items.filter(item=>item.id===first)).toHaveLength(0);
  }finally{await db.exec("reset role;rollback");}
+});
+
+
+test("metadados institucionais acompanham os PDFs, inclusive na busca do Supabase", async () => {
+ await db.exec("set role anon");
+ try {
+  const quiz=await search(1,"quiz");
+  expect(quiz.items).toHaveLength(1);
+  expect(quiz.items[0]).toMatchObject({title:"Quiz interativo no Scratch",type:["Atividade"],is_demo:true});
+  const internet=await search(1,"servidores");
+  expect(internet.items).toHaveLength(1);
+  expect(internet.items[0]).toMatchObject({title:"Como funciona a internet?",approach:["Plugada","Desplugada"]});
+ } finally { await db.exec("reset role"); }
 });

@@ -10,6 +10,7 @@ Os avisos são criados automaticamente nos seguintes eventos:
 
 | Evento | Quem recebe | Onde abre |
 | --- | --- | --- |
+| Conta criada | Nova conta, uma vez | Biblioteca |
 | Novo envio concluído | Autor do material | Meus envios |
 | Novo envio na fila | Revisores já autorizados | Análise de submissão |
 | Análise iniciada, aprovação ou recusa | Autor do material | Meus envios |
@@ -22,15 +23,19 @@ Os avisos são criados automaticamente nos seguintes eventos:
 
 **Aprovação e publicação são ações separadas.** Uma aprovação editorial não dispara o aviso de novo material na Biblioteca; isso só ocorre após a ação de publicação. Despublicar não envia novamente o aviso de lançamento ao republicar o mesmo material.
 
-Não são enviados e-mails nem notificações push nesta versão. A lista é interna à aplicação e guarda histórico por conta. Não são geradas notificações retroativas para eventos anteriores à instalação da migration 009.
+Não são enviados e-mails nem notificações push nesta versão. A lista é interna à aplicação e guarda histórico por conta. Os eventos anteriores à instalação da migration 009 não geram notificações retroativas, exceto a mensagem única de boas-vindas da migration 015, aplicada também aos perfis que já existiam.
 
 ## Ativação
 
 1. Atualize o repositório com os arquivos desta etapa.
-2. No SQL Editor do Supabase, depois das migrations 001 a 008, execute **somente** `supabase/migrations/202611110009_notifications.sql`.
+2. Se o banco já possui as migrations 009 e 011, execute somente `supabase/migrations/202611130015_welcome_notification.sql` para habilitar as boas-vindas. Em uma instalação nova, aplique as migrations em ordem; não execute novamente arquivos já aplicados.
 3. Inicie a aplicação com `npm ci` e `npm run dev` (com o `.env.local` configurado).
 4. Entre com uma conta de professor. O sininho deve aparecer na Biblioteca, na página de um material e nas outras páginas autenticadas.
 5. Acesse `/notificacoes` para visualizar o histórico. Se ainda não houver eventos, a central deve exibir o estado vazio, sem itens de demonstração.
+
+## Mensagem de boas-vindas
+
+Após instalar `supabase/migrations/202611130015_welcome_notification.sql`, cada conta recebe o aviso **Boas-vindas ao EduComp** assim que seu perfil é criado. A migração também entrega uma única mensagem às contas já cadastradas. O aviso abre a Biblioteca, pode ser marcado como lido e não concede nenhuma permissão adicional. A chave `welcome:v1` e a restrição única por destinatário impedem duplicações, mesmo que a migração seja repetida.
 
 ## Publicar um comunicado institucional
 
@@ -70,7 +75,7 @@ O destino precisa ser um caminho interno da aplicação. Evite colocar dados pes
 
 Teste com duas contas de professores e uma conta de revisor:
 
-1. Abra a central sem eventos e confira a mensagem de estado vazio.
+1. Abra a central com uma conta criada após a migration 015 e confira a mensagem de boas-vindas; uma segunda visita não cria outro aviso.
 2. Envie um material. Confira o aviso de protocolo para o autor e o item na fila do revisor.
 3. Inicie a análise, aprove e confirme que **nenhum aviso de novo material público** foi gerado antes da publicação.
 4. Publique. Confira o aviso para o autor e o aviso de novo material para a outra conta cadastrada.
@@ -81,4 +86,4 @@ Teste com duas contas de professores e uma conta de revisor:
 9. Publique um comunicado administrativo e confirme sua entrega sem enviar mensagens por uma conta comum.
 10. Despublique um material e confira que um aviso antigo não permite abrir conteúdo privado.
 
-Os testes estão em `tests/notifications-validation.test.ts` e `tests/notifications-database.test.ts`. Rode `npm run typecheck`, `npm run lint`, `npm test` e `npm run build` com as dependências instaladas e o Supabase configurado quando necessário.
+Os testes estão em `tests/notifications-validation.test.ts`, `tests/notifications-database.test.ts` e `tests/welcome-notification-database.test.ts`. Rode `npm run typecheck`, `npm run lint`, `npm test` e `npm run build` com as dependências instaladas e o Supabase configurado quando necessário.

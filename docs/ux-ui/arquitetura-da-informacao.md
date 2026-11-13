@@ -73,7 +73,7 @@ Os estados de erro, sucesso, vazio, filtros abertos e confirmações são **vari
 | Meu perfil | Dados pessoais, cargo/função, Sobre mim, foto e senha. |
 | Notificações | Avisos recentes, estado de leitura e lista completa. |
 | Revisão | Lista de envios, decisões editoriais e fila de denúncias de discussões. |
-| Institucional | Termos, privacidade, contato e compartilhamento da plataforma. |
+| Institucional | Termos, privacidade e contato. |
 
 ## 4. Navegação e permissões
 

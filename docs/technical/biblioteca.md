@@ -1,9 +1,23 @@
-# Biblioteca conectada ao Supabase
+# Biblioteca
 
-A página /biblioteca consulta a RPC search_library com o cliente SSR e a sessão do visitante. Não usa service_role, não carrega todo o acervo e não retorna exemplos locais em falhas. A migration 012 inclui **24 exemplos de interface em tabela própria do Supabase**, com paginação e RLS, sem fingir publicações ou anexos reais. O arquivo demo-materials.ts continua como referência de testes, não como fallback para falhas de rede. Consulte [exemplos-biblioteca.md](exemplos-biblioteca.md).
+A Biblioteca pública utiliza as funções `search_library` e `search_saved_library` do Supabase para consultar os materiais por título/tema, tipo, etapa, eixo e abordagem. Os filtros são independentes, aceitam seleção múltipla e se combinam na consulta. A paginação apresenta até 12 materiais por página.
 
-A migration 004 cadastra as opções de classificação e uma função SECURITY INVOKER, com search_path vazio. Ela respeita RLS e exige explicitamente is_published=true e review_status=approved, mesmo para autores/revisores. Termos da busca são combinados com E, opções dentro da categoria com OU, e categorias com E. A busca é por título e palavras-chave, ignorando caixa e acentos. Ordenação por created_at e id decrescentes; páginas de 12, com ajuste de páginas fora do intervalo. A contagem e os itens pertencem à mesma consulta/snapshot.
+## Estrutura
 
-Os filtros e a página permanecem na URL. A interface existente foi preservada, com mensagens de vazio e erro e uma prévia contendo dados reais. Os arquivos são consultados somente para usuário autenticado, sob RLS. O endpoint /materiais/[id]/arquivos/[fileId] verifica usuário, publicação atual e associação do arquivo ao material, então emite uma URL assinada de 60 segundos para download. Respostas não são armazenadas em cache. Uma URL já emitida pode continuar válida até expirar, mesmo após despublicação.
+- `src/app/biblioteca/page.tsx`: entrada da Biblioteca.
+- `src/components/library/library-browser.tsx`: pesquisa, filtros, cards, favoritos e paginação.
+- `src/lib/library/catalog.ts`: definição das categorias, interpretação de URLs e funções locais para testes.
+- `src/lib/library/load.ts`: consulta ao Supabase e obtenção dos estados de favorito.
+- `src/lib/library/catalog-resources.ts`: metadados editoriais e vínculos dos PDFs do acervo inicial.
+- `src/components/material/example-material-page.tsx`: ficha detalhada dos materiais do acervo.
+- `src/app/biblioteca/library.css`: apresentação da Biblioteca e de Salvos.
 
-Para o primeiro conteúdo, consulte primeiro-material.md. Não houve cadastro de conteúdo fictício no banco nem acesso remoto ao Supabase do usuário. O cadastro inicial pelo SQL Editor é restrito ao administrador e registra aprovação/publicação explícitas. A coleção de favoritos foi implementada na migration 005; consulte salvos.md. O formulário de envio continua pendente.
+## Dados e autorização
+
+Materiais de professores só aparecem quando aprovados e publicados. Os 24 registros editoriais são armazenados em `catalog_examples`; quatro possuem PDFs completos e os demais têm anexo provisório identificado nas páginas de detalhes. O cadastro inicial foi feito pelas migrations `012`–`013`. Comentários no acervo dependem da migration `014`.
+
+O ícone de favorito indica o estado salvo em azul preenchido. O estado é persistido por usuário e não deve ser confirmado antes do retorno do banco. A página Salvos é restrita a usuários autenticados.
+
+## Verificação
+
+Testar consulta sem login, resultados vazios, combinações de filtros, paginação, favoritos, acesso aos PDFs e erros de conexão. Os fluxos de alteração de estado devem ser testados com o Supabase real durante a homologação.

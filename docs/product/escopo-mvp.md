@@ -1,13 +1,13 @@
 
 # EduComp — Escopo do MVP
 
-**Versão:** 2.0 · **Data:** 07/11/2026 · **Situação:** escopo definido para implementação; desenvolvimento não iniciado.
+**Versão:** 2.1 · **Atualizado em:** 13/11/2026 · **Situação:** funcionalidades implementadas; QA e publicação pendentes.
 
 ## 1. Objetivo
 
-A primeira versão do EduComp reunirá **descoberta de materiais, participação docente e contribuição responsável ao acervo**. O professor poderá encontrar recursos, consultar informações pedagógicas, salvar materiais, trocar experiências e enviar novas contribuições. Revisores autorizados avaliarão tanto os materiais quanto as denúncias da comunidade.
+A primeira versão do EduComp reúne **descoberta de materiais, participação docente e contribuição responsável ao acervo**. O professor poderá encontrar recursos, consultar informações pedagógicas, salvar materiais, trocar experiências e enviar novas contribuições. Revisores autorizados avaliarão tanto os materiais quanto as denúncias da comunidade.
 
-A interface desktop está definida. O produto ainda precisa ser construído com autenticação, dados persistentes, armazenamento, serviços e testes. A existência de um estado no protótipo não significa que sua integração já esteja pronta.
+A interface e os serviços principais já estão no código. Ainda faltam testes integrados no Supabase real, conferência responsiva e homologação antes da publicação.
 
 ## 2. Funcionalidades incluídas
 
@@ -25,7 +25,7 @@ A interface desktop está definida. O produto ainda precisa ser construído com 
 - Consulta pública de materiais **aprovados e publicados**.
 - Pesquisa por título ou tema/palavras-chave, executada por **Buscar** ou Enter.
 - Quatro filtros independentes: **Tipo**, **Etapa**, **Eixo** e **Abordagem** (Plugada, Desplugada ou ambas).
-- Seis tipos: Plano de aula, Slides, Material de apoio, Atividade, Sequência didática e **Jogo**.
+- Oito tipos cadastráveis: Plano de aula, Slides, Material de apoio, Atividade, Sequência didática, Sequência de atividades, Aula completa e **Jogo**.
 - Etapas: Educação Infantil, Ensino Fundamental — Anos iniciais e finais, Ensino Médio; eixos: Pensamento Computacional, Mundo Digital e Cultura Digital.
 - Múltiplas seleções de filtro e estado sem resultados, com possibilidade de revisar os critérios.
 - Paginação de **12 materiais por página**, com total encontrado. A tela desktop apresenta a navegação entre páginas; não há seletor de ordenação no fluxo atual.
@@ -35,7 +35,7 @@ A interface desktop está definida. O produto ainda precisa ser construído com 
 
 - Página pública do material com informações pedagógicas, objetivos de aprendizagem quando disponíveis, descrição, abordagem e identificação de autoria.
 - Materiais com um ou mais arquivos PDF, DOCX, PPTX, PNG ou JPG, até **20 MB por arquivo**.
-- Acesso aos arquivos mediante autenticação e autorização; mensagens de indisponibilidade ou falha quando necessário.
+- Arquivos de materiais enviados por professores exigem autenticação e autorização. PDFs públicos do acervo institucional são acessíveis pela ficha sem login. Exibir mensagens de indisponibilidade ou falha quando necessário.
 - Link para **perfil público do autor**, com nome, foto ou avatar, apresentação autorizada e materiais publicados. E-mail e dados privados não são exibidos.
 
 ### 2.4. Salvos
@@ -44,7 +44,7 @@ A interface desktop está definida. O produto ainda precisa ser construído com 
 - Consultar uma coleção pessoal, pesquisar por título ou tema e abrir os detalhes dos materiais.
 - Exibir o estado de coleção vazia com orientação para explorar a Biblioteca.
 
-A página atual de Salvos mostra a busca textual. Existem variações de filtros de Salvos no arquivo de design, mas não estão integradas ao percurso visível da página; portanto, a ativação desses filtros não é exigência desta entrega.
+A página Salvos reutiliza a busca e os filtros da Biblioteca, respeitando a coleção do usuário autenticado.
 
 ### 2.5. Comunidade e perfis públicos
 
@@ -75,7 +75,6 @@ A página atual de Salvos mostra a busca textual. Existem variações de filtros
 - Notificações para o usuário sobre andamento de materiais, **novos materiais na Biblioteca** e **novidades da plataforma**, com indicador de não lidas, opção de marcar todas como lidas, lista completa e estado vazio.
 - Formulário **Fale conosco** com nome, e-mail, assunto e mensagem; validação, confirmação e tratamento de erro.
 - Termos de uso e Política de privacidade, com textos adequados ao serviço efetivamente oferecido antes da publicação.
-- Compartilhamento da plataforma com opções sociais previstas no protótipo e ação **Copiar link**, com confirmação. Endereços exibidos no Figma são ilustrativos até que haja domínio real.
 
 ## 3. Fora do MVP
 
@@ -103,20 +102,18 @@ A experiência desktop deve ser adaptada para tablet e celular. Essa adaptação
 - [ ] Perfis públicos preservam a privacidade; denúncias são encaminhadas à fila de moderação.
 - [ ] Submissões são validadas, persistidas e acompanhadas; aprovação não publica automaticamente sem a condição de disponibilidade pública.
 - [ ] Revisores conseguem registrar decisões editoriais e moderar denúncias, com justificativa e rastreabilidade.
-- [ ] Notificações, formulário de contato, compartilhamento e páginas institucionais funcionam nos limites definidos.
+- [ ] Notificações, formulário de contato e páginas institucionais funcionam nos limites definidos.
 - [ ] Erros e estados vazios foram tratados; os fluxos funcionam em desktop, tablet e celular.
 - [ ] Acessibilidade é avaliada tendo como referência a **WCAG 2.2 AA**, além dos testes funcionais, de segurança e de integração.
 
 O MVP só estará concluído após a implementação e a verificação desses critérios. O protótipo não substitui os testes.
 
-## 6. Definições técnicas pendentes
+## 6. Definições para homologação
 
-- [ ] Escolher framework, serviços, autenticação, armazenamento, hospedagem e estratégia de envio de notificações.
-- [ ] Fechar limites de campos e tags, número máximo de arquivos e tratamento de upload parcial.
-- [ ] Especificar vínculo entre etapas e anos/séries, metadados das abordagens e normalização de busca.
-- [ ] Definir esquema de estados para ajustes/reenvios e regras de publicação/despublicação.
-- [ ] Detalhar proteção contra spam, retenção de denúncias e tratamento de dados pessoais.
-- [ ] Estabelecer URLs, recuperação da navegação, breakpoints e metas técnicas de qualidade.
+- [ ] Conferir URL pública, hospedagem, redirecionamentos e variáveis do Supabase no ambiente final.
+- [ ] Validar limites, estados editoriais e políticas de acesso com contas reais de professor e revisor.
+- [ ] Revisar as práticas de retenção, proteção de dados e os documentos jurídicos.
+- [ ] Concluir os testes de responsividade, acessibilidade e navegação por teclado.
 
 ## 7. Documentos relacionados
 

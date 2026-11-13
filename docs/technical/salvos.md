@@ -6,7 +6,7 @@ A página /salvos verifica getUser no servidor e redireciona visitantes a /entra
 
 A Server Action setMaterialSaved recebe apenas o ID do material e o estado desejado. O usuário vem de getUser. Para salvar, verifica a publicação e insere a associação; o índice único impede duplicação e um conflito 23505 significa que o estado solicitado já existe. Para remover, restringe a exclusão por user_id e material_id. Revalida Biblioteca e Salvos após sucesso. Não modifica materiais, arquivos ou permissões de revisão.
 
-A interface bloqueia novos cliques enquanto aguarda a operação e só confirma o estado após sucesso no servidor. Erros são exibidos, sem marcar um item como salvo. Uma falha na leitura dos favoritos desabilita temporariamente os botões e solicita atualização. Visitantes recebem um diálogo de acesso. A página privada mostra um estado vazio e acesso à Biblioteca quando não há resultados.
+A interface bloqueia novos cliques enquanto aguarda a operação e só confirma o estado após sucesso no servidor. Erros são exibidos, sem marcar um item como salvo. Uma falha na leitura dos favoritos desabilita temporariamente os botões e solicita atualização. Visitantes recebem um diálogo de acesso. A página privada mostra um estado vazio sem botões redundantes; o acesso à Biblioteca permanece no cabeçalho.
 
 Materiais despublicados não aparecem na coleção, mas a associação é mantida; uma republicação volta a torná-los visíveis. As regras de download continuam verificando publicação, usuário e arquivo, com URL assinada de 60 segundos.
 

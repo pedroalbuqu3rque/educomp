@@ -20,5 +20,6 @@ describe("central de notificações",()=>{
   expect(notificationCategory("material_approved")).toBe("Meus envios");
   expect(notificationCategory("comment_reply")).toBe("Comunidade");
   expect(notificationCategory("announcement")).toBe("Atualização");
+  expect(notificationCategory("welcome")).toBe("Boas-vindas");
  });
 });
