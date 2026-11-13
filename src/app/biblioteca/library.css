@@ -714,7 +714,28 @@
   .library-header nav {
     order: 3;
     width: 100%;
-    justify-content: center;
+    max-width: 100%;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 4px;
+    padding: 4px;
+    background: #f5f8ff;
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+  }
+  .library-header nav::-webkit-scrollbar {
+    display: none;
+  }
+  .library-header nav a {
+    flex: 0 0 auto;
+    min-height: 40px;
+    padding: 9px 14px;
+    white-space: nowrap;
+    scroll-snap-align: start;
   }
   .materials-grid {
     grid-template-columns: repeat(2,minmax(0,1fr));
@@ -752,14 +773,47 @@
     grid-template-columns: 1fr;
   }
   .library-header-inner {
-    padding-inline: 20px;
+    padding: 10px 16px 12px;
+    column-gap: 6px;
+    row-gap: 10px;
   }
-  .library-header nav {
-    gap: 0;
-    justify-content: space-between;
+  .library-header-inner > .brand {
+    transform: scale(.86);
+    transform-origin: left center;
+    margin-right: -24px;
+  }
+  .library-header .guest-login {
+    min-height: 40px;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  .library-header-tools {
+    margin-left: auto;
   }
   .library-header nav a {
-    padding: 8px 12px;
+    padding: 8px 11px;
+  }
+  .library-toolbar {
+    display: grid;
+    grid-template-columns: minmax(0,1fr);
+    gap: 9px;
+  }
+  .library-search {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    min-height: 44px;
+    flex-basis: auto;
+  }
+  .library-filters {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .library-toolbar .search-submit.button {
+    grid-column: 1;
+    grid-row: 3;
+    width: 100%;
+    min-height: 44px;
   }
   .library-container {
     width: calc(100% - 32px);
@@ -889,9 +943,16 @@
   outline-offset: 2px;
 }
 
-@media (max-width: 800px) {
-  .library-header nav {
-    flex-wrap: wrap;
-    row-gap: 4px;
+
+.header-account-label-short {
+  display: none;
+}
+
+@media (max-width: 520px) {
+  .header-account-label {
+    display: none;
+  }
+  .header-account-label-short {
+    display: inline;
   }
 }

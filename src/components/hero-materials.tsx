@@ -45,6 +45,7 @@ export function HeroMaterials() {
           </div>
         ))}
       </div>
+      <span className="hero-swipe-hint" aria-hidden="true">Deslize para ver mais <span>→</span></span>
     </div>
   );
 }

@@ -115,6 +115,17 @@ Essa medida é uma referência visual, não uma largura fixa de renderização. 
 
 O cabeçalho, os cartões, os formulários e os diálogos devem seguir regras compartilhadas de espaçamento, bordas e elevação.
 
+### Comportamento responsivo da página inicial e da Biblioteca
+
+- **Até 760 px:** na página inicial, a marca fica acima de uma barra de acesso com dois botões da mesma largura. Quando existe sessão, o sino permanece na linha da marca; as ações ficam na barra inferior.
+- **Até 600 px:** a vitrine da página inicial usa uma faixa horizontal deslizável com cartões de tamanho legível. O usuário vê parte do cartão seguinte e uma instrução discreta para deslizar. O degradê fica atrás da faixa, sem recorte abrupto.
+- **De 601 a 950 px:** a vitrine mantém a composição sobreposta, em escala menor e com espaçamento adequado à largura de tablets.
+- **Até 800 px:** a navegação interna da Biblioteca ocupa uma faixa horizontal com rolagem própria, evitando linhas desproporcionais mesmo com a aba Revisão visível.
+- **Até 520 px:** busca e botão de busca ocupam a largura da coluna; os quatro filtros formam uma grade de duas colunas. Na conta autenticada, o cabeçalho interno usa o rótulo curto "Conta" junto à foto.
+- O layout da página não deve apresentar rolagem horizontal, e os botões devem permanecer operáveis por toque e teclado. Animações respeitam `prefers-reduced-motion`.
+
+O funcionamento completo em dispositivos físicos, com teclado móvel e contas reais, permanece para a homologação de QA.
+
 ### 4.5. Sobreposições
 
 Os pop-ups utilizam fundo escurecido e desfocado.

@@ -54,7 +54,7 @@ export async function LibraryHeader({ active = "biblioteca" }: { active?: Active
             href={user ? "/conta" : "/entrar"}
           >
             {user && <ProfileAvatar name={accountName} path={avatarPath} className="header-profile-avatar" />}
-            {user ? "Minha conta" : "Entrar"}
+            {user ? <><span className="header-account-label">Minha conta</span><span className="header-account-label-short">Conta</span></> : "Entrar"}
           </Link>
         </div>
       </div>

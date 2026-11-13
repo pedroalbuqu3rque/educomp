@@ -19,16 +19,18 @@ export async function SiteHeader() {
 
   return (
     <header className="site-header">
-      <div className="header-inner">
+      <div className={`header-inner${user ? " is-signed-in" : ""}`}>
         <Brand />
         <nav className="account-nav" aria-label="Acesso à conta">
           {user && <NotificationBell initialCount={unread} />}
-          <Link href={user ? "/conta" : "/entrar"} className="button button-outline">
-            {user ? "Minha conta" : "Entrar"}
-          </Link>
-          <Link href={user ? "/biblioteca" : "/cadastro"} className="button button-primary">
-            {user ? "Biblioteca" : "Criar conta"}
-          </Link>
+          <div className="account-nav-actions">
+            <Link href={user ? "/conta" : "/entrar"} className="button button-outline">
+              {user ? "Minha conta" : "Entrar"}
+            </Link>
+            <Link href={user ? "/biblioteca" : "/cadastro"} className="button button-primary">
+              {user ? "Biblioteca" : "Criar conta"}
+            </Link>
+          </div>
         </nav>
       </div>
     </header>
