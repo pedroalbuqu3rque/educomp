@@ -61,7 +61,7 @@ Os arquivos em [`supabase/migrations`](supabase/migrations) vão de **001 a 016*
 - `avatars`: bucket público para fotos de perfil.
 - Acesso a materiais, favoritos, perfis e funções de revisão protegido por políticas RLS e validações no servidor.
 - `reviewer_roles`: permissões de revisão concedidas pelo administrador. Uma conta comum não se torna revisora por se cadastrar.
-- O acervo editorial possui 24 fichas de materiais. Quatro têm PDFs próprios; as demais ainda usam um PDF provisório identificado na ficha. Os arquivos ficam em `public/biblioteca/arquivos`.
+- O acervo editorial possui 24 fichas de materiais. Quatro têm PDFs próprios; as demais ainda usam um PDF provisório identificado na ficha. Os PDFs são mantidos em `private/biblioteca/arquivos` e entregues por uma rota que exige login; as capas continuam públicas.
 
 A lista de tabelas, as políticas e as funções já foram verificadas por consultas no projeto Supabase; **a aplicação das migrations 013–016 e os fluxos com usuários reais ainda precisam ser confirmados no ambiente utilizado para a publicação**.
 

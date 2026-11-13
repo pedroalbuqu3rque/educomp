@@ -42,22 +42,32 @@ export function ExampleAccessPanel({
   return (
     <aside className="material-access catalog-access" aria-labelledby="catalog-file-heading">
       {file.cover ? (
-        <a href={file.url} target="_blank" rel="noopener noreferrer" className="catalog-cover-link" aria-label={`Visualizar ${file.name} em uma nova aba`}>
+        signedIn ? (
+          <a href={file.url} target="_blank" rel="noopener noreferrer" className="catalog-cover-link" aria-label={`Visualizar ${file.name} em uma nova aba`}>
+            <img className="catalog-cover" src={file.cover} width="400" height="566" alt={`Capa do arquivo ${file.name}`} />
+          </a>
+        ) : (
           <img className="catalog-cover" src={file.cover} width="400" height="566" alt={`Capa do arquivo ${file.name}`} />
-        </a>
+        )
       ) : (
         <div className="catalog-no-cover" aria-hidden="true">
           <span className="catalog-pdf-icon">PDF</span>
         </div>
       )}
       <div className="catalog-access-body">
-        <p className="catalog-file-label">Arquivo disponível</p>
+        <p className="catalog-file-label">{signedIn ? "Arquivo disponível" : "Arquivo para usuários cadastrados"}</p>
         <h2 id="catalog-file-heading">Acesse o material</h2>
         <p className="catalog-file-title">{file.name}</p>
         <p className="catalog-file-meta">PDF <span aria-hidden="true">·</span> {file.pages} {file.pages === 1 ? "página" : "páginas"} <span aria-hidden="true">·</span> {formatPdfSize(file.sizeBytes)}</p>
         <div className="material-actions">
-          <a className="button button-primary" href={file.url} target="_blank" rel="noopener noreferrer">Visualizar PDF <span aria-hidden="true">↗</span></a>
-          <a className="button button-outline" href={file.url} download={file.name}>Baixar arquivo</a>
+          {signedIn ? (
+            <>
+              <a className="button button-primary" href={file.url} target="_blank" rel="noopener noreferrer">Visualizar PDF <span aria-hidden="true">↗</span></a>
+              <a className="button button-outline" href={`${file.url}?download=1`}>Baixar arquivo</a>
+            </>
+          ) : (
+            <Link className="button button-primary" href={login}>Entrar para visualizar e baixar</Link>
+          )}
         </div>
         {file.provisional && (
           <p className="catalog-provisional-note">Este arquivo é provisório e não contém a atividade descrita. A ficha pedagógica já pode ser consultada; o material definitivo ainda será anexado.</p>

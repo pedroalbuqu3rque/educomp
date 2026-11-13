@@ -4,7 +4,7 @@ A biblioteca e a coleção de salvos agora abrem `/materiais/[id]`. A página ap
 
 As consultas usam as tabelas e políticas existentes. Não há nova migração nesta atualização. Tanto os detalhes quanto a lista do professor exigem `is_published = true` e `review_status = approved`, inclusive quando a sessão pertence ao autor ou a um revisor. O perfil consulta apenas `id`, `display_name`, `occupation` e `bio`.
 
-Visitantes podem ler as páginas. O download e os salvos exigem autenticação. O retorno do login aceita o endereço local de um material com UUID válido; endereços externos continuam bloqueados. O download utiliza a rota protegida já existente e suas URLs temporárias.
+Visitantes podem ler as páginas. O download e os salvos exigem autenticação. O retorno do login aceita o endereço local de um material com UUID válido; endereços externos continuam bloqueados. Materiais enviados por professores são baixados por rota protegida com URLs temporárias do Storage. PDFs do acervo institucional também exigem login, por uma rota autenticada que não os expõe em `public/`.
 
 A página distingue ausência de registro de falha de consulta. Falhas de arquivos ou favoritos preservam as informações do material e apresentam aviso. Os materiais enviados por professores têm ficha própria; os registros do acervo editorial ficam separados, com autoria indicada e arquivos vinculados.
 

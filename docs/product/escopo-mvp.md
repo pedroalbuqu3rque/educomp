@@ -35,7 +35,7 @@ A interface e os serviços principais já estão no código. Ainda faltam testes
 
 - Página pública do material com informações pedagógicas, objetivos de aprendizagem quando disponíveis, descrição, abordagem e identificação de autoria.
 - Materiais com um ou mais arquivos PDF, DOCX, PPTX, PNG ou JPG, até **20 MB por arquivo**.
-- Arquivos de materiais enviados por professores exigem autenticação e autorização. PDFs públicos do acervo institucional são acessíveis pela ficha sem login. Exibir mensagens de indisponibilidade ou falha quando necessário.
+- Fichas dos materiais publicados são públicas. Para visualizar e baixar PDFs, inclusive do acervo institucional, é necessário entrar na conta. Arquivos enviados por professores continuam sujeitos à autorização e ao estado de publicação. Exibir mensagens de indisponibilidade ou falha quando necessário.
 - Link para **perfil público do autor**, com nome, foto ou avatar, apresentação autorizada e materiais publicados. E-mail e dados privados não são exibidos.
 
 ### 2.4. Salvos

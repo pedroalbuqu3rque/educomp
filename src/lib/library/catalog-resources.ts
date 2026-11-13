@@ -4,6 +4,7 @@ import { isCatalogExampleId } from "./catalog";
 export type CatalogAttachment = {
   name: string;
   url: string;
+  fileName: string;
   sizeBytes: number;
   pages: number;
   cover?: string;
@@ -17,18 +18,21 @@ export type CatalogEditorial = {
   attachment: CatalogAttachment;
 };
 
-const base = "/biblioteca/arquivos";
+const base = "/api/biblioteca/arquivos";
 const covers = "/biblioteca/capas";
 
-const temporaryAttachment: CatalogAttachment = {
+type StoredAttachment = Omit<CatalogAttachment, "url">;
+type StoredEditorial = Omit<CatalogEditorial, "attachment"> & { attachment: StoredAttachment };
+
+const temporaryAttachment: StoredAttachment = {
   name: "Material de demonstração.pdf",
-  url: `${base}/material-de-demonstracao.pdf`,
+  fileName: "material-de-demonstracao.pdf",
   sizeBytes: 174008,
   pages: 1,
   provisional: true,
 };
 
-const completeResources: Record<number, CatalogEditorial> = {
+const completeResources: Record<number, StoredEditorial> = {
   1: {
     duration: "2 a 3 aulas",
     contents: [
@@ -40,7 +44,7 @@ const completeResources: Record<number, CatalogEditorial> = {
     application: "Use as folhas impressas em duplas ou individualmente. Após cada desafio, reserve um momento para comparar estratégias, testar comandos e revisar os percursos.",
     attachment: {
       name: "Desafio dos algoritmos.pdf",
-      url: `${base}/desafio-dos-algoritmos.pdf`,
+      fileName: "desafio-dos-algoritmos.pdf",
       cover: `${covers}/desafio-dos-algoritmos.webp`,
       sizeBytes: 2609351,
       pages: 8,
@@ -58,7 +62,7 @@ const completeResources: Record<number, CatalogEditorial> = {
     application: "Discuta situações fictícias antes da atividade impressa. Não solicite senhas, imagens nem dados pessoais reais dos estudantes.",
     attachment: {
       name: "Privacidade e proteção de dados.pdf",
-      url: `${base}/privacidade-e-seguranca-na-internet.pdf`,
+      fileName: "privacidade-e-seguranca-na-internet.pdf",
       cover: `${covers}/privacidade-e-seguranca-na-internet.webp`,
       sizeBytes: 2206227,
       pages: 5,
@@ -76,7 +80,7 @@ const completeResources: Record<number, CatalogEditorial> = {
     application: "Aplique com o editor do Scratch disponível. O PDF traz o roteiro de construção do quiz; o projeto complementar .sb3 citado no documento não faz parte dos arquivos enviados.",
     attachment: {
       name: "Quiz interativo no Scratch.pdf",
-      url: `${base}/quiz-interativo-no-scratch.pdf`,
+      fileName: "quiz-interativo-no-scratch.pdf",
       cover: `${covers}/quiz-interativo-no-scratch.webp`,
       sizeBytes: 2765313,
       pages: 6,
@@ -93,7 +97,7 @@ const completeResources: Record<number, CatalogEditorial> = {
     application: "Apresente o guia em tela ou imprima as páginas. Convide a turma a representar o caminho percorrido por uma informação entre um dispositivo e um servidor.",
     attachment: {
       name: "Como funciona a internet.pdf",
-      url: `${base}/como-funciona-a-internet.pdf`,
+      fileName: "como-funciona-a-internet.pdf",
       cover: `${covers}/como-funciona-a-internet.webp`,
       sizeBytes: 2510149,
       pages: 6,
@@ -151,7 +155,8 @@ function catalogPosition(id: string): number | null {
 export function getCatalogEditorial(id: string): CatalogEditorial | null {
   const position = catalogPosition(id);
   if (position === null) return null;
-  return completeResources[position] ?? { attachment: temporaryAttachment };
+  const editorial = completeResources[position] ?? { attachment: temporaryAttachment };
+  return { ...editorial, attachment: { ...editorial.attachment, url: `${base}/${id}` } };
 }
 
 export function presentCatalogRecord<T extends EditableCatalogFields>(item: T): T {

@@ -4,7 +4,7 @@ A Biblioteca reúne dois tipos de registro. Os materiais enviados por professore
 
 ## Arquivos fornecidos
 
-Os PDFs abaixo foram disponibilizados para integrar a Biblioteca. Permanecem no repositório em `public/biblioteca/arquivos/`, sem depender do Storage privado de materiais submetidos.
+Os PDFs abaixo foram disponibilizados para integrar a Biblioteca. Permanecem no repositório em `private/biblioteca/arquivos/`, fora dos arquivos públicos. A rota autenticada `/api/biblioteca/arquivos/[id]` disponibiliza o PDF apenas para usuários logados, sem utilizar o Storage dos materiais submetidos.
 
 | Registro do acervo | PDF vinculado | Situação |
 | --- | --- | --- |
@@ -14,7 +14,7 @@ Os PDFs abaixo foram disponibilizados para integrar a Biblioteca. Permanecem no 
 | Como funciona a internet? | `como-funciona-a-internet.pdf` | Material de apoio; 6 páginas |
 | Demais 20 registros | `material-de-demonstracao.pdf` | Arquivo provisório; não contém as atividades descritas |
 
-Os arquivos completos têm prévias de capa em `public/biblioteca/capas/`. As páginas mostram título, resumo, classificações pedagógicas, objetivo, informações de aplicação e acesso ao PDF. Para os registros sem material definitivo, uma observação no painel de download explica que o arquivo é provisório. **Não considerar esses 20 registros como materiais pedagógicos finalizados.**
+Os arquivos completos têm prévias de capa em `public/biblioteca/capas/`. As páginas públicas mostram título, resumo, classificações pedagógicas, objetivo e informações de aplicação; visualizar e baixar o PDF exige login. Para os registros sem material definitivo, uma observação no painel de download explica que o arquivo é provisório. **Não considerar esses 20 registros como materiais pedagógicos finalizados.**
 
 O PDF do quiz faz referência a um arquivo `.sb3` complementar, que não foi enviado. A página informa essa ausência sem oferecer download inexistente.
 
@@ -22,7 +22,7 @@ O PDF do quiz faz referência a um arquivo `.sb3` complementar, que não foi env
 
 A aplicação aplica correções editoriais dos quatro registros com PDF completo na exibição (`src/lib/library/catalog-resources.ts`). Isso permite apresentar títulos e classificações coerentes com os anexos sem aguardar alterações no banco. Entretanto, a busca e os filtros são executados no Supabase antes dessas correções; para que pesquisas como **quiz** e **servidores** encontrem os respectivos materiais e as novas classificações sejam consideradas, aplicar a migration `supabase/migrations/202611130013_catalog_editorial.sql` após a 012, uma única vez. Não modifica `materials`, `review_events`, RLS ou permissões.
 
-A consulta `search_library` mantém prioridade para materiais reais aprovados e publicados. A migration 013 só atualiza metadados de registros do acervo inicial, sem fingir publicação de professores nem enviar documentos para o banco. Os PDFs permanecem públicos por serem arquivos institucionais da Biblioteca; **não mover arquivos privados de professores para `public/`**.
+A consulta `search_library` mantém prioridade para materiais reais aprovados e publicados. A migration 013 só atualiza metadados de registros do acervo inicial, sem fingir publicação de professores nem enviar documentos para o banco. As fichas do acervo permanecem públicas, mas a visualização e o download dos PDFs exigem autenticação. **Não mover PDFs institucionais ou privados de professores para `public/`**.
 
 ## Finalização do conteúdo
 

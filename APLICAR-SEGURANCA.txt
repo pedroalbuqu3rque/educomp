@@ -1,0 +1,20 @@
+EduComp 0.2 - Correcao de acesso aos PDFs do acervo
+
+Objetivo: manter fichas publicas; exigir login para visualizar e baixar PDFs.
+
+Aplicacao do pacote incremental:
+1. Pare o servidor de desenvolvimento e faca um backup/commit.
+2. Copie src, docs, private, tests, next.config.ts e README.md para a raiz do projeto, substituindo apenas os arquivos correspondentes.
+3. CONFIRME que os cinco PDFs estao em private/biblioteca/arquivos.
+4. APAGUE a antiga pasta public/biblioteca/arquivos. Se ela permanecer, os links antigos continuarao publicos.
+   PowerShell na raiz do projeto:
+   Remove-Item -LiteralPath '.\public\biblioteca\arquivos' -Recurse -Force
+5. Nao apague public/biblioteca/capas (as imagens das capas continuam publicas).
+6. Rode npm.cmd run typecheck, npm.cmd run lint, npm.cmd test, npm.cmd run test:checks e npm.cmd run build.
+7. Publique uma nova versao na Vercel. Verifique que o antigo caminho /biblioteca/arquivos/desafio-dos-algoritmos.pdf retorna 404.
+8. Como visitante, os detalhes dos materiais publicados devem abrir, mas o painel deve pedir login para visualizar/baixar.
+9. Com login, visualize e baixe o arquivo. Materiais inativos nao devem disponibilizar PDFs.
+
+Sem migrations novas do Supabase. Os materiais enviados por professores continuam usando o bucket privado e a rota protegida que ja existiam.
+
+ATENCAO: a antiga versao publicada na Vercel nao sera protegida ate uma nova implantacao, e links antigos podem permanecer em cache temporariamente.

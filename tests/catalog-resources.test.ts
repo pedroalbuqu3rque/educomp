@@ -13,8 +13,8 @@ describe("Arquivos do acervo institucional", () => {
       const resource = getCatalogEditorial(uuidAt(index));
       expect(resource).not.toBeNull();
       const attachment = resource!.attachment;
-      expect(attachment.url.startsWith("/biblioteca/arquivos/")).toBe(true);
-      const pdf = readFileSync(`public${attachment.url}`);
+      expect(attachment.url).toBe(`/api/biblioteca/arquivos/${uuidAt(index)}`);
+      const pdf = readFileSync(`private/biblioteca/arquivos/${attachment.fileName}`);
       expect(pdf.subarray(0, 5).toString()).toBe("%PDF-");
       expect(pdf.byteLength).toBe(attachment.sizeBytes);
       expect(attachment.pages).toBeGreaterThan(0);
