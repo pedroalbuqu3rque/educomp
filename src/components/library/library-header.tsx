@@ -39,11 +39,19 @@ export async function LibraryHeader({ active = "biblioteca" }: { active?: Active
       <div className="library-header-inner">
         <Brand footer />
         <nav aria-label="Menu principal">
-          <Link href="/biblioteca" aria-current={active === "biblioteca" ? "page" : undefined}>Biblioteca</Link>
-          <Link href="/salvos" aria-current={active === "salvos" ? "page" : undefined}>Salvos</Link>
-          <Link href="/enviar" aria-current={active === "enviar" ? "page" : undefined}>Enviar material</Link>
+          <Link href="/biblioteca" aria-current={active === "biblioteca" ? "page" : undefined}>
+            Biblioteca
+          </Link>
+          <Link href="/salvos" aria-current={active === "salvos" ? "page" : undefined}>
+            Salvos
+          </Link>
+          <Link href="/enviar" aria-current={active === "enviar" ? "page" : undefined}>
+            Enviar material
+          </Link>
           {reviewer && (
-            <Link href="/revisao" aria-current={active === "revisao" ? "page" : undefined}>Revisão</Link>
+            <Link href="/revisao" aria-current={active === "revisao" ? "page" : undefined}>
+              Revisão
+            </Link>
           )}
         </nav>
         <div className="library-header-tools">
@@ -53,8 +61,21 @@ export async function LibraryHeader({ active = "biblioteca" }: { active?: Active
             aria-current={active === "conta" ? "page" : undefined}
             href={user ? "/conta" : "/entrar"}
           >
-            {user && <ProfileAvatar name={accountName} path={avatarPath} className="header-profile-avatar" />}
-            {user ? <><span className="header-account-label">Minha conta</span><span className="header-account-label-short">Conta</span></> : "Entrar"}
+            {user && (
+              <ProfileAvatar
+                name={accountName}
+                path={avatarPath}
+                className="header-profile-avatar"
+              />
+            )}
+            {user ? (
+              <>
+                <span className="header-account-label">Minha conta</span>
+                <span className="header-account-label-short">Conta</span>
+              </>
+            ) : (
+              "Entrar"
+            )}
           </Link>
         </div>
       </div>

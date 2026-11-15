@@ -13,7 +13,9 @@ import { GET } from "../src/app/api/biblioteca/arquivos/[id]/route";
 
 const id = "d3000000-0000-4000-8000-000000000001";
 function request(materialId = id, suffix = "") {
-  const url = new NextRequest(`http://localhost:3000/api/biblioteca/arquivos/${materialId}${suffix}`);
+  const url = new NextRequest(
+    `http://localhost:3000/api/biblioteca/arquivos/${materialId}${suffix}`,
+  );
   return GET(url, { params: Promise.resolve({ id: materialId }) });
 }
 
@@ -54,7 +56,11 @@ test("usuario autenticado pode visualizar o PDF sem cache publico", async () => 
   expect(response.headers.get("content-disposition")).toContain("inline;");
   expect(response.headers.get("cache-control")).toBe("private, no-store");
   expect(response.headers.get("x-content-type-options")).toBe("nosniff");
-  expect(Buffer.from(await response.arrayBuffer()).subarray(0, 5).toString()).toBe("%PDF-");
+  expect(
+    Buffer.from(await response.arrayBuffer())
+      .subarray(0, 5)
+      .toString(),
+  ).toBe("%PDF-");
 });
 
 test("download exige autenticacao e envia PDF como anexo", async () => {

@@ -13,19 +13,19 @@
   font-weight: 700;
   color: #1761d8;
   font-size: 12px;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
   margin: 0 0 17px;
 }
 
 .institutional-heading h1 {
   font-size: 46px;
-  letter-spacing: -.025em;
+  letter-spacing: -0.025em;
   line-height: 1.2;
   margin: 0;
   font-weight: 700;
 }
 
-.institutional-heading>p:last-child {
+.institutional-heading > p:last-child {
   font-size: 17px;
   line-height: 1.55;
   color: #526987;
@@ -49,7 +49,7 @@
   padding-top: 24px;
 }
 
-.institutional-heading-center>p:last-child {
+.institutional-heading-center > p:last-child {
   margin-top: 19px;
 }
 
@@ -104,11 +104,12 @@
   font-weight: 650;
 }
 
-.contact-field>span {
+.contact-field > span {
   color: #1761d8;
 }
 
-.contact-field input,.contact-field textarea {
+.contact-field input,
+.contact-field textarea {
   width: 100%;
   min-width: 0;
   display: block;
@@ -122,7 +123,9 @@
   font-size: 14px;
   line-height: 1.5;
   outline-offset: 3px;
-  transition: border-color .15s,box-shadow .15s;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 
 .contact-field input {
@@ -134,20 +137,23 @@
   resize: vertical;
 }
 
-.contact-field input::placeholder,.contact-field textarea::placeholder {
+.contact-field input::placeholder,
+.contact-field textarea::placeholder {
   color: #526987;
   opacity: 1;
 }
 
-.contact-field input:focus,.contact-field textarea:focus {
+.contact-field input:focus,
+.contact-field textarea:focus {
   border-color: #1761d8;
   box-shadow: 0 0 0 2px #1761d82b;
   outline: none;
 }
 
-.contact-field input:disabled,.contact-field textarea:disabled {
+.contact-field input:disabled,
+.contact-field textarea:disabled {
   background: #f8faff;
-  opacity: .75;
+  opacity: 0.75;
 }
 
 .contact-support-notes {
@@ -164,7 +170,9 @@
   margin: 0;
 }
 
-.contact-support-notes a,.contact-extra-link a,.institutional-text-link {
+.contact-support-notes a,
+.contact-extra-link a,
+.institutional-text-link {
   font-weight: 600;
   color: #1761d8;
   text-decoration: underline;
@@ -205,7 +213,7 @@
 
 .contact-actions button:disabled {
   cursor: wait;
-  opacity: .68;
+  opacity: 0.68;
 }
 
 .contact-error {
@@ -232,13 +240,13 @@
   border-radius: 13px;
   box-shadow: 0 22px 65px #132a4a3d;
   color: #102b5c;
-  max-width: min(630px,calc(100vw - 32px));
+  max-width: min(630px, calc(100vw - 32px));
   width: 100%;
   overflow: hidden;
 }
 
 .contact-dialog::backdrop {
-  background: rgba(14,25,42,.44);
+  background: rgba(14, 25, 42, 0.44);
   backdrop-filter: blur(5px);
 }
 
@@ -251,7 +259,7 @@
   color: #1761d8;
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: .04em;
+  letter-spacing: 0.04em;
 }
 
 .contact-dialog-close {
@@ -341,7 +349,7 @@
   display: block;
   color: #1761d8;
   font-size: 11px;
-  letter-spacing: .045em;
+  letter-spacing: 0.045em;
   margin-bottom: 3px;
 }
 
@@ -351,7 +359,7 @@
 
 .institutional-legal-grid {
   display: grid;
-  grid-template-columns: 274px minmax(0,1fr);
+  grid-template-columns: 274px minmax(0, 1fr);
   gap: 48px;
   align-items: start;
 }
@@ -365,7 +373,7 @@
   padding: 25px 22px 32px;
 }
 
-.institutional-legal-nav>strong {
+.institutional-legal-nav > strong {
   font-weight: 700;
   font-size: 11px;
   color: #1761d8;
@@ -377,7 +385,7 @@
   list-style: none;
 }
 
-.institutional-legal-nav li+li {
+.institutional-legal-nav li + li {
   border-top: 1px solid #d9e6fb;
 }
 
@@ -449,17 +457,17 @@
   border-radius: 9px;
 }
 
-.institutional-bottom>span {
+.institutional-bottom > span {
   font-size: 12px;
   color: #526987;
 }
 
-@media (max-width:950px) {
+@media (max-width: 950px) {
   .institutional-main {
     width: calc(100% - 80px);
   }
   .institutional-legal-grid {
-    grid-template-columns: 220px minmax(0,1fr);
+    grid-template-columns: 220px minmax(0, 1fr);
     gap: 24px;
   }
   .institutional-legal-nav {
@@ -470,17 +478,18 @@
   }
 }
 
-@media (max-width:650px) {
+@media (max-width: 650px) {
   .institutional-main {
     width: calc(100% - 40px);
   }
-  .institutional-heading,.institutional-legal .institutional-heading {
+  .institutional-heading,
+  .institutional-legal .institutional-heading {
     margin: 36px 0 26px;
   }
   .institutional-heading h1 {
     font-size: 34px;
   }
-  .institutional-heading>p:last-child {
+  .institutional-heading > p:last-child {
     font-size: 15px;
   }
   .institutional-heading-center {
@@ -556,13 +565,14 @@
   .institutional-bottom .button {
     width: 100%;
   }
-  .institutional-bottom>span {
+  .institutional-bottom > span {
     text-align: center;
   }
 }
 
-@media (prefers-reduced-motion:reduce) {
-  .contact-field input,.contact-field textarea {
+@media (prefers-reduced-motion: reduce) {
+  .contact-field input,
+  .contact-field textarea {
     transition: none;
   }
 }

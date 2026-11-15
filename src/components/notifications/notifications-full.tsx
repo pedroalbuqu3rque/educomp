@@ -57,9 +57,7 @@ export function NotificationsFull({ initial }: { initial: NotificationPageData }
     if (!item.readAt) {
       try {
         await changeNotification("read", item.id);
-      } catch {
-        // A leitura não deve impedir o acesso à página de destino.
-      }
+      } catch {}
     }
     router.push(item.targetUrl);
   }
@@ -93,7 +91,11 @@ export function NotificationsFull({ initial }: { initial: NotificationPageData }
             </button>
           </p>
         )}
-        {loading && <p className="notification-loading" role="status">Atualizando notificações…</p>}
+        {loading && (
+          <p className="notification-loading" role="status">
+            Atualizando notificações…
+          </p>
+        )}
 
         <NotificationFeed
           items={data.items}
@@ -111,7 +113,9 @@ export function NotificationsFull({ initial }: { initial: NotificationPageData }
             >
               Anterior
             </button>
-            <span>Página {data.page} de {data.pages}</span>
+            <span>
+              Página {data.page} de {data.pages}
+            </span>
             <button
               type="button"
               disabled={loading || data.page === data.pages}
@@ -123,7 +127,9 @@ export function NotificationsFull({ initial }: { initial: NotificationPageData }
         )}
 
         <footer className="notifications-full-footer">
-          <Link href="/biblioteca" className="button button-outline">Voltar à Biblioteca</Link>
+          <Link href="/biblioteca" className="button button-outline">
+            Voltar à Biblioteca
+          </Link>
         </footer>
       </main>
     </div>

@@ -14,11 +14,11 @@
 .submissions-heading h1 {
   font-size: 32px;
   line-height: 45px;
-  letter-spacing: -.4px;
+  letter-spacing: -0.4px;
   font-weight: 700;
 }
 
-.submissions-heading>p:not(.submissions-notice) {
+.submissions-heading > p:not(.submissions-notice) {
   font-size: 16px;
   line-height: 24px;
   color: var(--muted);
@@ -32,7 +32,8 @@
   margin-top: 22px;
 }
 
-.submissions-tabs a,.submissions-tabs span {
+.submissions-tabs a,
+.submissions-tabs span {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -70,7 +71,7 @@
 
 .submission-form {
   display: grid;
-  grid-template-columns: minmax(0,790fr) minmax(320px,402fr);
+  grid-template-columns: minmax(0, 790fr) minmax(320px, 402fr);
   gap: 20px;
   align-items: start;
   margin-top: 24px;
@@ -91,7 +92,7 @@
   font-size: 20px;
   font-weight: 650;
   line-height: 29px;
-  letter-spacing: -.2px;
+  letter-spacing: -0.2px;
 }
 
 .submission-caption {
@@ -122,7 +123,8 @@
   font-style: normal;
 }
 
-.submission-field input:not([type="checkbox"]),.submission-field textarea {
+.submission-field input:not([type="checkbox"]),
+.submission-field textarea {
   display: block;
   width: 100%;
   min-height: 47px;
@@ -143,24 +145,27 @@
   resize: vertical;
 }
 
-.submission-field input::placeholder,.submission-field textarea::placeholder {
+.submission-field input::placeholder,
+.submission-field textarea::placeholder {
   color: #69809e;
   opacity: 1;
 }
 
-.submission-field input:focus-visible,.submission-field textarea:focus-visible {
+.submission-field input:focus-visible,
+.submission-field textarea:focus-visible {
   border-color: var(--brand);
   outline: 2px solid #1761d855;
   outline-offset: 1px;
 }
 
-.submission-field input[aria-invalid="true"],.submission-field textarea[aria-invalid="true"] {
+.submission-field input[aria-invalid="true"],
+.submission-field textarea[aria-invalid="true"] {
   border-color: #c53b46;
 }
 
 .submission-field-grid {
   display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 19px 18px;
 }
 
@@ -236,14 +241,18 @@
   background: #f1f6ff;
 }
 
-.submission-choice input,.submission-approach input,.submission-rights input {
+.submission-choice input,
+.submission-approach input,
+.submission-rights input {
   height: 17px;
   width: 17px;
   flex: none;
   accent-color: var(--brand);
 }
 
-.submission-choice input:focus-visible,.submission-rights input:focus-visible,.submission-approach input:focus-visible {
+.submission-choice input:focus-visible,
+.submission-rights input:focus-visible,
+.submission-approach input:focus-visible {
   outline: 3px solid #1761d899;
   outline-offset: 3px;
 }
@@ -270,14 +279,15 @@
   background: #c5daff;
 }
 
-.submission-approach,.submission-rights {
+.submission-approach,
+.submission-rights {
   border: 0;
   margin: 0;
   padding: 0;
   min-width: 0;
 }
 
-.submission-approach>div {
+.submission-approach > div {
   display: flex;
   gap: 18px;
   flex-wrap: wrap;
@@ -441,7 +451,7 @@
 
 .submission-panel button:disabled {
   cursor: wait;
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .submission-feedback {
@@ -488,7 +498,7 @@
   margin: 12px 0;
 }
 
-.submission-success-dialog>p {
+.submission-success-dialog > p {
   font-size: 15px;
   line-height: 24px;
   color: var(--muted);
@@ -533,7 +543,7 @@
   font-weight: 650;
 }
 
-.submissions-list-section>p {
+.submissions-list-section > p {
   font-size: 14px;
   line-height: 22px;
   color: var(--muted);
@@ -577,13 +587,13 @@
   color: var(--brand);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: .035em;
+  letter-spacing: 0.035em;
   text-transform: uppercase;
   border-radius: 5px;
   padding: 6px 10px;
 }
 
-.submissions-history-card>p {
+.submissions-history-card > p {
   color: var(--muted);
   font-size: 13px;
   line-height: 20px;
@@ -617,7 +627,8 @@
   display: inline-block;
 }
 
-.submissions-status.published,.submissions-status.approved {
+.submissions-status.published,
+.submissions-status.approved {
   background: #e5f6e9;
   color: #206739;
 }
@@ -677,7 +688,7 @@
 
 .submissions-pages a[aria-disabled="true"] {
   pointer-events: none;
-  opacity: .4;
+  opacity: 0.4;
 }
 
 .submissions-note {
@@ -702,10 +713,10 @@
   font-size: 12px !important;
   font-weight: 700;
   color: var(--brand) !important;
-  letter-spacing: .06em;
+  letter-spacing: 0.06em;
 }
 
-.submission-tracking-dialog>p:not(.submission-modal-eyebrow) {
+.submission-tracking-dialog > p:not(.submission-modal-eyebrow) {
   font-size: 14px;
   line-height: 22px;
   color: var(--muted);
@@ -741,7 +752,7 @@
 
 .submission-tracking-stages {
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   margin: 20px 0 24px;
   counter-reset: track;
@@ -759,7 +770,7 @@
 }
 
 .submission-tracking-stages li::before {
-  content: counter(track,decimal-leading-zero);
+  content: counter(track, decimal-leading-zero);
   display: block;
   color: var(--brand);
   font-size: 15px;
@@ -795,15 +806,15 @@
   margin-top: 6px;
 }
 
-.submission-tracking-dialog>.button {
+.submission-tracking-dialog > .button {
   min-height: 44px;
   border-radius: 8px;
   font-size: 13px;
 }
 
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
   .submission-form {
-    grid-template-columns: minmax(0,1fr);
+    grid-template-columns: minmax(0, 1fr);
   }
   .submission-panel {
     gap: 19px;
@@ -816,7 +827,7 @@
   }
 }
 
-@media (max-width:640px) {
+@media (max-width: 640px) {
   .submissions-container {
     width: calc(100% - 32px);
     padding-top: 24px;
@@ -825,13 +836,14 @@
     font-size: 28px;
     line-height: 36px;
   }
-  .submissions-heading>p:not(.submissions-notice) {
+  .submissions-heading > p:not(.submissions-notice) {
     font-size: 14px;
   }
   .submissions-tabs {
     gap: 8px;
   }
-  .submissions-tabs a,.submissions-tabs span {
+  .submissions-tabs a,
+  .submissions-tabs span {
     min-width: 0;
     flex: 1;
     font-size: 13px;
@@ -844,7 +856,7 @@
     grid-template-columns: 1fr;
     gap: 15px;
   }
-  .submission-approach>div {
+  .submission-approach > div {
     gap: 13px;
   }
   .submission-dropzone {
@@ -853,7 +865,8 @@
   .submission-actions .button {
     padding: 10px;
   }
-  .submission-success-dialog,.submission-tracking-dialog {
+  .submission-success-dialog,
+  .submission-tracking-dialog {
     padding: 24px 18px;
   }
   .submission-success-dialog h2 {
@@ -864,7 +877,7 @@
     flex-direction: column;
   }
   .submission-tracking-stages {
-    grid-template-columns: repeat(2,minmax(0,1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .submissions-history-card {
     padding: 20px;
@@ -921,7 +934,7 @@
   margin: 12px 0;
 }
 
-.submission-tracking-dialog>.button {
+.submission-tracking-dialog > .button {
   margin-right: 10px;
   margin-bottom: 9px;
 }

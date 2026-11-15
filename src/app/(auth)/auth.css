@@ -5,7 +5,7 @@
 }
 
 .auth-header {
-  padding: 27px max(24px,calc((100vw - 1392px)/2));
+  padding: 27px max(24px, calc((100vw - 1392px) / 2));
 }
 
 .auth-main {
@@ -23,7 +23,7 @@
   background: white;
   border: 1px solid #d9e6fb;
   border-radius: 16px;
-  box-shadow: 0 12px 32px rgba(16,43,92,.14);
+  box-shadow: 0 12px 32px rgba(16, 43, 92, 0.14);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -139,7 +139,7 @@
 }
 
 .auth-submit:disabled {
-  opacity: .65;
+  opacity: 0.65;
   cursor: wait;
 }
 
@@ -204,7 +204,7 @@
   background: #1a4f9e;
 }
 
-@media (min-width:900px) {
+@media (min-width: 900px) {
   .auth-login {
     margin-top: 37px;
   }
@@ -213,7 +213,7 @@
   }
 }
 
-@media (max-width:600px) {
+@media (max-width: 600px) {
   .auth-header {
     padding: 20px 24px;
   }

@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, test } from "vitest";
 import { getCatalogEditorial, presentCatalogRecord } from "../src/lib/library/catalog-resources";
-import { demoMaterials } from "../src/lib/library/demo-materials";
+import { demoMaterials } from "./fixtures/materials";
 
 function uuidAt(index: number) {
   return `d3000000-0000-4000-8000-${String(index).padStart(12, "0")}`;
@@ -29,7 +29,9 @@ describe("Arquivos do acervo institucional", () => {
       if (complete.includes(index)) {
         expect(resource!.contents?.length).toBeGreaterThan(0);
         expect(resource!.attachment.cover).toBeTruthy();
-        expect(readFileSync(`public${resource!.attachment.cover}`).byteLength).toBeGreaterThan(1000);
+        expect(readFileSync(`public${resource!.attachment.cover}`).byteLength).toBeGreaterThan(
+          1000,
+        );
       }
     }
   });
@@ -37,8 +39,16 @@ describe("Arquivos do acervo institucional", () => {
   test("dados visíveis correspondem aos PDFs de Scratch e internet", () => {
     const scratch = presentCatalogRecord({ ...demoMaterials[3], id: uuidAt(4) });
     const internet = presentCatalogRecord({ ...demoMaterials[4], id: uuidAt(5) });
-    expect(scratch).toMatchObject({title: "Quiz interativo no Scratch", type: ["Atividade"], year: "EF · 6º ano"});
-    expect(internet).toMatchObject({title: "Como funciona a internet?", year: "EF · 8º ano", approach: ["Plugada", "Desplugada"]});
+    expect(scratch).toMatchObject({
+      title: "Quiz interativo no Scratch",
+      type: ["Atividade"],
+      year: "EF · 6º ano",
+    });
+    expect(internet).toMatchObject({
+      title: "Como funciona a internet?",
+      year: "EF · 8º ano",
+      approach: ["Plugada", "Desplugada"],
+    });
     expect(getCatalogEditorial("../../etc/passwd")).toBeNull();
   });
 });

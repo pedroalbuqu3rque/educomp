@@ -1,104 +1,70 @@
 # EduComp
 
-O **EduComp** é uma plataforma para professores da Educação Básica encontrarem, utilizarem e compartilharem materiais de ensino de Computação. A Biblioteca reúne recursos organizados por etapa de ensino, tipo, eixo da BNCC Computação e abordagem plugada ou desplugada. Cada material tem uma página própria, com informações pedagógicas e espaço para discussão entre docentes.
+Plataforma para professores da Educação Básica encontrarem e compartilharem materiais de ensino de Computação.
 
-Este repositório contém a aplicação web, as migrations do banco, os arquivos do acervo inicial, os testes e a documentação do produto.
+A Biblioteca organiza os recursos por tipo, etapa de ensino, eixo da Computação e abordagem plugada ou desplugada. As fichas são públicas. É preciso entrar na conta para baixar arquivos, salvar materiais e participar da Comunidade. Os envios passam por revisão antes da publicação.
 
-## Aplicação
+## Desenvolvimento
 
-O código inclui:
-
-- **Biblioteca e Salvos:** busca, quatro filtros independentes, paginação, fichas pedagógicas, prévias de arquivos e favoritos.
-- **Materiais:** publicação controlada, autoria, downloads, informações pedagógicas e Comunidade vinculada a cada recurso.
-- **Participação:** comentários, respostas, relatos de aplicação e denúncias, com moderação por revisores autorizados.
-- **Conta:** cadastro, confirmação de e-mail, login, recuperação de senha, perfil pessoal, foto e perfil público.
-- **Envios:** formulário de contribuição, acompanhamento do status, reenvio após solicitação de ajustes e revisão editorial.
-- **Comunicação:** notificações, canal Fale conosco, Termos de uso e Política de privacidade.
-
-A implementação está funcional no nível de código e testes automatizados. A conclusão do MVP depende de homologação dos fluxos com o Supabase real, acessibilidade e revisão dos textos jurídicos. **Build aprovado e testes automatizados não substituem esses procedimentos.**
-
-## Tecnologias
-
-Next.js 16, React 19, TypeScript, CSS, Supabase (Authentication, PostgreSQL com RLS e Storage), Vitest e PGlite. O projeto utiliza a fonte Inter e segue a identidade visual do EduComp.
-
-## Executar localmente
-
-Requisito: **Node.js 24** (arquivo `.nvmrc`).
+Use Node.js 24, conforme o arquivo `.nvmrc`.
 
 ```powershell
 npm.cmd ci
 Copy-Item .env.example .env.local
+```
+
+Preencha `.env.local` com a URL e a chave pública do Supabase. `APP_URL` deve apontar para o endereço da aplicação, usado nos links de autenticação. No desenvolvimento, use `http://localhost:3000`.
+
+```powershell
 npm.cmd run dev
 ```
 
-Preencha o `.env.local` com os valores públicos do projeto Supabase antes de iniciar o servidor:
-
-```dotenv
-NEXT_PUBLIC_SUPABASE_URL=https://SEU-PROJETO.supabase.co
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=SUA_CHAVE_PUBLICA
-APP_URL=http://localhost:3000
-```
-
-Acesse `http://localhost:3000`. Não inclua `.env.local`, segredos ou tokens em commits ou arquivos enviados para revisão.
-
-### Verificações de código
+## Verificações
 
 ```powershell
-npm.cmd run typecheck
+npm.cmd run format:check
 npm.cmd run lint
+npm.cmd run typecheck
 npm.cmd test
 npm.cmd run test:checks
 npm.cmd run build
 ```
 
-Os testes de banco usam PGlite e não modificam o banco hospedado. As rotas que exigem autenticação, Storage ou funções SQL precisam ser verificadas também com contas de teste reais.
+`npm.cmd run format` aplica a formatação do projeto. O CI executa as verificações a cada push e pull request. Os testes de banco usam PGlite e não alteram o Supabase hospedado.
 
-## Supabase
+## Estrutura
 
-Os arquivos em [`supabase/migrations`](supabase/migrations) vão de **001 a 016**. Aplique somente as migrations que estiverem faltando, na ordem, após verificar o histórico e manter um backup. Não reaplique migrations já instaladas nem execute novamente scripts administrativos de cadastramento apenas para testar.
+| Pasta | Conteúdo |
+| --- | --- |
+| `src/app` | Páginas, layouts e rotas HTTP |
+| `src/components` | Componentes organizados por funcionalidade |
+| `src/lib` | Consultas, validações e regras compartilhadas |
+| `public` | Marca, ícones e capas públicas |
+| `private` | PDFs do acervo, servidos por rota autenticada |
+| `supabase/migrations` | Histórico do banco, de 001 a 016 |
+| `supabase/admin` | Scripts administrativos |
+| `tests` | Testes automatizados e dados de teste em `fixtures` |
+| `docs` | Produto, interface, implementação e QA |
 
-- `materials`: bucket privado para os arquivos enviados pelos professores.
-- `avatars`: bucket público para fotos de perfil.
-- Acesso a materiais, favoritos, perfis e funções de revisão protegido por políticas RLS e validações no servidor.
-- `reviewer_roles`: permissões de revisão concedidas pelo administrador. Uma conta comum não se torna revisora por se cadastrar.
-- O acervo editorial possui 24 fichas de materiais. Quatro têm PDFs próprios; as demais ainda usam um PDF provisório identificado na ficha. Os PDFs são mantidos em `private/biblioteca/arquivos` e entregues por uma rota que exige login; as capas continuam públicas.
+Next.js, React e TypeScript compõem a aplicação. Supabase fornece autenticação, PostgreSQL e Storage. A interface usa CSS e a fonte Inter.
 
-A lista de tabelas, as políticas e as funções já foram verificadas por consultas no projeto Supabase; **a aplicação das migrations 013–016 e os fluxos com usuários reais ainda precisam ser confirmados no ambiente utilizado para a publicação**.
+## Banco e arquivos
 
-## Organização
+Aplique somente migrations ainda não instaladas, na ordem. Preserve o histórico de migrations já executadas. O papel de revisor é concedido por um administrador e não faz parte do cadastro comum.
 
-```text
-src/
-  app/          Páginas, layouts e rotas de API
-  components/   Componentes por área de interface
-  lib/          Consultas, validações e regras de negócio
-  proxy.ts      Renovação de sessão
-public/         Marca, ícones, capas e PDFs do acervo
-supabase/
-  migrations/   Evolução versionada do banco
-  admin/        Scripts de administração (uso controlado)
-tests/          Testes de regras de negócio, RLS e rotas
-docs/
-  product/      Escopo, requisitos e backlog
-  ux-ui/        Padrões visuais e fluxos
-  technical/    Guias de implementação e integração
-  qa/           Plano de testes e registros de revisão
-  archive/      Notas históricas de implementação
-```
+O bucket `materials` é privado; `avatars` é público. Os PDFs institucionais ficam em `private/biblioteca/arquivos`. Não os copie para `public`: essa pasta é acessível sem autenticação.
 
-Os CSS permanecem junto às áreas que os utilizam. O código usa componentes reutilizáveis, sem duplicar políticas de autorização nos elementos de interface.
+O acervo tem 24 fichas. Quatro possuem PDFs próprios; as demais usam um arquivo de demonstração identificado na página do material.
 
-## Estado antes da homologação
+Não inclua `.env.local`, credenciais, `node_modules` ou `.next` em commits ou pacotes compartilhados.
 
-A estrutura e as páginas estão implementadas. Antes de publicar, é necessário conferir as migrations mais recentes, conceder o papel de revisor a uma conta de teste, validar os envios e a moderação com duas contas, testar os acessos aos arquivos, revisar a responsividade e concluir a homologação de QA. Os textos de Termos e Privacidade exigem validação institucional/jurídica.
+## Documentação
 
-Consulte o [controle de implementação](docs/technical/controle-implementacao.md), o [backlog](docs/product/backlog.md) e o [plano de testes](docs/qa/plano-de-testes.md).
-
-## Referências de design
-
-- [Protótipo do EduComp no Figma](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32520)
-- [Identidade visual](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4418-15618)
+- [Revisão de código — 15/11/2026](docs/qa/revisao-2026-11-15.md)
+- [Plano de testes](docs/qa/plano-de-testes.md)
+- [Controle de implementação](docs/technical/controle-implementacao.md)
+- [Escopo do produto](docs/product/escopo-mvp.md)
 - [Design System](docs/ux-ui/design-system.md)
-- [Handoff de UI/UX](docs/ux-ui/handoff.md)
+- [Protótipo no Figma](https://www.figma.com/design/r8Lo2AKMd0UglgA8RRDl1y/EduComp?node-id=4437-32520)
 
-O projeto também compõe um portfólio pessoal, identificado discretamente no rodapé da página inicial.
+Os fluxos com e-mail, contas de professor e revisor, Storage e notificações precisam de homologação no ambiente integrado. O plano de QA registra esses cenários.

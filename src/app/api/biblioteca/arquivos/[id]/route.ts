@@ -40,17 +40,20 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
       .eq("is_active", true)
       .maybeSingle();
     if (lookupError) {
-      return new NextResponse("Não foi possível consultar o material.", { status: 503, headers: privateHeaders });
+      return new NextResponse("Não foi possível consultar o material.", {
+        status: 503,
+        headers: privateHeaders,
+      });
     }
     if (!example) {
       return new NextResponse("Material indisponível.", { status: 404, headers: privateHeaders });
     }
 
-    // Only mapped institutional PDF names reach this path (never user input).
     const file = resource.attachment;
     const path = join(process.cwd(), "private", "biblioteca", "arquivos", file.fileName);
     const bytes = await readFile(path);
-    const disposition = request.nextUrl.searchParams.get("download") === "1" ? "attachment" : "inline";
+    const disposition =
+      request.nextUrl.searchParams.get("download") === "1" ? "attachment" : "inline";
     const headers = {
       ...privateHeaders,
       "Content-Type": "application/pdf",
@@ -59,6 +62,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     };
     return new NextResponse(new Uint8Array(bytes), { status: 200, headers });
   } catch {
-    return new NextResponse("Arquivo indisponível no momento.", { status: 503, headers: privateHeaders });
+    return new NextResponse("Arquivo indisponível no momento.", {
+      status: 503,
+      headers: privateHeaders,
+    });
   }
 }

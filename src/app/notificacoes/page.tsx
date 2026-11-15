@@ -7,22 +7,25 @@ import { NotificationsFull } from "@/components/notifications/notifications-full
 import { LibraryHeader } from "@/components/library/library-header";
 import "@/components/notifications/notifications.css";
 
-export const metadata = { title: "Notificações | EduComp", robots: { index: false, follow: false } };
+export const metadata = {
+  title: "Notificações | EduComp",
+  robots: { index: false, follow: false },
+};
 export const dynamic = "force-dynamic";
 
 export default async function Page() {
-  if (!await currentUser()) redirect("/entrar?next=/notificacoes");
+  if (!(await currentUser())) redirect("/entrar?next=/notificacoes");
 
   let initial: Awaited<ReturnType<typeof loadNotifications>> | null = null;
   try {
     initial = await loadNotifications(await createClient(), 1, 12);
-  } catch {
-    // A página mantém uma opção de retorno quando o serviço está indisponível.
-  }
+  } catch {}
 
   return (
     <>
-      <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
+      <a className="skip-link" href="#conteudo">
+        Pular para o conteúdo
+      </a>
       <LibraryHeader active="notificacoes" />
       {initial ? (
         <NotificationsFull initial={initial} />
@@ -31,9 +34,12 @@ export default async function Page() {
           <main className="notifications-full-card" id="conteudo">
             <h1>Notificações indisponíveis</h1>
             <p className="notification-error" role="alert">
-              Não foi possível consultar as notificações. Confira a configuração da plataforma e tente novamente.
+              Não foi possível consultar as notificações. Confira a configuração da plataforma e
+              tente novamente.
             </p>
-            <Link className="button button-outline" href="/biblioteca">Voltar à Biblioteca</Link>
+            <Link className="button button-outline" href="/biblioteca">
+              Voltar à Biblioteca
+            </Link>
           </main>
         </div>
       )}

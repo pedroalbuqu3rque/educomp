@@ -1,14 +1,25 @@
-/* eslint-disable @next/next/no-img-element */
 const examples = [
   {
     kind: "JOGO",
-    title: <>Desafio<br />dos algoritmos</>,
+    title: (
+      <>
+        Desafio
+        <br />
+        dos algoritmos
+      </>
+    ),
     year: "Ensino Fundamental · 5º ano",
     className: "game",
   },
   {
     kind: "SLIDES",
-    title: <>Internet das<br />Coisas (IoT)</>,
+    title: (
+      <>
+        Internet das
+        <br />
+        Coisas (IoT)
+      </>
+    ),
     year: "Ensino Fundamental · 9º ano",
     className: "slides",
   },
@@ -26,7 +37,13 @@ const examples = [
   },
   {
     kind: "SEQUÊNCIA DIDÁTICA",
-    title: <>Criação de jogos<br />digitais</>,
+    title: (
+      <>
+        Criação de jogos
+        <br />
+        digitais
+      </>
+    ),
     year: "Ensino Médio · 2º ano",
     className: "sequence",
   },
@@ -34,10 +51,14 @@ const examples = [
 
 export function HeroMaterials() {
   return (
-    <div className="hero-visual" role="img" aria-label="Exemplos ilustrativos de materiais pedagógicos">
+    <div
+      className="hero-visual"
+      role="img"
+      aria-label="Exemplos ilustrativos de materiais pedagógicos"
+    >
       <div className="visual-stage" aria-hidden="true">
         <img className="hero-geometry" src="/brand/hero-glow.svg" alt="" />
-        {examples.map(item => (
+        {examples.map((item) => (
           <div key={item.className} className={`example-card ${item.className}`}>
             <span className="material-kind">{item.kind}</span>
             <p className="material-title">{item.title}</p>
@@ -45,7 +66,9 @@ export function HeroMaterials() {
           </div>
         ))}
       </div>
-      <span className="hero-swipe-hint" aria-hidden="true">Deslize para ver mais <span>→</span></span>
+      <span className="hero-swipe-hint" aria-hidden="true">
+        Deslize para ver mais <span>→</span>
+      </span>
     </div>
   );
 }

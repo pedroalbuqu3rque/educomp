@@ -1,6 +1,5 @@
 import { isCatalogExampleId } from "./catalog";
 
-/** Arquivos institucionais do acervo inicial. Não são uploads nem materiais aprovados de terceiros. */
 export type CatalogAttachment = {
   name: string;
   url: string;
@@ -41,7 +40,8 @@ const completeResources: Record<number, StoredEditorial> = {
       "Planejamento, execução, correção de erros e repetições",
       "Referências ao final do caderno",
     ],
-    application: "Use as folhas impressas em duplas ou individualmente. Após cada desafio, reserve um momento para comparar estratégias, testar comandos e revisar os percursos.",
+    application:
+      "Use as folhas impressas em duplas ou individualmente. Após cada desafio, reserve um momento para comparar estratégias, testar comandos e revisar os percursos.",
     attachment: {
       name: "Desafio dos algoritmos.pdf",
       fileName: "desafio-dos-algoritmos.pdf",
@@ -59,7 +59,8 @@ const completeResources: Record<number, StoredEditorial> = {
       "Folha de atividade com situações fictícias para discussão",
       "Referências e orientações de segurança",
     ],
-    application: "Discuta situações fictícias antes da atividade impressa. Não solicite senhas, imagens nem dados pessoais reais dos estudantes.",
+    application:
+      "Discuta situações fictícias antes da atividade impressa. Não solicite senhas, imagens nem dados pessoais reais dos estudantes.",
     attachment: {
       name: "Privacidade e proteção de dados.pdf",
       fileName: "privacidade-e-seguranca-na-internet.pdf",
@@ -77,7 +78,8 @@ const completeResources: Record<number, StoredEditorial> = {
       "Programação de decisões e variáveis em blocos",
       "Etapas para testar, corrigir e personalizar o quiz",
     ],
-    application: "Aplique com o editor do Scratch disponível. O PDF traz o roteiro de construção do quiz; o projeto complementar .sb3 citado no documento não faz parte dos arquivos enviados.",
+    application:
+      "Aplique com o editor do Scratch disponível. O PDF traz o roteiro de construção do quiz; o projeto complementar .sb3 citado no documento não faz parte dos arquivos enviados.",
     attachment: {
       name: "Quiz interativo no Scratch.pdf",
       fileName: "quiz-interativo-no-scratch.pdf",
@@ -94,7 +96,8 @@ const completeResources: Record<number, StoredEditorial> = {
       "Endereços, navegação e transmissão por pacotes",
       "Vocabulário básico de redes e referências",
     ],
-    application: "Apresente o guia em tela ou imprima as páginas. Convide a turma a representar o caminho percorrido por uma informação entre um dispositivo e um servidor.",
+    application:
+      "Apresente o guia em tela ou imprima as páginas. Convide a turma a representar o caminho percorrido por uma informação entre um dispositivo e um servidor.",
     attachment: {
       name: "Como funciona a internet.pdf",
       fileName: "como-funciona-a-internet.pdf",
@@ -120,27 +123,33 @@ type EditableCatalogFields = {
   approach: string[];
 };
 
-/** Correções editoriais também registradas na migration 013 para manter busca e filtros coerentes. */
 const metadataCorrections: Record<number, Partial<EditableCatalogFields>> = {
   1: {
-    description: "Cinco desafios desplugados com tabuleiros para planejar instruções, executar percursos, identificar erros e explorar repetições.",
-    objectives: "Planejar, executar, testar e revisar algoritmos em percursos e desafios progressivos.",
+    description:
+      "Cinco desafios desplugados com tabuleiros para planejar instruções, executar percursos, identificar erros e explorar repetições.",
+    objectives:
+      "Planejar, executar, testar e revisar algoritmos em percursos e desafios progressivos.",
   },
   2: {
     title: "Privacidade e segurança",
-    description: "Aula de 50 minutos sobre dados pessoais e cuidados ao compartilhar informações na internet, com roteiro e folha de atividade.",
-    objectives: "Reconhecer riscos de exposição de dados e justificar escolhas mais seguras em situações fictícias.",
+    description:
+      "Aula de 50 minutos sobre dados pessoais e cuidados ao compartilhar informações na internet, com roteiro e folha de atividade.",
+    objectives:
+      "Reconhecer riscos de exposição de dados e justificar escolhas mais seguras em situações fictícias.",
   },
   4: {
     title: "Quiz interativo no Scratch",
-    description: "Atividade plugada para programar perguntas, respostas, condições e pontuação em um quiz no Scratch.",
+    description:
+      "Atividade plugada para programar perguntas, respostas, condições e pontuação em um quiz no Scratch.",
     type: ["Atividade"],
     keywords: ["scratch", "quiz", "programação", "pontuação"],
-    objectives: "Programar um quiz com perguntas, decisões, pontuação e testes usando blocos do Scratch.",
+    objectives:
+      "Programar um quiz com perguntas, decisões, pontuação e testes usando blocos do Scratch.",
   },
   5: {
     title: "Como funciona a internet?",
-    description: "Guia visual sobre dispositivos, redes, servidores, endereços e o caminho percorrido pelos dados na internet.",
+    description:
+      "Guia visual sobre dispositivos, redes, servidores, endereços e o caminho percorrido pelos dados na internet.",
     keywords: ["internet", "redes", "servidores", "dados"],
     objectives: "Explicar o funcionamento básico das redes e diferenciar a internet da Web.",
     year: "EF · 8º ano",

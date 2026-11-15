@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:checks": "node --test tests/*.check.mjs"
+    "test:checks": "node --test tests/*.check.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "type": "module",
   "dependencies": {
@@ -32,6 +34,7 @@
     "@types/react-dom": "^19.3.0",
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.4.5",
+    "prettier": "3.10.1",
     "tailwindcss": "^4.3.5",
     "typescript": "^6.0.3",
     "vitest": "^5.1.0"

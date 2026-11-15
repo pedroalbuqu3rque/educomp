@@ -1,6 +1,6 @@
 # Controle de implementação
 
-**Referência:** EduComp 0.2 · 13/11/2026
+**Referência:** EduComp 0.2 · 15/11/2026
 **Uso:** acompanhamento das entregas no repositório. A validação de QA acontece em etapa separada.
 
 ## Estado das áreas
@@ -19,9 +19,9 @@
 
 ## Banco e arquivos
 
-Migrations disponíveis: `001`–`016` em `supabase/migrations`. Não as reexecute sem verificar se já foram aplicadas. O banco do projeto já foi consultado e apresentou 16 tabelas com RLS habilitado, os buckets `materials` (privado) e `avatars` (público), além das funções principais de envio, revisão, Comunidade e notificações.
+Migrations disponíveis: `001`–`016` em `supabase/migrations`. Não as reexecute sem verificar se já foram aplicadas. O registro da revisão anterior informa 16 tabelas com RLS habilitado, os buckets `materials` (privado) e `avatars` (público), além das funções principais de envio, revisão, Comunidade e notificações.
 
-O acervo editorial contém 24 registros. Quatro PDFs são materiais completos; os outros têm arquivos provisórios, identificados na ficha. A migration `013` mantém metadados da Biblioteca coerentes com os PDFs; a `014` permite participação da Comunidade nos registros do acervo; a `015` cria a notificação de boas-vindas. A aplicação efetiva dessas três migrations deve ser confirmada na homologação.
+O acervo editorial contém 24 registros. Quatro PDFs são materiais completos; os outros têm arquivos provisórios, identificados na ficha. A migration `013` mantém metadados da Biblioteca coerentes com os PDFs; a `014` permite participação da Comunidade nos registros do acervo; a `015` cria a notificação de boas-vindas. Este pacote não exige novas migrations. A revisão local não consultou nem alterou o banco hospedado.
 
 ## Pendências para fechamento
 
